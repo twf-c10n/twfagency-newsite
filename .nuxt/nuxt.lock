@@ -1,0 +1,9 @@
+{
+  "pid": 80753,
+  "startedAt": 1780224435617,
+  "command": "dev",
+  "cwd": "/Users/tf-066/twf-agency",
+  "port": 3000,
+  "hostname": "0.0.0.0",
+  "url": "http://0.0.0.0:3000"
+}
