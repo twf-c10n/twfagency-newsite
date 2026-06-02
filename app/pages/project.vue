@@ -17,7 +17,7 @@ const activeCategoryId = ref('media-strategy')
 const aboutAssetPath = '/assets/about-figma'
 
 const navItems = [
-  { label: 'Home', href: '/#home' },
+  { label: 'Home', href: '/' },
   { label: 'Our Services', href: '/services' },
   { label: 'Projects', href: '/project', active: true },
   { label: 'Photography', href: '/photography' },
@@ -152,7 +152,11 @@ const socials = [
 ]
 
 const updateHeader = () => {
-  headerScrolled.value = window.scrollY > 18
+  const isScrolled = window.scrollY > 18
+
+  if (headerScrolled.value !== isScrolled) {
+    headerScrolled.value = isScrolled
+  }
 }
 
 onMounted(() => {
@@ -169,7 +173,7 @@ onBeforeUnmount(() => {
   <div class="page project-page">
     <header :class="['site-header about-figma-header', { scrolled: headerScrolled }]">
       <nav class="about-figma-nav" aria-label="Primary navigation">
-        <a class="about-logo" href="/#home" aria-label="TWF home">
+        <a class="about-logo" href="/" aria-label="TWF home">
           <img :src="`${aboutAssetPath}/twf-logo.svg`" alt="TWF">
         </a>
 

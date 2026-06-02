@@ -11,18 +11,19 @@ useHead({
 })
 
 const clientLogos = [
-  { label: 'acer', color: '#83b81a', variant: 'acer' },
-  { label: 'unicef', color: '#1cabe2', variant: 'unicef' },
+  { label: 'Acer', color: '#83b81a', variant: 'acer' },
+  { label: 'Unicef', color: '#1cabe2', variant: 'unicef' },
   { label: 'KING POWER', color: '#004b9b', variant: 'king-power' },
   { label: 'SCG', color: '#ed1b2f', variant: 'scg' },
-  { label: 'ROLKISS', color: '#e6007e', variant: 'rolkiss' },
+  { label: 'Rojukiss', color: '#e6007e', variant: 'rojukiss' },
   { label: 'Target', color: '#cc0000', variant: 'target' },
-  { label: 'syngenta', color: '#00a859', variant: 'syngenta' }
+  { label: 'Syngenta', color: '#00a859', variant: 'syngenta' }
 ]
 
-const imgTriangleOfPerformance = '/assets/triangle-performance-main.png'
-const imgTriangleOfPerformance1 = '/assets/triangle-performance-grid.png'
-const imgTriangleOfPerformance2 = '/assets/triangle-performance-glow.png'
+const imgTriangleOfPerformance = '/assets/triangle-performance-main.webp'
+const imgTriangleOfPerformance1 = '/assets/triangle-performance-grid.webp'
+const imgTriangleOfPerformance2 = '/assets/triangle-performance-glow.webp'
+const imgTriangleLogo = '/assets/about-figma/twf-logo-footer.svg'
 
 const pillars = [
   {
@@ -139,7 +140,7 @@ const articles = [
 ]
 
 const navItems = [
-  { id: 'home', label: 'Home', href: '#home' },
+  { id: 'home', label: 'Home', href: '/' },
   { id: 'services', label: 'Our Services', href: '/services' },
   { id: 'projects', label: 'Projects', href: '/project' },
   { id: 'photography', label: 'Photography', href: '/photography' },
@@ -148,22 +149,29 @@ const navItems = [
 ]
 
 const menuOpen = ref(false)
-const showIntro = ref(true)
 const motionReady = ref(false)
 const headerScrolled = ref(false)
 const activeSection = ref('home')
 const activeService = ref(mediaServices[0].id)
+const showreelActive = ref(false)
 const pageRoot = ref<HTMLElement | null>(null)
+const heroMedia = ref<HTMLElement | null>(null)
 const showreelSection = ref<HTMLElement | null>(null)
+const showreelStage = ref<HTMLElement | null>(null)
 const showreelVideo = ref<HTMLVideoElement | null>(null)
 const serviceNavigation = ref<HTMLUListElement | null>(null)
 
-let introTimer: number | undefined
 let revealObserver: IntersectionObserver | undefined
 let sectionObserver: IntersectionObserver | undefined
 let strategyObserver: IntersectionObserver | undefined
+let heroVideoObserver: IntersectionObserver | undefined
+let showreelStageObserver: IntersectionObserver | undefined
 let showreelVideoObserver: IntersectionObserver | undefined
 let pointerFrame = 0
+let scrollFrame = 0
+let scrollIdleTimer: number | undefined
+let showreelTracking = false
+let showreelStyleKey = ''
 
 const loadShowreelVideo = () => {
   const video = showreelVideo.value
@@ -180,40 +188,80 @@ const loadShowreelVideo = () => {
   })
 }
 
+const updateShowreelProgress = () => {
+  const section = showreelSection.value
+  if (!section) {
+    return
+  }
+
+  const rect = section.getBoundingClientRect()
+  const viewportWidth = window.innerWidth
+  const viewportHeight = window.innerHeight
+  const travelDistance = Math.max(viewportHeight, rect.height - viewportHeight)
+  const rawProgress = travelDistance
+    ? Math.min(1, Math.max(0, -rect.top / travelDistance))
+    : 0
+  const showreelProgress = Math.round(rawProgress * 1000) / 1000
+  const styleKey = `${viewportWidth}:${viewportHeight}:${showreelProgress}`
+
+  if (styleKey === showreelStyleKey) {
+    return
+  }
+
+  showreelStyleKey = styleKey
+  const startWidth = Math.min(400, viewportWidth * 0.86)
+  const startHeight = startWidth * (9 / 16)
+  const showreelWidth = startWidth + ((viewportWidth - startWidth) * showreelProgress)
+  const showreelHeight = startHeight + ((viewportHeight - startHeight) * showreelProgress)
+
+  showreelActive.value = showreelProgress > 0.02
+  section.style.setProperty('--showreel-progress', String(showreelProgress))
+  section.style.setProperty('--showreel-width', `${showreelWidth}px`)
+  section.style.setProperty('--showreel-height', `${showreelHeight}px`)
+}
+
 const updateScrollEffects = () => {
   if (!pageRoot.value) {
     return
   }
 
-  const maximumScroll = document.documentElement.scrollHeight - window.innerHeight
+  const scrollY = window.scrollY
+  const viewportHeight = window.innerHeight
+  const maximumScroll = document.documentElement.scrollHeight - viewportHeight
   const progress = maximumScroll
-    ? Math.min(1, Math.max(0, window.scrollY / maximumScroll))
+    ? Math.min(1, Math.max(0, scrollY / maximumScroll))
     : 0
+  const isHeaderScrolled = scrollY > 18
 
-  headerScrolled.value = window.scrollY > 18
+  if (headerScrolled.value !== isHeaderScrolled) {
+    headerScrolled.value = isHeaderScrolled
+  }
+
   pageRoot.value.style.setProperty('--scroll-progress', String(progress))
 
-  if (showreelSection.value) {
-    const showreelRect = showreelSection.value.getBoundingClientRect()
-    const compactViewport = window.innerWidth <= 760
-    const expandDistance = compactViewport
-      ? Math.max(230, window.innerHeight * 0.38)
-      : Math.min(640, Math.max(420, window.innerHeight * 0.62))
-    const holdDistance = compactViewport
-      ? 80
-      : Math.min(180, Math.max(110, window.innerHeight * 0.16))
-    const showreelProgress = Math.min(1, Math.max(0, -showreelRect.top / expandDistance))
-    const startWidth = window.innerWidth * (compactViewport ? 0.86 : 0.7)
-    const startHeight = startWidth * (9 / 16)
-    const showreelWidth = startWidth + ((window.innerWidth - startWidth) * showreelProgress)
-    const showreelHeight = startHeight + ((window.innerHeight - startHeight) * showreelProgress)
-
-    showreelSection.value.style.setProperty('--showreel-expand-distance', `${expandDistance}px`)
-    showreelSection.value.style.setProperty('--showreel-hold-distance', `${holdDistance}px`)
-    showreelSection.value.style.setProperty('--showreel-progress', String(showreelProgress))
-    showreelSection.value.style.setProperty('--showreel-width', `${showreelWidth}px`)
-    showreelSection.value.style.setProperty('--showreel-height', `${showreelHeight}px`)
+  if (showreelTracking) {
+    updateShowreelProgress()
   }
+}
+
+const requestScrollEffects = () => {
+  if (pageRoot.value && !pageRoot.value.classList.contains('is-scrolling')) {
+    pageRoot.value.classList.add('is-scrolling')
+  }
+
+  window.clearTimeout(scrollIdleTimer)
+  scrollIdleTimer = window.setTimeout(() => {
+    pageRoot.value?.classList.remove('is-scrolling')
+  }, 140)
+
+  if (scrollFrame) {
+    return
+  }
+
+  scrollFrame = window.requestAnimationFrame(() => {
+    scrollFrame = 0
+    updateScrollEffects()
+  })
 }
 
 const updatePointerGlow = (event: PointerEvent) => {
@@ -258,8 +306,8 @@ onMounted(() => {
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
   updateScrollEffects()
-  window.addEventListener('scroll', updateScrollEffects, { passive: true })
-  window.addEventListener('resize', updateScrollEffects, { passive: true })
+  window.addEventListener('scroll', requestScrollEffects, { passive: true })
+  window.addEventListener('resize', requestScrollEffects, { passive: true })
 
   const sections = page.querySelectorAll<HTMLElement>('section[id], footer[id]')
   sectionObserver = new IntersectionObserver(
@@ -300,9 +348,41 @@ onMounted(() => {
     showreelVideoObserver.observe(showreelVideo.value)
   }
 
+  if (!reduceMotion && showreelStage.value) {
+    showreelStageObserver = new IntersectionObserver(
+      (entries) => {
+        showreelTracking = entries.some((entry) => entry.isIntersecting)
+        updateShowreelProgress()
+      },
+      { rootMargin: '0px 0px 0px 0px', threshold: 0 }
+    )
+    showreelStageObserver.observe(showreelStage.value)
+  }
+
+  if (!reduceMotion && heroMedia.value) {
+    const heroVideos = Array.from(heroMedia.value.querySelectorAll<HTMLVideoElement>('video'))
+
+    heroVideoObserver = new IntersectionObserver(
+      (entries) => {
+        const isVisible = entries.some((entry) => entry.isIntersecting)
+
+        heroVideos.forEach((video) => {
+          if (isVisible) {
+            video.play().catch(() => {
+              // Autoplay can be blocked; the static frame remains visible.
+            })
+          } else {
+            video.pause()
+          }
+        })
+      },
+      { rootMargin: '120px 0px 120px 0px', threshold: 0.04 }
+    )
+    heroVideoObserver.observe(heroMedia.value)
+  }
+
   if (reduceMotion) {
     page.querySelectorAll('video').forEach((video) => video.pause())
-    showIntro.value = false
     return
   }
 
@@ -324,39 +404,30 @@ onMounted(() => {
   if (window.matchMedia('(pointer: fine)').matches) {
     page.addEventListener('pointermove', updatePointerGlow, { passive: true })
   }
-
-  introTimer = window.setTimeout(() => {
-    showIntro.value = false
-  }, 1050)
 })
 
 onBeforeUnmount(() => {
-  window.clearTimeout(introTimer)
+  window.clearTimeout(scrollIdleTimer)
   window.cancelAnimationFrame(pointerFrame)
-  window.removeEventListener('scroll', updateScrollEffects)
-  window.removeEventListener('resize', updateScrollEffects)
+  window.cancelAnimationFrame(scrollFrame)
+  window.removeEventListener('scroll', requestScrollEffects)
+  window.removeEventListener('resize', requestScrollEffects)
   pageRoot.value?.removeEventListener('pointermove', updatePointerGlow)
   revealObserver?.disconnect()
   sectionObserver?.disconnect()
   strategyObserver?.disconnect()
+  heroVideoObserver?.disconnect()
+  showreelStageObserver?.disconnect()
   showreelVideoObserver?.disconnect()
 })
 </script>
 
 <template>
   <div ref="pageRoot" :class="['page', { 'motion-ready': motionReady }]">
-    <Transition name="intro">
-      <div v-if="showIntro" class="intro" aria-hidden="true">
-        <span class="brand-mark">TWF</span>
-        <p>Imagine Beyond The Limit</p>
-        <span class="intro-line" />
-      </div>
-    </Transition>
-
     <header :class="['site-header', { scrolled: headerScrolled }]">
       <span class="scroll-progress" aria-hidden="true" />
       <nav class="nav shell" aria-label="Primary navigation">
-        <a class="brand" href="#home" aria-label="TWF home">
+        <a class="brand" href="/" aria-label="TWF home">
           <span class="brand-mark">TWF</span>
         </a>
         <div :class="['nav-links', { open: menuOpen }]">
@@ -389,7 +460,8 @@ onBeforeUnmount(() => {
 
     <main>
       <section id="home" class="hero">
-        <div class="hero-media" aria-hidden="true">
+        <div ref="heroMedia" class="hero-media" aria-hidden="true">
+          <div class="media-skeleton hero-media-skeleton" />
           <video class="hero-banner" autoplay muted loop playsinline preload="metadata">
             <source src="/assets/banner.webm" type="video/webm">
           </video>
@@ -469,10 +541,7 @@ onBeforeUnmount(() => {
                 <path class="triangle-energy-flow" d="M50 1 L99 99 L1 99 Z" />
               </svg>
               <div class="triangle-inner">
-                <span class="brand-mark" aria-label="TWF">
-                  <b>T</b><b>W</b><b>F</b>
-                </span>
-                <em>Agency</em>
+                <img :src="imgTriangleLogo" alt="TWF Agency" class="triangle-logo">
                 <strong>Performance<br>Creative</strong>
                 <small>Triangle of Performance (Top)</small>
               </div>
@@ -547,9 +616,11 @@ onBeforeUnmount(() => {
         </div>
       </section>
 
-      <section id="photography" ref="showreelSection" class="showreel">
-        <div class="showreel-stage">
+      <section id="photography" ref="showreelSection" :class="['showreel', { 'is-active': showreelActive }]">
+        <div ref="showreelStage" class="showreel-stage">
           <figure class="showreel-frame" data-reveal>
+            <div class="media-skeleton showreel-skeleton" aria-hidden="true" />
+            <img class="showreel-poster" src="/assets/showreel-reference.png" alt="" aria-hidden="true">
             <video
               ref="showreelVideo"
               muted

@@ -17,7 +17,7 @@ const activeStoryIndex = ref(1)
 const assetPath = '/assets/about-figma'
 
 const navItems = [
-  { label: 'Home', href: '/#home' },
+  { label: 'Home', href: '/' },
   { label: 'Our Services', href: '/services' },
   { label: 'Projects', href: '/project' },
   { label: 'Photography', href: '/photography' },
@@ -76,7 +76,11 @@ const socials = [
 ]
 
 const updateHeader = () => {
-  headerScrolled.value = window.scrollY > 18
+  const isScrolled = window.scrollY > 18
+
+  if (headerScrolled.value !== isScrolled) {
+    headerScrolled.value = isScrolled
+  }
 }
 
 const previousStory = () => {
@@ -103,7 +107,7 @@ onBeforeUnmount(() => {
   <div class="page about-figma-page">
     <header :class="['site-header about-figma-header', { scrolled: headerScrolled }]">
       <nav class="about-figma-nav" aria-label="Primary navigation">
-        <a class="about-logo" href="/#home" aria-label="TWF home">
+        <a class="about-logo" href="/" aria-label="TWF home">
           <img :src="`${assetPath}/twf-logo.svg`" alt="TWF">
         </a>
 

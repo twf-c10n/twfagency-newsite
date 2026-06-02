@@ -636,37 +636,37 @@ const _routes = [
   {
     name: "about",
     path: "/about",
-    component: () => import('./about-Ctu1C8P0.mjs')
+    component: () => import('./about-BA14UoIn.mjs')
   },
   {
     name: "blog",
     path: "/blog",
-    component: () => import('./blog-CYuREyLO.mjs')
+    component: () => import('./blog-DNCIwSJr.mjs')
   },
   {
     name: "contact",
     path: "/contact",
-    component: () => import('./contact-EnMpyv08.mjs')
+    component: () => import('./contact-JxlbSbxn.mjs')
   },
   {
     name: "photography",
     path: "/photography",
-    component: () => import('./photography-C03iEaju.mjs')
+    component: () => import('./photography-BTwgqU3O.mjs')
   },
   {
     name: "project",
     path: "/project",
-    component: () => import('./project-7kAr0a4X.mjs')
+    component: () => import('./project-0kg-ZV-j.mjs')
   },
   {
     name: "services",
     path: "/services",
-    component: () => import('./services-CyPovjtn.mjs')
+    component: () => import('./services-B7qGdlpw.mjs')
   },
   {
     name: "index",
     path: "/",
-    component: () => import('./index-Dos_dQjN.mjs')
+    component: () => import('./index-bhN8Bq9r.mjs')
   }
 ];
 const ROUTE_KEY_PARENTHESES_RE = /(:\w+)\([^)]+\)/g;

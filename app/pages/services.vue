@@ -18,7 +18,7 @@ const aboutAssetPath = '/assets/about-figma'
 const assetPath = '/assets/services-figma'
 
 const navItems = [
-  { label: 'Home', href: '/#home' },
+  { label: 'Home', href: '/' },
   { label: 'Our Services', href: '/services', active: true },
   { label: 'Projects', href: '/project' },
   { label: 'Photography', href: '/photography' },
@@ -111,7 +111,11 @@ const activeService = computed(() => {
 })
 
 const updateHeader = () => {
-  headerScrolled.value = window.scrollY > 18
+  const isScrolled = window.scrollY > 18
+
+  if (headerScrolled.value !== isScrolled) {
+    headerScrolled.value = isScrolled
+  }
 }
 
 onMounted(() => {
@@ -128,7 +132,7 @@ onBeforeUnmount(() => {
   <div class="page services-page">
     <header :class="['site-header about-figma-header', { scrolled: headerScrolled }]">
       <nav class="about-figma-nav" aria-label="Primary navigation">
-        <a class="about-logo" href="/#home" aria-label="TWF home">
+        <a class="about-logo" href="/" aria-label="TWF home">
           <img :src="`${aboutAssetPath}/twf-logo.svg`" alt="TWF">
         </a>
 
