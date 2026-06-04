@@ -139,19 +139,7 @@ const articles = [
   'เคล็ดลับสร้างแคมเปญให้โตไว'
 ]
 
-const navItems = [
-  { id: 'home', label: 'Home', href: '/' },
-  { id: 'services', label: 'Our Services', href: '/services' },
-  { id: 'projects', label: 'Projects', href: '/project' },
-  { id: 'photography', label: 'Photography', href: '/photography' },
-  { id: 'blog', label: 'Blog', href: '/blog' },
-  { id: 'about', label: 'About Us', href: '/about' }
-]
-
-const menuOpen = ref(false)
 const motionReady = ref(false)
-const headerScrolled = ref(false)
-const activeSection = ref('home')
 const activeService = ref(mediaServices[0].id)
 const showreelActive = ref(false)
 const pageRoot = ref<HTMLElement | null>(null)
@@ -162,7 +150,6 @@ const showreelVideo = ref<HTMLVideoElement | null>(null)
 const serviceNavigation = ref<HTMLUListElement | null>(null)
 
 let revealObserver: IntersectionObserver | undefined
-let sectionObserver: IntersectionObserver | undefined
 let strategyObserver: IntersectionObserver | undefined
 let heroVideoObserver: IntersectionObserver | undefined
 let showreelStageObserver: IntersectionObserver | undefined
@@ -231,12 +218,6 @@ const updateScrollEffects = () => {
   const progress = maximumScroll
     ? Math.min(1, Math.max(0, scrollY / maximumScroll))
     : 0
-  const isHeaderScrolled = scrollY > 18
-
-  if (headerScrolled.value !== isHeaderScrolled) {
-    headerScrolled.value = isHeaderScrolled
-  }
-
   pageRoot.value.style.setProperty('--scroll-progress', String(progress))
 
   if (showreelTracking) {
@@ -308,19 +289,6 @@ onMounted(() => {
   updateScrollEffects()
   window.addEventListener('scroll', requestScrollEffects, { passive: true })
   window.addEventListener('resize', requestScrollEffects, { passive: true })
-
-  const sections = page.querySelectorAll<HTMLElement>('section[id], footer[id]')
-  sectionObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          activeSection.value = entry.target.id
-        }
-      })
-    },
-    { rootMargin: '-36% 0px -54% 0px', threshold: 0 }
-  )
-  sections.forEach((section) => sectionObserver?.observe(section))
 
   const strategyPanels = page.querySelectorAll<HTMLElement>('.strategy-panel')
   strategyObserver = new IntersectionObserver(
@@ -414,7 +382,6 @@ onBeforeUnmount(() => {
   window.removeEventListener('resize', requestScrollEffects)
   pageRoot.value?.removeEventListener('pointermove', updatePointerGlow)
   revealObserver?.disconnect()
-  sectionObserver?.disconnect()
   strategyObserver?.disconnect()
   heroVideoObserver?.disconnect()
   showreelStageObserver?.disconnect()
@@ -424,39 +391,7 @@ onBeforeUnmount(() => {
 
 <template>
   <div ref="pageRoot" :class="['page', { 'motion-ready': motionReady }]">
-    <header :class="['site-header', { scrolled: headerScrolled }]">
-      <span class="scroll-progress" aria-hidden="true" />
-      <nav class="nav shell" aria-label="Primary navigation">
-        <a class="brand" href="/" aria-label="TWF home">
-          <span class="brand-mark">TWF</span>
-        </a>
-        <div :class="['nav-links', { open: menuOpen }]">
-          <a
-            v-for="item in navItems"
-            :key="item.id"
-            :class="{ active: activeSection === item.id }"
-            :href="item.href"
-            :aria-current="activeSection === item.id ? 'page' : undefined"
-            @click="menuOpen = false"
-          >{{ item.label }}</a>
-        </div>
-        <a
-          :class="['nav-contact', { active: activeSection === 'contact' }]"
-          href="/contact"
-          :aria-current="activeSection === 'contact' ? 'page' : undefined"
-        >Contact</a>
-        <button
-          class="menu-toggle"
-          type="button"
-          :aria-expanded="menuOpen"
-          aria-label="Toggle navigation"
-          @click="menuOpen = !menuOpen"
-        >
-          <span />
-          <span />
-        </button>
-      </nav>
-    </header>
+    <SiteHeader active-path="/" />
 
     <main>
       <section id="home" class="hero">

@@ -1,0 +1,87 @@
+<script setup lang="ts">
+const props = withDefaults(
+  defineProps<{
+    activePath?: string
+  }>(),
+  {
+    activePath: '/'
+  }
+)
+
+const menuOpen = ref(false)
+const headerScrolled = ref(false)
+
+const aboutAssetPath = '/assets/about-figma'
+
+const navItems = [
+  { label: 'Home', href: '/' },
+  { label: 'Our Services', href: '/services' },
+  { label: 'Projects', href: '/project' },
+  { label: 'Photography', href: '/photography' },
+  { label: 'Blog', href: '/blog' },
+  { label: 'About Us', href: '/about' }
+]
+
+const isActive = (href: string) => props.activePath === href
+
+const closeMenu = () => {
+  menuOpen.value = false
+}
+
+const updateHeader = () => {
+  const isScrolled = window.scrollY > 18
+
+  if (headerScrolled.value !== isScrolled) {
+    headerScrolled.value = isScrolled
+  }
+}
+
+onMounted(() => {
+  updateHeader()
+  window.addEventListener('scroll', updateHeader, { passive: true })
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('scroll', updateHeader)
+})
+</script>
+
+<template>
+  <header :class="['site-header about-figma-header', { scrolled: headerScrolled }]">
+    <nav class="about-figma-nav" aria-label="Primary navigation">
+      <a class="about-logo" href="/" aria-label="TWF home" @click="closeMenu">
+        <img :src="`${aboutAssetPath}/twf-logo.svg`" alt="TWF">
+      </a>
+
+      <div :class="['nav-links about-figma-links', { open: menuOpen }]">
+        <a
+          v-for="item in navItems"
+          :key="item.href"
+          :class="{ active: isActive(item.href) }"
+          :href="item.href"
+          :aria-current="isActive(item.href) ? 'page' : undefined"
+          @click="closeMenu"
+        >
+          {{ item.label }}
+        </a>
+      </div>
+
+      <a
+        :class="['nav-contact about-contact', { active: isActive('/contact') }]"
+        href="/contact"
+        :aria-current="isActive('/contact') ? 'page' : undefined"
+        @click="closeMenu"
+      >Contact</a>
+      <button
+        class="menu-toggle"
+        type="button"
+        :aria-expanded="menuOpen"
+        aria-label="Toggle navigation"
+        @click="menuOpen = !menuOpen"
+      >
+        <span />
+        <span />
+      </button>
+    </nav>
+  </header>
+</template>

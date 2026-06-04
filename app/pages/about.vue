@@ -10,20 +10,9 @@ useHead({
   ]
 })
 
-const menuOpen = ref(false)
-const headerScrolled = ref(false)
 const activeStoryIndex = ref(1)
 
 const assetPath = '/assets/about-figma'
-
-const navItems = [
-  { label: 'Home', href: '/' },
-  { label: 'Our Services', href: '/services' },
-  { label: 'Projects', href: '/project' },
-  { label: 'Photography', href: '/photography' },
-  { label: 'Blog', href: '/blog' },
-  { label: 'About Us', href: '/about', active: true }
-]
 
 const storyImages = [
   { src: `${assetPath}/story-left.png`, alt: 'TWF agency event installation' },
@@ -75,14 +64,6 @@ const socials = [
   { label: 'LinkedIn', src: `${assetPath}/linkedin.svg`, href: '#' }
 ]
 
-const updateHeader = () => {
-  const isScrolled = window.scrollY > 18
-
-  if (headerScrolled.value !== isScrolled) {
-    headerScrolled.value = isScrolled
-  }
-}
-
 const previousStory = () => {
   activeStoryIndex.value =
     activeStoryIndex.value === 0 ? storyImages.length - 1 : activeStoryIndex.value - 1
@@ -93,50 +74,11 @@ const nextStory = () => {
     activeStoryIndex.value === storyImages.length - 1 ? 0 : activeStoryIndex.value + 1
 }
 
-onMounted(() => {
-  updateHeader()
-  window.addEventListener('scroll', updateHeader, { passive: true })
-})
-
-onBeforeUnmount(() => {
-  window.removeEventListener('scroll', updateHeader)
-})
 </script>
 
 <template>
   <div class="page about-figma-page">
-    <header :class="['site-header about-figma-header', { scrolled: headerScrolled }]">
-      <nav class="about-figma-nav" aria-label="Primary navigation">
-        <a class="about-logo" href="/" aria-label="TWF home">
-          <img :src="`${assetPath}/twf-logo.svg`" alt="TWF">
-        </a>
-
-        <div :class="['nav-links about-figma-links', { open: menuOpen }]">
-          <a
-            v-for="item in navItems"
-            :key="item.href"
-            :class="{ active: item.active }"
-            :href="item.href"
-            :aria-current="item.active ? 'page' : undefined"
-            @click="menuOpen = false"
-          >
-            {{ item.label }}
-          </a>
-        </div>
-
-        <a class="nav-contact about-contact" href="/contact">Contact</a>
-        <button
-          class="menu-toggle"
-          type="button"
-          :aria-expanded="menuOpen"
-          aria-label="Toggle navigation"
-          @click="menuOpen = !menuOpen"
-        >
-          <span />
-          <span />
-        </button>
-      </nav>
-    </header>
+    <SiteHeader active-path="/about" />
 
     <main>
       <section class="about-title-section">
