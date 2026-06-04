@@ -10,20 +10,8 @@ useHead({
   ]
 })
 
-const menuOpen = ref(false)
-const headerScrolled = ref(false)
-
 const aboutAssetPath = '/assets/about-figma'
 const contactAssetPath = '/assets/contact-figma'
-
-const navItems = [
-  { label: 'Home', href: '/' },
-  { label: 'Our Services', href: '/services' },
-  { label: 'Projects', href: '/project' },
-  { label: 'Photography', href: '/photography' },
-  { label: 'Blog', href: '/blog' },
-  { label: 'About Us', href: '/about' }
-]
 
 const contactDetails = [
   { label: 'Phone', value: '(+66) 02 024 9759', href: 'tel:+6620249759' },
@@ -44,56 +32,11 @@ const footerSocials = [
   { label: 'LinkedIn', src: `${aboutAssetPath}/linkedin.svg`, href: '#' }
 ]
 
-const updateHeader = () => {
-  const isScrolled = window.scrollY > 18
-
-  if (headerScrolled.value !== isScrolled) {
-    headerScrolled.value = isScrolled
-  }
-}
-
-onMounted(() => {
-  updateHeader()
-  window.addEventListener('scroll', updateHeader, { passive: true })
-})
-
-onBeforeUnmount(() => {
-  window.removeEventListener('scroll', updateHeader)
-})
 </script>
 
 <template>
   <div class="page contact-figma-page">
-    <header :class="['site-header about-figma-header', { scrolled: headerScrolled }]">
-      <nav class="about-figma-nav" aria-label="Primary navigation">
-        <a class="about-logo" href="/" aria-label="TWF home">
-          <img :src="`${aboutAssetPath}/twf-logo.svg`" alt="TWF">
-        </a>
-
-        <div :class="['nav-links about-figma-links', { open: menuOpen }]">
-          <a
-            v-for="item in navItems"
-            :key="item.href"
-            :href="item.href"
-            @click="menuOpen = false"
-          >
-            {{ item.label }}
-          </a>
-        </div>
-
-        <a class="nav-contact about-contact active" href="/contact" aria-current="page">Contact</a>
-        <button
-          class="menu-toggle"
-          type="button"
-          :aria-expanded="menuOpen"
-          aria-label="Toggle navigation"
-          @click="menuOpen = !menuOpen"
-        >
-          <span />
-          <span />
-        </button>
-      </nav>
-    </header>
+    <SiteHeader active-path="/contact" />
 
     <main>
       <section class="contact-hero">
