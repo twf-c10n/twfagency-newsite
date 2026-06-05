@@ -19,11 +19,15 @@ const navItems = [
   { label: 'Projects', href: '/project' },
   { label: 'Photography', href: '/photography' },
   { label: 'Blog', href: 'https://twfdigital.com/blogs/', activePath: '/blog' },
-  { label: 'About Us', href: '/about' }
+  { label: 'About Us', href: '/about' },
+  { label: 'Contact', href: '/contact' }
 ]
 
-const isActive = (item: { href: string, activePath?: string }) =>
-  props.activePath === (item.activePath ?? item.href)
+const isActive = (item: { href: string, activePath?: string } | string) => {
+  const path = typeof item === 'string' ? item : (item.activePath ?? item.href)
+
+  return props.activePath === path
+}
 
 const closeMenu = () => {
   menuOpen.value = false
@@ -68,11 +72,11 @@ onBeforeUnmount(() => {
       </div>
 
       <a
-        :class="['nav-contact about-contact', { active: isActive('/contact') }]"
-        href="/contact"
-        :aria-current="isActive('/contact') ? 'page' : undefined"
+        :class="['nav-contact about-contact', { active: isActive('/partnership') }]"
+        href="/partnership"
+        :aria-current="isActive('/partnership') ? 'page' : undefined"
         @click="closeMenu"
-      >Contact</a>
+      >Start a partnership</a>
       <button
         class="menu-toggle"
         type="button"

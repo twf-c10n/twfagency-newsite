@@ -1431,10 +1431,10 @@ section[id], footer[id] {
 .about-title-section {
   display: grid;
   width: min(100%, 1280px);
-  min-height: 424px;
+  min-height: 548px;
   place-items: center;
   margin: 0 auto;
-  padding: 124px 80px 96px;
+  padding: 128px 80px 94px;
 }
 
 .about-title-section h1 {
@@ -1788,10 +1788,12 @@ section[id], footer[id] {
 .services-hero {
   display: grid;
   width: min(100%, 1280px);
+  min-height: 548px;
   gap: 40px;
   justify-items: center;
+  align-content: center;
   margin: 0 auto;
-  padding: 120px 80px;
+  padding: 128px 80px 94px;
   text-align: center;
 }
 
@@ -2085,10 +2087,12 @@ section[id], footer[id] {
 .project-hero {
   display: grid;
   width: min(100%, 1280px);
+  min-height: 548px;
   gap: 40px;
   justify-items: center;
+  align-content: center;
   margin: 0 auto;
-  padding: 120px 80px 24px;
+  padding: 128px 80px 94px;
   text-align: center;
 }
 
@@ -2876,12 +2880,12 @@ section[id], footer[id] {
 .contact-hero {
   display: grid;
   width: min(100%, 1280px);
-  min-height: 420px;
+  min-height: 548px;
   place-items: center;
   align-content: center;
   gap: 40px;
   margin: 0 auto;
-  padding: 144px 80px 76px;
+  padding: 128px 80px 94px;
   text-align: center;
 }
 
@@ -3174,6 +3178,199 @@ section[id], footer[id] {
   width: 100%;
 }
 
+.partnership-page {
+  min-height: 100vh;
+  color: #fff;
+  background: #111;
+}
+
+.partnership-main {
+  display: grid;
+  justify-items: center;
+  padding: 132px 24px 86px;
+}
+
+.partnership-form {
+  display: grid;
+  width: min(100%, 1044px);
+  gap: 48px;
+}
+
+.partnership-heading {
+  text-align: center;
+}
+
+.partnership-heading h1 {
+  color: #f3f3f3;
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 400;
+  line-height: 1.15;
+}
+
+.partnership-heading em {
+  color: #fde33b;
+  font-style: italic;
+  font-weight: 700;
+}
+
+.partnership-heading span {
+  margin-left: 10px;
+}
+
+.partnership-section {
+  display: grid;
+  gap: 27px;
+}
+
+.partnership-label {
+  color: rgb(255 255 255 / 48%);
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+.partnership-interest-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px 64px;
+}
+
+.partnership-check,
+.partnership-consent {
+  display: grid;
+  grid-template-columns: 18px 1fr;
+  gap: 16px;
+  align-items: start;
+}
+
+.partnership-check {
+  min-height: 42px;
+  color: #f4f4f4;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.partnership-check input,
+.partnership-consent input {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  border: 1px solid rgb(255 255 255 / 62%);
+  border-radius: 3px;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.partnership-check input:checked,
+.partnership-consent input:checked {
+  border-color: #fde33b;
+  background:
+    linear-gradient(135deg, transparent 42%, #111 42% 58%, transparent 58%),
+    #fde33b;
+}
+
+.partnership-field-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 33px 14px;
+}
+
+.partnership-field {
+  display: grid;
+  gap: 8px;
+}
+
+.partnership-field.span-full {
+  grid-column: 1 / -1;
+}
+
+.partnership-field span {
+  color: #fff;
+  font-size: 12px;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+.partnership-field input,
+.partnership-field textarea {
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid rgb(255 255 255 / 58%);
+  border-radius: 0;
+  outline: 0;
+  background: transparent;
+  color: #fff;
+  font-family: "Chakra Petch", Arial, sans-serif;
+  font-size: 16px;
+}
+
+.partnership-field input {
+  height: 31px;
+}
+
+.partnership-field textarea {
+  min-height: 31px;
+  resize: vertical;
+}
+
+.partnership-field input:focus,
+.partnership-field textarea:focus {
+  border-bottom-color: #fde33b;
+}
+
+.partnership-consent {
+  max-width: 840px;
+  margin-top: 2px;
+  color: #fff;
+  font-size: 10px;
+  line-height: 1.45;
+}
+
+.partnership-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 54px;
+  padding-top: 10px;
+}
+
+.partnership-back,
+.partnership-submit {
+  display: inline-flex;
+  min-width: 124px;
+  min-height: 40px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent;
+  background: transparent;
+  color: #fff;
+  font-family: "Chakra Petch", Arial, sans-serif;
+  font-size: 12px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: border-color .2s ease, color .2s ease, transform .2s ease;
+}
+
+.partnership-back {
+  min-width: auto;
+  padding: 0 10px;
+}
+
+.partnership-submit {
+  border-color: rgb(255 255 255 / 62%);
+}
+
+.partnership-back:hover,
+.partnership-submit:hover {
+  color: #fde33b;
+  transform: translateY(-1px);
+}
+
+.partnership-submit:hover {
+  border-color: #fde33b;
+}
+
 .articles {
   padding: 112px 0 137px;
   color: #101112;
@@ -3361,6 +3558,10 @@ section[id], footer[id] {
     font-size: 12px;
   }
 
+  .partnership-interest-grid {
+    column-gap: 32px;
+  }
+
   .contact-content {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     padding-right: 24px;
@@ -3535,8 +3736,8 @@ section[id], footer[id] {
   }
 
   .about-title-section {
-    min-height: 316px;
-    padding: 104px 17px 54px;
+    min-height: 470px;
+    padding: 112px 17px 70px;
   }
 
   .blog-search-section {
@@ -3545,13 +3746,15 @@ section[id], footer[id] {
   }
 
   .services-hero {
+    min-height: 470px;
     gap: 26px;
-    padding: 104px 17px 58px;
+    padding: 112px 17px 70px;
   }
 
   .project-hero {
+    min-height: 470px;
     gap: 26px;
-    padding: 120px 17px 54px;
+    padding: 112px 17px 70px;
   }
 
   .services-hero h1 {
@@ -3698,9 +3901,9 @@ section[id], footer[id] {
   }
 
   .contact-hero {
-    min-height: 312px;
+    min-height: 470px;
     gap: 30px;
-    padding: 104px 17px 54px;
+    padding: 112px 17px 70px;
   }
 
   .about-title-section h1,
@@ -3715,6 +3918,44 @@ section[id], footer[id] {
     grid-template-columns: 1fr;
     gap: 44px;
     padding: 0 17px 66px;
+  }
+
+  .partnership-main {
+    padding: 104px 17px 64px;
+  }
+
+  .partnership-form {
+    gap: 38px;
+  }
+
+  .partnership-heading {
+    text-align: left;
+  }
+
+  .partnership-heading h1 {
+    font-size: clamp(32px, 10vw, 44px);
+  }
+
+  .partnership-heading span {
+    display: block;
+    margin: 4px 0 0;
+  }
+
+  .partnership-interest-grid,
+  .partnership-field-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .partnership-interest-grid {
+    gap: 20px;
+  }
+
+  .partnership-check {
+    min-height: 0;
+  }
+
+  .partnership-actions {
+    gap: 30px;
   }
 
   .contact-column,
