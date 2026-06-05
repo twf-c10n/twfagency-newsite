@@ -10,8 +10,6 @@ useHead({
   ]
 })
 
-const activeStoryIndex = ref(1)
-
 const assetPath = '/assets/about-figma'
 
 const storyImages = [
@@ -19,6 +17,11 @@ const storyImages = [
   { src: `${assetPath}/story-center.png`, alt: 'TWF team portrait' },
   { src: `${assetPath}/story-right.png`, alt: 'TWF team celebration' }
 ]
+
+const storySlides = ref([...storyImages])
+const storyOffset = ref(0)
+const isStoryResetting = ref(false)
+const isStoryAnimating = ref(false)
 
 const partners = [
   {
@@ -65,13 +68,49 @@ const socials = [
 ]
 
 const previousStory = () => {
-  activeStoryIndex.value =
-    activeStoryIndex.value === 0 ? storyImages.length - 1 : activeStoryIndex.value - 1
+  if (isStoryAnimating.value || isStoryResetting.value) {
+    return
+  }
+
+  isStoryAnimating.value = true
+  storyOffset.value = 1
 }
 
 const nextStory = () => {
-  activeStoryIndex.value =
-    activeStoryIndex.value === storyImages.length - 1 ? 0 : activeStoryIndex.value + 1
+  if (isStoryAnimating.value || isStoryResetting.value) {
+    return
+  }
+
+  isStoryAnimating.value = true
+  storyOffset.value = -1
+}
+
+const handleStoryTransitionEnd = (event: TransitionEvent) => {
+  if (event.propertyName !== 'transform') {
+    return
+  }
+
+  if (storyOffset.value === -1) {
+    const [firstSlide, ...remainingSlides] = storySlides.value
+    storySlides.value = [...remainingSlides, firstSlide]
+  } else if (storyOffset.value === 1) {
+    const slides = [...storySlides.value]
+    const lastSlide = slides.pop()
+
+    if (lastSlide) {
+      storySlides.value = [lastSlide, ...slides]
+    }
+  }
+
+  isStoryResetting.value = true
+  storyOffset.value = 0
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      isStoryResetting.value = false
+      isStoryAnimating.value = false
+    })
+  })
 }
 
 </script>
@@ -86,16 +125,32 @@ const nextStory = () => {
       </section>
 
       <section class="about-story-strip" aria-label="TWF agency moments">
-        <div class="about-story-track" :style="{ '--story-index': activeStoryIndex }">
-          <figure v-for="image in storyImages" :key="image.src">
+        <div
+          :class="['about-story-track', { resetting: isStoryResetting }]"
+          :style="{ '--story-offset': storyOffset }"
+          @transitionend="handleStoryTransitionEnd"
+        >
+          <figure v-for="image in storySlides" :key="image.src">
             <img :src="image.src" :alt="image.alt">
           </figure>
         </div>
         <div class="about-story-controls">
-          <button class="story-control previous" type="button" aria-label="Previous image" @click="previousStory">
+          <button
+            class="story-control previous"
+            type="button"
+            aria-label="Previous image"
+            :disabled="isStoryAnimating || isStoryResetting"
+            @click="previousStory"
+          >
             <img :src="`${assetPath}/arrow-circle.svg`" alt="">
           </button>
-          <button class="story-control next" type="button" aria-label="Next image" @click="nextStory">
+          <button
+            class="story-control next"
+            type="button"
+            aria-label="Next image"
+            :disabled="isStoryAnimating || isStoryResetting"
+            @click="nextStory"
+          >
             <img :src="`${assetPath}/arrow-circle.svg`" alt="">
           </button>
         </div>

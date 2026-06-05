@@ -11,13 +11,26 @@ useHead({
 })
 
 const clientLogos = [
-  { label: 'Acer', color: '#83b81a', variant: 'acer' },
-  { label: 'Unicef', color: '#1cabe2', variant: 'unicef' },
-  { label: 'KING POWER', color: '#004b9b', variant: 'king-power' },
-  { label: 'SCG', color: '#ed1b2f', variant: 'scg' },
-  { label: 'Rojukiss', color: '#e6007e', variant: 'rojukiss' },
-  { label: 'Target', color: '#cc0000', variant: 'target' },
-  { label: 'Syngenta', color: '#00a859', variant: 'syngenta' }
+  { label: 'Client logo 01', src: '/assets/client-logos/client-logo-01.png' },
+  { label: 'Client logo 02', src: '/assets/client-logos/client-logo-02.png' },
+  { label: 'Client logo 03', src: '/assets/client-logos/client-logo-03.png' },
+  { label: 'Client logo 04', src: '/assets/client-logos/client-logo-04.png' },
+  { label: 'Client logo 05', src: '/assets/client-logos/client-logo-05.png' },
+  { label: 'Client logo 06', src: '/assets/client-logos/client-logo-06.png' },
+  { label: 'Client logo 07', src: '/assets/client-logos/client-logo-07.png' },
+  { label: 'Client logo 08', src: '/assets/client-logos/client-logo-08.png' },
+  { label: 'Client logo 09', src: '/assets/client-logos/client-logo-09.png' },
+  { label: 'Client logo 10', src: '/assets/client-logos/client-logo-10.png' },
+  { label: 'Client logo 11', src: '/assets/client-logos/client-logo-11.png' },
+  { label: 'Client logo 12', src: '/assets/client-logos/client-logo-12.png' },
+  { label: 'Client logo 13', src: '/assets/client-logos/client-logo-13.png' },
+  { label: 'Client logo 14', src: '/assets/client-logos/client-logo-14.png' },
+  { label: 'Client logo 15', src: '/assets/client-logos/client-logo-15.png' },
+  { label: 'Client logo 16', src: '/assets/client-logos/client-logo-16.png' },
+  { label: 'Client logo 17', src: '/assets/client-logos/client-logo-17.png' },
+  { label: 'Client logo 18', src: '/assets/client-logos/client-logo-18.png' },
+  { label: 'Client logo 19', src: '/assets/client-logos/client-logo-19.png' },
+  { label: 'Client logo 20', src: '/assets/client-logos/client-logo-20.png' }
 ]
 
 const imgTriangleOfPerformance = '/assets/triangle-performance-main.webp'
@@ -419,12 +432,15 @@ onBeforeUnmount(() => {
       <section class="client-strip" aria-label="Our clients">
         <div class="logo-track" aria-hidden="true">
           <div v-for="sequence in 2" :key="sequence" class="logo-set">
-            <span
+            <img
               v-for="logo in clientLogos"
               :key="`${sequence}-${logo.label}`"
-              :class="['brand-logo', `brand-logo-${logo.variant}`]"
-              :style="{ '--brand-color': logo.color }"
-            >{{ logo.label }}</span>
+              class="brand-logo"
+              :src="logo.src"
+              :alt="logo.label"
+              loading="eager"
+              decoding="async"
+            >
           </div>
         </div>
       </section>

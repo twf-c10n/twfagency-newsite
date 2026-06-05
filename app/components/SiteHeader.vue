@@ -18,11 +18,12 @@ const navItems = [
   { label: 'Our Services', href: '/services' },
   { label: 'Projects', href: '/project' },
   { label: 'Photography', href: '/photography' },
-  { label: 'Blog', href: '/blog' },
+  { label: 'Blog', href: 'https://twfdigital.com/blogs/', activePath: '/blog' },
   { label: 'About Us', href: '/about' }
 ]
 
-const isActive = (href: string) => props.activePath === href
+const isActive = (item: { href: string, activePath?: string }) =>
+  props.activePath === (item.activePath ?? item.href)
 
 const closeMenu = () => {
   menuOpen.value = false
@@ -57,9 +58,9 @@ onBeforeUnmount(() => {
         <a
           v-for="item in navItems"
           :key="item.href"
-          :class="{ active: isActive(item.href) }"
+          :class="{ active: isActive(item) }"
           :href="item.href"
-          :aria-current="isActive(item.href) ? 'page' : undefined"
+          :aria-current="isActive(item) ? 'page' : undefined"
           @click="closeMenu"
         >
           {{ item.label }}
