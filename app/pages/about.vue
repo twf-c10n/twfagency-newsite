@@ -22,6 +22,7 @@ const storySlides = ref([...storyImages])
 const storyOffset = ref(0)
 const isStoryResetting = ref(false)
 const isStoryAnimating = ref(false)
+let storyAutoplay: ReturnType<typeof setInterval> | undefined
 
 const partners = [
   {
@@ -85,6 +86,18 @@ const nextStory = () => {
   storyOffset.value = -1
 }
 
+const startStoryAutoplay = () => {
+  stopStoryAutoplay()
+  storyAutoplay = setInterval(nextStory, 2600)
+}
+
+const stopStoryAutoplay = () => {
+  if (storyAutoplay) {
+    clearInterval(storyAutoplay)
+    storyAutoplay = undefined
+  }
+}
+
 const handleStoryTransitionEnd = (event: TransitionEvent) => {
   if (event.propertyName !== 'transform') {
     return
@@ -113,6 +126,14 @@ const handleStoryTransitionEnd = (event: TransitionEvent) => {
   })
 }
 
+onMounted(() => {
+  startStoryAutoplay()
+})
+
+onBeforeUnmount(() => {
+  stopStoryAutoplay()
+})
+
 </script>
 
 <template>
@@ -124,7 +145,12 @@ const handleStoryTransitionEnd = (event: TransitionEvent) => {
         <h1>Our Story Begins with the Digital Age</h1>
       </section>
 
-      <section class="about-story-strip" aria-label="TWF agency moments">
+      <section
+        class="about-story-strip"
+        aria-label="TWF agency moments"
+        @mouseenter="stopStoryAutoplay"
+        @mouseleave="startStoryAutoplay"
+      >
         <div
           :class="['about-story-track', { resetting: isStoryResetting }]"
           :style="{ '--story-offset': storyOffset }"
