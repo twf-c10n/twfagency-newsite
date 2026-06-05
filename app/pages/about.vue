@@ -18,11 +18,7 @@ const storyImages = [
   { src: `${assetPath}/story-right.png`, alt: 'TWF team celebration' }
 ]
 
-const storySlides = ref([...storyImages])
-const storyOffset = ref(0)
-const isStoryResetting = ref(false)
-const isStoryAnimating = ref(false)
-let storyAutoplay: ReturnType<typeof setInterval> | undefined
+const storySets = [storyImages, storyImages]
 
 const partners = [
   {
@@ -68,72 +64,6 @@ const socials = [
   { label: 'LinkedIn', src: `${assetPath}/linkedin.svg`, href: '#' }
 ]
 
-const previousStory = () => {
-  if (isStoryAnimating.value || isStoryResetting.value) {
-    return
-  }
-
-  isStoryAnimating.value = true
-  storyOffset.value = 1
-}
-
-const nextStory = () => {
-  if (isStoryAnimating.value || isStoryResetting.value) {
-    return
-  }
-
-  isStoryAnimating.value = true
-  storyOffset.value = -1
-}
-
-const startStoryAutoplay = () => {
-  stopStoryAutoplay()
-  storyAutoplay = setInterval(nextStory, 2600)
-}
-
-const stopStoryAutoplay = () => {
-  if (storyAutoplay) {
-    clearInterval(storyAutoplay)
-    storyAutoplay = undefined
-  }
-}
-
-const handleStoryTransitionEnd = (event: TransitionEvent) => {
-  if (event.propertyName !== 'transform') {
-    return
-  }
-
-  if (storyOffset.value === -1) {
-    const [firstSlide, ...remainingSlides] = storySlides.value
-    storySlides.value = [...remainingSlides, firstSlide]
-  } else if (storyOffset.value === 1) {
-    const slides = [...storySlides.value]
-    const lastSlide = slides.pop()
-
-    if (lastSlide) {
-      storySlides.value = [lastSlide, ...slides]
-    }
-  }
-
-  isStoryResetting.value = true
-  storyOffset.value = 0
-
-  requestAnimationFrame(() => {
-    requestAnimationFrame(() => {
-      isStoryResetting.value = false
-      isStoryAnimating.value = false
-    })
-  })
-}
-
-onMounted(() => {
-  startStoryAutoplay()
-})
-
-onBeforeUnmount(() => {
-  stopStoryAutoplay()
-})
-
 </script>
 
 <template>
@@ -145,40 +75,13 @@ onBeforeUnmount(() => {
         <h1>Our Story Begins with the Digital Age</h1>
       </section>
 
-      <section
-        class="about-story-strip"
-        aria-label="TWF agency moments"
-        @mouseenter="stopStoryAutoplay"
-        @mouseleave="startStoryAutoplay"
-      >
-        <div
-          :class="['about-story-track', { resetting: isStoryResetting }]"
-          :style="{ '--story-offset': storyOffset }"
-          @transitionend="handleStoryTransitionEnd"
-        >
-          <figure v-for="image in storySlides" :key="image.src">
-            <img :src="image.src" :alt="image.alt">
-          </figure>
-        </div>
-        <div class="about-story-controls">
-          <button
-            class="story-control previous"
-            type="button"
-            aria-label="Previous image"
-            :disabled="isStoryAnimating || isStoryResetting"
-            @click="previousStory"
-          >
-            <img :src="`${assetPath}/arrow-circle.svg`" alt="">
-          </button>
-          <button
-            class="story-control next"
-            type="button"
-            aria-label="Next image"
-            :disabled="isStoryAnimating || isStoryResetting"
-            @click="nextStory"
-          >
-            <img :src="`${assetPath}/arrow-circle.svg`" alt="">
-          </button>
+      <section class="about-story-strip" aria-label="TWF agency moments">
+        <div class="about-story-track">
+          <div v-for="(set, setIndex) in storySets" :key="setIndex" class="about-story-set">
+            <figure v-for="image in set" :key="`${setIndex}-${image.src}`">
+              <img :src="image.src" :alt="setIndex === 0 ? image.alt : ''">
+            </figure>
+          </div>
         </div>
       </section>
 

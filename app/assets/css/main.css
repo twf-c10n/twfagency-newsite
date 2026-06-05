@@ -1450,79 +1450,40 @@ section[id], footer[id] {
 }
 
 .about-story-strip {
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-  align-items: center;
   width: 100%;
   overflow: hidden;
 }
 
 .about-story-track {
   display: flex;
-  width: 2064px;
-  gap: 12px;
-  justify-content: center;
-  transform: translateX(calc(var(--story-offset, 0) * 692px));
-  transition: transform .45s cubic-bezier(.2, .72, .25, 1);
+  width: max-content;
+  animation: about-story-marquee 24s linear infinite;
   will-change: transform;
 }
 
-.about-story-track.resetting {
-  transition: none;
+.about-story-set {
+  display: flex;
+  flex: 0 0 auto;
+  gap: 12px;
+  padding-right: 12px;
 }
 
-.about-story-track figure {
+.about-story-set figure {
   flex: 0 0 680px;
   height: 445px;
   overflow: hidden;
 }
 
-.about-story-track img {
+.about-story-set img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.about-story-controls {
-  display: flex;
-  gap: 40px;
-  align-items: center;
-  justify-content: center;
-}
-
-.story-control {
-  display: grid;
-  width: 60px;
-  height: 60px;
-  place-items: center;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  cursor: pointer;
-  transition: opacity .2s ease, transform .2s ease;
-}
-
-.story-control:hover {
-  opacity: .76;
-}
-
-.story-control:disabled {
-  cursor: default;
-  opacity: .45;
-}
-
-.story-control.previous {
-  transform: rotate(-90deg);
-}
-
-.story-control.next {
-  transform: rotate(90deg);
-}
-
-.story-control img {
-  width: 53px;
-  height: 53px;
+@keyframes about-story-marquee {
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 .about-intro-copy {
@@ -4017,35 +3978,19 @@ section[id], footer[id] {
     font-size: 11px;
   }
 
-  .about-story-strip {
-    gap: 24px;
-  }
-
   .about-story-track {
-    width: calc((82vw * 3) + 8px);
-    justify-content: flex-start;
+    animation-duration: 20s;
+  }
+
+  .about-story-set {
     gap: 4px;
-    transform: translateX(calc(var(--story-offset, 0) * (82vw + 4px)));
+    padding-right: 4px;
   }
 
-  .about-story-track::-webkit-scrollbar {
-    display: none;
-  }
-
-  .about-story-track figure {
+  .about-story-set figure {
     flex-basis: 82vw;
     height: 54vw;
     min-height: 250px;
-  }
-
-  .story-control {
-    width: 48px;
-    height: 48px;
-  }
-
-  .story-control img {
-    width: 43px;
-    height: 43px;
   }
 
   .about-intro-copy {
