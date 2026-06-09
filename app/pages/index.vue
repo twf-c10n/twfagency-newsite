@@ -486,6 +486,16 @@ onBeforeUnmount(() => {
               loading="lazy"
               decoding="async"
             >
+            <div class="performance-labels" aria-hidden="true">
+              <span
+                v-for="(pillar, index) in pillars"
+                :key="`performance-label-${pillar.number}`"
+                :class="['performance-label', `performance-label-${index + 1}`]"
+              >
+                <strong>{{ pillar.number }}</strong>
+                {{ pillar.title }}
+              </span>
+            </div>
             <img
               class="performance-poster"
               src="/assets/triangle-of-performance-figma.png"
