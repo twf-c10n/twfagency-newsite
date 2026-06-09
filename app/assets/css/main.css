@@ -362,6 +362,7 @@ section[id], footer[id] {
 }
 
 .client-strip {
+  --client-logo-height: 68px;
   position: relative;
   height: 91px;
   overflow: hidden;
@@ -385,18 +386,18 @@ section[id], footer[id] {
   display: flex;
   min-width: max-content;
   align-items: center;
-  gap: clamp(18px, 2.2vw, 34px);
-  padding: 0 clamp(9px, 1.1vw, 17px);
+  gap: clamp(18px, 2vw, 32px);
+  padding: 0 clamp(10px, 1vw, 16px);
 }
 
 .brand-logo {
   display: block;
   width: auto;
-  height: clamp(54px, 5.8vw, 70px);
-  aspect-ratio: 1042 / 573;
+  height: var(--client-logo-height);
   max-width: none;
   flex: 0 0 auto;
   object-fit: contain;
+  object-position: center;
   filter: saturate(1.04) contrast(1.04);
   transition: transform .25s ease, filter .25s ease;
 }
@@ -482,10 +483,10 @@ section[id], footer[id] {
 .performance-visual {
   position: relative;
   display: grid;
-  min-height: 0;
+  min-height: clamp(560px, 46.875vw, 900px);
   place-items: center;
   overflow: hidden;
-  padding: clamp(24px, 3.7vw, 44px) 20px;
+  padding: 0;
   background: #000;
   contain: paint;
   isolation: isolate;
@@ -495,20 +496,82 @@ section[id], footer[id] {
   scroll-margin-top: 64px;
 }
 
-.performance-stack {
+.performance-scene {
   position: relative;
+  width: 100%;
+  min-height: inherit;
+  overflow: hidden;
+  background: #000;
+  isolation: isolate;
+}
+
+.performance-scene::before,
+.performance-scene::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  pointer-events: none;
+}
+
+.performance-scene::before {
   z-index: 1;
-  width: min(558px, calc(100vw - 40px));
-  aspect-ratio: 558 / 469;
-  text-align: center;
+  background:
+    radial-gradient(circle at 50% 18%, rgb(184 54 99 / 42%), transparent 29%),
+    radial-gradient(circle at 15% 78%, rgb(57 181 74 / 38%), transparent 31%),
+    radial-gradient(circle at 88% 73%, rgb(253 233 43 / 30%), transparent 26%),
+    linear-gradient(180deg, rgb(0 0 0 / 25%) 0%, rgb(0 0 0 / 4%) 45%, rgb(0 0 0 / 64%) 100%);
+  mix-blend-mode: screen;
+}
+
+.performance-scene::after {
+  z-index: 4;
+  background:
+    linear-gradient(90deg, #000 0%, transparent 12%, transparent 88%, #000 100%),
+    linear-gradient(180deg, #000 0%, transparent 18%, transparent 82%, #000 100%);
+}
+
+.performance-bg,
+.performance-bg img,
+.performance-shards,
+.performance-poster {
+  position: absolute;
+  max-width: none;
+}
+
+.performance-bg {
+  z-index: 0;
+  inset: 0;
+}
+
+.performance-bg img {
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  filter: brightness(.58) contrast(1.15) saturate(.7);
+}
+
+.performance-shards {
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  width: min(1320px, 72vw);
+  opacity: .34;
+  filter: saturate(.88) drop-shadow(0 0 44px rgb(0 59 255 / 22%));
+  mix-blend-mode: screen;
+  transform: translate(-50%, -43%) rotate(-1deg);
 }
 
 .performance-poster {
-  width: 100%;
-  height: 100%;
-  max-width: none;
-  object-fit: contain;
-  filter: drop-shadow(0 10px 28px rgb(0 0 0 / 42%));
+  z-index: 3;
+  top: 50%;
+  left: 50%;
+  width: clamp(430px, 29.0625vw, 558px);
+  height: auto;
+  clip-path: polygon(52% 2%, 98% 97%, 6% 97%);
+  filter: drop-shadow(0 34px 82px rgb(0 0 0 / 58%));
+  transform: translate(-50%, -47%);
 }
 
 .page.is-scrolling .logo-track,
@@ -524,8 +587,9 @@ section[id], footer[id] {
 
 .pillar {
   display: flex;
-  min-height: 446px;
+  min-height: 0;
   align-items: center;
+  aspect-ratio: 1 / 1;
   padding: 0 clamp(35px, 6vw, 70px);
   transition: filter .32s ease;
 }
@@ -3175,12 +3239,29 @@ section[id], footer[id] {
   line-height: 1.65;
 }
 
+.footer-logo {
+  width: 123px;
+  height: 47px;
+  object-fit: contain;
+}
+
 .socials {
   display: flex;
-  gap: 33px;
+  gap: 28px;
   align-items: center;
-  font-size: 18px;
-  font-weight: 700;
+}
+
+.socials a {
+  display: grid;
+  width: 32px;
+  height: 32px;
+  place-items: center;
+}
+
+.socials img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
 }
 
 .copyright {
@@ -3901,6 +3982,7 @@ section[id], footer[id] {
   }
 
   .client-strip {
+    --client-logo-height: 52px;
     height: 74px;
     padding: 0;
   }
@@ -3916,7 +3998,7 @@ section[id], footer[id] {
   }
 
   .brand-logo {
-    height: 52px;
+    height: var(--client-logo-height);
   }
 
   .needs {
@@ -3958,13 +4040,22 @@ section[id], footer[id] {
   }
 
   .performance-visual {
-    min-height: 0;
-    padding: 22px 17px 30px;
+    min-height: clamp(430px, 112vw, 620px);
   }
 
-  .performance-stack {
+  .performance-scene {
+    min-height: inherit;
+  }
+
+  .performance-shards {
+    width: min(980px, 154vw);
+    opacity: .24;
+    transform: translate(-50%, -39%) rotate(-1deg);
+  }
+
+  .performance-poster {
     width: min(558px, calc(100vw - 34px));
-    min-height: 0;
+    transform: translate(-50%, -46%);
   }
 
   .pillar-grid,
@@ -3979,6 +4070,7 @@ section[id], footer[id] {
   }
 
   .pillar {
+    aspect-ratio: auto;
     min-height: 214px;
     align-items: stretch;
     padding: 14px 17px;

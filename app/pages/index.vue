@@ -11,26 +11,35 @@ useHead({
 })
 
 const clientLogos = [
-  { label: 'Client logo 01', src: '/assets/client-logos/client-logo-01.png' },
-  { label: 'Client logo 02', src: '/assets/client-logos/client-logo-02.png' },
-  { label: 'Client logo 03', src: '/assets/client-logos/client-logo-03.png' },
-  { label: 'Client logo 04', src: '/assets/client-logos/client-logo-04.png' },
-  { label: 'Client logo 05', src: '/assets/client-logos/client-logo-05.png' },
-  { label: 'Client logo 06', src: '/assets/client-logos/client-logo-06.png' },
-  { label: 'Client logo 07', src: '/assets/client-logos/client-logo-07.png' },
-  { label: 'Client logo 08', src: '/assets/client-logos/client-logo-08.png' },
-  { label: 'Client logo 09', src: '/assets/client-logos/client-logo-09.png' },
-  { label: 'Client logo 10', src: '/assets/client-logos/client-logo-10.png' },
-  { label: 'Client logo 11', src: '/assets/client-logos/client-logo-11.png' },
-  { label: 'Client logo 12', src: '/assets/client-logos/client-logo-12.png' },
-  { label: 'Client logo 13', src: '/assets/client-logos/client-logo-13.png' },
-  { label: 'Client logo 14', src: '/assets/client-logos/client-logo-14.png' },
-  { label: 'Client logo 15', src: '/assets/client-logos/client-logo-15.png' },
-  { label: 'Client logo 16', src: '/assets/client-logos/client-logo-16.png' },
-  { label: 'Client logo 17', src: '/assets/client-logos/client-logo-17.png' },
-  { label: 'Client logo 18', src: '/assets/client-logos/client-logo-18.png' },
-  { label: 'Client logo 19', src: '/assets/client-logos/client-logo-19.png' },
-  { label: 'Client logo 20', src: '/assets/client-logos/client-logo-20.png' }
+  { label: 'HomePro', src: '/assets/client-logos/client-logo-01.png' },
+  { label: 'Certainty', src: '/assets/client-logos/client-logo-02.png' },
+  { label: 'GS Battery', src: '/assets/client-logos/client-logo-03.png' },
+  { label: 'Syngenta', src: '/assets/client-logos/client-logo-04.png' },
+  { label: 'ROJUKISS', src: '/assets/client-logos/client-logo-05.png' },
+  { label: 'Beger', src: '/assets/client-logos/client-logo-06.png' },
+  { label: 'SCG', src: '/assets/client-logos/client-logo-07.png' },
+  { label: "Dentiste' Plus White", src: '/assets/client-logos/client-logo-08.png' },
+  { label: 'ViMUT Hospital', src: '/assets/client-logos/client-logo-09.png' },
+  { label: 'UNICEF', src: '/assets/client-logos/client-logo-10.png' },
+  { label: 'Acer', src: '/assets/client-logos/client-logo-11.png' },
+  { label: 'TrueCoffee', src: '/assets/client-logos/client-logo-12.png' },
+  { label: 'Taro', src: '/assets/client-logos/client-logo-13.png' },
+  { label: 'Double Goose', src: '/assets/client-logos/client-logo-14.png' },
+  { label: 'Pruksa', src: '/assets/client-logos/client-logo-15.png' },
+  { label: 'SC Asset', src: '/assets/client-logos/client-logo-16.png' },
+  { label: 'Bangkok Insurance', src: '/assets/client-logos/client-logo-17.png' },
+  { label: 'Kubota', src: '/assets/client-logos/client-logo-18.png' },
+  { label: 'BabyLove', src: '/assets/client-logos/client-logo-19.png' },
+  { label: 'ACUVUE', src: '/assets/client-logos/client-logo-20.png' }
+]
+
+const aboutAssetPath = '/assets/about-figma'
+
+const footerSocials = [
+  { label: 'Facebook', src: `${aboutAssetPath}/facebook.svg`, href: '#' },
+  { label: 'X', src: `${aboutAssetPath}/x.svg`, href: '#' },
+  { label: 'Instagram', src: `${aboutAssetPath}/instagram.svg`, href: '#' },
+  { label: 'LinkedIn', src: `${aboutAssetPath}/linkedin.svg`, href: '#' }
 ]
 
 const pillars = [
@@ -464,7 +473,19 @@ onBeforeUnmount(() => {
         </div>
 
         <div id="performance-creative-visual" class="performance-visual" aria-label="Triangle of Performance">
-          <div class="performance-stack" data-reveal>
+          <div class="performance-scene" data-reveal>
+            <picture class="performance-bg" aria-hidden="true">
+              <source srcset="/assets/performance-bg.webp" type="image/webp">
+              <img src="/assets/performance-bg.png" alt="" loading="lazy" decoding="async">
+            </picture>
+            <img
+              class="performance-shards"
+              src="/assets/triangle-performance-glow.webp"
+              alt=""
+              aria-hidden="true"
+              loading="lazy"
+              decoding="async"
+            >
             <img
               class="performance-poster"
               src="/assets/triangle-of-performance-figma.png"
@@ -622,13 +643,12 @@ onBeforeUnmount(() => {
         <a class="cta-button" href="mailto:hello@twf.agency">Initiate Project Launch <b>+</b></a>
       </div>
       <div class="shell footer-bottom">
-        <span class="brand-mark">TWF</span>
+        <img class="footer-logo" :src="`${aboutAssetPath}/twf-logo-footer.svg`" alt="TWF">
         <p>The Web Flight Co., Ltd. Crystal Park Place Building, R.1<br>Praditmanutham Road, Wangthonglang, Bangkok 10310</p>
         <div class="socials">
-          <a href="#" aria-label="Facebook">f</a>
-          <a href="#" aria-label="Twitter">x</a>
-          <a href="#" aria-label="Instagram">◎</a>
-          <a href="#" aria-label="LinkedIn">in</a>
+          <a v-for="social in footerSocials" :key="social.label" :href="social.href" :aria-label="social.label">
+            <img :src="social.src" alt="">
+          </a>
         </div>
       </div>
       <p class="copyright">Copyright © 2026 TWF DIGITAL MARKETING CONSULTANCY</p>
