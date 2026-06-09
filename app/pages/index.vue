@@ -33,11 +33,6 @@ const clientLogos = [
   { label: 'Client logo 20', src: '/assets/client-logos/client-logo-20.png' }
 ]
 
-const imgTriangleOfPerformance = '/assets/triangle-performance-main.webp'
-const imgTriangleOfPerformance1 = '/assets/triangle-performance-grid.webp'
-const imgTriangleOfPerformance2 = '/assets/triangle-performance-glow.webp'
-const imgTriangleLogo = '/assets/about-figma/twf-logo-footer.svg'
-
 const pillars = [
   {
     number: '01',
@@ -468,39 +463,15 @@ onBeforeUnmount(() => {
           </p>
         </div>
 
-        <div class="performance-visual">
-          <div class="performance-bg" aria-hidden="true">
-            <img :src="imgTriangleOfPerformance" alt="" class="performance-bg-layer main" />
-            <img :src="imgTriangleOfPerformance1" alt="" class="performance-bg-layer grid" />
-            <img :src="imgTriangleOfPerformance2" alt="" class="performance-bg-layer glow" />
-          </div>
-          <div class="beam" aria-hidden="true" />
+        <div id="performance-creative-visual" class="performance-visual" aria-label="Triangle of Performance">
           <div class="performance-stack" data-reveal>
-            <span class="triangle-point">Insightful Data &amp;<br>Measurable Result<br><small>[วัดผลได้]</small></span>
-            <div class="triangle" aria-label="Triangle of Performance">
-              <svg class="triangle-energy" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-                <defs>
-                  <linearGradient id="triangle-light" x1="0" y1="1" x2="1" y2="1">
-                    <stop offset="0" stop-color="#67e999" />
-                    <stop offset=".22" stop-color="#16c9ec" />
-                    <stop offset=".45" stop-color="#6550ff" />
-                    <stop offset=".7" stop-color="#ee3786" />
-                    <stop offset="1" stop-color="#ffe84c" />
-                  </linearGradient>
-                </defs>
-                <path class="triangle-energy-track" d="M50 1 L99 99 L1 99 Z" />
-                <path class="triangle-energy-flow" d="M50 1 L99 99 L1 99 Z" />
-              </svg>
-              <div class="triangle-inner">
-                <img :src="imgTriangleLogo" alt="TWF Agency" class="triangle-logo">
-                <strong>Performance<br>Creative</strong>
-                <small>Triangle of Performance (Top)</small>
-              </div>
-            </div>
-            <div class="triangle-bottom">
-              <span class="triangle-left">Media Efficiency<br><small>[เข้าถึง]</small></span>
-              <span class="triangle-right">Creativity<br>Driving Actions<br><small>[มี Action]</small></span>
-            </div>
+            <img
+              class="performance-poster"
+              src="/assets/triangle-of-performance-figma.png"
+              alt="Triangle of Performance: TWF Agency Performance Creative"
+              loading="lazy"
+              decoding="async"
+            >
           </div>
         </div>
 
