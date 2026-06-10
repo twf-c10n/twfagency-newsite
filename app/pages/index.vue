@@ -45,15 +45,21 @@ const footerSocials = [
 const pillars = [
   {
     number: '01',
-    title: 'Insightful Data & Measurable Result'
+    title: 'Insightful Data & Measurable Result',
+    labelLines: ['Insightful Data &', 'Measurable Result'],
+    labelSubtitle: '(วัดผลได้)'
   },
   {
     number: '02',
-    title: 'Media Efficiency'
+    title: 'Media Efficiency',
+    labelLines: ['Media Efficiency'],
+    labelSubtitle: '(เข้าถึง)'
   },
   {
     number: '03',
-    title: 'Creativity Driving Actions'
+    title: 'Creativity Driving Actions',
+    labelLines: ['Creativity', 'Driving Actions'],
+    labelSubtitle: '(มี ACTION)'
   }
 ]
 
@@ -492,8 +498,16 @@ onBeforeUnmount(() => {
                 :key="`performance-label-${pillar.number}`"
                 :class="['performance-label', `performance-label-${index + 1}`]"
               >
-                <strong>{{ pillar.number }}</strong>
-                {{ pillar.title }}
+                <strong>
+                  <span
+                    v-for="line in pillar.labelLines"
+                    :key="line"
+                    class="performance-label-line"
+                  >
+                    {{ line }}
+                  </span>
+                </strong>
+                <span class="performance-label-subtitle">{{ pillar.labelSubtitle }}</span>
               </span>
             </div>
             <img
