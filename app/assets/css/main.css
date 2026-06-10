@@ -244,7 +244,7 @@ section[id], footer[id] {
 .hero {
   position: relative;
   display: flex;
-  min-height: clamp(700px, 64.5vw, 826px);
+  min-height: 100vh;
   align-items: center;
   isolation: isolate;
   background: #101117;
@@ -277,7 +277,7 @@ section[id], footer[id] {
   z-index: 1;
   inset: 0;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   object-fit: cover;
   object-position: center;
 }
@@ -418,15 +418,42 @@ section[id], footer[id] {
 }
 
 .needs {
+  position: relative;
+  isolation: isolate;
   display: grid;
   min-height: 60vh;
+  overflow: hidden;
   place-items: center;
   padding: 70px 20px;
   text-align: center;
-  background: #101112;
+  background: #000;
+}
+
+.needs::before,
+.needs::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  pointer-events: none;
+}
+
+.needs::before {
+  z-index: 0;
+  background:
+    linear-gradient(180deg, #000 0%, rgb(0 0 0 / 44%) 34%, rgb(0 0 0 / 48%) 68%, #000 100%),
+    url("/assets/needs-background.svg") center / cover no-repeat;
+  opacity: .92;
+  transform: scale(1.04);
+}
+
+.needs::after {
+  z-index: 0;
+  background: linear-gradient(180deg, #000 0%, transparent 24%, transparent 70%, #000 100%);
 }
 
 .narrow {
+  position: relative;
+  z-index: 1;
   width: min(690px, 100%);
 }
 
@@ -453,11 +480,31 @@ section[id], footer[id] {
 }
 
 .expertise-heading {
+  position: relative;
+  isolation: isolate;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 156px;
   align-items: center;
   min-height: 315px;
+}
+
+.expertise-heading::before {
+  position: absolute;
+  top: -120px;
+  bottom: -120px;
+  left: 50%;
+  z-index: 0;
+  width: 100vw;
+  content: "";
+  pointer-events: none;
+  background: linear-gradient(180deg, #000 0%, rgb(0 0 0 / 78%) 18%, rgb(0 0 0 / 8%) 50%, rgb(0 0 0 / 82%) 82%, #000 100%);
+  transform: translateX(-50%);
+}
+
+.expertise-heading > * {
+  position: relative;
+  z-index: 1;
 }
 
 .caption {
@@ -1883,12 +1930,12 @@ section[id], footer[id] {
 
 .automotive-copy li {
   padding: 8px 13px;
-  border: 1px solid color-mix(in srgb, var(--active-accent) 36%, rgb(255 255 255 / 30%));
+  border: 1.5px solid transparent;
   border-radius: 999px;
   color: rgb(255 255 255 / 86%);
   font-size: 12px;
   letter-spacing: .06em;
-  background: rgb(0 0 0 / 24%);
+  background: linear-gradient(#050607, #050607) padding-box, linear-gradient(95deg, #25b57d, #f0c82a, #e62653) border-box;
   backdrop-filter: blur(8px);
 }
 

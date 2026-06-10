@@ -11,26 +11,26 @@ useHead({
 })
 
 const clientLogos = [
+  { label: 'TrueCoffee', src: '/assets/client-logos/client-logo-12.png' },
+  { label: 'UNICEF', src: '/assets/client-logos/client-logo-10.png' },
+  { label: 'SCG', src: '/assets/client-logos/client-logo-07.png' },
+  { label: 'SC Asset', src: '/assets/client-logos/client-logo-16.png' },
+  { label: 'Pruksa', src: '/assets/client-logos/client-logo-15.png' },
+  { label: 'Kubota', src: '/assets/client-logos/client-logo-18.png' },
   { label: 'HomePro', src: '/assets/client-logos/client-logo-01.png' },
-  { label: 'Certainty', src: '/assets/client-logos/client-logo-02.png' },
   { label: 'GS Battery', src: '/assets/client-logos/client-logo-03.png' },
-  { label: 'Syngenta', src: '/assets/client-logos/client-logo-04.png' },
+  { label: 'Certainty', src: '/assets/client-logos/client-logo-02.png' },
+  { label: 'Bangkok Insurance', src: '/assets/client-logos/client-logo-17.png' },
+  { label: 'Double Goose', src: '/assets/client-logos/client-logo-14.png' },
+  { label: 'BabyLove', src: '/assets/client-logos/client-logo-19.png' },
+  { label: 'ACUVUE', src: '/assets/client-logos/client-logo-20.png' },
+  { label: 'Acer', src: '/assets/client-logos/client-logo-11.png' },
+  { label: 'ViMUT Hospital', src: '/assets/client-logos/client-logo-09.png' },
+  { label: "Dentiste' Plus White", src: '/assets/client-logos/client-logo-08.png' },
   { label: 'ROJUKISS', src: '/assets/client-logos/client-logo-05.png' },
   { label: 'Beger', src: '/assets/client-logos/client-logo-06.png' },
-  { label: 'SCG', src: '/assets/client-logos/client-logo-07.png' },
-  { label: "Dentiste' Plus White", src: '/assets/client-logos/client-logo-08.png' },
-  { label: 'ViMUT Hospital', src: '/assets/client-logos/client-logo-09.png' },
-  { label: 'UNICEF', src: '/assets/client-logos/client-logo-10.png' },
-  { label: 'Acer', src: '/assets/client-logos/client-logo-11.png' },
-  { label: 'TrueCoffee', src: '/assets/client-logos/client-logo-12.png' },
-  { label: 'Taro', src: '/assets/client-logos/client-logo-13.png' },
-  { label: 'Double Goose', src: '/assets/client-logos/client-logo-14.png' },
-  { label: 'Pruksa', src: '/assets/client-logos/client-logo-15.png' },
-  { label: 'SC Asset', src: '/assets/client-logos/client-logo-16.png' },
-  { label: 'Bangkok Insurance', src: '/assets/client-logos/client-logo-17.png' },
-  { label: 'Kubota', src: '/assets/client-logos/client-logo-18.png' },
-  { label: 'BabyLove', src: '/assets/client-logos/client-logo-19.png' },
-  { label: 'ACUVUE', src: '/assets/client-logos/client-logo-20.png' }
+  { label: 'Syngenta', src: '/assets/client-logos/client-logo-04.png' },
+  { label: 'Taro', src: '/assets/client-logos/client-logo-13.png' }
 ]
 
 const aboutAssetPath = '/assets/about-figma'
