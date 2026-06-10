@@ -1,4 +1,4 @@
-globalThis.__timing__.logStart('Load chunks/build/error-404-Dya4p4Kp');import { mergeProps, withCtx, createTextVNode, toDisplayString, defineComponent, shallowRef, h, resolveComponent, computed, unref, useSSRContext } from 'vue';
+import { mergeProps, withCtx, createTextVNode, toDisplayString, defineComponent, shallowRef, h, resolveComponent, computed, unref, useSSRContext } from 'vue';
 import { r as parseQuery, m as hasProtocol, p as joinURL, x as withTrailingSlash, y as withoutTrailingSlash } from '../nitro/nitro.mjs';
 import { _ as _export_sfc, b as useRouter, e as encodeRoutePath, r as resolveRouteObject, n as navigateTo, u as useNuxtApp, c as useRuntimeConfig, a as nuxtLinkDefaults } from './server.mjs';
 import { ssrRenderAttrs, ssrInterpolate, ssrRenderComponent } from 'vue/server-renderer';
@@ -371,5 +371,5 @@ _sfc_main.setup = (props, ctx) => {
 };
 const error404 = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-973901ae"]]);
 
-export { error404 as default };;globalThis.__timing__.logEnd('Load chunks/build/error-404-Dya4p4Kp');
+export { error404 as default };
 //# sourceMappingURL=error-404-Dya4p4Kp.mjs.map

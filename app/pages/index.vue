@@ -46,19 +46,19 @@ const pillars = [
   {
     number: '01',
     title: 'Insightful Data & Measurable Result',
-    labelLines: ['Insightful Data &', 'Measurable Result'],
+    labelLines: ['INSIGHTFUL DATA &', 'MEASURABLE RESULT'],
     labelSubtitle: '(วัดผลได้)'
   },
   {
     number: '02',
     title: 'Media Efficiency',
-    labelLines: ['Media Efficiency'],
+    labelLines: ['MEDIA EFFICIENCY'],
     labelSubtitle: '(เข้าถึง)'
   },
   {
     number: '03',
     title: 'Creativity Driving Actions',
-    labelLines: ['Creativity', 'Driving Actions'],
+    labelLines: ['CREATIVITY', 'DRIVING ACTIONS'],
     labelSubtitle: '(มี ACTION)'
   }
 ]
@@ -480,43 +480,85 @@ onBeforeUnmount(() => {
 
         <div id="performance-creative-visual" class="performance-visual" aria-label="Triangle of Performance">
           <div class="performance-scene" data-reveal>
-            <picture class="performance-bg" aria-hidden="true">
-              <source srcset="/assets/performance-bg.webp" type="image/webp">
-              <img src="/assets/performance-bg.png" alt="" loading="lazy" decoding="async">
-            </picture>
-            <img
-              class="performance-shards"
-              src="/assets/triangle-performance-glow.webp"
-              alt=""
-              aria-hidden="true"
-              loading="lazy"
-              decoding="async"
-            >
-            <div class="performance-labels" aria-hidden="true">
-              <span
-                v-for="(pillar, index) in pillars"
-                :key="`performance-label-${pillar.number}`"
-                :class="['performance-label', `performance-label-${index + 1}`]"
-              >
-                <strong>
+            <div class="performance-bg" aria-hidden="true">
+              <div class="performance-bg-gradient" />
+              <picture class="performance-bg-layer main">
+                <source srcset="/assets/triangle-performance-main.webp" type="image/webp">
+                <img src="/assets/triangle-performance-main.png" alt="" loading="lazy" decoding="async">
+              </picture>
+              <picture class="performance-bg-layer grid">
+                <source srcset="/assets/triangle-performance-grid.webp" type="image/webp">
+                <img src="/assets/triangle-performance-grid.png" alt="" loading="lazy" decoding="async">
+              </picture>
+              <picture class="performance-bg-layer glow">
+                <source srcset="/assets/triangle-performance-glow.webp" type="image/webp">
+                <img src="/assets/triangle-performance-glow.png" alt="" loading="lazy" decoding="async">
+              </picture>
+            </div>
+            <div class="beam" aria-hidden="true" />
+            <div class="performance-stack">
+              <div class="performance-label-top">
+                <p class="performance-label-title">
                   <span
-                    v-for="line in pillar.labelLines"
-                    :key="line"
-                    class="performance-label-line"
+                    v-for="line in pillars[0].labelLines"
+                    :key="`performance-top-${line}`"
                   >
                     {{ line }}
                   </span>
-                </strong>
-                <span class="performance-label-subtitle">{{ pillar.labelSubtitle }}</span>
-              </span>
+                </p>
+                <p class="performance-label-subtitle">{{ pillars[0].labelSubtitle }}</p>
+              </div>
+              <div class="triangle" aria-label="Triangle of Performance">
+                <svg class="triangle-energy" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+                  <defs>
+                    <linearGradient id="triangle-light" x1="0" y1="1" x2="1" y2="1">
+                      <stop offset="0" stop-color="#67e999" />
+                      <stop offset=".22" stop-color="#16c9ec" />
+                      <stop offset=".45" stop-color="#6550ff" />
+                      <stop offset=".7" stop-color="#ee3786" />
+                      <stop offset="1" stop-color="#ffe84c" />
+                    </linearGradient>
+                  </defs>
+                  <path class="triangle-energy-track" d="M50 1 L99 99 L1 99 Z" />
+                  <path class="triangle-energy-flow" d="M50 1 L99 99 L1 99 Z" />
+                </svg>
+                <div class="triangle-inner">
+                  <img
+                    class="triangle-logo"
+                    src="/assets/triangle-twf-logo.svg"
+                    alt="TWF Agency"
+                    loading="lazy"
+                    decoding="async"
+                  >
+                  <strong>PERFORMANCE CREATIVE</strong>
+                  <small>TRIANGLE OF PERFORMANCE (TOP)</small>
+                </div>
+              </div>
+              <div class="performance-label-bottom">
+                <div class="performance-label-side performance-label-left">
+                  <p class="performance-label-title">
+                    <span
+                      v-for="line in pillars[1].labelLines"
+                      :key="`performance-left-${line}`"
+                    >
+                      {{ line }}
+                    </span>
+                  </p>
+                  <p class="performance-label-subtitle">{{ pillars[1].labelSubtitle }}</p>
+                </div>
+                <div class="performance-label-side performance-label-right">
+                  <p class="performance-label-title">
+                    <span
+                      v-for="line in pillars[2].labelLines"
+                      :key="`performance-right-${line}`"
+                    >
+                      {{ line }}
+                    </span>
+                  </p>
+                  <p class="performance-label-subtitle">{{ pillars[2].labelSubtitle }}</p>
+                </div>
+              </div>
             </div>
-            <img
-              class="performance-poster"
-              src="/assets/triangle-of-performance-figma.png"
-              alt="Triangle of Performance: TWF Agency Performance Creative"
-              loading="lazy"
-              decoding="async"
-            >
           </div>
         </div>
 
