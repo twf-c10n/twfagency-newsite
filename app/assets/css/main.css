@@ -362,7 +362,7 @@ section[id], footer[id] {
 }
 
 .client-strip {
-  --client-logo-height: 68px;
+  --client-logo-height: 40px;
   position: relative;
   height: 91px;
   overflow: hidden;
@@ -386,7 +386,7 @@ section[id], footer[id] {
   display: flex;
   min-width: max-content;
   align-items: center;
-  gap: clamp(18px, 2vw, 32px);
+  gap: clamp(64px, 2vw, 32px);
   padding: 0 clamp(10px, 1vw, 16px);
 }
 
@@ -497,6 +497,10 @@ section[id], footer[id] {
 }
 
 .performance-scene {
+  --performance-poster-width: clamp(430px, 29.0625vw, 558px);
+  --performance-poster-half: clamp(215px, 14.53125vw, 279px);
+  --performance-label-gap: clamp(34px, 3vw, 54px);
+  --performance-top-label-lift: clamp(220px, 16vw, 248px);
   position: relative;
   width: 100%;
   min-height: inherit;
@@ -615,7 +619,8 @@ section[id], footer[id] {
 .performance-label-1 {
   --label-accent: #21d7a4;
   top: 58%;
-  left: calc(50% - clamp(500px, 37vw, 690px));
+  right: calc(50% + var(--performance-poster-half) + var(--performance-label-gap));
+  left: auto;
 }
 
 .performance-label-1::after {
@@ -627,7 +632,7 @@ section[id], footer[id] {
 
 .performance-label-2 {
   --label-accent: #3ea6ff;
-  top: clamp(84px, 12vw, 148px);
+  top: calc(50% - var(--performance-top-label-lift));
   left: 50%;
   justify-items: center;
   max-width: min(360px, 28vw);
@@ -646,7 +651,8 @@ section[id], footer[id] {
 .performance-label-3 {
   --label-accent: #ffcf3c;
   top: 58%;
-  right: calc(50% - clamp(500px, 37vw, 690px));
+  right: auto;
+  left: calc(50% + var(--performance-poster-half) + var(--performance-label-gap));
   justify-items: end;
   text-align: right;
 }
@@ -663,7 +669,7 @@ section[id], footer[id] {
   z-index: 3;
   top: 50%;
   left: 50%;
-  width: clamp(430px, 29.0625vw, 558px);
+  width: var(--performance-poster-width);
   height: auto;
   clip-path: polygon(52% 2%, 98% 97%, 6% 97%);
   filter: drop-shadow(0 34px 82px rgb(0 0 0 / 58%));
@@ -1322,10 +1328,11 @@ section[id], footer[id] {
 .about-contact {
   height: 42px;
   padding: 0 26px;
-  border: 1.5px solid #39b54a;
+  border: 1.5px solid transparent;
   font-size: 14px;
   font-weight: 400;
   letter-spacing: .1em;
+      background: linear-gradient(#050607, #050607) padding-box, linear-gradient(95deg, #25b57d, #f0c82a, #e62653) border-box;
 }
 
 .about-title-section {
@@ -3377,17 +3384,24 @@ section[id], footer[id] {
     font-size: 11px;
   }
 
+  .performance-scene {
+    --performance-label-gap: clamp(24px, 3vw, 34px);
+    --performance-top-label-lift: 220px;
+  }
+
   .performance-label-1 {
-    left: 24px;
+    right: calc(50% + var(--performance-poster-half) + var(--performance-label-gap));
+    left: auto;
   }
 
   .performance-label-2 {
-    top: 64px;
+    top: calc(50% - var(--performance-top-label-lift));
     max-width: 230px;
   }
 
   .performance-label-3 {
-    right: 24px;
+    right: auto;
+    left: calc(50% + var(--performance-poster-half) + var(--performance-label-gap));
   }
 
   .performance-label-1::after,
@@ -3598,6 +3612,12 @@ section[id], footer[id] {
   .about-contact {
     margin-left: auto;
     margin-right: 14px;
+  }
+}
+
+@media (max-width: 860px) {
+  .performance-labels {
+    display: none;
   }
 }
 
@@ -4101,7 +4121,7 @@ section[id], footer[id] {
   }
 
   .client-strip {
-    --client-logo-height: 52px;
+    --client-logo-height: 40px;
     height: 74px;
     padding: 0;
   }
@@ -4112,7 +4132,7 @@ section[id], footer[id] {
 
   .logo-set {
     min-width: max-content;
-    gap: 16px;
+    gap: clamp(64px, 2vw, 32px);
     padding: 0 8px;
   }
 
@@ -4163,6 +4183,8 @@ section[id], footer[id] {
   }
 
   .performance-scene {
+    --performance-poster-width: min(558px, calc(100vw - 34px));
+    --performance-poster-half: min(279px, calc((100vw - 34px) / 2));
     min-height: inherit;
   }
 
