@@ -137,7 +137,7 @@ const socials = [
         <div class="rainbow-rule" />
         <div class="about-founder-card">
           <blockquote>
-            " We strive to drive your audience<br>
+            "We strive to drive your audience<br>
             to take action and fuel your<br>
             business growth with measurable results."
           </blockquote>
