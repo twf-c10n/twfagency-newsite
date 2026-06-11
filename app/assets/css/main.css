@@ -687,7 +687,7 @@ section[id], footer[id] {
 
 .performance-label-1 {
   top: var(--performance-top-label-top);
-  left: 50%;
+  left: 51%;
   width: var(--performance-top-label-width);
   transform: translateX(-50%);
 }

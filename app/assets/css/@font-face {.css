@@ -663,7 +663,9 @@ section[id], footer[id] {
 }
 
 .performance-label strong {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
   font-family: "Chakra Petch", Arial, sans-serif;
   color: var(--performance-label-accent);
   font-size: clamp(18px, 1.7vw, 24px);
