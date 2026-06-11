@@ -46,19 +46,19 @@ const pillars = [
   {
     number: '01',
     title: 'Insightful Data & Measurable Result',
-    labelLines: ['INSIGHTFUL DATA &', 'MEASURABLE RESULT'],
+    labelLines: ['Insightful Data &', 'Measurable Result'],
     labelSubtitle: '(วัดผลได้)'
   },
   {
     number: '02',
     title: 'Media Efficiency',
-    labelLines: ['MEDIA EFFICIENCY'],
+    labelLines: ['Media Efficiency'],
     labelSubtitle: '(เข้าถึง)'
   },
   {
     number: '03',
     title: 'Creativity Driving Actions',
-    labelLines: ['CREATIVITY', 'DRIVING ACTIONS'],
+    labelLines: ['Creativity', 'Driving Actions'],
     labelSubtitle: '(มี ACTION)'
   }
 ]
@@ -479,44 +479,64 @@ onBeforeUnmount(() => {
         </div>
 
         <div id="performance-creative-visual" class="performance-visual" aria-label="Triangle of Performance">
-          <div class="perf-label perf-label-top">
-            <p class="perf-title">
-              <span v-for="line in pillars[0].labelLines" :key="`top-${line}`">{{ line }}</span>
-            </p>
-            <p class="perf-subtitle">{{ pillars[0].labelSubtitle }}</p>
-          </div>
-
-          <div class="perf-triangle" aria-label="Triangle of Performance">
-            <div class="perf-orb perf-orb-top" aria-hidden="true"></div>
-            <div class="perf-orb perf-orb-right" aria-hidden="true"></div>
-            <div class="perf-orb perf-orb-left" aria-hidden="true"></div>
-            <div class="perf-polygon-group" aria-hidden="true">
-              <div class="perf-triangle-shape perf-tri-shape-bg"></div>
-              <div class="perf-triangle-shape perf-tri-shape-inner"></div>
-              <div class="perf-tri-shape-border"></div>
-              <div class="perf-triangle-shape perf-tri-shape-glow"></div>
-              <div class="perf-tri-shape-outer"></div>
+          <div class="performance-scene" data-reveal>
+            <picture class="performance-bg" aria-hidden="true">
+              <source srcset="/assets/performance-bg.webp" type="image/webp">
+              <img src="/assets/performance-bg.png" alt="" loading="lazy" decoding="async">
+            </picture>
+            <img
+              class="performance-shards"
+              src="/assets/triangle-performance-glow.webp"
+              alt=""
+              aria-hidden="true"
+              loading="lazy"
+              decoding="async"
+            >
+            <div class="performance-labels" aria-hidden="true">
+              <span class="performance-label performance-label-1">
+                <strong>
+                  <span
+                    v-for="line in pillars[0].labelLines"
+                    :key="`top-${line}`"
+                    class="performance-label-line"
+                  >
+                    {{ line }}
+                  </span>
+                </strong>
+                <span class="performance-label-subtitle">{{ pillars[0].labelSubtitle }}</span>
+              </span>
+              <span class="performance-label performance-label-2">
+                <strong>
+                  <span
+                    v-for="line in pillars[1].labelLines"
+                    :key="`left-${line}`"
+                    class="performance-label-line"
+                  >
+                    {{ line }}
+                  </span>
+                </strong>
+                <span class="performance-label-subtitle">{{ pillars[1].labelSubtitle }}</span>
+              </span>
+              <span class="performance-label performance-label-3">
+                <strong>
+                  <span
+                    v-for="line in pillars[2].labelLines"
+                    :key="`right-${line}`"
+                    class="performance-label-line"
+                  >
+                    {{ line }}
+                  </span>
+                </strong>
+                <span class="performance-label-subtitle">{{ pillars[2].labelSubtitle }}</span>
+              </span>
             </div>
-            <div class="perf-triangle-center">
-              <img src="/assets/triangle-twf-logo.svg" alt="TWF Agency" class="perf-logo" loading="lazy" decoding="async">
-              <p class="perf-center-title">PERFORMANCE CREATIVE</p>
-              <p class="perf-center-sub">TRIANGLE OF PERFORMANCE (TOP)</p>
-            </div>
-          </div>
-
-          <div class="perf-label perf-label-bottom">
-            <div class="perf-label-left">
-              <p class="perf-title">
-                <span v-for="line in pillars[1].labelLines" :key="`left-${line}`">{{ line }}</span>
-              </p>
-              <p class="perf-subtitle">{{ pillars[1].labelSubtitle }}</p>
-            </div>
-            <div class="perf-label-right">
-              <p class="perf-title">
-                <span v-for="line in pillars[2].labelLines" :key="`right-${line}`">{{ line }}</span>
-              </p>
-              <p class="perf-subtitle">{{ pillars[2].labelSubtitle }}</p>
-            </div>
+            <img
+              class="performance-poster"
+              src="/assets/triangle-of-performance-figma.png"
+              alt="Triangle of Performance: TWF Agency Performance Creative"
+              loading="lazy"
+              decoding="async"
+            >
           </div>
         </div>
 
