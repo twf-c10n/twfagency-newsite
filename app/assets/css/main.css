@@ -537,7 +537,6 @@ section[id], footer[id] {
   background: #000;
   contain: paint;
   isolation: isolate;
-  filter: drop-shadow(0 4px 2px rgb(0 0 0 / 25%));
 }
 
 #performance-creative-visual {
@@ -647,11 +646,10 @@ section[id], footer[id] {
   pointer-events: none;
   transform: translate(-50%, -46%);
   background:
-    radial-gradient(circle at 50% 30%, rgb(238 53 138 / 54%), transparent 28%),
-    radial-gradient(circle at 22% 76%, rgb(28 224 177 / 42%), transparent 25%),
-    radial-gradient(circle at 79% 77%, rgb(255 191 44 / 48%), transparent 25%);
-  filter: blur(22px);
-  animation: beam-breathe 6s ease-in-out infinite;
+    radial-gradient(circle at 50% 30%, rgb(238 53 138 / 28%), transparent 30%),
+    radial-gradient(circle at 22% 76%, rgb(28 224 177 / 22%), transparent 27%),
+    radial-gradient(circle at 79% 77%, rgb(255 191 44 / 24%), transparent 27%);
+  opacity: .9;
 }
 
 .beam::before {
@@ -660,54 +658,15 @@ section[id], footer[id] {
   content: "";
   clip-path: polygon(50% 0, 100% 100%, 0 100%);
   background: linear-gradient(116deg, #54e39b, #1fc8ec 27%, #e82c92 65%, #ffe449);
-  background-size: 200% 200%;
-  transform-origin: center;
-  filter: blur(30px);
-  animation: beam-shift 10s linear infinite;
+  opacity: .24;
 }
 
 .beam::after {
   position: absolute;
   inset: -25%;
   content: "";
-  opacity: .28;
+  opacity: .12;
   background: conic-gradient(from 263deg at 50% 47%, transparent, #f4f5ff 4deg, transparent 12deg, transparent 34deg, #fff 39deg, transparent 44deg, transparent 57deg, #fff 62deg, transparent 67deg, transparent);
-  filter: blur(10px);
-  animation: beam-rays 7s ease-in-out infinite;
-}
-
-@keyframes beam-breathe {
-  50% {
-    opacity: .82;
-    transform: translate(-50%, -46%) scale(1.045);
-  }
-}
-
-@keyframes beam-rays {
-  50% {
-    opacity: .34;
-    transform: scale(1.04);
-  }
-}
-
-@keyframes beam-shift {
-  0% {
-    transform: rotate(0deg) translateY(0px);
-    filter: blur(30px) hue-rotate(0deg);
-    background-position: 0% 50%;
-  }
-
-  50% {
-    transform: rotate(18deg) translateY(-6px);
-    filter: blur(36px) hue-rotate(25deg);
-    background-position: 100% 50%;
-  }
-
-  100% {
-    transform: rotate(0deg) translateY(0px);
-    filter: blur(30px) hue-rotate(0deg);
-    background-position: 0% 50%;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -776,18 +735,6 @@ section[id], footer[id] {
   width: min(470px, 60.2vw);
   height: min(407px, 52vw);
   margin-top: 8px;
-  filter: drop-shadow(0 4px 2px rgb(0 0 0 / 60%)) drop-shadow(0 0 12px rgb(255 255 255 / 22%));
-}
-
-.performance-stack.is-visible .triangle {
-  animation: triangle-hover 7s ease-in-out infinite;
-}
-
-@keyframes triangle-hover {
-  50% {
-    transform: translateY(-3px);
-    filter: drop-shadow(0 6px 22px rgb(255 255 255 / 36%));
-  }
 }
 
 .triangle::before {
@@ -796,7 +743,6 @@ section[id], footer[id] {
   content: "";
   clip-path: polygon(50% 0, 100% 100%, 0 100%);
   background: linear-gradient(112deg, #68eda6 0%, #1fcaee 24%, #6257ff 44%, #ed3588 68%, #ffed50 100%);
-  filter: drop-shadow(0 0 6px rgb(255 255 255 / 44%)) drop-shadow(0 0 14px rgb(237 53 136 / 34%));
 }
 
 .triangle::after {
@@ -835,22 +781,14 @@ section[id], footer[id] {
   stroke: url("#triangle-light");
   stroke-width: 2.5;
   opacity: 1;
-  filter: drop-shadow(0 0 3px #fff) drop-shadow(0 0 11px rgb(237 53 136 / 45%));
   stroke-dasharray: 298;
   stroke-dashoffset: 0;
-  animation: triangle-current 5.6s linear infinite;
-}
-
-@keyframes triangle-current {
-  to {
-    stroke-dashoffset: -596;
-  }
 }
 
 .triangle-inner {
   position: absolute;
   z-index: 2;
-  top: 47%;
+  top: 55%;
   left: 50%;
   display: flex;
   width: 59%;
@@ -879,6 +817,8 @@ section[id], footer[id] {
 .triangle-logo {
   width: min(165px, 21vw);
   height: auto;
+  aspect-ratio: 165 / 63;
+  object-fit: contain;
 }
 
 .triangle-inner strong {
@@ -905,20 +845,24 @@ section[id], footer[id] {
 .pillar-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 1fr;
   overflow: hidden;
 }
 
 .pillar {
   display: flex;
+  box-sizing: border-box;
+  width: 100%;
   min-height: 0;
   align-items: center;
+  justify-content: center;
   aspect-ratio: 1 / 1;
-  padding: 0 clamp(35px, 6vw, 70px);
-  transition: filter .32s ease;
+  padding: clamp(18px, 4vw, 56px);
+  contain: layout paint;
 }
 
-.pillar.is-visible:hover {
-  filter: brightness(1.1);
+.pillar.is-visible {
+  aspect-ratio: 1 / 1;
 }
 
 .pillar:first-child {
@@ -934,15 +878,14 @@ section[id], footer[id] {
 }
 
 .pillar div {
-  min-height: 254px;
-  width: 100%;
+  display: grid;
+  width: min(100%, 340px);
+  aspect-ratio: 1 / 1;
+  min-height: 0;
+  align-content: center;
   padding: 29px 27px;
   background: #000;
-  transition: transform .32s ease, box-shadow .32s ease;
-}
-
-.pillar:hover div {
-  box-shadow: 0 18px 42px rgb(0 0 0 / 28%);
+  align-items: center;
 }
 
 .pillar span {
@@ -1530,7 +1473,7 @@ section[id], footer[id] {
 }
 
 .about-figma-links {
-  gap: 32px;
+  gap: 24px;
   margin: 0;
   font-size: 14px;
   font-weight: 400;
@@ -1919,23 +1862,20 @@ section[id], footer[id] {
   position: absolute;
   inset: 0;
   z-index: -2;
+  background:
+    radial-gradient(circle at 72% 58%, color-mix(in srgb, var(--active-accent) 54%, transparent) 0%, transparent 34%),
+    radial-gradient(circle at 20% 34%, color-mix(in srgb, var(--active-accent) 22%, transparent) 0%, transparent 30%),
+    linear-gradient(135deg, color-mix(in srgb, var(--active-accent) 20%, #000) 0%, #030405 52%, color-mix(in srgb, var(--active-accent) 16%, #000) 100%);
+  transition: background .35s ease;
 }
 
 .automotive-bg::after {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle at 72% 64%, color-mix(in srgb, var(--active-accent) 42%, transparent) 0%, transparent 34%),
-    linear-gradient(180deg, #000 0%, rgb(0 0 0 / 88%) 15%, rgb(0 0 0 / 24%) 72%),
+    linear-gradient(180deg, #000 0%, rgb(0 0 0 / 82%) 15%, rgb(0 0 0 / 28%) 72%),
     linear-gradient(90deg, rgb(0 0 0 / 42%) 0%, rgb(0 0 0 / 10%) 50%, rgb(0 0 0 / 24%) 100%);
   content: "";
-  transition: background .35s ease;
-}
-
-.automotive-bg img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
 }
 
 .automotive-gridline {
@@ -1991,7 +1931,7 @@ section[id], footer[id] {
 .automotive-menu button.active {
   border-color: var(--item-accent, #39b54a);
   background:
-    linear-gradient(#000, #000) padding-box,
+    linear-gradient(color-mix(in srgb, var(--item-accent, #39b54a) 24%, #000), color-mix(in srgb, var(--item-accent, #39b54a) 10%, #000)) padding-box,
     linear-gradient(100deg, var(--item-accent, #39b54a), #00a8de 42%, #93278f 72%, #fde92b 100%) border-box;
   box-shadow: 0 0 24px color-mix(in srgb, var(--item-accent, #39b54a) 26%, transparent);
 }
@@ -4408,14 +4348,15 @@ section[id], footer[id] {
   }
 
   .pillar {
-    aspect-ratio: auto;
-    min-height: 214px;
+    aspect-ratio: 1 / 1;
+    min-height: 0;
     align-items: stretch;
-    padding: 14px 17px;
+    padding: 14px;
   }
 
   .pillar div {
-    display: grid;
+    width: 100%;
+    aspect-ratio: 1 / 1;
     min-height: 0;
     align-content: space-between;
     gap: 18px;
@@ -4638,7 +4579,8 @@ section[id], footer[id] {
   }
 
   .pillar {
-    min-height: 188px;
+    aspect-ratio: 1 / 1;
+    min-height: 0;
     padding: 12px;
   }
 

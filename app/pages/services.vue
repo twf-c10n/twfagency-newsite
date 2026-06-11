@@ -120,9 +120,7 @@ const activeService = computed(() => {
         :style="{ '--active-accent': activeService.accent }"
         aria-labelledby="agency-services-title"
       >
-        <div class="automotive-bg" aria-hidden="true">
-          <img :src="`${assetPath}/automotive-campaign-bg.png`" alt="">
-        </div>
+        <div class="automotive-bg" aria-hidden="true" />
         <div class="automotive-gridline" aria-hidden="true" />
 
         <div class="automotive-inner">

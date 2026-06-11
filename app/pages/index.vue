@@ -479,7 +479,7 @@ onBeforeUnmount(() => {
         </div>
 
         <div id="performance-creative-visual" class="performance-visual" aria-label="Triangle of Performance">
-          <div class="performance-scene" data-reveal>
+          <div class="performance-scene">
             <div class="performance-bg" aria-hidden="true">
               <div class="performance-bg-gradient" />
               <picture class="performance-bg-layer main">
