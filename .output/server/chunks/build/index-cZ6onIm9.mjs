@@ -21,15 +21,14 @@ import 'vue-router';
 
 const _imports_0 = publicAssetsURL("/assets/banner.webm");
 const _imports_1 = publicAssetsURL("/assets/bg_filter.webm");
-const _imports_2 = publicAssetsURL("/assets/triangle-of-performance-figma.png");
-const _imports_3 = publicAssetsURL("/assets/triangle-twf-logo.svg");
-const _imports_4 = publicAssetsURL("/assets/orbit.png");
-const _imports_5 = publicAssetsURL("/assets/showreel-reference.png");
-const _imports_6 = publicAssetsURL("/assets/stellar-data.png");
-const _imports_7 = publicAssetsURL("/assets/kensento.png");
-const _imports_8 = publicAssetsURL("/assets/award.png");
-const _imports_9 = publicAssetsURL("/assets/team.png");
-const _imports_10 = publicAssetsURL("/assets/article-cover.png");
+const _imports_2 = publicAssetsURL("/assets/triangle-twf-logo.svg");
+const _imports_3 = publicAssetsURL("/assets/orbit.png");
+const _imports_4 = publicAssetsURL("/assets/showreel-reference.png");
+const _imports_5 = publicAssetsURL("/assets/stellar-data.png");
+const _imports_6 = publicAssetsURL("/assets/kensento.png");
+const _imports_7 = publicAssetsURL("/assets/award.png");
+const _imports_8 = publicAssetsURL("/assets/team.png");
+const _imports_9 = publicAssetsURL("/assets/article-cover.png");
 const aboutAssetPath = "/assets/about-figma";
 const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "index",
@@ -206,19 +205,19 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
         });
         _push(`<!--]--></div>`);
       });
-      _push(`<!--]--></div></section><section class="needs"><div class="narrow" data-reveal><h2 class="gradient-title">All your needs</h2><p> We are a high-end digital agency merging uncompromising technical mastery with unbounded creativity. For 15 years, we have engineered digital experiences for high-growth talent firms and luxury innovators. </p></div></section><section id="services" class="expertise"><div class="shell expertise-heading" data-reveal><div><p class="caption">Our Expertise</p><h2>Performance<br>Creative</h2></div><p> We dismantle the traditional agency model to build something faster, bolder, and more focused on your bottom line. No fluff, just kinetic impact. </p></div><div id="performance-creative-visual" class="performance-visual" aria-label="Triangle of Performance"><div class="performance-scene"><div class="performance-stack"><div class="performance-label-top"><p class="performance-label-title"><!--[-->`);
+      _push(`<!--]--></div></section><section class="needs"><div class="narrow" data-reveal><h2 class="gradient-title">All your needs</h2><p> We are a high-end digital agency merging uncompromising technical mastery with unbounded creativity. For 15 years, we have engineered digital experiences for high-growth talent firms and luxury innovators. </p></div></section><section id="services" class="expertise"><div class="shell expertise-heading" data-reveal><div><p class="caption">Our Expertise</p><h2>Performance<br>Creative</h2></div><p> We dismantle the traditional agency model to build something faster, bolder, and more focused on your bottom line. No fluff, just kinetic impact. </p></div><div id="performance-creative-visual" class="performance-visual" aria-label="Triangle of Performance"><div class="perf-label perf-label-top"><p class="perf-title"><!--[-->`);
       ssrRenderList(pillars[0].labelLines, (line) => {
         _push(`<span>${ssrInterpolate(line)}</span>`);
       });
-      _push(`<!--]--></p><p class="performance-label-subtitle">${ssrInterpolate(pillars[0].labelSubtitle)}</p></div><div class="triangle" aria-label="Triangle of Performance"><div class="triangle-image" aria-hidden="true"><img${ssrRenderAttr("src", _imports_2)} alt="" loading="lazy" decoding="async"></div><div class="triangle-inner"><img class="triangle-logo"${ssrRenderAttr("src", _imports_3)} alt="TWF Agency" loading="lazy" decoding="async"><strong>PERFORMANCE CREATIVE</strong><small>TRIANGLE OF PERFORMANCE (TOP)</small></div></div><div class="performance-label-bottom"><div class="performance-label-side performance-label-left"><p class="performance-label-title"><!--[-->`);
+      _push(`<!--]--></p><p class="perf-subtitle">${ssrInterpolate(pillars[0].labelSubtitle)}</p></div><div class="perf-triangle" aria-label="Triangle of Performance"><div class="perf-orb perf-orb-top" aria-hidden="true"></div><div class="perf-orb perf-orb-right" aria-hidden="true"></div><div class="perf-orb perf-orb-left" aria-hidden="true"></div><div class="perf-polygon-group" aria-hidden="true"><div class="perf-triangle-shape perf-tri-shape-bg"></div><div class="perf-triangle-shape perf-tri-shape-inner"></div><div class="perf-tri-shape-border"></div><div class="perf-triangle-shape perf-tri-shape-glow"></div><div class="perf-tri-shape-outer"></div></div><div class="perf-triangle-center"><img${ssrRenderAttr("src", _imports_2)} alt="TWF Agency" class="perf-logo" loading="lazy" decoding="async"><p class="perf-center-title">PERFORMANCE CREATIVE</p><p class="perf-center-sub">TRIANGLE OF PERFORMANCE (TOP)</p></div></div><div class="perf-label perf-label-bottom"><div class="perf-label-left"><p class="perf-title"><!--[-->`);
       ssrRenderList(pillars[1].labelLines, (line) => {
         _push(`<span>${ssrInterpolate(line)}</span>`);
       });
-      _push(`<!--]--></p><p class="performance-label-subtitle">${ssrInterpolate(pillars[1].labelSubtitle)}</p></div><div class="performance-label-side performance-label-right"><p class="performance-label-title"><!--[-->`);
+      _push(`<!--]--></p><p class="perf-subtitle">${ssrInterpolate(pillars[1].labelSubtitle)}</p></div><div class="perf-label-right"><p class="perf-title"><!--[-->`);
       ssrRenderList(pillars[2].labelLines, (line) => {
         _push(`<span>${ssrInterpolate(line)}</span>`);
       });
-      _push(`<!--]--></p><p class="performance-label-subtitle">${ssrInterpolate(pillars[2].labelSubtitle)}</p></div></div></div></div></div><div class="pillar-grid"><!--[-->`);
+      _push(`<!--]--></p><p class="perf-subtitle">${ssrInterpolate(pillars[2].labelSubtitle)}</p></div></div></div><div class="pillar-grid"><!--[-->`);
       ssrRenderList(pillars, (pillar, index) => {
         _push(`<article class="pillar" data-reveal style="${ssrRenderStyle({ "--delay": `${index * 90}ms` })}"><div><span>${ssrInterpolate(pillar.number)}</span><h3>${ssrInterpolate(pillar.title)}</h3><a href="#contact">Click Here <b>+</b></a></div></article>`);
       });
@@ -234,9 +233,9 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
         });
         _push(`<!--]--></ul></article>`);
       });
-      _push(`<!--]--></div></div><div class="orbit-art" data-reveal style="${ssrRenderStyle({ "--delay": ".18s" })}" aria-hidden="true"><img${ssrRenderAttr("src", _imports_4)} alt=""></div></div></section><section id="photography" class="${ssrRenderClass(["showreel", { "is-active": unref(showreelActive) }])}"><div class="showreel-stage"><figure class="showreel-frame" data-reveal><div class="media-skeleton showreel-skeleton" aria-hidden="true"></div><img class="showreel-poster"${ssrRenderAttr("src", _imports_5)} alt="" aria-hidden="true"><video muted loop playsinline preload="none"${ssrRenderAttr("poster", _imports_5)} aria-label="Capturing Vision. Executing Perfection. Watch 2026 showreel"><source data-src="/assets/showreel.mp4" type="video/mp4"></video></figure></div></section><section id="projects" class="products"><div class="shell products-inner"><p class="accent-copy" data-reveal>Venture Beyond Your Limits</p><h2 data-reveal style="${ssrRenderStyle({ "--delay": ".08s" })}">Our Innovative Product<br>and Services</h2><div class="product-grid"><article data-reveal style="${ssrRenderStyle({ "--delay": ".14s" })}"><img${ssrRenderAttr("src", _imports_6)} alt="Stellar Data"><p>Elevate your performance marketing campaigns</p></article><article data-reveal style="${ssrRenderStyle({ "--delay": ".22s" })}"><img${ssrRenderAttr("src", _imports_7)} alt="Kensento"><p>Taking you beyond cookies consent management</p></article></div></div></section><section id="about" class="team"><div class="shell team-grid"><div class="team-photos" data-reveal><img${ssrRenderAttr("src", _imports_8)} alt="TWF awards"><img${ssrRenderAttr("src", _imports_9)} alt="TWF team"></div><div class="team-copy" data-reveal style="${ssrRenderStyle({ "--delay": ".14s" })}"><h2>A team you<br>can trust</h2><p> We push boundaries and strive for excellence by fostering a highly collaborative and constructive environment. Our team is comprised of talented individuals who work hard to elevate your brand. </p></div></div></section><section id="blog" class="articles"><div class="shell"><p class="caption" data-reveal>Our Expertise</p><h2 data-reveal style="${ssrRenderStyle({ "--delay": ".08s" })}">Explore our recent articles</h2><p class="article-tags" data-reveal style="${ssrRenderStyle({ "--delay": ".12s" })}">Performance Marketing · Social Media · Case Study · Media Plan &amp; Buy · Digital Campaign</p><div class="article-grid"><!--[-->`);
+      _push(`<!--]--></div></div><div class="orbit-art" data-reveal style="${ssrRenderStyle({ "--delay": ".18s" })}" aria-hidden="true"><img${ssrRenderAttr("src", _imports_3)} alt=""></div></div></section><section id="photography" class="${ssrRenderClass(["showreel", { "is-active": unref(showreelActive) }])}"><div class="showreel-stage"><figure class="showreel-frame" data-reveal><div class="media-skeleton showreel-skeleton" aria-hidden="true"></div><img class="showreel-poster"${ssrRenderAttr("src", _imports_4)} alt="" aria-hidden="true"><video muted loop playsinline preload="none"${ssrRenderAttr("poster", _imports_4)} aria-label="Capturing Vision. Executing Perfection. Watch 2026 showreel"><source data-src="/assets/showreel.mp4" type="video/mp4"></video></figure></div></section><section id="projects" class="products"><div class="shell products-inner"><p class="accent-copy" data-reveal>Venture Beyond Your Limits</p><h2 data-reveal style="${ssrRenderStyle({ "--delay": ".08s" })}">Our Innovative Product<br>and Services</h2><div class="product-grid"><article data-reveal style="${ssrRenderStyle({ "--delay": ".14s" })}"><img${ssrRenderAttr("src", _imports_5)} alt="Stellar Data"><p>Elevate your performance marketing campaigns</p></article><article data-reveal style="${ssrRenderStyle({ "--delay": ".22s" })}"><img${ssrRenderAttr("src", _imports_6)} alt="Kensento"><p>Taking you beyond cookies consent management</p></article></div></div></section><section id="about" class="team"><div class="shell team-grid"><div class="team-photos" data-reveal><img${ssrRenderAttr("src", _imports_7)} alt="TWF awards"><img${ssrRenderAttr("src", _imports_8)} alt="TWF team"></div><div class="team-copy" data-reveal style="${ssrRenderStyle({ "--delay": ".14s" })}"><h2>A team you<br>can trust</h2><p> We push boundaries and strive for excellence by fostering a highly collaborative and constructive environment. Our team is comprised of talented individuals who work hard to elevate your brand. </p></div></div></section><section id="blog" class="articles"><div class="shell"><p class="caption" data-reveal>Our Expertise</p><h2 data-reveal style="${ssrRenderStyle({ "--delay": ".08s" })}">Explore our recent articles</h2><p class="article-tags" data-reveal style="${ssrRenderStyle({ "--delay": ".12s" })}">Performance Marketing · Social Media · Case Study · Media Plan &amp; Buy · Digital Campaign</p><div class="article-grid"><!--[-->`);
       ssrRenderList(articles, (article, index) => {
-        _push(`<article data-reveal style="${ssrRenderStyle({ "--delay": `${160 + index * 75}ms` })}"><img${ssrRenderAttr("src", _imports_10)} alt=""><div><p>LINE Commerce</p><h3>${ssrInterpolate(article)}</h3><a href="#blog">Click Here <b>+</b></a></div></article>`);
+        _push(`<article data-reveal style="${ssrRenderStyle({ "--delay": `${160 + index * 75}ms` })}"><img${ssrRenderAttr("src", _imports_9)} alt=""><div><p>LINE Commerce</p><h3>${ssrInterpolate(article)}</h3><a href="#blog">Click Here <b>+</b></a></div></article>`);
       });
       _push(`<!--]--></div></div></section></main><footer id="contact" class="footer"><div class="footer-action" data-reveal><h2 class="gradient-title">Make your goals a reality</h2><a class="cta-button" href="mailto:hello@twf.agency">Initiate Project Launch <b>+</b></a></div><div class="shell footer-bottom"><img class="footer-logo"${ssrRenderAttr("src", `${aboutAssetPath}/twf-logo-footer.svg`)} alt="TWF"><p>The Web Flight Co., Ltd. Crystal Park Place Building, R.1<br>Praditmanutham Road, Wangthonglang, Bangkok 10310</p><div class="socials"><!--[-->`);
       ssrRenderList(footerSocials, (social) => {
@@ -254,4 +253,4 @@ _sfc_main.setup = (props, ctx) => {
 };
 
 export { _sfc_main as default };
-//# sourceMappingURL=index-DEyqnhrM.mjs.map
+//# sourceMappingURL=index-cZ6onIm9.mjs.map

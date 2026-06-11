@@ -479,64 +479,43 @@ onBeforeUnmount(() => {
         </div>
 
         <div id="performance-creative-visual" class="performance-visual" aria-label="Triangle of Performance">
-          <div class="performance-scene">
-            <div class="performance-stack">
-              <div class="performance-label-top">
-                <p class="performance-label-title">
-                  <span
-                    v-for="line in pillars[0].labelLines"
-                    :key="`performance-top-${line}`"
-                  >
-                    {{ line }}
-                  </span>
-                </p>
-                <p class="performance-label-subtitle">{{ pillars[0].labelSubtitle }}</p>
-              </div>
-              <div class="triangle" aria-label="Triangle of Performance">
-                <div class="triangle-image" aria-hidden="true">
-                  <img
-                    src="/assets/triangle-of-performance-figma.png"
-                    alt=""
-                    loading="lazy"
-                    decoding="async"
-                  >
-                </div>
-                <div class="triangle-inner">
-                  <img
-                    class="triangle-logo"
-                    src="/assets/triangle-twf-logo.svg"
-                    alt="TWF Agency"
-                    loading="lazy"
-                    decoding="async"
-                  >
-                  <strong>PERFORMANCE CREATIVE</strong>
-                  <small>TRIANGLE OF PERFORMANCE (TOP)</small>
-                </div>
-              </div>
-              <div class="performance-label-bottom">
-                <div class="performance-label-side performance-label-left">
-                  <p class="performance-label-title">
-                    <span
-                      v-for="line in pillars[1].labelLines"
-                      :key="`performance-left-${line}`"
-                    >
-                      {{ line }}
-                    </span>
-                  </p>
-                  <p class="performance-label-subtitle">{{ pillars[1].labelSubtitle }}</p>
-                </div>
-                <div class="performance-label-side performance-label-right">
-                  <p class="performance-label-title">
-                    <span
-                      v-for="line in pillars[2].labelLines"
-                      :key="`performance-right-${line}`"
-                    >
-                      {{ line }}
-                    </span>
-                  </p>
-                  <p class="performance-label-subtitle">{{ pillars[2].labelSubtitle }}</p>
-                </div>
-              </div>
+          <div class="perf-label perf-label-top">
+            <p class="perf-title">
+              <span v-for="line in pillars[0].labelLines" :key="`top-${line}`">{{ line }}</span>
+            </p>
+            <p class="perf-subtitle">{{ pillars[0].labelSubtitle }}</p>
+          </div>
+
+          <div class="perf-triangle" aria-label="Triangle of Performance">
+            <div class="perf-orb perf-orb-top" aria-hidden="true"></div>
+            <div class="perf-orb perf-orb-right" aria-hidden="true"></div>
+            <div class="perf-orb perf-orb-left" aria-hidden="true"></div>
+            <div class="perf-polygon-group" aria-hidden="true">
+              <div class="perf-triangle-shape perf-tri-shape-bg"></div>
+              <div class="perf-triangle-shape perf-tri-shape-inner"></div>
+              <div class="perf-tri-shape-border"></div>
+              <div class="perf-triangle-shape perf-tri-shape-glow"></div>
+              <div class="perf-tri-shape-outer"></div>
+            </div>
+            <div class="perf-triangle-center">
+              <img src="/assets/triangle-twf-logo.svg" alt="TWF Agency" class="perf-logo" loading="lazy" decoding="async">
+              <p class="perf-center-title">PERFORMANCE CREATIVE</p>
+              <p class="perf-center-sub">TRIANGLE OF PERFORMANCE (TOP)</p>
+            </div>
+          </div>
+
+          <div class="perf-label perf-label-bottom">
+            <div class="perf-label-left">
+              <p class="perf-title">
+                <span v-for="line in pillars[1].labelLines" :key="`left-${line}`">{{ line }}</span>
+              </p>
+              <p class="perf-subtitle">{{ pillars[1].labelSubtitle }}</p>
+            </div>
+            <div class="perf-label-right">
+              <p class="perf-title">
+                <span v-for="line in pillars[2].labelLines" :key="`right-${line}`">{{ line }}</span>
+              </p>
+              <p class="perf-subtitle">{{ pillars[2].labelSubtitle }}</p>
             </div>
           </div>
         </div>
