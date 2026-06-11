@@ -468,8 +468,8 @@ section[id], footer[id] {
 }
 
 .needs::after {
-  z-index: 0;
-  background: linear-gradient(180deg, #000 0%, transparent 24%, transparent 70%, #000 100%);
+    z-index: 0;
+    background: linear-gradient(0deg, #000 30%, transparent 68%, transparent 64%, #000 100%);
 }
 
 .narrow {
@@ -551,16 +551,12 @@ section[id], footer[id] {
 /* ================== TRIANGLE OF PERFORMANCE (FIGMA CSS) ================== */
 
 .performance-visual {
+  --perf-scale: 1;
   position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 1280px;
-  max-width: 100%;
+  display: block;
+  width: 100%;
   height: 800px;
   min-height: 800px;
-  gap: 8px;
   overflow: hidden;
   box-shadow: 0 4px 4px rgb(0 0 0 / 25%);
   background:
@@ -574,14 +570,18 @@ section[id], footer[id] {
 
 /* ====== Text Top ====== */
 .perf-label {
-  position: relative;
+  position: absolute;
   flex: none;
+  transform-origin: top center;
 }
 
 .perf-label-top {
+  top: 6.25%;
+  left: 50%;
   width: 252px;
   height: 105px;
   filter: drop-shadow(0 4px 4px rgb(0 0 0 / 60%));
+  transform: translateX(-50%) scale(var(--perf-scale));
 }
 
 .perf-title {
@@ -628,11 +628,15 @@ section[id], footer[id] {
 
 /* ====== TRIANGLE with CSS blur orbs ====== */
 .perf-triangle {
-  position: relative;
+  position: absolute;
+  top: 20.375%;
+  left: 50%;
   width: 783px;
   height: 475px;
   flex: none;
   overflow: visible;
+  transform: translateX(-50%) scale(var(--perf-scale));
+  transform-origin: top center;
 }
 
 /* Orb 1 — Top vertex (red→purple) */
@@ -692,22 +696,29 @@ section[id], footer[id] {
 
 .perf-tri-shape-bg {
   background: #292C2E;
+  z-index: 1;
 }
 
 .perf-tri-shape-inner {
   background: #3C4042;
   box-shadow: 0 3px 75px #000;
   inset: 42px 49px 41px;
+  z-index: 2;
 }
 
 .perf-tri-shape-border {
-  inset: -5px;
-  border: 4.5px solid #353535;
-  background: transparent;
+  position: absolute;
+  z-index: 0;
+  left: 151px;
+  top: -5px;
+  width: 481px;
+  height: 418px;
+  background: #353535;
   clip-path: polygon(50% 0, 100% 100%, 0 100%);
 }
 
 .perf-tri-shape-glow {
+  z-index: 3;
   mix-blend-mode: plus-lighter;
   background:
     radial-gradient(ellipse at 50% 20%, rgb(0 212 255 / 20%), transparent 60%),
@@ -716,7 +727,12 @@ section[id], footer[id] {
 }
 
 .perf-tri-shape-outer {
-  inset: -4px;
+  position: absolute;
+  z-index: 4;
+  left: 152px;
+  top: -4px;
+  width: 479px;
+  height: 416px;
   opacity: .2;
   box-shadow: inset 0 3px 75px rgb(0 0 0 / 10%);
   background: transparent;
@@ -775,12 +791,16 @@ section[id], footer[id] {
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-start;
+  top: 80.75%;
+  left: 50%;
   width: 783px;
   height: 105px;
   flex: none;
+  transform: translateX(-50%) scale(var(--perf-scale));
 }
 
 .perf-label-left {
+  position: relative;
   width: 252px;
   height: 74px;
   filter: drop-shadow(0 4px 4px rgb(0 0 0 / 60%));
@@ -788,6 +808,7 @@ section[id], footer[id] {
 }
 
 .perf-label-right {
+  position: relative;
   width: 252px;
   height: 105px;
   filter: drop-shadow(0 4px 4px rgb(0 0 0 / 60%));
@@ -3666,6 +3687,14 @@ section[id], footer[id] {
   }
 }
 
+@media (max-width: 840px) {
+  .performance-visual {
+    --perf-scale: .95;
+    height: clamp(360px, calc(102vw - 35px), 760px);
+    min-height: clamp(360px, calc(102vw - 35px), 760px);
+  }
+}
+
 @media (max-width: 900px) {
   .nav {
     position: relative;
@@ -4326,132 +4355,8 @@ section[id], footer[id] {
 
   /* --- Performance mobile --- */
   .performance-visual {
-    width: 100%;
-    height: auto;
-    min-height: 0;
-    aspect-ratio: 1 / 1;
-    gap: 4px;
+    --perf-scale: .9;
     box-shadow: none;
-  }
-
-  .perf-label-top {
-    width: min(220px, 44vw);
-    height: auto;
-    min-height: 60px;
-  }
-
-  .perf-label-top .perf-title {
-    position: static;
-    height: auto;
-    font-size: clamp(13px, 3.8vw, 17px);
-    line-height: 1.3;
-  }
-
-  .perf-label-top .perf-subtitle {
-    position: static;
-    height: auto;
-    font-size: clamp(12px, 3.4vw, 15px);
-    line-height: 1.3;
-  }
-
-  .perf-label-bottom {
-    width: calc(100vw - 34px);
-    height: auto;
-    min-height: 60px;
-  }
-
-  .perf-label-left,
-  .perf-label-right {
-    width: min(220px, 44vw);
-    height: auto;
-    min-height: 60px;
-  }
-
-  .perf-label-left .perf-title,
-  .perf-label-right .perf-title {
-    position: static;
-    height: auto;
-    font-size: clamp(13px, 3.8vw, 17px);
-    line-height: 1.3;
-  }
-
-  .perf-label-left .perf-subtitle,
-  .perf-label-right .perf-subtitle {
-    position: static;
-    height: auto;
-    font-size: clamp(12px, 3.4vw, 15px);
-    line-height: 1.3;
-  }
-
-  .perf-triangle {
-    width: min(470px, calc(100vw - 60px));
-    height: auto;
-    aspect-ratio: 783 / 475;
-  }
-
-  .perf-orb {
-    filter: blur(60px);
-  }
-
-  .perf-orb-top {
-    width: 150px;
-    height: 250px;
-    left: 37%;
-  }
-
-  .perf-orb-right {
-    width: 100px;
-    height: 250px;
-    left: 55%;
-    top: 40%;
-  }
-
-  .perf-orb-left {
-    width: 100px;
-    height: 250px;
-    left: 5%;
-    top: 40%;
-  }
-
-  .perf-polygon-group {
-    left: 3%;
-    top: 20px;
-    width: 94%;
-    height: auto;
-    aspect-ratio: 783 / 523;
-    filter: drop-shadow(3px 17px 25px rgb(0 0 0 / 90%));
-  }
-
-  .perf-triangle-shape {
-    left: 20%;
-    width: 60%;
-    height: 90%;
-  }
-
-  .perf-tri-shape-inner {
-    inset: 20px 24px 20px;
-  }
-
-  .perf-triangle-center {
-    left: calc(50% - 100px);
-    top: 44%;
-    width: 200px;
-    gap: 14px;
-  }
-
-  .perf-center-title {
-    width: 100%;
-    font-size: clamp(14px, 3.6vw, 18px);
-  }
-
-  .perf-center-sub {
-    font-size: 11px;
-    letter-spacing: 0.6px;
-  }
-
-  .perf-logo {
-    width: clamp(100px, 21vw, 140px);
-    height: auto;
   }
 
   .pillar-grid,
@@ -4687,7 +4592,29 @@ section[id], footer[id] {
   }
 }
 
+@media (max-width: 700px) {
+  .performance-visual {
+    --perf-scale: .82;
+  }
+}
+
+@media (max-width: 620px) {
+  .performance-visual {
+    --perf-scale: .72;
+  }
+}
+
+@media (max-width: 540px) {
+  .performance-visual {
+    --perf-scale: .62;
+  }
+}
+
 @media (max-width: 480px) {
+  .performance-visual {
+    --perf-scale: .54;
+  }
+
   .hero h1 {
     font-size: clamp(29px, 8vw, 32px);
     line-height: 1.08;
@@ -4726,6 +4653,12 @@ section[id], footer[id] {
   .article-tags {
     font-size: 10px;
     line-height: 1.7;
+  }
+}
+
+@media (max-width: 400px) {
+  .performance-visual {
+    --perf-scale: .45;
   }
 }
 
