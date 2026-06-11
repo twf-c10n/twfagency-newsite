@@ -572,10 +572,10 @@ section[id], footer[id] {
   --performance-poster-half: calc(var(--performance-poster-width) / 2);
   --performance-top-label-width: clamp(250px, 25vw, 300px);
   --performance-bottom-label-width: clamp(206px, 21vw, 230px);
-  --performance-top-label-top: clamp(52px, 7vh, 76px);
-  --performance-bottom-label-top: min(calc(100% - 130px), calc(50% + clamp(216px, 32vh, 238px)));
-  --performance-left-label-inline: clamp(188px, 20.8vw, 256px);
-  --performance-right-label-inline: clamp(136px, 16vw, 186px);
+  --performance-top-label-top: clamp(110px, 12vh, 160px);
+  --performance-bottom-label-top: min(calc(100% - 130px), calc(50% + clamp(206px, 28vh, 228px)));
+  --performance-left-label-inline: clamp(130px, 13vw, 210px);
+  --performance-right-label-inline: clamp(130px, 13vw, 210px);
   --performance-poster-y: 50%;
   --performance-poster-translate-y: -50%;
   position: absolute;
@@ -653,7 +653,7 @@ section[id], footer[id] {
 .performance-label {
   position: absolute;
   display: grid;
-  gap: 10px;
+  gap: 8px;
   color: #fff;
   font-family: "Chakra Petch", Arial, sans-serif;
   text-align: center;
@@ -678,12 +678,12 @@ section[id], footer[id] {
 .performance-label strong {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
   font-family: "Chakra Petch", Arial, sans-serif;
   color: #fff;
-  font-size: clamp(20px, 2.1vw, 24px);
+  font-size: clamp(17px, 1.8vw, 22px);
   font-weight: 700;
-  line-height: 1.22;
+  line-height: 1.2;
   letter-spacing: 0;
   text-transform: uppercase;
 }
@@ -695,7 +695,7 @@ section[id], footer[id] {
 
 .performance-label-subtitle {
   color: #fff;
-  font-size: clamp(20px, 2.15vw, 24px);
+  font-size: clamp(16px, 1.7vw, 21px);
   line-height: 1.08;
 }
 
@@ -3461,22 +3461,22 @@ section[id], footer[id] {
     --performance-poster-half: calc(var(--performance-poster-width) / 2);
     --performance-top-label-width: min(290px, 50vw);
     --performance-bottom-label-width: 210px;
-    --performance-top-label-top: clamp(52px, 7vh, 76px);
-    --performance-bottom-label-top: min(calc(100% - 116px), calc(50% + 222px));
-    --performance-left-label-inline: clamp(84px, 15vw, 158px);
-    --performance-right-label-inline: clamp(92px, 14vw, 152px);
+    --performance-top-label-top: clamp(90px, 11vh, 140px);
+    --performance-bottom-label-top: min(calc(100% - 116px), calc(50% + 200px));
+    --performance-left-label-inline: clamp(60px, 8vw, 85px);
+    --performance-right-label-inline: clamp(40px, 5.5vw, 60px);
     --performance-poster-y: 50%;
     --performance-poster-translate-y: -52%;
   }
 
   .performance-label strong {
-    gap: 10px;
-    font-size: 20px;
-    line-height: 1.2;
+    gap: 8px;
+    font-size: 18px;
+    line-height: 1.18;
   }
 
   .performance-label-subtitle {
-    font-size: 21px;
+    font-size: 19px;
   }
 
   .performance-shards {
@@ -3611,6 +3611,46 @@ section[id], footer[id] {
   }
 }
 
+@media (max-height: 820px) {
+  .performance-scene {
+    --performance-poster-y: 45%;
+    --performance-top-label-top: clamp(40px, 8vh, 70px);
+  }
+
+  .performance-label strong {
+    font-size: clamp(14px, 1.3vw, 17px);
+    gap: 6px;
+  }
+
+  .performance-label-subtitle {
+    font-size: clamp(13px, 1.2vw, 16px);
+  }
+
+  .performance-label {
+    gap: 6px;
+  }
+}
+
+@media (max-height: 720px) {
+  .performance-scene {
+    --performance-poster-y: 42%;
+    --performance-top-label-top: clamp(30px, 6vh, 45px);
+  }
+
+  .performance-label strong {
+    font-size: clamp(12px, 1.1vw, 15px);
+    gap: 4px;
+  }
+
+  .performance-label-subtitle {
+    font-size: clamp(11px, 1vw, 14px);
+  }
+
+  .performance-label {
+    gap: 4px;
+  }
+}
+
 @media (max-width: 900px) {
   .nav {
     position: relative;
@@ -3687,6 +3727,43 @@ section[id], footer[id] {
   .about-contact {
     margin-left: auto;
     margin-right: 14px;
+  }
+}
+
+@media (max-width: 768px) {
+  .performance-scene {
+    --performance-poster-width: min(250px, calc(66vw - 40px));
+    --performance-poster-half: calc(var(--performance-poster-width) / 2);
+    --performance-top-label-width: min(200px, 55vw);
+    --performance-bottom-label-width: min(150px, 38vw);
+    --performance-top-label-top: clamp(42px, 6vh, 100px);
+    --performance-bottom-label-top: calc(50% + min(172px, 23vh));
+    --performance-left-label-inline: clamp(80px, 13.5vw, 108px);
+    --performance-right-label-inline: clamp(80px, 13.5vw, 108px);
+    --performance-poster-y: 48%;
+    --performance-poster-translate-y: -50%;
+  }
+
+  .performance-poster {
+    width: var(--performance-poster-width);
+    height: auto;
+    transform: translate(-50%, var(--performance-poster-translate-y));
+  }
+
+  .performance-shards {
+    width: min(580px, 130vw);
+    opacity: .24;
+    transform: translate(-50%, -41%) rotate(-1deg);
+  }
+
+  .performance-label strong {
+    gap: 6px;
+    font-size: clamp(14px, 2.8vw, 17px);
+    line-height: 1.16;
+  }
+
+  .performance-label-subtitle {
+    font-size: clamp(13px, 2.8vw, 16px);
   }
 }
 
@@ -4307,17 +4384,17 @@ section[id], footer[id] {
   }
 
   .performance-label {
-    gap: 7px;
+    gap: 6px;
   }
 
   .performance-label strong {
-    gap: 7px;
-    font-size: clamp(14px, 4.2vw, 17px);
-    line-height: 1.18;
+    gap: 6px;
+    font-size: clamp(13px, 3.8vw, 16px);
+    line-height: 1.16;
   }
 
   .performance-label-subtitle {
-    font-size: clamp(14px, 4.4vw, 18px);
+    font-size: clamp(13px, 4vw, 16px);
   }
 
   .performance-label-2 {
@@ -4635,12 +4712,12 @@ section[id], footer[id] {
 
   .performance-label strong {
     gap: 4px;
-    font-size: clamp(11px, 3.5vw, 13px);
-    line-height: 1.1;
+    font-size: clamp(11px, 3.2vw, 14px);
+    line-height: 1.12;
   }
 
   .performance-label-subtitle {
-    font-size: clamp(10px, 3.4vw, 13px);
+    font-size: clamp(11px, 3.2vw, 14px);
     line-height: 1.06;
   }
 
