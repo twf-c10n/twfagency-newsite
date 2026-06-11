@@ -572,10 +572,10 @@ section[id], footer[id] {
   --performance-poster-half: calc(var(--performance-poster-width) / 2);
   --performance-top-label-width: clamp(250px, 25vw, 300px);
   --performance-bottom-label-width: clamp(206px, 21vw, 230px);
-  --performance-top-label-top: clamp(28px, 4.8vh, 42px);
+  --performance-top-label-top: clamp(52px, 7vh, 76px);
   --performance-bottom-label-top: min(calc(100% - 130px), calc(50% + clamp(216px, 32vh, 238px)));
-  --performance-left-label-inline: clamp(168px, 18.8vw, 226px);
-  --performance-right-label-inline: clamp(106px, 11vw, 132px);
+  --performance-left-label-inline: clamp(188px, 20.8vw, 256px);
+  --performance-right-label-inline: clamp(136px, 16vw, 186px);
   --performance-poster-y: 50%;
   --performance-poster-translate-y: -50%;
   position: absolute;
@@ -664,7 +664,9 @@ section[id], footer[id] {
 }
 
 .performance-label strong {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   font-family: "Chakra Petch", Arial, sans-serif;
   color: #fff;
   font-size: clamp(20px, 2.1vw, 24px);
@@ -3447,15 +3449,16 @@ section[id], footer[id] {
     --performance-poster-half: calc(var(--performance-poster-width) / 2);
     --performance-top-label-width: min(290px, 50vw);
     --performance-bottom-label-width: 210px;
-    --performance-top-label-top: clamp(30px, 5vh, 48px);
+    --performance-top-label-top: clamp(52px, 7vh, 76px);
     --performance-bottom-label-top: min(calc(100% - 116px), calc(50% + 222px));
-    --performance-left-label-inline: clamp(74px, 13vw, 138px);
-    --performance-right-label-inline: clamp(62px, 10vw, 118px);
+    --performance-left-label-inline: clamp(84px, 15vw, 158px);
+    --performance-right-label-inline: clamp(92px, 14vw, 152px);
     --performance-poster-y: 50%;
     --performance-poster-translate-y: -52%;
   }
 
   .performance-label strong {
+    gap: 10px;
     font-size: 20px;
     line-height: 1.2;
   }
@@ -4261,7 +4264,7 @@ section[id], footer[id] {
     --performance-poster-half: calc(var(--performance-poster-width) / 2);
     --performance-top-label-width: min(260px, 76vw);
     --performance-bottom-label-width: min(170px, 43vw);
-    --performance-top-label-top: clamp(58px, 9vh, 82px);
+    --performance-top-label-top: clamp(100px, 14vh, 130px);
     --performance-bottom-label-top: calc(50% + min(176px, 22vh));
     --performance-left-label-inline: 17px;
     --performance-right-label-inline: 17px;
@@ -4285,6 +4288,7 @@ section[id], footer[id] {
   }
 
   .performance-label strong {
+    gap: 7px;
     font-size: clamp(14px, 4.2vw, 17px);
     line-height: 1.18;
   }
