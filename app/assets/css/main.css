@@ -14,12 +14,20 @@
 
 @font-face {
   font-family: "Chakra Petch";
+  src: url("/fonts/chakra-petch-light.ttf") format("truetype");
+  font-weight: 300;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Chakra Petch";
   src: url("/fonts/chakra-petch-bold.ttf") format("truetype");
   font-weight: 700;
   font-display: swap;
 }
 
 :root {
+  --font-primary: "Chakra Petch", Arial, sans-serif;
   --bg: #050607;
   --surface: #101112;
   --white: #f7f8fa;
@@ -52,7 +60,9 @@ body {
   min-width: 320px;
   color: var(--white);
   background: var(--bg);
-  font-family: "Chakra Petch", Arial, sans-serif;
+  font-family: var(--font-primary);
+  font-synthesis-weight: none;
+  text-rendering: geometricPrecision;
 }
 
 h1,
@@ -71,6 +81,17 @@ ul {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  color: inherit;
 }
 
 img {
@@ -447,8 +468,8 @@ section[id], footer[id] {
 }
 
 .needs::after {
-  z-index: 0;
-  background: linear-gradient(180deg, #000 0%, transparent 24%, transparent 70%, #000 100%);
+    z-index: 0;
+    background: linear-gradient(0deg, #000 30%, transparent 68%, transparent 64%, #000 100%);
 }
 
 .narrow {
@@ -527,10 +548,13 @@ section[id], footer[id] {
   line-height: 1.6;
 }
 
+/* ================== TRIANGLE OF PERFORMANCE (FIGMA CSS) ================== */
+
 .performance-visual {
   position: relative;
   display: grid;
-  min-height: clamp(560px, 100vw, 900px);
+  min-height: 100vh;
+  min-height: 100svh;
   place-items: center;
   overflow: hidden;
   padding: 0;
@@ -544,14 +568,18 @@ section[id], footer[id] {
 }
 
 .performance-scene {
-  --performance-poster-width: clamp(500px, 20.75vw, 558px);
-  --performance-label-width: clamp(210px, 19.6875vw, 252px);
-  --performance-top-label-top: clamp(34px, 3.9vw, 50px);
-  --performance-bottom-label-top: min(calc(100% - 105px), calc(50% + clamp(178px, 35vw, 238px)));
-  --performance-bottom-label-edge: max(70px, calc(50% - min(392px, 30.625vw)));
-  position: relative;
-  width: 100%;
-  min-height: inherit;
+  --performance-poster-width: clamp(510px, 49.4vw, 558px);
+  --performance-poster-half: calc(var(--performance-poster-width) / 2);
+  --performance-top-label-width: clamp(250px, 25vw, 300px);
+  --performance-bottom-label-width: clamp(206px, 21vw, 230px);
+  --performance-top-label-top: clamp(52px, 7vh, 76px);
+  --performance-bottom-label-top: min(calc(100% - 130px), calc(50% + clamp(216px, 32vh, 238px)));
+  --performance-left-label-inline: clamp(188px, 20.8vw, 256px);
+  --performance-right-label-inline: clamp(136px, 16vw, 186px);
+  --performance-poster-y: 50%;
+  --performance-poster-translate-y: -50%;
+  position: absolute;
+  inset: 0;
   overflow: hidden;
   background: #000;
   isolation: isolate;
@@ -568,23 +596,22 @@ section[id], footer[id] {
 .performance-scene::before {
   z-index: 1;
   background:
-    radial-gradient(circle at 50% 18%, rgb(184 54 99 / 42%), transparent 29%),
-    radial-gradient(circle at 15% 78%, rgb(57 181 74 / 38%), transparent 31%),
-    radial-gradient(circle at 88% 73%, rgb(253 233 43 / 30%), transparent 26%),
-    linear-gradient(180deg, rgb(0 0 0 / 25%) 0%, rgb(0 0 0 / 4%) 45%, rgb(0 0 0 / 64%) 100%);
+    radial-gradient(circle at 50% 22%, rgb(184 54 99 / 36%), transparent 30%),
+    radial-gradient(circle at 16% 78%, rgb(57 181 74 / 32%), transparent 31%),
+    radial-gradient(circle at 88% 74%, rgb(253 233 43 / 28%), transparent 27%),
+    linear-gradient(180deg, rgb(0 0 0 / 18%) 0%, rgb(0 0 0 / 4%) 44%, rgb(0 0 0 / 68%) 100%);
   mix-blend-mode: screen;
 }
 
 .performance-scene::after {
   z-index: 4;
   background:
-    linear-gradient(90deg, #000 0%, transparent 12%, transparent 88%, #000 100%),
-    linear-gradient(180deg, #000 0%, transparent 18%, transparent 82%, #000 100%);
+    linear-gradient(90deg, #000 0%, rgb(0 0 0 / 0%) 12%, rgb(0 0 0 / 0%) 88%, #000 100%),
+    linear-gradient(180deg, #000 0%, rgb(0 0 0 / 0%) 16%, rgb(0 0 0 / 0%) 84%, #000 100%);
 }
 
 .performance-bg,
 .performance-bg img,
-.performance-shards,
 .performance-poster {
   position: absolute;
   max-width: none;
@@ -600,19 +627,8 @@ section[id], footer[id] {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center;
-  filter: brightness(.58) contrast(1.15) saturate(.7);
-}
-
-.performance-shards {
-  z-index: 2;
-  top: 50%;
-  left: 50%;
-  width: min(1320px, 72vw);
-  opacity: .34;
-  filter: saturate(.88) drop-shadow(0 0 44px rgb(0 59 255 / 22%));
-  mix-blend-mode: screen;
-  transform: translate(-50%, -43%) rotate(-1deg);
+  object-position: center bottom;
+  filter: brightness(.54) contrast(1.04) saturate(.62);
 }
 
 .performance-labels {
@@ -624,67 +640,83 @@ section[id], footer[id] {
 
 .performance-label {
   position: absolute;
-  display: flex;
-  width: var(--performance-label-width);
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
+  display: grid;
   gap: 10px;
   color: #fff;
+  font-family: "Chakra Petch", Arial, sans-serif;
   text-align: center;
-  text-shadow: 0 4px 2px rgb(0 0 0 / 60%), 0 0 22px rgb(0 0 0 / 78%);
+  text-shadow: 0 3px 16px rgb(0 0 0 / 82%), 0 0 24px rgb(0 0 0 / 72%);
 }
 
 .performance-label::before,
+.performance-label::after {
+  display: block;
+  content: "";
+  pointer-events: none;
+}
+
+.performance-label::before {
+  display: none;
+}
+
 .performance-label::after {
   display: none;
 }
 
 .performance-label strong {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   font-family: "Chakra Petch", Arial, sans-serif;
-  font-size: clamp(18px, 1.875vw, 24px);
+  color: #fff;
+  font-size: clamp(20px, 2.1vw, 24px);
   font-weight: 700;
-  line-height: 1.15;
+  line-height: 1.22;
   letter-spacing: 0;
   text-transform: uppercase;
 }
 
-.performance-label-line {
+.performance-label-line,
+.performance-label-subtitle {
   display: block;
 }
 
 .performance-label-subtitle {
-  display: block;
-  font-size: clamp(17px, 1.875vw, 24px);
-  line-height: 1.15;
+  color: #fff;
+  font-size: clamp(20px, 2.15vw, 24px);
+  line-height: 1.08;
 }
 
 .performance-label-1 {
-  top: 10vw;
-  left: 51vw;
+  top: var(--performance-top-label-top);
+  left: 51%;
+  width: var(--performance-top-label-width);
   transform: translateX(-50%);
 }
 
 .performance-label-2 {
   top: var(--performance-bottom-label-top);
-  left: 0px;
+  left: var(--performance-left-label-inline);
+  width: var(--performance-bottom-label-width);
 }
 
 .performance-label-3 {
-  right: 0px;
   top: var(--performance-bottom-label-top);
+  right: var(--performance-right-label-inline);
+  width: var(--performance-bottom-label-width);
 }
 
 .performance-poster {
   z-index: 3;
-  top: 50%;
+  top: var(--performance-poster-y);
   left: 50%;
   width: var(--performance-poster-width);
   height: auto;
-  clip-path: polygon(52% 2%, 98% 97%, 6% 97%);
+  object-fit: contain;
+  object-position: center;
+  clip-path: polygon(52% 2.4%, 98.7% 96.8%, 6.2% 96.8%);
   filter: drop-shadow(0 34px 82px rgb(0 0 0 / 58%));
-  transform: translate(-50%, -47%);
+  transform: translate(-50%, var(--performance-poster-translate-y));
 }
 
 .page.is-scrolling .logo-track,
@@ -700,15 +732,18 @@ section[id], footer[id] {
 
 .pillar {
   display: flex;
+  box-sizing: border-box;
+  width: 100%;
   min-height: 0;
   align-items: center;
+  justify-content: center;
   aspect-ratio: 1 / 1;
-  padding: 0 clamp(35px, 6vw, 70px);
-  transition: filter .32s ease;
+  padding: clamp(18px, 4vw, 56px);
+  contain: layout paint;
 }
 
-.pillar.is-visible:hover {
-  filter: brightness(1.1);
+.pillar.is-visible {
+  aspect-ratio: 1 / 1;
 }
 
 .pillar:first-child {
@@ -724,37 +759,37 @@ section[id], footer[id] {
 }
 
 .pillar div {
-  min-height: 254px;
-  width: 100%;
+  display: grid;
+  width: min(100%, 340px);
+  aspect-ratio: 1 / 1;
+  min-height: 0;
+  align-content: center;
   padding: 29px 27px;
   background: #000;
-  transition: transform .32s ease, box-shadow .32s ease;
-}
-
-.pillar:hover div {
-  box-shadow: 0 18px 42px rgb(0 0 0 / 28%);
+  align-items: center;
 }
 
 .pillar span {
-  font-size: 47px;
+  font-size: clamp(22px, 3.2vw, 34px);
   font-weight: 700;
+  line-height: 1;
 }
 
 .pillar h3 {
-  min-height: 82px;
-  margin: 7px 0 22px;
-  font-size: 22px;
-  line-height: 1.12;
+  min-height: unset;
+  margin: clamp(4px, 0.8vw, 10px) 0 clamp(12px, 2vw, 24px);
+  font-size: clamp(13px, 1.6vw, 20px);
+  line-height: 1.15;
   text-transform: uppercase;
 }
 
 .pillar a {
   display: inline-flex;
-  gap: 13px;
+  gap: 8px;
   align-items: center;
-  padding: 9px 15px;
+  padding: clamp(6px, 0.8vw, 10px) clamp(10px, 1.4vw, 18px);
   border: 1px solid #e4e4e4;
-  font-size: 10px;
+  font-size: clamp(8px, 0.9vw, 11px);
 }
 
 .pillar b {
@@ -1057,7 +1092,12 @@ section[id], footer[id] {
 
 .team {
   padding: 88px 0 158px;
-  background: #000;
+  background:
+    radial-gradient(ellipse 60% 35% at 50% 50%,
+      rgb(79 74 74 / 30%) 0%,
+      transparent 70%
+    ),
+    #000;
 }
 
 .team-grid {
@@ -1088,9 +1128,12 @@ section[id], footer[id] {
 
 .team-copy h2 {
   margin-bottom: 38px;
-  color: #09baff;
   font-size: clamp(40px, 4vw, 58px);
   line-height: 1.05;
+  background: linear-gradient(94deg, #180DFD -14.33%, #00A8DE 29.8%, #39B54A 73.1%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .team-copy p {
@@ -1320,7 +1363,7 @@ section[id], footer[id] {
 }
 
 .about-figma-links {
-  gap: 32px;
+  gap: 24px;
   margin: 0;
   font-size: 14px;
   font-weight: 400;
@@ -1709,23 +1752,20 @@ section[id], footer[id] {
   position: absolute;
   inset: 0;
   z-index: -2;
+  background:
+    radial-gradient(circle at 72% 58%, color-mix(in srgb, var(--active-accent) 54%, transparent) 0%, transparent 34%),
+    radial-gradient(circle at 20% 34%, color-mix(in srgb, var(--active-accent) 22%, transparent) 0%, transparent 30%),
+    linear-gradient(135deg, color-mix(in srgb, var(--active-accent) 20%, #000) 0%, #030405 52%, color-mix(in srgb, var(--active-accent) 16%, #000) 100%);
+  transition: background .35s ease;
 }
 
 .automotive-bg::after {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle at 72% 64%, color-mix(in srgb, var(--active-accent) 42%, transparent) 0%, transparent 34%),
-    linear-gradient(180deg, #000 0%, rgb(0 0 0 / 88%) 15%, rgb(0 0 0 / 24%) 72%),
+    linear-gradient(180deg, #000 0%, rgb(0 0 0 / 82%) 15%, rgb(0 0 0 / 28%) 72%),
     linear-gradient(90deg, rgb(0 0 0 / 42%) 0%, rgb(0 0 0 / 10%) 50%, rgb(0 0 0 / 24%) 100%);
   content: "";
-  transition: background .35s ease;
-}
-
-.automotive-bg img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
 }
 
 .automotive-gridline {
@@ -1769,7 +1809,7 @@ section[id], footer[id] {
   border-radius: 999px;
   color: #fff;
   background: rgb(0 0 0 / 18%);
-  font: 700 14px/1 "Chakra Petch", Arial, sans-serif;
+  font: 700 14px/1 var(--font-primary);
   letter-spacing: .1em;
   text-align: left;
   cursor: pointer;
@@ -1781,7 +1821,7 @@ section[id], footer[id] {
 .automotive-menu button.active {
   border-color: var(--item-accent, #39b54a);
   background:
-    linear-gradient(#000, #000) padding-box,
+    linear-gradient(color-mix(in srgb, var(--item-accent, #39b54a) 24%, #000), color-mix(in srgb, var(--item-accent, #39b54a) 10%, #000)) padding-box,
     linear-gradient(100deg, var(--item-accent, #39b54a), #00a8de 42%, #93278f 72%, #fde92b 100%) border-box;
   box-shadow: 0 0 24px color-mix(in srgb, var(--item-accent, #39b54a) 26%, transparent);
 }
@@ -1976,6 +2016,11 @@ section[id], footer[id] {
   margin: 0 auto;
   padding: 200px 80px 94px;
   text-align: center;
+  background:
+    radial-gradient(ellipse 70% 35% at 50% 45%,
+      rgb(79 74 74 / 50%) 15%,
+      transparent 60%
+    );
 }
 
 .project-hero h1 {
@@ -1983,6 +2028,7 @@ section[id], footer[id] {
   font-weight: 400;
   line-height: 1;
   text-transform: uppercase;
+  text-shadow: 0 4px 2px rgb(0 0 0 / 60%);
 }
 
 .project-hero p {
@@ -1990,6 +2036,7 @@ section[id], footer[id] {
   color: rgb(255 255 255 / 94%);
   font-size: 20px;
   line-height: 1.7;
+  text-shadow: 0 4px 2px rgb(0 0 0 / 60%);
 }
 
 .project-categories {
@@ -1997,33 +2044,37 @@ section[id], footer[id] {
   width: min(100%, 800px);
   flex-wrap: wrap;
   justify-content: center;
-  gap: 18px 24px;
+  gap: 14px;
   margin: 0 auto;
   padding: 0 24px;
 }
 
 .project-categories button {
-  min-height: 30px;
-  padding: 8px 16px;
-  border: 0;
+  min-height: 36px;
+  padding: 10px 22px;
+  border: 1px solid rgb(255 255 255 / 12%);
   border-radius: 999px;
-  color: #000;
-  background: #fff;
-  font: 400 14px/1 "Chakra Petch", Arial, sans-serif;
-  letter-spacing: .071em;
+  color: #fff;
+  background: rgb(255 255 255 / 6%);
+  font: 500 14px/1 var(--font-primary);
+  letter-spacing: .05em;
   cursor: pointer;
-  transition: color .2s ease, transform .2s ease, box-shadow .2s ease;
+  transition: background .25s ease, border-color .25s ease, color .25s ease, transform .2s ease, box-shadow .25s ease;
 }
 
 .project-categories button:hover {
+  background: rgb(255 255 255 / 12%);
+  border-color: rgb(255 255 255 / 24%);
   transform: translateY(-1px);
-  box-shadow: 0 8px 24px rgb(235 45 46 / 20%);
+  box-shadow: 0 4px 20px rgb(235 45 46 / 18%);
 }
 
 .project-categories button.active {
+  border-color: transparent;
   color: #fff;
   font-weight: 700;
-  background: linear-gradient(180deg, #eb2d2e 0%, #93278f 100%);
+  background: linear-gradient(135deg, #eb2d2e 0%, #93278f 100%);
+  box-shadow: 0 4px 24px rgb(235 45 46 / 30%);
 }
 
 .project-services {
@@ -2034,7 +2085,7 @@ section[id], footer[id] {
   align-items: start;
   justify-content: center;
   margin: 0 auto;
-  padding: 40px 0 80px;
+  padding: 60px 0 100px;
 }
 
 .project-service-copy {
@@ -2047,14 +2098,14 @@ section[id], footer[id] {
   font-size: 40px;
   font-weight: 700;
   line-height: 1.44;
-  background: linear-gradient(180deg, #eb2d2e 0%, #93278f 100%);
+  background: linear-gradient(135deg, #eb2d2e 0%, #93278f 100%);
   background-clip: text;
 }
 
 .project-service-copy p {
-  color: #fff;
+  color: #d0d1d2;
   font-size: 16px;
-  line-height: 1.6;
+  line-height: 1.7;
 }
 
 .project-card-grid {
@@ -2066,16 +2117,15 @@ section[id], footer[id] {
 .project-card {
   position: relative;
   display: flex;
-  min-height: 297px;
+  min-height: 280px;
   flex-direction: column;
   justify-content: space-between;
   overflow: hidden;
   padding: 31px;
-  border: 1px solid rgb(255 255 255 / 10%);
+  border: 1px solid rgb(255 255 255 / 8%);
   background:
-    linear-gradient(130deg, rgb(255 255 255 / 8%) 0%, rgb(255 255 255 / 4%) 100%),
-    #151515;
-  backdrop-filter: blur(9px);
+    linear-gradient(135deg, rgb(255 255 255 / 6%) 0%, rgb(255 255 255 / 2%) 100%),
+    #111;
 }
 
 .project-card::after {
@@ -2084,8 +2134,8 @@ section[id], footer[id] {
   content: "";
   pointer-events: none;
   opacity: 0;
-  background: linear-gradient(130deg, rgb(255 181 154 / 12%) 0%, rgb(255 181 154 / 0%) 100%);
-  transition: opacity .24s ease;
+  background: linear-gradient(135deg, rgb(235 45 46 / 10%) 0%, rgb(147 39 143 / 6%) 100%);
+  transition: opacity .3s ease;
 }
 
 .project-card:hover::after {
@@ -2164,7 +2214,7 @@ section[id], footer[id] {
 
 .project-card p {
   position: relative;
-  color: #fff;
+  color: #d0d1d2;
   font-size: 13px;
   font-weight: 400;
   line-height: 1.5;
@@ -2453,7 +2503,7 @@ section[id], footer[id] {
 .photo-section-head > p {
   max-width: 435px;
   color: #fff;
-  font-family: Arial, sans-serif;
+  font-family: var(--font-primary);
   font-size: 18px;
   line-height: 1.62;
 }
@@ -2564,7 +2614,7 @@ section[id], footer[id] {
   max-width: 150px;
   margin-bottom: 8px;
   color: #e2e2e2;
-  font-family: Arial, sans-serif;
+  font-family: var(--font-primary);
   font-size: 16px;
   font-weight: 400;
   line-height: 1.5;
@@ -2574,7 +2624,7 @@ section[id], footer[id] {
   position: relative;
   z-index: 1;
   color: #8a99ad;
-  font-family: Arial, sans-serif;
+  font-family: var(--font-primary);
   font-size: 16px;
   line-height: 1.5;
 }
@@ -2594,7 +2644,7 @@ section[id], footer[id] {
 .photo-archive-head h2 {
   margin-bottom: 16px;
   color: #e2e2e2;
-  font-family: Arial, sans-serif;
+  font-family: var(--font-primary);
   font-size: 16px;
   font-weight: 400;
   line-height: 1.5;
@@ -2602,7 +2652,7 @@ section[id], footer[id] {
 
 .photo-archive-head p {
   color: #8a99ad;
-  font-family: Arial, sans-serif;
+  font-family: var(--font-primary);
   font-size: 16px;
   line-height: 1.5;
 }
@@ -2708,7 +2758,7 @@ section[id], footer[id] {
 
 .photo-work-copy h3 {
   color: #e2e2e2;
-  font-family: Arial, sans-serif;
+  font-family: var(--font-primary);
   font-size: 16px;
   font-weight: 400;
   line-height: 1.5;
@@ -2794,7 +2844,7 @@ section[id], footer[id] {
     linear-gradient(#000, #000) padding-box,
     linear-gradient(90deg, #39b54a, #00a8de 31%, #93278f 58%, #eb2d2e 78%, #fde92b) border-box;
   color: #fff;
-  font-family: "Chakra Petch", Arial, sans-serif;
+  font-family: var(--font-primary);
   font-size: 14px;
   line-height: 1;
   cursor: pointer;
@@ -3013,7 +3063,7 @@ section[id], footer[id] {
   border-radius: 0;
   background: #fff;
   color: #121212;
-  font-family: "Chakra Petch", Arial, sans-serif;
+  font-family: var(--font-primary);
   font-size: 14px;
   outline: 0;
 }
@@ -3183,7 +3233,7 @@ section[id], footer[id] {
   outline: 0;
   background: transparent;
   color: #fff;
-  font-family: "Chakra Petch", Arial, sans-serif;
+  font-family: var(--font-primary);
   font-size: 16px;
 }
 
@@ -3227,7 +3277,7 @@ section[id], footer[id] {
   border: 1px solid transparent;
   background: transparent;
   color: #fff;
-  font-family: "Chakra Petch", Arial, sans-serif;
+  font-family: var(--font-primary);
   font-size: 12px;
   letter-spacing: .08em;
   text-transform: uppercase;
@@ -3389,27 +3439,32 @@ section[id], footer[id] {
   text-align: center;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1024px) {
   .shell {
     width: min(calc(100% - 48px), var(--max));
   }
 
-  .performance-label {
-    --performance-label-width: 210px;
-  }
-
   .performance-scene {
-    --performance-top-label-top: 70px;
-    --performance-bottom-label-top: min(calc(100% - 96px), calc(60% + 180px));
-    --performance-bottom-label-edge: max(52px, calc(50% - 306px));
+    --performance-poster-width: min(500px, calc(88vw - 42px));
+    --performance-poster-half: calc(var(--performance-poster-width) / 2);
+    --performance-top-label-width: min(290px, 50vw);
+    --performance-bottom-label-width: 210px;
+    --performance-top-label-top: clamp(52px, 7vh, 76px);
+    --performance-bottom-label-top: min(calc(100% - 116px), calc(50% + 222px));
+    --performance-left-label-inline: clamp(84px, 15vw, 158px);
+    --performance-right-label-inline: clamp(92px, 14vw, 152px);
+    --performance-poster-y: 50%;
+    --performance-poster-translate-y: -52%;
   }
 
   .performance-label strong {
-    font-size: 18px;
+    gap: 10px;
+    font-size: 20px;
+    line-height: 1.2;
   }
 
-  .performance-label span {
-    font-size: 17px;
+  .performance-label-subtitle {
+    font-size: 21px;
   }
 
   .about-figma-nav,
@@ -3618,12 +3673,6 @@ section[id], footer[id] {
   }
 }
 
-@media (max-width: 860px) {
-  .performance-labels {
-    display: block;
-  }
-}
-
 @media (max-width: 760px) {
   .shell {
     width: calc(100% - 34px);
@@ -3679,6 +3728,11 @@ section[id], footer[id] {
     min-height: 470px;
     gap: 26px;
     padding: 112px 17px 70px;
+    background:
+      radial-gradient(ellipse 80% 30% at 50% 40%,
+        rgb(79 74 74 / 40%) 10%,
+        transparent 60%
+      );
   }
 
   .services-hero h1 {
@@ -3699,7 +3753,7 @@ section[id], footer[id] {
   }
 
   .project-categories {
-    gap: 12px;
+    gap: 10px;
     justify-content: flex-start;
     overflow-x: auto;
     flex-wrap: nowrap;
@@ -3714,6 +3768,7 @@ section[id], footer[id] {
 
   .project-categories button {
     flex: 0 0 auto;
+    padding: 8px 16px;
     font-size: 12px;
   }
 
@@ -3742,8 +3797,8 @@ section[id], footer[id] {
   }
 
   .project-card {
-    min-height: 230px;
-    padding: 26px;
+    min-height: 220px;
+    padding: 24px;
   }
 
   .automotive-campaign,
@@ -4016,24 +4071,33 @@ section[id], footer[id] {
     min-height: 82px;
   }
 
-  .partner-tiktok img:first-child {
-    width: 132px;
+  .about-partner-logo img {
+    width: auto;
     height: auto;
+    max-height: 80px;
+    object-fit: contain;
+  }
+
+  .partner-tiktok img:first-child {
+    width: auto;
+    height: 36px;
   }
 
   .partner-tiktok img:last-child,
   .partner-google img:last-child {
-    height: auto;
+    width: auto;
+    height: 10px;
   }
 
   .partner-meta img:last-child {
-    height: 48px;
+    width: auto;
+    height: 42px;
   }
 
   .partner-adman img,
   .partner-line img {
-    width: 170px;
-    height: auto;
+    width: auto;
+    height: 70px;
   }
 
   .partner-meta {
@@ -4043,6 +4107,12 @@ section[id], footer[id] {
   .partner-meta img:first-child {
     width: 54px;
     height: 54px;
+  }
+
+  .partner-google img:first-child,
+  .partner-meta img:first-child {
+    width: 50px;
+    height: 50px;
   }
 
   .about-founder-card {
@@ -4072,6 +4142,7 @@ section[id], footer[id] {
   .about-footer-address {
     display: grid;
     justify-items: center;
+    justify-content: center;
     text-align: center;
   }
 
@@ -4181,29 +4252,57 @@ section[id], footer[id] {
     white-space: normal;
   }
 
+  /* --- Performance mobile --- */
   .performance-visual {
-    min-height: clamp(430px, 100vw, 620px);
+    min-height: 100vh;
+    min-height: 100svh;
+    box-shadow: none;
   }
 
   .performance-scene {
-    --performance-poster-width: min(558px, calc(100vw - 34px));
-    --performance-poster-half: min(279px, calc((100vw - 34px) / 2));
+    --performance-poster-width: min(334px, calc(100vw - 42px));
+    --performance-poster-half: calc(var(--performance-poster-width) / 2);
+    --performance-top-label-width: min(260px, 76vw);
+    --performance-bottom-label-width: min(170px, 43vw);
+    --performance-top-label-top: clamp(100px, 14vh, 130px);
+    --performance-bottom-label-top: calc(50% + min(176px, 22vh));
+    --performance-left-label-inline: 17px;
+    --performance-right-label-inline: 17px;
+    --performance-poster-y: 47%;
+    --performance-poster-translate-y: -50%;
     min-height: inherit;
   }
 
-  .performance-shards {
-    width: min(980px, 154vw);
-    opacity: .24;
-    transform: translate(-50%, -39%) rotate(-1deg);
-  }
-
   .performance-poster {
-    width: min(558px, calc(70vw - 34px));
-    transform: translate(-50%, -50%);
+    width: var(--performance-poster-width);
+    height: auto;
+    transform: translate(-50%, var(--performance-poster-translate-y));
   }
 
   .performance-labels {
     display: block;
+  }
+
+  .performance-label {
+    gap: 7px;
+  }
+
+  .performance-label strong {
+    gap: 7px;
+    font-size: clamp(14px, 4.2vw, 17px);
+    line-height: 1.18;
+  }
+
+  .performance-label-subtitle {
+    font-size: clamp(14px, 4.4vw, 18px);
+  }
+
+  .performance-label-2 {
+    left: var(--performance-left-label-inline);
+  }
+
+  .performance-label-3 {
+    right: var(--performance-right-label-inline);
   }
 
   .pillar-grid,
@@ -4218,37 +4317,41 @@ section[id], footer[id] {
   }
 
   .pillar {
-    aspect-ratio: auto;
-    min-height: 214px;
+    aspect-ratio: 1 / 1;
+    width: 100%;
+    min-height: 0;
     align-items: stretch;
-    padding: 14px 17px;
+    padding: 34px;
   }
 
   .pillar div {
-    display: grid;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 1 / 1;
     min-height: 0;
-    align-content: space-between;
-    gap: 18px;
-    padding: 22px 20px;
+    align-content: center;
+    padding: 20px 18px;
+    background: #000;
+    align-items: center;
   }
 
   .pillar span {
-    font-size: clamp(34px, 11vw, 44px);
+    font-size: clamp(28px, 10vw, 40px);
     line-height: 1;
   }
 
   .pillar h3 {
-    min-height: 0;
-    margin: 0;
-    font-size: clamp(18px, 5.6vw, 22px);
+    min-height: unset;
+    margin: clamp(2px, 0.6vw, 6px) 0 clamp(8px, 2.4vw, 14px);
+    font-size: clamp(15px, 4.8vw, 20px);
     line-height: 1.15;
   }
 
   .pillar a {
     width: fit-content;
-    min-height: 38px;
-    padding: 10px 15px;
-    font-size: 10px;
+    min-height: 34px;
+    padding: 8px 12px;
+    font-size: clamp(9px, 2.6vw, 11px);
   }
 
   .strategy {
@@ -4448,13 +4551,14 @@ section[id], footer[id] {
   }
 
   .pillar {
-    min-height: 188px;
-    padding: 12px;
+    aspect-ratio: 1 / 1;
+    min-height: 0;
+    padding: 12vw;
   }
 
   .pillar div {
-    gap: 14px;
-    padding: 19px 17px;
+    gap: 10px;
+    padding: 34px 34px;
   }
 
   .pillar h3 {
@@ -4521,7 +4625,7 @@ section[id], footer[id] {
   }
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1024px) {
   .photo-section {
     width: min(calc(100% - 48px), var(--max));
   }

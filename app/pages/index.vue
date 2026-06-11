@@ -493,21 +493,41 @@ onBeforeUnmount(() => {
               decoding="async"
             >
             <div class="performance-labels" aria-hidden="true">
-              <span
-                v-for="(pillar, index) in pillars"
-                :key="`performance-label-${pillar.number}`"
-                :class="['performance-label', `performance-label-${index + 1}`]"
-              >
+              <span class="performance-label performance-label-1">
                 <strong>
                   <span
-                    v-for="line in pillar.labelLines"
-                    :key="line"
+                    v-for="line in pillars[0].labelLines"
+                    :key="`top-${line}`"
                     class="performance-label-line"
                   >
                     {{ line }}
                   </span>
                 </strong>
-                <span class="performance-label-subtitle">{{ pillar.labelSubtitle }}</span>
+                <span class="performance-label-subtitle">{{ pillars[0].labelSubtitle }}</span>
+              </span>
+              <span class="performance-label performance-label-2">
+                <strong>
+                  <span
+                    v-for="line in pillars[1].labelLines"
+                    :key="`left-${line}`"
+                    class="performance-label-line"
+                  >
+                    {{ line }}
+                  </span>
+                </strong>
+                <span class="performance-label-subtitle">{{ pillars[1].labelSubtitle }}</span>
+              </span>
+              <span class="performance-label performance-label-3">
+                <strong>
+                  <span
+                    v-for="line in pillars[2].labelLines"
+                    :key="`right-${line}`"
+                    class="performance-label-line"
+                  >
+                    {{ line }}
+                  </span>
+                </strong>
+                <span class="performance-label-subtitle">{{ pillars[2].labelSubtitle }}</span>
               </span>
             </div>
             <img
