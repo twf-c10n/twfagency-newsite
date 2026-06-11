@@ -1,6 +1,6 @@
 import { _ as __nuxt_component_0 } from './SiteHeader-D9ODwCeG.mjs';
 import { defineComponent, ref, computed, mergeProps, unref, useSSRContext } from 'vue';
-import { ssrRenderAttrs, ssrRenderComponent, ssrRenderStyle, ssrRenderAttr, ssrRenderList, ssrRenderClass, ssrInterpolate } from 'vue/server-renderer';
+import { ssrRenderAttrs, ssrRenderComponent, ssrRenderStyle, ssrRenderList, ssrRenderClass, ssrInterpolate, ssrRenderAttr } from 'vue/server-renderer';
 import { u as useHead } from './composables-CXt4RJfp.mjs';
 import './server.mjs';
 import '../nitro/nitro.mjs';
@@ -113,7 +113,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       const _component_SiteHeader = __nuxt_component_0;
       _push(`<div${ssrRenderAttrs(mergeProps({ class: "page services-page" }, _attrs))}>`);
       _push(ssrRenderComponent(_component_SiteHeader, { "active-path": "/services" }, null, _parent));
-      _push(`<main><section class="services-hero"><h1>Our Services TWF Agency</h1><p> We are a high-end digital agency merging uncompromising technical mastery with unbounded creativity. For 15 years, we have engineered digital experiences for high-growth tech firms and luxury innovators. </p></section><section class="agency-services-showcase" style="${ssrRenderStyle({ "--active-accent": unref(activeService).accent })}" aria-labelledby="agency-services-title"><div class="automotive-bg" aria-hidden="true"><img${ssrRenderAttr("src", `${assetPath}/automotive-campaign-bg.png`)} alt=""></div><div class="automotive-gridline" aria-hidden="true"></div><div class="automotive-inner"><aside class="automotive-menu" aria-label="Agency services"><!--[-->`);
+      _push(`<main><section class="services-hero"><h1>Our Services TWF Agency</h1><p> We are a high-end digital agency merging uncompromising technical mastery with unbounded creativity. For 15 years, we have engineered digital experiences for high-growth tech firms and luxury innovators. </p></section><section class="agency-services-showcase" style="${ssrRenderStyle({ "--active-accent": unref(activeService).accent })}" aria-labelledby="agency-services-title"><div class="automotive-bg" aria-hidden="true"></div><div class="automotive-gridline" aria-hidden="true"></div><div class="automotive-inner"><aside class="automotive-menu" aria-label="Agency services"><!--[-->`);
       ssrRenderList(services, (service, index) => {
         _push(`<button type="button" class="${ssrRenderClass({ active: unref(activeServiceId) === service.id })}" style="${ssrRenderStyle({ "--item-accent": service.accent })}"><span>${ssrInterpolate(String(index + 1).padStart(2, "0"))}</span><b>${ssrInterpolate(service.title)}</b></button>`);
       });
@@ -141,4 +141,4 @@ _sfc_main.setup = (props, ctx) => {
 };
 
 export { _sfc_main as default };
-//# sourceMappingURL=services-VbrRgT7R.mjs.map
+//# sourceMappingURL=services-JNBKPsf2.mjs.map

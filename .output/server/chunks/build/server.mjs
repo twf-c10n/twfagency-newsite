@@ -634,12 +634,12 @@ const _routes = [
   {
     name: "services",
     path: "/services",
-    component: () => import('./services-VbrRgT7R.mjs')
+    component: () => import('./services-JNBKPsf2.mjs')
   },
   {
     name: "index",
     path: "/",
-    component: () => import('./index-Dpe6JotL.mjs')
+    component: () => import('./index-b9bLrAow.mjs')
   }
 ];
 const ROUTE_KEY_PARENTHESES_RE = /(:\w+)\([^)]+\)/g;

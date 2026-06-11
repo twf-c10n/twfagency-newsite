@@ -480,22 +480,6 @@ onBeforeUnmount(() => {
 
         <div id="performance-creative-visual" class="performance-visual" aria-label="Triangle of Performance">
           <div class="performance-scene">
-            <div class="performance-bg" aria-hidden="true">
-              <div class="performance-bg-gradient" />
-              <picture class="performance-bg-layer main">
-                <source srcset="/assets/triangle-performance-main.webp" type="image/webp">
-                <img src="/assets/triangle-performance-main.png" alt="" loading="lazy" decoding="async">
-              </picture>
-              <picture class="performance-bg-layer grid">
-                <source srcset="/assets/triangle-performance-grid.webp" type="image/webp">
-                <img src="/assets/triangle-performance-grid.png" alt="" loading="lazy" decoding="async">
-              </picture>
-              <picture class="performance-bg-layer glow">
-                <source srcset="/assets/triangle-performance-glow.webp" type="image/webp">
-                <img src="/assets/triangle-performance-glow.png" alt="" loading="lazy" decoding="async">
-              </picture>
-            </div>
-            <div class="beam" aria-hidden="true" />
             <div class="performance-stack">
               <div class="performance-label-top">
                 <p class="performance-label-title">
