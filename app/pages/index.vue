@@ -501,19 +501,6 @@ onBeforeUnmount(() => {
                     decoding="async"
                   >
                 </div>
-                <svg class="triangle-energy" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-                  <defs>
-                    <linearGradient id="triangle-light" x1="0" y1="1" x2="1" y2="1">
-                      <stop offset="0" stop-color="#67e999" />
-                      <stop offset=".22" stop-color="#16c9ec" />
-                      <stop offset=".45" stop-color="#6550ff" />
-                      <stop offset=".7" stop-color="#ee3786" />
-                      <stop offset="1" stop-color="#ffe84c" />
-                    </linearGradient>
-                  </defs>
-                  <path class="triangle-energy-track" d="M50 1 L99 99 L1 99 Z" />
-                  <path class="triangle-energy-flow" d="M50 1 L99 99 L1 99 Z" />
-                </svg>
                 <div class="triangle-inner">
                   <img
                     class="triangle-logo"

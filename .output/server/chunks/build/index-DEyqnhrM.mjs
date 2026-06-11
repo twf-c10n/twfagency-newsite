@@ -210,7 +210,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       ssrRenderList(pillars[0].labelLines, (line) => {
         _push(`<span>${ssrInterpolate(line)}</span>`);
       });
-      _push(`<!--]--></p><p class="performance-label-subtitle">${ssrInterpolate(pillars[0].labelSubtitle)}</p></div><div class="triangle" aria-label="Triangle of Performance"><div class="triangle-image" aria-hidden="true"><img${ssrRenderAttr("src", _imports_2)} alt="" loading="lazy" decoding="async"></div><svg class="triangle-energy" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="triangle-light" x1="0" y1="1" x2="1" y2="1"><stop offset="0" stop-color="#67e999"></stop><stop offset=".22" stop-color="#16c9ec"></stop><stop offset=".45" stop-color="#6550ff"></stop><stop offset=".7" stop-color="#ee3786"></stop><stop offset="1" stop-color="#ffe84c"></stop></linearGradient></defs><path class="triangle-energy-track" d="M50 1 L99 99 L1 99 Z"></path><path class="triangle-energy-flow" d="M50 1 L99 99 L1 99 Z"></path></svg><div class="triangle-inner"><img class="triangle-logo"${ssrRenderAttr("src", _imports_3)} alt="TWF Agency" loading="lazy" decoding="async"><strong>PERFORMANCE CREATIVE</strong><small>TRIANGLE OF PERFORMANCE (TOP)</small></div></div><div class="performance-label-bottom"><div class="performance-label-side performance-label-left"><p class="performance-label-title"><!--[-->`);
+      _push(`<!--]--></p><p class="performance-label-subtitle">${ssrInterpolate(pillars[0].labelSubtitle)}</p></div><div class="triangle" aria-label="Triangle of Performance"><div class="triangle-image" aria-hidden="true"><img${ssrRenderAttr("src", _imports_2)} alt="" loading="lazy" decoding="async"></div><div class="triangle-inner"><img class="triangle-logo"${ssrRenderAttr("src", _imports_3)} alt="TWF Agency" loading="lazy" decoding="async"><strong>PERFORMANCE CREATIVE</strong><small>TRIANGLE OF PERFORMANCE (TOP)</small></div></div><div class="performance-label-bottom"><div class="performance-label-side performance-label-left"><p class="performance-label-title"><!--[-->`);
       ssrRenderList(pillars[1].labelLines, (line) => {
         _push(`<span>${ssrInterpolate(line)}</span>`);
       });
@@ -254,4 +254,4 @@ _sfc_main.setup = (props, ctx) => {
 };
 
 export { _sfc_main as default };
-//# sourceMappingURL=index-CZvr9pk3.mjs.map
+//# sourceMappingURL=index-DEyqnhrM.mjs.map
