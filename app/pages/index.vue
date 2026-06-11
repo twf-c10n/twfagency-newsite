@@ -493,6 +493,14 @@ onBeforeUnmount(() => {
                 <p class="performance-label-subtitle">{{ pillars[0].labelSubtitle }}</p>
               </div>
               <div class="triangle" aria-label="Triangle of Performance">
+                <div class="triangle-image" aria-hidden="true">
+                  <img
+                    src="/assets/triangle-of-performance-figma.png"
+                    alt=""
+                    loading="lazy"
+                    decoding="async"
+                  >
+                </div>
                 <svg class="triangle-energy" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
                   <defs>
                     <linearGradient id="triangle-light" x1="0" y1="1" x2="1" y2="1">

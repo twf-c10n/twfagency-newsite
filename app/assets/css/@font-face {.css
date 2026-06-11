@@ -3459,7 +3459,7 @@ section[id], footer[id] {
   text-align: center;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1024px) {
   .shell {
     width: min(calc(100% - 48px), var(--max));
   }
@@ -4659,7 +4659,7 @@ section[id], footer[id] {
   }
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1024px) {
   .photo-section {
     width: min(calc(100% - 48px), var(--max));
   }
