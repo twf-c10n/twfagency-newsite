@@ -612,7 +612,6 @@ section[id], footer[id] {
 
 .performance-bg,
 .performance-bg img,
-.performance-shards,
 .performance-poster {
   position: absolute;
   max-width: none;
@@ -630,17 +629,6 @@ section[id], footer[id] {
   object-fit: cover;
   object-position: center bottom;
   filter: brightness(.54) contrast(1.04) saturate(.62);
-}
-
-.performance-shards {
-  z-index: 2;
-  top: 50%;
-  left: 50%;
-  width: min(1180px, 88vw);
-  opacity: .28;
-  filter: saturate(.86) drop-shadow(0 0 46px rgb(0 63 255 / 26%));
-  mix-blend-mode: screen;
-  transform: translate(-50%, -42%) rotate(-1deg);
 }
 
 .performance-labels {
@@ -724,7 +712,7 @@ section[id], footer[id] {
   height: auto;
   object-fit: contain;
   object-position: center;
-  clip-path: polygon(50% 0%, 99% 99%, 1% 99%);
+  clip-path: polygon(52% 2.4%, 98.7% 96.8%, 6.2% 96.8%);
   filter: drop-shadow(0 34px 82px rgb(0 0 0 / 58%));
   transform: translate(-50%, var(--performance-poster-translate-y));
 }
@@ -3476,11 +3464,6 @@ section[id], footer[id] {
     font-size: 21px;
   }
 
-  .performance-shards {
-    width: min(980px, 118vw);
-    opacity: .34;
-  }
-
   .about-figma-nav,
   .about-title-section,
   .services-hero,
@@ -4285,13 +4268,6 @@ section[id], footer[id] {
     --performance-poster-y: 47%;
     --performance-poster-translate-y: -50%;
     min-height: inherit;
-  }
-
-  .performance-shards {
-    display: block;
-    width: min(760px, 160vw);
-    opacity: .22;
-    transform: translate(-50%, -41%) rotate(-1deg);
   }
 
   .performance-poster {

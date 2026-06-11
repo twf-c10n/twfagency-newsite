@@ -484,14 +484,6 @@ onBeforeUnmount(() => {
               <source srcset="/assets/performance-bg.webp" type="image/webp">
               <img src="/assets/performance-bg.png" alt="" loading="lazy" decoding="async">
             </picture>
-            <img
-              class="performance-shards"
-              src="/assets/triangle-performance-glow.webp"
-              alt=""
-              aria-hidden="true"
-              loading="lazy"
-              decoding="async"
-            >
             <div class="performance-labels" aria-hidden="true">
               <span class="performance-label performance-label-1">
                 <strong>
