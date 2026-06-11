@@ -4264,7 +4264,7 @@ section[id], footer[id] {
     --performance-poster-half: calc(var(--performance-poster-width) / 2);
     --performance-top-label-width: min(260px, 76vw);
     --performance-bottom-label-width: min(170px, 43vw);
-    --performance-top-label-top: clamp(100px, 14vh, 130px);
+    --performance-top-label-top: clamp(50px, 8vh, 130px);
     --performance-bottom-label-top: calc(50% + min(176px, 22vh));
     --performance-left-label-inline: 17px;
     --performance-right-label-inline: 17px;
