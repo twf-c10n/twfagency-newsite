@@ -612,6 +612,7 @@ section[id], footer[id] {
 
 .performance-bg,
 .performance-bg img,
+.performance-shards,
 .performance-poster {
   position: absolute;
   max-width: none;
@@ -629,6 +630,17 @@ section[id], footer[id] {
   object-fit: cover;
   object-position: center bottom;
   filter: brightness(.54) contrast(1.04) saturate(.62);
+}
+
+.performance-shards {
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  width: min(1180px, 88vw);
+  opacity: .44;
+  filter: saturate(.86) drop-shadow(0 0 46px rgb(0 63 255 / 26%));
+  mix-blend-mode: screen;
+  transform: translate(-50%, -42%) rotate(-1deg);
 }
 
 .performance-labels {
@@ -3467,6 +3479,11 @@ section[id], footer[id] {
     font-size: 21px;
   }
 
+  .performance-shards {
+    width: min(980px, 118vw);
+    opacity: .34;
+  }
+
   .about-figma-nav,
   .about-title-section,
   .services-hero,
@@ -4279,6 +4296,12 @@ section[id], footer[id] {
     transform: translate(-50%, var(--performance-poster-translate-y));
   }
 
+  .performance-shards {
+    width: min(760px, 160vw);
+    opacity: .22;
+    transform: translate(-50%, -41%) rotate(-1deg);
+  }
+
   .performance-labels {
     display: block;
   }
@@ -4578,6 +4601,56 @@ section[id], footer[id] {
     font-size: 10px;
     line-height: 1.7;
   }
+
+  /* --- Performance smallest phone --- */
+  .performance-scene {
+    --performance-poster-width: min(250px, calc(100vw - 48px));
+    --performance-poster-half: calc(var(--performance-poster-width) / 2);
+    --performance-top-label-width: min(200px, 68vw);
+    --performance-bottom-label-width: min(134px, 35vw);
+    --performance-top-label-top: clamp(38px, 6vh, 96px);
+    --performance-bottom-label-top: calc(50% + min(134px, 18vh));
+    --performance-left-label-inline: 6px;
+    --performance-right-label-inline: 6px;
+    --performance-poster-y: 45%;
+    --performance-poster-translate-y: -50%;
+    min-height: inherit;
+  }
+
+  .performance-poster {
+    width: var(--performance-poster-width);
+    height: auto;
+    transform: translate(-50%, var(--performance-poster-translate-y));
+  }
+
+  .performance-shards {
+    width: min(420px, 175vw);
+    opacity: .14;
+    transform: translate(-50%, -39%) rotate(-1deg);
+  }
+
+  .performance-label {
+    gap: 4px;
+  }
+
+  .performance-label strong {
+    gap: 4px;
+    font-size: clamp(11px, 3.5vw, 13px);
+    line-height: 1.1;
+  }
+
+  .performance-label-subtitle {
+    font-size: clamp(10px, 3.4vw, 13px);
+    line-height: 1.06;
+  }
+
+  .performance-label-2 {
+    left: var(--performance-left-label-inline);
+  }
+
+  .performance-label-3 {
+    right: var(--performance-right-label-inline);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -4786,5 +4859,55 @@ section[id], footer[id] {
   .photo-cta h2 {
     font-size: 32px;
     line-height: 1.25;
+  }
+
+  /* --- Performance small phone --- */
+  .performance-scene {
+    --performance-poster-width: min(280px, calc(100vw - 52px));
+    --performance-poster-half: calc(var(--performance-poster-width) / 2);
+    --performance-top-label-width: min(220px, 72vw);
+    --performance-bottom-label-width: min(150px, 38vw);
+    --performance-top-label-top: clamp(44px, 7vh, 110px);
+    --performance-bottom-label-top: calc(50% + min(148px, 20vh));
+    --performance-left-label-inline: 10px;
+    --performance-right-label-inline: 10px;
+    --performance-poster-y: 46%;
+    --performance-poster-translate-y: -50%;
+    min-height: inherit;
+  }
+
+  .performance-poster {
+    width: var(--performance-poster-width);
+    height: auto;
+    transform: translate(-50%, var(--performance-poster-translate-y));
+  }
+
+  .performance-shards {
+    width: min(560px, 170vw);
+    opacity: .18;
+    transform: translate(-50%, -40%) rotate(-1deg);
+  }
+
+  .performance-label {
+    gap: 5px;
+  }
+
+  .performance-label strong {
+    gap: 5px;
+    font-size: clamp(12px, 3.8vw, 15px);
+    line-height: 1.14;
+  }
+
+  .performance-label-subtitle {
+    font-size: clamp(12px, 3.9vw, 15px);
+    line-height: 1.08;
+  }
+
+  .performance-label-2 {
+    left: var(--performance-left-label-inline);
+  }
+
+  .performance-label-3 {
+    right: var(--performance-right-label-inline);
   }
 }
