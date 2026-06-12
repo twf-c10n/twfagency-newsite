@@ -691,7 +691,9 @@ const _inlineRuntimeConfig = {
       }
     }
   },
-  "public": {}
+  "public": {
+    "apiBaseUrl": "https://admin-stg.twfagency.com/api"
+  }
 };
 const envOptions = {
   prefix: "NITRO_",

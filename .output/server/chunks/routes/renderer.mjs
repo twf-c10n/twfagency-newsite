@@ -1,5 +1,5 @@
-import { createRenderer, getRequestDependencies, getPreloadLinks, getPrefetchLinks } from 'vue-bundle-renderer/runtime';
-import { o as joinRelativeURL, v as useRuntimeConfig, k as getResponseStatusText, j as getResponseStatus, f as encodePath, a as defineRenderHandler, i as getQuery, c as createError, e as destr, l as getRouteRules, p as joinURL, u as useNitroApp } from '../nitro/nitro.mjs';
+globalThis.__timing__.logStart('Load chunks/routes//renderer');import { createRenderer, getRequestDependencies, getPreloadLinks, getPrefetchLinks } from 'vue-bundle-renderer/runtime';
+import { p as joinRelativeURL, w as useRuntimeConfig, k as getResponseStatusText, j as getResponseStatus, f as encodePath, a as defineRenderHandler, i as getQuery, c as createError, e as destr, l as getRouteRules, q as joinURL, v as useNitroApp } from '../nitro/nitro.mjs';
 import { renderToString } from 'vue/server-renderer';
 import { createHead as createHead$1, propsToString, renderSSRHead } from 'unhead/server';
 import { stringify, uneval } from 'devalue';
@@ -511,5 +511,5 @@ const renderer = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({
   default: handler
 }, Symbol.toStringTag, { value: 'Module' }));
 
-export { baseURL as b, headSymbol as h, publicAssetsURL as p, renderer as r, useHead as u };
+export { baseURL as b, headSymbol as h, publicAssetsURL as p, renderer as r, useHead as u };;globalThis.__timing__.logEnd('Load chunks/routes//renderer');
 //# sourceMappingURL=renderer.mjs.map

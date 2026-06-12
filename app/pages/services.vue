@@ -85,6 +85,16 @@ const services = [
     description:
       'LINE OA, CRM, commerce, and messaging solutions for Thai brands that need tighter customer relationships.',
     points: ['LINE OA strategy', 'Rich menu and messaging', 'Commerce integration']
+  },
+  {
+    id: 'ai-video-analytics',
+    title: 'AI Video Analytics for Retail',
+    eyebrow: 'Retail Intelligence',
+    image: `${assetPath}/analytics.jpg`,
+    accent: '#180dfd',
+    description:
+      'AI-powered video analytics that translate in-store behavior into actionable retail insight, helping teams improve operations and customer experience.',
+    points: ['Customer Traffic Insight', 'In-store Behavior Analysis', 'Retail Performance Dashboard']
   }
 ]
 
