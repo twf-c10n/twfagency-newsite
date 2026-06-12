@@ -374,6 +374,7 @@ section[id], footer[id] {
   width: max-content;
   height: 100%;
   align-items: center;
+  gap: clamp(32px, 2vw, 64px);
   will-change: transform;
   animation: client-marquee 42s linear infinite;
 }
@@ -386,8 +387,7 @@ section[id], footer[id] {
   display: flex;
   min-width: max-content;
   align-items: center;
-  gap: clamp(64px, 2vw, 32px);
-  padding: 0 clamp(10px, 1vw, 16px);
+  gap: clamp(32px, 2vw, 64px);
 }
 
 .brand-logo {
@@ -4217,8 +4217,7 @@ section[id], footer[id] {
 
   .logo-set {
     min-width: max-content;
-    gap: clamp(64px, 2vw, 32px);
-    padding: 0 8px;
+    gap: clamp(32px, 2vw, 64px);
   }
 
   .brand-logo {
