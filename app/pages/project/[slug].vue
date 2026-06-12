@@ -24,7 +24,8 @@ const apiBaseUrl = String(runtimeConfig.public.apiBaseUrl || '')
 
 const { data: project, pending, error } = await useAsyncData<ProjectDetail>(
   `project-detail:${slug}`,
-  () => getProjectDetail(slug)
+  () => getProjectDetail(slug),
+  { server: false }
 )
 
 const asRecord = (source: unknown) => source as Record<string, unknown> | null | undefined
