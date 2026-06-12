@@ -638,7 +638,7 @@ const _routes = [
   {
     name: "project-slug",
     path: "/project/:slug()",
-    component: () => import('./_slug_-CB-bZ_Wi.mjs')
+    component: () => import('./_slug_-DS5tAWI1.mjs')
   },
   {
     name: "about",
@@ -658,7 +658,7 @@ const _routes = [
   {
     name: "partnership",
     path: "/partnership",
-    component: () => import('./partnership-DoBvywlj.mjs')
+    component: () => import('./partnership-uebrFpWe.mjs')
   },
   {
     name: "photography",
@@ -668,7 +668,7 @@ const _routes = [
   {
     name: "project",
     path: "/project",
-    component: () => import('./index-VgJY0FO-.mjs')
+    component: () => import('./index-BcTvEkxl.mjs')
   },
   {
     name: "services",
@@ -678,7 +678,7 @@ const _routes = [
   {
     name: "index",
     path: "/",
-    component: () => import('./index-BO0Msoto.mjs')
+    component: () => import('./index-BkBnMLHJ.mjs')
   }
 ];
 const ROUTE_KEY_PARENTHESES_RE = /(:\w+)\([^)]+\)/g;

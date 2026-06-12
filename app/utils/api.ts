@@ -59,6 +59,15 @@ export type ContactUsPage = PageMeta & {
   services?: ContactService[]
 }
 
+export type HomepagePage = PageMeta & {
+  trust_lies?: {
+    description_en?: string
+    description_th?: string
+    attachment_id?: string[]
+    images?: Media[]
+  }
+}
+
 export type ProjectDetail = PageMeta & {
   slug?: string
   name_en?: string
@@ -487,7 +496,7 @@ export const getPageBySlug = <T extends PageMeta = PageMeta>(slug: string) => {
   return apiFetch<T>(`/pages/${encodeURIComponent(slug)}`)
 }
 
-export const getHomepage = () => getPageBySlug('homepage')
+export const getHomepage = () => getPageBySlug<HomepagePage>('homepage')
 
 export const getServicesPage = () => getPageBySlug('services')
 

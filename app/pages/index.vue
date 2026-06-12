@@ -1,4 +1,11 @@
 <script setup lang="ts">
+import {
+  getHomepage,
+  getMediaUrl,
+  pickLocalizedText,
+  type HomepagePage
+} from '~/utils/api'
+
 useHead({
   title: 'TWF Agency | Imagine Beyond The Limit',
   meta: [
@@ -185,6 +192,10 @@ type WordPressPost = {
 
 const wordpressOrigin = 'https://twfdigital.com'
 const fallbackArticleImage = '/assets/article-cover.png'
+const fallbackTrustDescription =
+  'We push boundaries and strive for excellence by fostering a highly collaborative and constructive environment. Our team is comprised of talented individuals who work hard to elevate your brand.'
+const runtimeConfig = useRuntimeConfig()
+const apiBaseUrl = String(runtimeConfig.public.apiBaseUrl || '')
 
 const fallbackArticles: ArticleCard[] = [
   {
@@ -214,6 +225,66 @@ const fallbackArticles: ArticleCard[] = [
 ]
 
 const articles = ref<ArticleCard[]>(fallbackArticles)
+const previousTrustSlideIndex = ref(0)
+const activeTrustSlideIndex = ref(1)
+
+const { data: homepage } = await useAsyncData<HomepagePage>(
+  'homepage-trust-lies',
+  getHomepage
+)
+
+const fallbackTrustPhotos = [
+  {
+    id: 'fallback-award',
+    src: '/assets/award.png',
+    alt: 'TWF awards'
+  },
+  {
+    id: 'fallback-team',
+    src: '/assets/team.png',
+    alt: 'TWF team'
+  }
+]
+
+const trustPhotos = computed(() => {
+  const photos = (homepage.value?.trust_lies?.images ?? [])
+    .map((image, index) => ({
+      id: `${image.name || 'trust-lies'}-${index}`,
+      src: getMediaUrl(image, '', apiBaseUrl),
+      alt: image.name || `TWF team slide ${index + 1}`
+    }))
+    .filter((photo) => photo.src)
+
+  return photos.length ? photos : fallbackTrustPhotos
+})
+
+const trustDescription = computed(() => {
+  return pickLocalizedText(
+    homepage.value?.trust_lies,
+    'description',
+    fallbackTrustDescription
+  )
+})
+
+const getTrustPhotoAt = (index: number) => {
+  const photos = trustPhotos.value
+
+  return photos[index % photos.length] || fallbackTrustPhotos[0]
+}
+
+const previousTrustPhoto = computed(() => {
+  return trustPhotos.value.length > 1
+    ? getTrustPhotoAt(previousTrustSlideIndex.value)
+    : getTrustPhotoAt(activeTrustSlideIndex.value)
+})
+
+const activeTrustPhoto = computed(() => getTrustPhotoAt(activeTrustSlideIndex.value))
+const hasTrustPhotoLoop = computed(() => trustPhotos.value.length > 1)
+
+watch(trustPhotos, (photos) => {
+  previousTrustSlideIndex.value = 0
+  activeTrustSlideIndex.value = photos.length > 1 ? 1 : 0
+})
 
 const decodeHtml = (value: string) => {
   if (!import.meta.client || !value) {
@@ -330,8 +401,28 @@ let showreelVideoObserver: IntersectionObserver | undefined
 let pointerFrame = 0
 let scrollFrame = 0
 let scrollIdleTimer: number | undefined
+let trustSlideTimer: number | undefined
 let showreelTracking = false
 let showreelStyleKey = ''
+
+const advanceTrustPhoto = () => {
+  if (trustPhotos.value.length < 2) {
+    return
+  }
+
+  previousTrustSlideIndex.value = activeTrustSlideIndex.value
+  activeTrustSlideIndex.value = (activeTrustSlideIndex.value + 1) % trustPhotos.value.length
+}
+
+const startTrustPhotoLoop = () => {
+  window.clearInterval(trustSlideTimer)
+
+  if (!hasTrustPhotoLoop.value) {
+    return
+  }
+
+  trustSlideTimer = window.setInterval(advanceTrustPhoto, 3400)
+}
 
 const loadShowreelVideo = () => {
   const video = showreelVideo.value
@@ -461,6 +552,10 @@ onMounted(() => {
   }
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  if (!reduceMotion) {
+    startTrustPhotoLoop()
+  }
+
   updateScrollEffects()
   window.addEventListener('scroll', requestScrollEffects, { passive: true })
   window.addEventListener('resize', requestScrollEffects, { passive: true })
@@ -551,6 +646,7 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
   window.clearTimeout(scrollIdleTimer)
+  window.clearInterval(trustSlideTimer)
   window.cancelAnimationFrame(pointerFrame)
   window.cancelAnimationFrame(scrollFrame)
   window.removeEventListener('scroll', requestScrollEffects)
@@ -800,16 +896,18 @@ onBeforeUnmount(() => {
           </video>
         </div>
         <div class="shell team-grid">
-          <div class="team-photos" data-reveal>
-            <img src="/assets/award.png" alt="TWF awards">
-            <img src="/assets/team.png" alt="TWF team">
+          <div :class="['team-photos', { 'is-looping': hasTrustPhotoLoop }]" data-reveal>
+            <figure class="team-photo-slide is-previous" aria-hidden="true">
+              <img :src="previousTrustPhoto.src" :alt="previousTrustPhoto.alt">
+            </figure>
+            <figure :key="activeTrustPhoto.id" class="team-photo-slide is-active">
+              <img :src="activeTrustPhoto.src" :alt="activeTrustPhoto.alt">
+            </figure>
           </div>
           <div class="team-copy" data-reveal style="--delay: .14s">
             <h2>A team you<br>can trust</h2>
             <p>
-              We push boundaries and strive for excellence by fostering a highly
-              collaborative and constructive environment. Our team is comprised of
-              talented individuals who work hard to elevate your brand.
+              {{ trustDescription }}
             </p>
           </div>
         </div>

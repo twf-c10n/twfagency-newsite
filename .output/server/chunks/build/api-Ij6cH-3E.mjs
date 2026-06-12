@@ -1,4 +1,4 @@
-globalThis.__timing__.logStart('Load chunks/build/api-DdjBMHQM');import { defineComponent, createElementBlock, shallowRef, getCurrentInstance, provide, cloneVNode, h, isRef, computed, toValue, onServerPrefetch, reactive, ref, nextTick, unref, toRef } from 'vue';
+globalThis.__timing__.logStart('Load chunks/build/api-Ij6cH-3E');import { defineComponent, createElementBlock, shallowRef, getCurrentInstance, provide, cloneVNode, h, isRef, computed, toValue, onServerPrefetch, reactive, ref, nextTick, unref, toRef } from 'vue';
 import { n as hash } from '../nitro/nitro.mjs';
 import { isPlainObject } from '@vue/shared';
 import { u as useNuxtApp, a as asyncDataDefaults, f as fetchDefaults, c as createError, h as useRuntimeConfig } from './server.mjs';
@@ -691,11 +691,12 @@ const pickLocalizedText = (source, field, fallback = "", locale = "en") => {
 const getPageBySlug = (slug) => {
   return apiFetch(`/pages/${encodeURIComponent(slug)}`);
 };
+const getHomepage = () => getPageBySlug("homepage");
 const getOurProjectsPage = () => getPageBySlug("our-projects");
 const getContactUsPage = () => getPageBySlug("contact-us");
 const getProjectDetail = (slug) => {
   return apiFetch(`/pages/our-project/${encodeURIComponent(slug)}`);
 };
 
-export { getMediaUrl as a, getOurProjectsPage as b, getProjectDetail as c, getContactUsPage as g, pickLocalizedText as p, useAsyncData as u };;globalThis.__timing__.logEnd('Load chunks/build/api-DdjBMHQM');
-//# sourceMappingURL=api-DdjBMHQM.mjs.map
+export { getHomepage as a, getMediaUrl as b, getOurProjectsPage as c, getProjectDetail as d, getContactUsPage as g, pickLocalizedText as p, useAsyncData as u };;globalThis.__timing__.logEnd('Load chunks/build/api-Ij6cH-3E');
+//# sourceMappingURL=api-Ij6cH-3E.mjs.map

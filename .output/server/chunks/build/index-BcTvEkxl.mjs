@@ -1,8 +1,8 @@
-globalThis.__timing__.logStart('Load chunks/build/index-VgJY0FO-');import { _ as __nuxt_component_0 } from './SiteHeader-D9ODwCeG.mjs';
+globalThis.__timing__.logStart('Load chunks/build/index-BcTvEkxl');import { _ as __nuxt_component_0 } from './SiteHeader-D9ODwCeG.mjs';
 import { _ as __nuxt_component_0$1 } from './nuxt-link-_96boU3P.mjs';
 import { defineComponent, ref, withAsyncContext, computed, watch, mergeProps, unref, withCtx, openBlock, createBlock, createVNode, toDisplayString, useSSRContext } from 'vue';
 import { ssrRenderAttrs, ssrRenderComponent, ssrInterpolate, ssrRenderList, ssrRenderClass, ssrRenderAttr } from 'vue/server-renderer';
-import { u as useAsyncData, b as getOurProjectsPage, p as pickLocalizedText, a as getMediaUrl } from './api-DdjBMHQM.mjs';
+import { u as useAsyncData, c as getOurProjectsPage, p as pickLocalizedText, b as getMediaUrl } from './api-Ij6cH-3E.mjs';
 import { h as useRuntimeConfig } from './server.mjs';
 import { u as useHead } from './composables-CXt4RJfp.mjs';
 import '../nitro/nitro.mjs';
@@ -471,5 +471,5 @@ _sfc_main.setup = (props, ctx) => {
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };
 
-export { _sfc_main as default };;globalThis.__timing__.logEnd('Load chunks/build/index-VgJY0FO-');
-//# sourceMappingURL=index-VgJY0FO-.mjs.map
+export { _sfc_main as default };;globalThis.__timing__.logEnd('Load chunks/build/index-BcTvEkxl');
+//# sourceMappingURL=index-BcTvEkxl.mjs.map
