@@ -901,7 +901,7 @@ onBeforeUnmount(() => {
       <section id="about" class="team">
         <div class="team-media" aria-hidden="true">
           <video autoplay muted loop playsinline preload="metadata">
-            <source src="/assets/background.webm" type="video/webm">
+            <source src="/assets/background-1781079667180.webm" type="video/webm">
           </video>
         </div>
         <div class="shell team-grid">
