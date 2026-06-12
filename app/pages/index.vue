@@ -10,7 +10,11 @@ useHead({
   ]
 })
 
-const clientLogos = [
+const aboutAssetPath = '/assets/about-figma'
+
+// ── Default static data (fallback when API is unavailable) ──────────
+
+const defaultClientLogos = [
   { label: 'TrueCoffee', src: '/assets/client-logos/client-logo-12.png' },
   { label: 'UNICEF', src: '/assets/client-logos/client-logo-10.png' },
   { label: 'SCG', src: '/assets/client-logos/client-logo-07.png' },
@@ -33,16 +37,14 @@ const clientLogos = [
   { label: 'Taro', src: '/assets/client-logos/client-logo-13.png' }
 ]
 
-const aboutAssetPath = '/assets/about-figma'
-
-const footerSocials = [
+const defaultFooterSocials = [
   { label: 'Facebook', src: `${aboutAssetPath}/facebook.svg`, href: '#' },
   { label: 'X', src: `${aboutAssetPath}/x.svg`, href: '#' },
   { label: 'Instagram', src: `${aboutAssetPath}/instagram.svg`, href: '#' },
   { label: 'LinkedIn', src: `${aboutAssetPath}/linkedin.svg`, href: '#' }
 ]
 
-const pillars = [
+const defaultPillars = [
   {
     number: '01',
     title: 'Insightful Data & Measurable Result',
@@ -63,7 +65,7 @@ const pillars = [
   }
 ]
 
-const mediaServices = [
+const defaultMediaServices = [
   {
     id: 'media-strategy',
     title: 'Media Strategy',
@@ -156,14 +158,23 @@ const mediaServices = [
   }
 ]
 
-const articles = [
+const defaultArticles = [
   'เทคนิคเพิ่มยอดขายผ่านดิจิทัล',
   'เครื่องมือใหม่ที่แบรนด์ยุคใหม่ต้องใช้',
   'เคล็ดลับสร้างแคมเปญให้โตไว'
 ]
 
+// ── Reactive state (populated from API or fallback) ────────────────
+
+const clientLogos = ref(defaultClientLogos)
+const footerSocials = ref(defaultFooterSocials)
+const pillars = ref(defaultPillars)
+const mediaServices = ref(defaultMediaServices)
+const articles = ref(defaultArticles)
+const pageData = ref<Record<string, unknown> | null>(null)
+
 const motionReady = ref(false)
-const activeService = ref(mediaServices[0].id)
+const activeService = ref(defaultMediaServices[0].id)
 const showreelActive = ref(false)
 const pageRoot = ref<HTMLElement | null>(null)
 const heroMedia = ref<HTMLElement | null>(null)
@@ -302,7 +313,30 @@ const selectService = (id: string, keepVisible = false) => {
   })
 }
 
-onMounted(() => {
+onMounted(async () => {
+  // ── Fetch homepage data from API ─────────────────────────────────
+  try {
+    const api = useApi()
+    const data = await api.fetchPage<Record<string, unknown>>('homepage')
+    if (data) {
+      pageData.value = data
+      // Map API response to reactive state when available
+      if (data.highlights && Array.isArray(data.highlights) && data.highlights.length > 0) {
+        mediaServices.value = data.highlights.map((h: any, i: number) => ({
+          id: `highlight-${i}`,
+          title: h.title || defaultMediaServices[i]?.title || '',
+          description: h.description || '',
+          capabilities: (h.capabilities as string[]) || defaultMediaServices[i]?.capabilities || [],
+        }))
+      }
+      if (data.articles && Array.isArray(data.articles)) {
+        articles.value = data.articles as string[]
+      }
+    }
+  } catch {
+    // API unavailable — keep fallback static data
+  }
+
   const page = pageRoot.value
   if (!page) {
     return

@@ -12,15 +12,15 @@ useHead({
 
 const assetPath = '/assets/about-figma'
 
-const storyImages = [
+// ── Default static data ────────────────────────────────────────────
+
+const defaultStoryImages = [
   { src: `${assetPath}/story-left.png`, alt: 'TWF agency event installation' },
   { src: `${assetPath}/story-center.png`, alt: 'TWF team portrait' },
   { src: `${assetPath}/story-right.png`, alt: 'TWF team celebration' }
 ]
 
-const storySets = [storyImages, storyImages]
-
-const partners = [
+const defaultPartners = [
   {
     name: 'TikTok',
     className: 'partner-tiktok',
@@ -57,12 +57,43 @@ const partners = [
   }
 ]
 
-const socials = [
+const defaultSocials = [
   { label: 'Facebook', src: `${assetPath}/facebook.svg`, href: '#' },
   { label: 'X', src: `${assetPath}/x.svg`, href: '#' },
   { label: 'Instagram', src: `${assetPath}/instagram.svg`, href: '#' },
   { label: 'LinkedIn', src: `${assetPath}/linkedin.svg`, href: '#' }
 ]
+
+// ── Reactive state ─────────────────────────────────────────────────
+
+const storyImages = ref(defaultStoryImages)
+const storySets = computed(() => [storyImages.value, storyImages.value])
+const partners = ref(defaultPartners)
+const socials = ref(defaultSocials)
+const pageData = ref<Record<string, unknown> | null>(null)
+
+// ── Fetch from API ─────────────────────────────────────────────────
+
+onMounted(async () => {
+  try {
+    const api = useApi()
+    const data = await api.fetchPage<Record<string, any>>('about-us')
+    if (data) {
+      pageData.value = data
+      if (data.our_storys?.images && Array.isArray(data.our_storys.images)) {
+        storyImages.value = data.our_storys.images.map((img: any) => ({
+          src: img.value || img.url || defaultStoryImages[0].src,
+          alt: img.name || 'TWF agency',
+        }))
+      }
+      if (data.partners && Array.isArray(data.partners)) {
+        partners.value = data.partners as any[]
+      }
+    }
+  } catch {
+    // API unavailable — keep fallback
+  }
+})
 
 </script>
 

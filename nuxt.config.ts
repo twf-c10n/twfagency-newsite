@@ -8,5 +8,22 @@ export default defineNuxtConfig({
       htmlAttrs: { lang: 'en' },
       viewport: 'width=device-width, initial-scale=1'
     }
-  }
+  },
+
+  /**
+   * Runtime config — accessible via useRuntimeConfig()
+   */
+  runtimeConfig: {
+    public: {
+      apiBaseUrl: '/api',
+    },
+  },
+
+  /**
+   * Route rules — proxy /api requests to the Laravel backend
+   * to avoid CORS issues during development.
+   */
+  routeRules: {
+    '/api/**': { proxy: 'http://localhost:8000/api/**' },
+  },
 })

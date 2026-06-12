@@ -14,7 +14,9 @@ const activeCategoryId = ref('media-strategy')
 
 const aboutAssetPath = '/assets/about-figma'
 
-const categories = [
+// ── Default static data ────────────────────────────────────────────
+
+const defaultCategories = [
   {
     id: 'media-strategy',
     label: 'Media Strategy',
@@ -62,33 +64,13 @@ const categories = [
 const cardCopy =
   'High-resolution stills engineered for global campaigns and elite product launches.'
 
-const cardsByCategory: Record<string, Array<{ icon: string; title: string; description: string }>> = {
+const defaultCardsByCategory: Record<string, Array<{ icon: string; title: string; description: string }>> = {
   'media-strategy': [
-    {
-      icon: 'aperture',
-      title: 'Communications Planning and Implementation',
-      description: cardCopy
-    },
-    {
-      icon: 'camera',
-      title: 'Digital Brand Building',
-      description: cardCopy
-    },
-    {
-      icon: 'bolt',
-      title: 'Digital Marketing Consultation',
-      description: cardCopy
-    },
-    {
-      icon: 'bolt',
-      title: 'Digital Marketing Consultation',
-      description: cardCopy
-    },
-    {
-      icon: 'layers',
-      title: 'Digital Media Planning and Buying',
-      description: cardCopy
-    }
+    { icon: 'aperture', title: 'Communications Planning and Implementation', description: cardCopy },
+    { icon: 'camera', title: 'Digital Brand Building', description: cardCopy },
+    { icon: 'bolt', title: 'Digital Marketing Consultation', description: cardCopy },
+    { icon: 'bolt', title: 'Digital Marketing Consultation', description: cardCopy },
+    { icon: 'layers', title: 'Digital Media Planning and Buying', description: cardCopy }
   ],
   'performance-marketing': [
     { icon: 'bolt', title: 'Performance Campaign Architecture', description: cardCopy },
@@ -127,18 +109,65 @@ const cardsByCategory: Record<string, Array<{ icon: string; title: string; descr
   ]
 }
 
-const activeCategory = computed(() => {
-  return categories.find((category) => category.id === activeCategoryId.value) ?? categories[0]
-})
-
-const activeCards = computed(() => cardsByCategory[activeCategory.value.id] ?? cardsByCategory['media-strategy'])
-
-const socials = [
+const defaultSocials = [
   { label: 'Facebook', src: `${aboutAssetPath}/facebook.svg`, href: '#' },
   { label: 'X', src: `${aboutAssetPath}/x.svg`, href: '#' },
   { label: 'Instagram', src: `${aboutAssetPath}/instagram.svg`, href: '#' },
   { label: 'LinkedIn', src: `${aboutAssetPath}/linkedin.svg`, href: '#' }
 ]
+
+// ── Reactive state ─────────────────────────────────────────────────
+
+const categories = ref(defaultCategories)
+const cardsByCategory = ref(defaultCardsByCategory)
+const socials = ref(defaultSocials)
+const pageData = ref<Record<string, unknown> | null>(null)
+
+const activeCategory = computed(() => {
+  return categories.value.find((category) => category.id === activeCategoryId.value) ?? categories.value[0]
+})
+
+const activeCards = computed(() => cardsByCategory.value[activeCategory.value.id] ?? cardsByCategory.value['media-strategy'])
+
+// ── Fetch from API ─────────────────────────────────────────────────
+
+onMounted(async () => {
+  try {
+    const api = useApi()
+    const data = await api.fetchPage<Record<string, any>>('our-projects')
+    if (data?.services && Array.isArray(data.services) && data.services.length > 0) {
+      // Map API services to categories and cards
+      const mappedCategories: Array<{ id: string; label: string; title: string; description: string }> = []
+      const mappedCards: Record<string, Array<{ icon: string; title: string; description: string }>> = {}
+      const icons = ['aperture', 'camera', 'bolt', 'layers', 'aperture', 'camera', 'bolt']
+
+      data.services.forEach((svc: any, si: number) => {
+        const catId = svc.id || `cat-${si}`
+        mappedCategories.push({
+          id: catId,
+          label: svc.name_en || defaultCategories[si]?.label || '',
+          title: svc.name_en || defaultCategories[si]?.title || '',
+          description: svc.description_en || defaultCategories[si]?.description || '',
+        })
+        if (svc.projects && Array.isArray(svc.projects)) {
+          mappedCards[catId] = svc.projects.map((proj: any, pi: number) => ({
+            icon: icons[pi % icons.length],
+            title: proj.name_en || proj.headline_en || 'Project',
+            description: proj.headline_en || proj.name_en || cardCopy,
+          }))
+        }
+      })
+
+      if (mappedCategories.length > 0) {
+        categories.value = mappedCategories
+        cardsByCategory.value = { ...defaultCardsByCategory, ...mappedCards }
+        activeCategoryId.value = mappedCategories[0].id
+      }
+    }
+  } catch {
+    // API unavailable — keep fallback
+  }
+})
 
 </script>
 

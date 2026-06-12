@@ -32,6 +32,50 @@ const footerSocials = [
   { label: 'LinkedIn', src: `${aboutAssetPath}/linkedin.svg`, href: '#' }
 ]
 
+// ── Form submission state ──────────────────────────────────────────
+
+const formState = reactive({
+  name: '',
+  email: '',
+  company: '',
+  budget: '',
+  objectives: '',
+  consent: false,
+  submitting: false,
+  submitted: false,
+  error: '',
+})
+
+async function handleSubmit() {
+  formState.submitting = true
+  formState.error = ''
+
+  try {
+    const api = useApi()
+    const response = await api.submitContactForm({
+      fullname: formState.name,
+      email: formState.email,
+      phone: '',
+      company_name: formState.company,
+      form_type: 'contact',
+      objectives: formState.objectives,
+      has_accepted: formState.consent,
+      'estimated_budget.min': 0,
+      'estimated_budget.max': formState.budget ? Number(formState.budget) : 0,
+    })
+
+    if (response.statusCode === 200) {
+      formState.submitted = true
+    } else {
+      formState.error = response.message || 'Submission failed. Please try again.'
+    }
+  } catch (err: any) {
+    formState.error = err?.message || 'Network error. Please try again.'
+  } finally {
+    formState.submitting = false
+  }
+}
+
 </script>
 
 <template>
@@ -97,24 +141,31 @@ const footerSocials = [
             </div>
           </article>
 
-          <form id="partnership-form" class="contact-form" action="mailto:mailus@twfagency.com" method="post" enctype="text/plain">
-            <div class="contact-form-grid">
-              <input type="text" name="name" placeholder="Name" autocomplete="name">
-              <input type="email" name="email" placeholder="Email" autocomplete="email">
-              <input type="text" name="company" placeholder="Company name/brand" autocomplete="organization">
-              <input type="text" name="budget" placeholder="Budget">
+          <form id="partnership-form" class="contact-form" @submit.prevent="handleSubmit">
+            <div v-if="formState.submitted" class="contact-form-success">
+              <p>Thank you! We'll be in touch soon.</p>
             </div>
-            <textarea name="objectives" placeholder="Objectives" rows="7"></textarea>
-            <label class="contact-consent">
-              <input type="checkbox" name="consent">
-              <span>
-                By submitting this contact form, you consent to the collection, storage, and processing of your personal information
-              </span>
-            </label>
-            <button class="contact-pill-button contact-submit" type="submit">
-              <span>Submit</span>
-              <img :src="`${contactAssetPath}/arrow.svg`" alt="">
-            </button>
+
+            <template v-else>
+              <div class="contact-form-grid">
+                <input v-model="formState.name" type="text" name="name" placeholder="Name" autocomplete="name" required>
+                <input v-model="formState.email" type="email" name="email" placeholder="Email" autocomplete="email" required>
+                <input v-model="formState.company" type="text" name="company" placeholder="Company name/brand" autocomplete="organization" required>
+                <input v-model="formState.budget" type="text" name="budget" placeholder="Budget">
+              </div>
+              <textarea v-model="formState.objectives" name="objectives" placeholder="Objectives" rows="7" required></textarea>
+              <label class="contact-consent">
+                <input v-model="formState.consent" type="checkbox" name="consent" required>
+                <span>
+                  By submitting this contact form, you consent to the collection, storage, and processing of your personal information
+                </span>
+              </label>
+              <p v-if="formState.error" class="contact-form-error">{{ formState.error }}</p>
+              <button class="contact-pill-button contact-submit" type="submit" :disabled="formState.submitting">
+                <span>{{ formState.submitting ? 'Sending...' : 'Submit' }}</span>
+                <img :src="`${contactAssetPath}/arrow.svg`" alt="">
+              </button>
+            </template>
           </form>
         </div>
       </section>

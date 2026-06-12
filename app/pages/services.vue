@@ -15,7 +15,9 @@ const activeServiceId = ref('media-strategy')
 const aboutAssetPath = '/assets/about-figma'
 const assetPath = '/assets/services-figma'
 
-const services = [
+// ── Default static data ────────────────────────────────────────────
+
+const defaultServices = [
   {
     id: 'media-strategy',
     title: 'Media Strategy',
@@ -88,15 +90,50 @@ const services = [
   }
 ]
 
-const socials = [
+const defaultSocials = [
   { label: 'Facebook', src: `${aboutAssetPath}/facebook.svg`, href: '#' },
   { label: 'X', src: `${aboutAssetPath}/x.svg`, href: '#' },
   { label: 'Instagram', src: `${aboutAssetPath}/instagram.svg`, href: '#' },
   { label: 'LinkedIn', src: `${aboutAssetPath}/linkedin.svg`, href: '#' }
 ]
 
+// ── Reactive state ─────────────────────────────────────────────────
+
+const services = ref(defaultServices)
+const socials = ref(defaultSocials)
+const pageData = ref<Record<string, unknown> | null>(null)
+
 const activeService = computed(() => {
-  return services.find((service) => service.id === activeServiceId.value) ?? services[0]
+  return services.value.find((service) => service.id === activeServiceId.value) ?? services.value[0]
+})
+
+// ── Fetch from API ─────────────────────────────────────────────────
+
+onMounted(async () => {
+  try {
+    const api = useApi()
+    const data = await api.fetchPage<Record<string, any>>('services')
+    if (data?.services && Array.isArray(data.services) && data.services.length > 0) {
+      // Map API services to the structure expected by the template
+      const accents = ['#39b54a', '#00a8de', '#eb2d2e', '#93278f', '#fde92b', '#00a8de', '#39b54a']
+      const images = [
+        'media-strategy', 'performance-marketing', 'creative-solutions',
+        'crm-solutions', 'influencer-kol', 'analytics', 'line-business'
+      ]
+      services.value = data.services.map((s: any, i: number) => ({
+        id: s.id || `service-${i}`,
+        title: s.name_en || defaultServices[i]?.title || '',
+        eyebrow: s.sub_services?.[0]?.name || defaultServices[i]?.eyebrow || '',
+        image: `${assetPath}/${images[i] || defaultServices[i]?.id}.jpg`,
+        accent: accents[i] || defaultServices[i]?.accent || '#39b54a',
+        description: s.description_en || defaultServices[i]?.description || '',
+        points: (s.sub_services as any[])?.map((ss: any) => ss.name) || defaultServices[i]?.points || [],
+      }))
+      activeServiceId.value = services.value[0]?.id || 'media-strategy'
+    }
+  } catch {
+    // API unavailable — keep fallback
+  }
 })
 
 </script>

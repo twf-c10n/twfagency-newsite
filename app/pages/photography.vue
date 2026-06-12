@@ -13,7 +13,7 @@ useHead({
 const aboutAssetPath = '/assets/about-figma'
 const assetPath = '/assets/photography-figma'
 
-const tickerItems = [
+const defaultTickerItems = [
   'Commercial Photography',
   '4K Cinematography',
   'Drone Ops',
@@ -21,7 +21,7 @@ const tickerItems = [
   'Short-Form Virality'
 ]
 
-const expertiseCards = [
+const defaultExpertiseCards = [
   {
     icon: 'aperture',
     title: 'Commercial Photography',
@@ -47,6 +47,9 @@ const expertiseCards = [
       'End-to-end finishing, industry-standard color grading and seamless visual effects.'
   }
 ]
+
+const tickerItems = ref(defaultTickerItems)
+const expertiseCards = ref(defaultExpertiseCards)
 
 const portfolioItems = [
   {
@@ -79,12 +82,31 @@ const portfolioItems = [
   }
 ]
 
-const socials = [
+const defaultSocials = [
   { label: 'Facebook', src: `${aboutAssetPath}/facebook.svg`, href: '#' },
   { label: 'X', src: `${aboutAssetPath}/x.svg`, href: '#' },
   { label: 'Instagram', src: `${aboutAssetPath}/instagram.svg`, href: '#' },
   { label: 'LinkedIn', src: `${aboutAssetPath}/linkedin.svg`, href: '#' }
 ]
+
+const socials = ref(defaultSocials)
+
+// ── Fetch from API (attempt to load CMS data if available) ─────────
+
+onMounted(async () => {
+  try {
+    const api = useApi()
+    const data = await api.fetchPage<Record<string, any>>('photography')
+    if (data?.expertise_cards && Array.isArray(data.expertise_cards)) {
+      expertiseCards.value = data.expertise_cards
+    }
+    if (data?.ticker_items && Array.isArray(data.ticker_items)) {
+      tickerItems.value = data.ticker_items
+    }
+  } catch {
+    // API unavailable — keep fallback
+  }
+})
 
 </script>
 

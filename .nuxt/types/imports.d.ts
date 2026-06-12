@@ -97,6 +97,7 @@ declare global {
   const unref: typeof import('vue').unref
   const updateAppConfig: typeof import('../../node_modules/nuxt/dist/app/config').updateAppConfig
   const useAnnouncer: typeof import('../../node_modules/nuxt/dist/app/composables/announcer').useAnnouncer
+  const useApi: typeof import('../../app/composables/useApi').useApi
   const useAppConfig: typeof import('../../node_modules/nuxt/dist/app/config').useAppConfig
   const useAsyncData: typeof import('../../node_modules/nuxt/dist/app/composables/asyncData').useAsyncData
   const useAttrs: typeof import('vue').useAttrs
@@ -300,6 +301,7 @@ declare module 'vue' {
     readonly unref: UnwrapRef<typeof import('vue')['unref']>
     readonly updateAppConfig: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/config')['updateAppConfig']>
     readonly useAnnouncer: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/announcer')['useAnnouncer']>
+    readonly useApi: UnwrapRef<typeof import('../../app/composables/useApi')['useApi']>
     readonly useAppConfig: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/config')['useAppConfig']>
     readonly useAsyncData: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/asyncData')['useAsyncData']>
     readonly useAttrs: UnwrapRef<typeof import('vue')['useAttrs']>

@@ -13,19 +13,52 @@ useHead({
 const aboutAssetPath = '/assets/about-figma'
 const blogAssetPath = '/assets/blog-figma'
 
-const articles = Array.from({ length: 6 }, (_, index) => ({
+// ── Default static data ────────────────────────────────────────────
+
+const defaultArticles = Array.from({ length: 6 }, (_, index) => ({
   id: `line-commerce-${index + 1}`,
   category: 'LINE Commerce',
   title: 'เครื่องมือทำเงินแห่งยุคดิจิทัล!',
   href: '#'
 }))
 
-const socials = [
+const defaultSocials = [
   { label: 'Facebook', src: `${aboutAssetPath}/facebook.svg`, href: '#' },
   { label: 'X', src: `${aboutAssetPath}/x.svg`, href: '#' },
   { label: 'Instagram', src: `${aboutAssetPath}/instagram.svg`, href: '#' },
   { label: 'LinkedIn', src: `${aboutAssetPath}/linkedin.svg`, href: '#' }
 ]
+
+// ── Reactive state ─────────────────────────────────────────────────
+
+const articles = ref(defaultArticles)
+const socials = ref(defaultSocials)
+const loading = ref(false)
+
+// ── Fetch from API ─────────────────────────────────────────────────
+
+onMounted(async () => {
+  loading.value = true
+  try {
+    const api = useApi()
+    const result = await api.fetchBlogs(1, 10)
+    if (result?.blogs && Array.isArray(result.blogs) && result.blogs.length > 0) {
+      articles.value = result.blogs.map((blog: any, i: number) => ({
+        id: blog.slug || `blog-${i}`,
+        category: blog.category || 'Article',
+        title: blog.title || defaultArticles[i]?.title || '',
+        href: blog.url || `/blog/${blog.slug}`,
+        image: blog.imageUrl || `${blogAssetPath}/article-product.png`,
+        date: blog.postDate,
+        author: blog.authorName,
+      }))
+    }
+  } catch {
+    // API unavailable — keep fallback
+  } finally {
+    loading.value = false
+  }
+})
 
 </script>
 
