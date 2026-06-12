@@ -3594,12 +3594,45 @@ section[id], footer[id] {
   border-bottom-color: #fde33b;
 }
 
+.partnership-field.has-error input,
+.partnership-field.has-error textarea {
+  border-bottom-color: #ff9b8f;
+}
+
 .partnership-consent {
   max-width: 840px;
   margin-top: 2px;
   color: #fff;
   font-size: 10px;
   line-height: 1.45;
+}
+
+.partnership-consent.has-error input {
+  border-color: #ff9b8f;
+}
+
+.partnership-error {
+  color: #ffb4a8;
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+.partnership-status {
+  justify-self: center;
+  max-width: 620px;
+  margin: -16px 0;
+  color: #f4f4f4;
+  font-size: 12px;
+  line-height: 1.55;
+  text-align: center;
+}
+
+.partnership-status-success {
+  color: #9cf4a8;
+}
+
+.partnership-status-error {
+  color: #ffb4a8;
 }
 
 .partnership-actions {
@@ -3645,6 +3678,12 @@ section[id], footer[id] {
 
 .partnership-submit:hover {
   border-color: #fde33b;
+}
+
+.partnership-submit:disabled {
+  opacity: .55;
+  cursor: progress;
+  transform: none;
 }
 
 .articles {

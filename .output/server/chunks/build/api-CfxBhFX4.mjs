@@ -1,4 +1,4 @@
-globalThis.__timing__.logStart('Load chunks/build/api-Cg4u_a1G');import { h as useRuntimeConfig, u as useNuxtApp, a as asyncDataDefaults, f as fetchDefaults, c as createError } from './server.mjs';
+globalThis.__timing__.logStart('Load chunks/build/api-CfxBhFX4');import { h as useRuntimeConfig, u as useNuxtApp, a as asyncDataDefaults, f as fetchDefaults, c as createError } from './server.mjs';
 import { defineComponent, createElementBlock, shallowRef, getCurrentInstance, provide, cloneVNode, h, isRef, computed, toValue, onServerPrefetch, reactive, ref, nextTick, unref, toRef } from 'vue';
 import { debounce } from 'perfect-debounce';
 import { n as hash } from '../nitro/nitro.mjs';
@@ -691,9 +691,10 @@ const getPageBySlug = (slug) => {
   return apiFetch(`/pages/${encodeURIComponent(slug)}`);
 };
 const getOurProjectsPage = () => getPageBySlug("our-projects");
+const getContactUsPage = () => getPageBySlug("contact-us");
 const getProjectDetail = (slug) => {
   return apiFetch(`/pages/our-project/${encodeURIComponent(slug)}`);
 };
 
-export { getOurProjectsPage as a, getProjectDetail as b, getMediaUrl as g, pickLocalizedText as p, useAsyncData as u };;globalThis.__timing__.logEnd('Load chunks/build/api-Cg4u_a1G');
-//# sourceMappingURL=api-Cg4u_a1G.mjs.map
+export { getMediaUrl as a, getOurProjectsPage as b, getProjectDetail as c, getContactUsPage as g, pickLocalizedText as p, useAsyncData as u };;globalThis.__timing__.logEnd('Load chunks/build/api-CfxBhFX4');
+//# sourceMappingURL=api-CfxBhFX4.mjs.map

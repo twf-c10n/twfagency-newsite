@@ -215,7 +215,7 @@ declare global {
   export type { PageMeta } from '../../node_modules/nuxt/dist/app/composables/pages'
   import('../../node_modules/nuxt/dist/app/composables/pages')
   // @ts-ignore
-  export type { PublicApiError, ApiResponse, Media, ProjectCard, ProjectService, OurProjectsPage, ProjectDetail, GlobalConfig, ContactFormPayload, BlogList } from '../../app/utils/api'
+  export type { PublicApiError, ApiResponse, Media, ProjectCard, ProjectService, OurProjectsPage, ContactService, ContactUsPage, ProjectDetail, GlobalConfig, ContactFormPayload, BlogList } from '../../app/utils/api'
   import('../../app/utils/api')
 }
 // for vue template auto import

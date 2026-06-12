@@ -48,6 +48,17 @@ export type OurProjectsPage = PageMeta & {
   services?: ProjectService[]
 }
 
+export type ContactService = {
+  id: string
+  name_en?: string | null
+  name_th?: string | null
+}
+
+export type ContactUsPage = PageMeta & {
+  service_ids?: string[]
+  services?: ContactService[]
+}
+
 export type ProjectDetail = PageMeta & {
   slug?: string
   name_en?: string
@@ -432,7 +443,7 @@ export const getServicesPage = () => getPageBySlug('services')
 
 export const getOurProjectsPage = () => getPageBySlug<OurProjectsPage>('our-projects')
 
-export const getContactUsPage = () => getPageBySlug('contact-us')
+export const getContactUsPage = () => getPageBySlug<ContactUsPage>('contact-us')
 
 export const getAboutUsPage = () => getPageBySlug('about-us')
 

@@ -31,5 +31,5 @@ export { requestIdleCallback, cancelIdleCallback } from '#app/compat/idle-callba
 export { setInterval } from '#app/compat/interval';
 export { definePageMeta, PageMeta } from '#app/composables/pages';
 export { defineLazyHydrationComponent } from '#app/composables/lazy-hydration';
-export { PublicApiError, apiFetch, getMediaUrl, pickLocalizedText, getGlobalConfig, getPageBySlug, getHomepage, getServicesPage, getOurProjectsPage, getContactUsPage, getAboutUsPage, getProjectDetail, submitContactForm, getBlogs, getBlogDetail, ApiResponse, Media, ProjectCard, ProjectService, OurProjectsPage, ProjectDetail, GlobalConfig, ContactFormPayload, BlogList } from '../app/utils/api';
+export { PublicApiError, apiFetch, getMediaUrl, pickLocalizedText, getGlobalConfig, getPageBySlug, getHomepage, getServicesPage, getOurProjectsPage, getContactUsPage, getAboutUsPage, getProjectDetail, submitContactForm, getBlogs, getBlogDetail, ApiResponse, Media, ProjectCard, ProjectService, OurProjectsPage, ContactService, ContactUsPage, ProjectDetail, GlobalConfig, ContactFormPayload, BlogList } from '../app/utils/api';
 export { useNuxtDevTools } from '../node_modules/@nuxt/devtools/dist/runtime/use-nuxt-devtools';
