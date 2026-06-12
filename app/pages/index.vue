@@ -1,4 +1,11 @@
 <script setup lang="ts">
+import {
+  getHomepage,
+  getMediaUrl,
+  pickLocalizedText,
+  type HomepagePage
+} from '~/utils/api'
+
 useHead({
   title: 'TWF Agency | Imagine Beyond The Limit',
   meta: [
@@ -156,11 +163,221 @@ const mediaServices = [
   }
 ]
 
-const articles = [
-  'เทคนิคเพิ่มยอดขายผ่านดิจิทัล',
-  'เครื่องมือใหม่ที่แบรนด์ยุคใหม่ต้องใช้',
-  'เคล็ดลับสร้างแคมเปญให้โตไว'
+type ArticleCard = {
+  id: string
+  title: string
+  description: string
+  image: string
+  href: string
+  authorName: string
+}
+
+type WordPressPost = {
+  id?: number
+  slug?: string
+  date?: string
+  link?: string
+  title?: {
+    rendered?: string
+  }
+  author_name?: string
+  yoast_head_json?: {
+    og_title?: string
+    og_description?: string
+    og_image?: Array<{
+      url?: string
+    }>
+  }
+}
+
+const wordpressOrigin = 'https://twfdigital.com'
+const fallbackArticleImage = '/assets/article-cover.png'
+const fallbackTrustDescription =
+  'We push boundaries and strive for excellence by fostering a highly collaborative and constructive environment. Our team is comprised of talented individuals who work hard to elevate your brand.'
+const runtimeConfig = useRuntimeConfig()
+const apiBaseUrl = String(runtimeConfig.public.apiBaseUrl || '')
+
+const fallbackArticles: ArticleCard[] = [
+  {
+    id: 'fallback-digital-sales',
+    title: 'เทคนิคเพิ่มยอดขายผ่านดิจิทัล',
+    description: '',
+    image: fallbackArticleImage,
+    href: '#blog',
+    authorName: 'LINE Commerce'
+  },
+  {
+    id: 'fallback-brand-tools',
+    title: 'เครื่องมือใหม่ที่แบรนด์ยุคใหม่ต้องใช้',
+    description: '',
+    image: fallbackArticleImage,
+    href: '#blog',
+    authorName: 'LINE Commerce'
+  },
+  {
+    id: 'fallback-fast-campaign',
+    title: 'เคล็ดลับสร้างแคมเปญให้โตไว',
+    description: '',
+    image: fallbackArticleImage,
+    href: '#blog',
+    authorName: 'LINE Commerce'
+  }
 ]
+
+const articles = ref<ArticleCard[]>(fallbackArticles)
+const trustBottomSlideIndex = ref(0)
+const isTrustSliding = ref(false)
+
+const { data: homepage } = await useAsyncData<HomepagePage>(
+  'homepage-trust-lies',
+  getHomepage
+)
+
+const fallbackTrustPhotos = [
+  {
+    id: 'fallback-award',
+    src: '/assets/award.png',
+    alt: 'TWF awards'
+  },
+  {
+    id: 'fallback-team',
+    src: '/assets/team.png',
+    alt: 'TWF team'
+  }
+]
+
+const trustPhotos = computed(() => {
+  const photos = (homepage.value?.trust_lies?.images ?? [])
+    .map((image, index) => ({
+      id: `${image.name || 'trust-lies'}-${index}`,
+      src: getMediaUrl(image, '', apiBaseUrl),
+      alt: image.name || `TWF team slide ${index + 1}`
+    }))
+    .filter((photo) => photo.src)
+
+  return photos.length ? photos : fallbackTrustPhotos
+})
+
+const trustDescription = computed(() => {
+  return pickLocalizedText(
+    homepage.value?.trust_lies,
+    'description',
+    fallbackTrustDescription
+  )
+})
+
+const getTrustPhotoAt = (index: number) => {
+  const photos = trustPhotos.value
+
+  return photos[index % photos.length] || fallbackTrustPhotos[0]
+}
+
+const trustBottomPhoto = computed(() => getTrustPhotoAt(trustBottomSlideIndex.value))
+const trustTopPhoto = computed(() => getTrustPhotoAt(trustBottomSlideIndex.value + 1))
+const trustIncomingPhoto = computed(() => getTrustPhotoAt(trustBottomSlideIndex.value + 2))
+const hasTrustPhotoLoop = computed(() => trustPhotos.value.length > 1)
+
+watch(trustPhotos, (photos) => {
+  trustBottomSlideIndex.value = 0
+  isTrustSliding.value = false
+})
+
+const decodeHtml = (value: string) => {
+  if (!import.meta.client || !value) {
+    return value
+  }
+
+  const textarea = document.createElement('textarea')
+  textarea.innerHTML = value
+
+  return textarea.value
+}
+
+const stripHtml = (value: string) => {
+  return decodeHtml(value.replace(/<[^>]*>/g, '').trim())
+}
+
+const mapWordPressPost = (post: WordPressPost): ArticleCard => {
+  const title = stripHtml(
+    post.yoast_head_json?.og_title ||
+      post.title?.rendered ||
+      'TWF Agency Article'
+  )
+  const description = stripHtml(post.yoast_head_json?.og_description || '')
+  const image = post.yoast_head_json?.og_image?.[0]?.url || fallbackArticleImage
+  const href = post.link || (post.slug ? `${wordpressOrigin}/${post.slug}/` : '#blog')
+
+  return {
+    id: String(post.id ?? post.slug ?? title),
+    title,
+    description,
+    image,
+    href,
+    authorName: post.author_name || 'TWF Agency'
+  }
+}
+
+const revealElement = (element: HTMLElement) => {
+  if (element.classList.contains('is-visible')) {
+    return
+  }
+
+  if (!revealObserver || !motionReady.value) {
+    element.classList.add('is-visible')
+    return
+  }
+
+  revealObserver.observe(element)
+}
+
+const revealArticleCards = async () => {
+  await nextTick()
+
+  pageRoot.value
+    ?.querySelectorAll<HTMLElement>('.article-grid [data-reveal]')
+    .forEach(revealElement)
+}
+
+const fetchLatestArticles = async () => {
+  const fields = [
+    'id',
+    'slug',
+    'date',
+    'link',
+    'title.rendered',
+    'author_name',
+    'yoast_head_json.og_title',
+    'yoast_head_json.og_description',
+    'yoast_head_json.og_image'
+  ].join(',')
+  const params = new URLSearchParams({
+    per_page: '3',
+    orderby: 'date',
+    order: 'desc',
+    _fields: fields
+  })
+  const requestUrl = `${wordpressOrigin}/wp-json/wp/v2/posts?${params.toString()}`
+
+  try {
+    const response = await fetch(requestUrl)
+
+    if (!response.ok) {
+      throw new Error(`WordPress responded with ${response.status}`)
+    }
+
+    const posts = (await response.json()) as WordPressPost[]
+    const mappedPosts = posts.map(mapWordPressPost).filter((post) => post.title).slice(0, 3)
+
+    if (mappedPosts.length) {
+      articles.value = mappedPosts
+      await revealArticleCards()
+    }
+  } catch (error) {
+    console.error('Error fetching blog posts:', error)
+    articles.value = fallbackArticles
+    await revealArticleCards()
+  }
+}
 
 const motionReady = ref(false)
 const activeService = ref(mediaServices[0].id)
@@ -180,8 +397,40 @@ let showreelVideoObserver: IntersectionObserver | undefined
 let pointerFrame = 0
 let scrollFrame = 0
 let scrollIdleTimer: number | undefined
+let trustSlideTimer: number | undefined
+let trustSlideResetTimer: number | undefined
 let showreelTracking = false
 let showreelStyleKey = ''
+
+const advanceTrustPhoto = () => {
+  if (trustPhotos.value.length < 2 || isTrustSliding.value) {
+    return
+  }
+
+  isTrustSliding.value = true
+  window.clearTimeout(trustSlideResetTimer)
+  trustSlideResetTimer = window.setTimeout(finishTrustPhotoSlide, 950)
+}
+
+const finishTrustPhotoSlide = () => {
+  if (!isTrustSliding.value) {
+    return
+  }
+
+  window.clearTimeout(trustSlideResetTimer)
+  trustBottomSlideIndex.value = (trustBottomSlideIndex.value + 1) % trustPhotos.value.length
+  isTrustSliding.value = false
+}
+
+const startTrustPhotoLoop = () => {
+  window.clearInterval(trustSlideTimer)
+
+  if (!hasTrustPhotoLoop.value) {
+    return
+  }
+
+  trustSlideTimer = window.setInterval(advanceTrustPhoto, 3400)
+}
 
 const loadShowreelVideo = () => {
   const video = showreelVideo.value
@@ -303,12 +552,18 @@ const selectService = (id: string, keepVisible = false) => {
 }
 
 onMounted(() => {
+  fetchLatestArticles()
+
   const page = pageRoot.value
   if (!page) {
     return
   }
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  if (!reduceMotion) {
+    startTrustPhotoLoop()
+  }
+
   updateScrollEffects()
   window.addEventListener('scroll', requestScrollEffects, { passive: true })
   window.addEventListener('resize', requestScrollEffects, { passive: true })
@@ -389,8 +644,8 @@ onMounted(() => {
     },
     { rootMargin: '0px 0px -10% 0px', threshold: 0.12 }
   )
-  revealElements.forEach((element) => revealObserver?.observe(element))
   motionReady.value = true
+  revealElements.forEach(revealElement)
 
   if (window.matchMedia('(pointer: fine)').matches) {
     page.addEventListener('pointermove', updatePointerGlow, { passive: true })
@@ -399,6 +654,8 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
   window.clearTimeout(scrollIdleTimer)
+  window.clearTimeout(trustSlideResetTimer)
+  window.clearInterval(trustSlideTimer)
   window.cancelAnimationFrame(pointerFrame)
   window.cancelAnimationFrame(scrollFrame)
   window.removeEventListener('scroll', requestScrollEffects)
@@ -648,16 +905,36 @@ onBeforeUnmount(() => {
           </video>
         </div>
         <div class="shell team-grid">
-          <div class="team-photos" data-reveal>
-            <img src="/assets/award.png" alt="TWF awards">
-            <img src="/assets/team.png" alt="TWF team">
+          <div :class="['team-photos', { 'is-looping': hasTrustPhotoLoop, 'is-sliding': isTrustSliding }]">
+            <div
+              class="team-photo-track"
+              @animationend="finishTrustPhotoSlide"
+              @animationcancel="finishTrustPhotoSlide"
+            >
+              <figure class="team-photo-slide is-incoming" aria-hidden="true">
+                <img :src="trustIncomingPhoto.src" :alt="trustIncomingPhoto.alt">
+              </figure>
+              <figure class="team-photo-slide is-top">
+                <img :src="trustTopPhoto.src" :alt="trustTopPhoto.alt">
+              </figure>
+              <figure class="team-photo-slide is-bottom">
+                <img :src="trustBottomPhoto.src" :alt="trustBottomPhoto.alt">
+              </figure>
+            </div>
+            <div class="team-photo-buffer" aria-hidden="true">
+              <img
+                v-for="photo in trustPhotos"
+                :key="`buffer-${photo.id}`"
+                :src="photo.src"
+                :alt="photo.alt"
+                decoding="async"
+              >
+            </div>
           </div>
           <div class="team-copy" data-reveal style="--delay: .14s">
             <h2>A team you<br>can trust</h2>
             <p>
-              We push boundaries and strive for excellence by fostering a highly
-              collaborative and constructive environment. Our team is comprised of
-              talented individuals who work hard to elevate your brand.
+              {{ trustDescription }}
             </p>
           </div>
         </div>
@@ -671,15 +948,19 @@ onBeforeUnmount(() => {
           <div class="article-grid">
             <article
               v-for="(article, index) in articles"
-              :key="article"
+              :key="article.id"
               data-reveal
               :style="{ '--delay': `${160 + index * 75}ms` }"
             >
-              <img src="/assets/article-cover.png" alt="">
+              <img :src="article.image" :alt="article.title" loading="lazy">
               <div>
-                <p>LINE Commerce</p>
-                <h3>{{ article }}</h3>
-                <a href="#blog">Click Here <b>+</b></a>
+                <p>{{ article.authorName }}</p>
+                <h3>{{ article.title }}</h3>
+                <a
+                  :href="article.href"
+                  :target="article.href.startsWith('http') ? '_blank' : undefined"
+                  :rel="article.href.startsWith('http') ? 'noreferrer' : undefined"
+                >Click Here <b>+</b></a>
               </div>
             </article>
           </div>
