@@ -1,4 +1,4 @@
-globalThis.__timing__.logStart('Load chunks/build/index-CZK2uaZK');import { _ as __nuxt_component_0 } from './SiteHeader-D9ODwCeG.mjs';
+globalThis.__timing__.logStart('Load chunks/build/index-BO0Msoto');import { _ as __nuxt_component_0 } from './SiteHeader-D9ODwCeG.mjs';
 import { defineComponent, ref, mergeProps, unref, useSSRContext } from 'vue';
 import { ssrRenderAttrs, ssrRenderComponent, ssrRenderAttr, ssrRenderStyle, ssrRenderList, ssrInterpolate, ssrRenderClass } from 'vue/server-renderer';
 import { p as publicAssetsURL } from '../routes/renderer.mjs';
@@ -32,8 +32,8 @@ const _imports_9 = publicAssetsURL("/assets/kensento.png");
 const _imports_10 = publicAssetsURL("/assets/background.webm");
 const _imports_11 = publicAssetsURL("/assets/award.png");
 const _imports_12 = publicAssetsURL("/assets/team.png");
-const _imports_13 = publicAssetsURL("/assets/article-cover.png");
 const aboutAssetPath = "/assets/about-figma";
+const fallbackArticleImage = "/assets/article-cover.png";
 const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "index",
   __ssrInlineRender: true,
@@ -179,11 +179,33 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
         ]
       }
     ];
-    const articles = [
-      "เทคนิคเพิ่มยอดขายผ่านดิจิทัล",
-      "เครื่องมือใหม่ที่แบรนด์ยุคใหม่ต้องใช้",
-      "เคล็ดลับสร้างแคมเปญให้โตไว"
+    const fallbackArticles = [
+      {
+        id: "fallback-digital-sales",
+        title: "เทคนิคเพิ่มยอดขายผ่านดิจิทัล",
+        description: "",
+        image: fallbackArticleImage,
+        href: "#blog",
+        authorName: "LINE Commerce"
+      },
+      {
+        id: "fallback-brand-tools",
+        title: "เครื่องมือใหม่ที่แบรนด์ยุคใหม่ต้องใช้",
+        description: "",
+        image: fallbackArticleImage,
+        href: "#blog",
+        authorName: "LINE Commerce"
+      },
+      {
+        id: "fallback-fast-campaign",
+        title: "เคล็ดลับสร้างแคมเปญให้โตไว",
+        description: "",
+        image: fallbackArticleImage,
+        href: "#blog",
+        authorName: "LINE Commerce"
+      }
     ];
+    const articles = ref(fallbackArticles);
     const motionReady = ref(false);
     const activeService = ref(mediaServices[0].id);
     const showreelActive = ref(false);
@@ -238,8 +260,8 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
         _push(`<!--]--></ul></article>`);
       });
       _push(`<!--]--></div></div><div class="orbit-art" data-reveal style="${ssrRenderStyle({ "--delay": ".18s" })}" aria-hidden="true"><img${ssrRenderAttr("src", _imports_6)} alt=""></div></div></section><section id="photography" class="${ssrRenderClass(["showreel", { "is-active": unref(showreelActive) }])}"><div class="showreel-stage"><figure class="showreel-frame" data-reveal><div class="media-skeleton showreel-skeleton" aria-hidden="true"></div><img class="showreel-poster"${ssrRenderAttr("src", _imports_7)} alt="" aria-hidden="true"><video muted loop playsinline preload="none"${ssrRenderAttr("poster", _imports_7)} aria-label="Capturing Vision. Executing Perfection. Watch 2026 showreel"><source data-src="/assets/showreel.mp4" type="video/mp4"></video></figure></div></section><section id="projects" class="products"><div class="shell products-inner"><p class="accent-copy" data-reveal>Venture Beyond Your Limits</p><h2 data-reveal style="${ssrRenderStyle({ "--delay": ".08s" })}">Our Innovative Product<br>and Services</h2><div class="product-grid"><article data-reveal style="${ssrRenderStyle({ "--delay": ".14s" })}"><img${ssrRenderAttr("src", _imports_8)} alt="Stellar Data"><p>Elevate your performance marketing campaigns</p></article><article data-reveal style="${ssrRenderStyle({ "--delay": ".22s" })}"><img${ssrRenderAttr("src", _imports_9)} alt="Kensento"><p>Taking you beyond cookies consent management</p></article></div></div></section><section id="about" class="team"><div class="team-media" aria-hidden="true"><video autoplay muted loop playsinline preload="metadata"><source${ssrRenderAttr("src", _imports_10)} type="video/webm"></video></div><div class="shell team-grid"><div class="team-photos" data-reveal><img${ssrRenderAttr("src", _imports_11)} alt="TWF awards"><img${ssrRenderAttr("src", _imports_12)} alt="TWF team"></div><div class="team-copy" data-reveal style="${ssrRenderStyle({ "--delay": ".14s" })}"><h2>A team you<br>can trust</h2><p> We push boundaries and strive for excellence by fostering a highly collaborative and constructive environment. Our team is comprised of talented individuals who work hard to elevate your brand. </p></div></div></section><section id="blog" class="articles"><div class="shell"><p class="caption" data-reveal>Our Expertise</p><h2 data-reveal style="${ssrRenderStyle({ "--delay": ".08s" })}">Explore our recent articles</h2><p class="article-tags" data-reveal style="${ssrRenderStyle({ "--delay": ".12s" })}">Performance Marketing · Social Media · Case Study · Media Plan &amp; Buy · Digital Campaign</p><div class="article-grid"><!--[-->`);
-      ssrRenderList(articles, (article, index) => {
-        _push(`<article data-reveal style="${ssrRenderStyle({ "--delay": `${160 + index * 75}ms` })}"><img${ssrRenderAttr("src", _imports_13)} alt=""><div><p>LINE Commerce</p><h3>${ssrInterpolate(article)}</h3><a href="#blog">Click Here <b>+</b></a></div></article>`);
+      ssrRenderList(unref(articles), (article, index) => {
+        _push(`<article data-reveal style="${ssrRenderStyle({ "--delay": `${160 + index * 75}ms` })}"><img${ssrRenderAttr("src", article.image)}${ssrRenderAttr("alt", article.title)} loading="lazy"><div><p>${ssrInterpolate(article.authorName)}</p><h3>${ssrInterpolate(article.title)}</h3><a${ssrRenderAttr("href", article.href)}${ssrRenderAttr("target", article.href.startsWith("http") ? "_blank" : void 0)}${ssrRenderAttr("rel", article.href.startsWith("http") ? "noreferrer" : void 0)}>Click Here <b>+</b></a></div></article>`);
       });
       _push(`<!--]--></div></div></section></main><footer id="contact" class="footer"><div class="footer-action" data-reveal><h2 class="gradient-title">Make your goals a reality</h2><a class="cta-button" href="mailto:hello@twf.agency">Initiate Project Launch <b>+</b></a></div><div class="shell footer-bottom"><img class="footer-logo"${ssrRenderAttr("src", `${aboutAssetPath}/twf-logo-footer.svg`)} alt="TWF"><p>The Web Flight Co., Ltd. Crystal Park Place Building, R.1<br>Praditmanutham Road, Wangthonglang, Bangkok 10310</p><div class="socials"><!--[-->`);
       ssrRenderList(footerSocials, (social) => {
@@ -256,5 +278,5 @@ _sfc_main.setup = (props, ctx) => {
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };
 
-export { _sfc_main as default };;globalThis.__timing__.logEnd('Load chunks/build/index-CZK2uaZK');
-//# sourceMappingURL=index-CZK2uaZK.mjs.map
+export { _sfc_main as default };;globalThis.__timing__.logEnd('Load chunks/build/index-BO0Msoto');
+//# sourceMappingURL=index-BO0Msoto.mjs.map

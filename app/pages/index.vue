@@ -156,11 +156,161 @@ const mediaServices = [
   }
 ]
 
-const articles = [
-  'เทคนิคเพิ่มยอดขายผ่านดิจิทัล',
-  'เครื่องมือใหม่ที่แบรนด์ยุคใหม่ต้องใช้',
-  'เคล็ดลับสร้างแคมเปญให้โตไว'
+type ArticleCard = {
+  id: string
+  title: string
+  description: string
+  image: string
+  href: string
+  authorName: string
+}
+
+type WordPressPost = {
+  id?: number
+  slug?: string
+  date?: string
+  link?: string
+  title?: {
+    rendered?: string
+  }
+  author_name?: string
+  yoast_head_json?: {
+    og_title?: string
+    og_description?: string
+    og_image?: Array<{
+      url?: string
+    }>
+  }
+}
+
+const wordpressOrigin = 'https://twfdigital.com'
+const fallbackArticleImage = '/assets/article-cover.png'
+
+const fallbackArticles: ArticleCard[] = [
+  {
+    id: 'fallback-digital-sales',
+    title: 'เทคนิคเพิ่มยอดขายผ่านดิจิทัล',
+    description: '',
+    image: fallbackArticleImage,
+    href: '#blog',
+    authorName: 'LINE Commerce'
+  },
+  {
+    id: 'fallback-brand-tools',
+    title: 'เครื่องมือใหม่ที่แบรนด์ยุคใหม่ต้องใช้',
+    description: '',
+    image: fallbackArticleImage,
+    href: '#blog',
+    authorName: 'LINE Commerce'
+  },
+  {
+    id: 'fallback-fast-campaign',
+    title: 'เคล็ดลับสร้างแคมเปญให้โตไว',
+    description: '',
+    image: fallbackArticleImage,
+    href: '#blog',
+    authorName: 'LINE Commerce'
+  }
 ]
+
+const articles = ref<ArticleCard[]>(fallbackArticles)
+
+const decodeHtml = (value: string) => {
+  if (!import.meta.client || !value) {
+    return value
+  }
+
+  const textarea = document.createElement('textarea')
+  textarea.innerHTML = value
+
+  return textarea.value
+}
+
+const stripHtml = (value: string) => {
+  return decodeHtml(value.replace(/<[^>]*>/g, '').trim())
+}
+
+const mapWordPressPost = (post: WordPressPost): ArticleCard => {
+  const title = stripHtml(
+    post.yoast_head_json?.og_title ||
+      post.title?.rendered ||
+      'TWF Agency Article'
+  )
+  const description = stripHtml(post.yoast_head_json?.og_description || '')
+  const image = post.yoast_head_json?.og_image?.[0]?.url || fallbackArticleImage
+  const href = post.link || (post.slug ? `${wordpressOrigin}/${post.slug}/` : '#blog')
+
+  return {
+    id: String(post.id ?? post.slug ?? title),
+    title,
+    description,
+    image,
+    href,
+    authorName: post.author_name || 'TWF Agency'
+  }
+}
+
+const revealElement = (element: HTMLElement) => {
+  if (element.classList.contains('is-visible')) {
+    return
+  }
+
+  if (!revealObserver || !motionReady.value) {
+    element.classList.add('is-visible')
+    return
+  }
+
+  revealObserver.observe(element)
+}
+
+const revealArticleCards = async () => {
+  await nextTick()
+
+  pageRoot.value
+    ?.querySelectorAll<HTMLElement>('.article-grid [data-reveal]')
+    .forEach(revealElement)
+}
+
+const fetchLatestArticles = async () => {
+  const fields = [
+    'id',
+    'slug',
+    'date',
+    'link',
+    'title.rendered',
+    'author_name',
+    'yoast_head_json.og_title',
+    'yoast_head_json.og_description',
+    'yoast_head_json.og_image'
+  ].join(',')
+  const params = new URLSearchParams({
+    per_page: '3',
+    orderby: 'date',
+    order: 'desc',
+    _fields: fields
+  })
+  const requestUrl = `${wordpressOrigin}/wp-json/wp/v2/posts?${params.toString()}`
+
+  try {
+    const response = await fetch(requestUrl)
+
+    if (!response.ok) {
+      throw new Error(`WordPress responded with ${response.status}`)
+    }
+
+    const posts = (await response.json()) as WordPressPost[]
+    const mappedPosts = posts.map(mapWordPressPost).filter((post) => post.title).slice(0, 3)
+
+    if (mappedPosts.length) {
+      articles.value = mappedPosts
+      await revealArticleCards()
+    }
+  } catch (error) {
+    console.error('Error fetching blog posts:', error)
+    articles.value = fallbackArticles
+    await revealArticleCards()
+  }
+}
 
 const motionReady = ref(false)
 const activeService = ref(mediaServices[0].id)
@@ -303,6 +453,8 @@ const selectService = (id: string, keepVisible = false) => {
 }
 
 onMounted(() => {
+  fetchLatestArticles()
+
   const page = pageRoot.value
   if (!page) {
     return
@@ -389,8 +541,8 @@ onMounted(() => {
     },
     { rootMargin: '0px 0px -10% 0px', threshold: 0.12 }
   )
-  revealElements.forEach((element) => revealObserver?.observe(element))
   motionReady.value = true
+  revealElements.forEach(revealElement)
 
   if (window.matchMedia('(pointer: fine)').matches) {
     page.addEventListener('pointermove', updatePointerGlow, { passive: true })
@@ -671,15 +823,19 @@ onBeforeUnmount(() => {
           <div class="article-grid">
             <article
               v-for="(article, index) in articles"
-              :key="article"
+              :key="article.id"
               data-reveal
               :style="{ '--delay': `${160 + index * 75}ms` }"
             >
-              <img src="/assets/article-cover.png" alt="">
+              <img :src="article.image" :alt="article.title" loading="lazy">
               <div>
-                <p>LINE Commerce</p>
-                <h3>{{ article }}</h3>
-                <a href="#blog">Click Here <b>+</b></a>
+                <p>{{ article.authorName }}</p>
+                <h3>{{ article.title }}</h3>
+                <a
+                  :href="article.href"
+                  :target="article.href.startsWith('http') ? '_blank' : undefined"
+                  :rel="article.href.startsWith('http') ? 'noreferrer' : undefined"
+                >Click Here <b>+</b></a>
               </div>
             </article>
           </div>
