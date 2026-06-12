@@ -445,7 +445,7 @@ section[id], footer[id] {
   min-height: 60vh;
   overflow: hidden;
   place-items: center;
-  padding: 70px 20px;
+  padding: 70px 20px 0px;
   text-align: center;
   background: #000;
 }
@@ -469,7 +469,7 @@ section[id], footer[id] {
 
 .needs::after {
     z-index: 0;
-    background: linear-gradient(0deg, #000 30%, transparent 68%, transparent 64%, #000 100%);
+    background: linear-gradient(0deg, #000 15%, transparent 55%, transparent 75%, #000 100%);
 }
 
 .narrow {
@@ -1113,14 +1113,13 @@ section[id], footer[id] {
   background: #000;
 }
 
-.team::after {
+.team::before {
   position: absolute;
   z-index: -1;
   inset: 0;
   content: "";
-  background:
-    linear-gradient(90deg, rgb(0 0 0 / 70%) 0%, rgb(0 0 0 / 20%) 50%, rgb(0 0 0 / 50%) 100%),
-    linear-gradient(180deg, transparent 50%, #000 100%);
+  background: linear-gradient(180deg, #000 0%, transparent 30%);
+  pointer-events: none;
 }
 
 .team-media {
@@ -4396,7 +4395,7 @@ section[id], footer[id] {
   /* --- Performance mobile --- */
   .performance-visual {
     min-height: 100vh;
-    min-height: 100svh;
+    min-height: 50svh;
     box-shadow: none;
   }
 
