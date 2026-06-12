@@ -1,4 +1,4 @@
-import process from 'node:process';globalThis._importMeta_={url:import.meta.url,env:process.env};import './timing.js';globalThis.__timing__.logStart('Nitro Start');import { tmpdir } from 'node:os';
+import process from 'node:process';globalThis._importMeta_={url:import.meta.url,env:process.env};import { tmpdir } from 'node:os';
 import { defineEventHandler, handleCacheHeaders, splitCookiesString, createEvent, fetchWithEvent, isEvent, eventHandler, setHeaders, createError, sendRedirect, proxyRequest, getRequestHeader, setResponseHeaders, setResponseStatus, send, getRequestHeaders, setResponseHeader, appendResponseHeader, getRequestURL, getResponseHeader, removeResponseHeader, getQuery as getQuery$1, readBody, createApp, createRouter as createRouter$1, toNodeListener, lazyEventHandler, getResponseStatus, getRouterParam, getResponseStatusText } from 'file:///Users/tf-066/twf-agency/node_modules/h3/dist/index.mjs';
 import { Server } from 'node:http';
 import { resolve, dirname, join } from 'node:path';
@@ -10,7 +10,7 @@ import { viteNodeFetch } from 'file:///Users/tf-066/twf-agency/node_modules/@nux
 import { createRenderer, getRequestDependencies, getPreloadLinks, getPrefetchLinks } from 'file:///Users/tf-066/twf-agency/node_modules/vue-bundle-renderer/dist/runtime.mjs';
 import { parseURL, withoutBase, joinURL, getQuery, withQuery, withTrailingSlash, decodePath, withLeadingSlash, withoutTrailingSlash, encodePath, joinRelativeURL } from 'file:///Users/tf-066/twf-agency/node_modules/ufo/dist/index.mjs';
 import destr, { destr as destr$1 } from 'file:///Users/tf-066/twf-agency/node_modules/destr/dist/index.mjs';
-import { createDebugger, createHooks } from 'file:///Users/tf-066/twf-agency/node_modules/nitropack/node_modules/hookable/dist/index.mjs';
+import { createHooks } from 'file:///Users/tf-066/twf-agency/node_modules/nitropack/node_modules/hookable/dist/index.mjs';
 import { createFetch, Headers as Headers$1 } from 'file:///Users/tf-066/twf-agency/node_modules/ofetch/dist/node.mjs';
 import { fetchNodeRequestHandler, callNodeRequestHandler } from 'file:///Users/tf-066/twf-agency/node_modules/node-mock-http/dist/index.mjs';
 import { createStorage, defineDriver, prefixStorage } from 'file:///Users/tf-066/twf-agency/node_modules/unstorage/dist/index.mjs';
@@ -2200,47 +2200,9 @@ function onConsoleLog(callback) {
 	consola$1.wrapConsole();
 }
 
-function defineNitroPlugin(def) {
-  return def;
-}
-
-const _T1_b7tuxMCnFAzt9ZetZyfUDINLEmVuShC5vern34bc = defineNitroPlugin((nitro) => {
-  createDebugger(nitro.hooks, { tag: "nitro-runtime" });
-});
-
-const globalTiming = globalThis.__timing__ || {
-  start: () => 0,
-  end: () => 0,
-  metrics: []
-};
-const timingMiddleware = eventHandler((event) => {
-  const start = globalTiming.start();
-  const _end = event.node.res.end;
-  event.node.res.end = function(chunk, encoding, cb) {
-    const metrics = [
-      ["Generate", globalTiming.end(start)],
-      ...globalTiming.metrics
-    ];
-    const serverTiming = metrics.map((m) => `-;dur=${m[1]};desc="${encodeURIComponent(m[0])}"`).join(", ");
-    if (!event.node.res.headersSent) {
-      event.node.res.setHeader("Server-Timing", serverTiming);
-    }
-    _end.call(event.node.res, chunk, encoding, cb);
-    return this;
-  }.bind(event.node.res);
-});
-const _o2KiOWSWGBdL_fy4YRrsFpmZCDPdeBdN0LDROIuYHHY = defineNitroPlugin((nitro) => {
-  nitro.h3App.stack.unshift({
-    route: "/",
-    handler: timingMiddleware
-  });
-});
-
 const plugins = [
   _9Zo5TYKyr5YBE4nMrrsj4yCbCdXElKpMthT_Rv_7MAY,
 _R795cDPadXzxuf2du_AkShkP4_A1Aflj9_2k3LvLWc,
-_T1_b7tuxMCnFAzt9ZetZyfUDINLEmVuShC5vern34bc,
-_o2KiOWSWGBdL_fy4YRrsFpmZCDPdeBdN0LDROIuYHHY,
 _wH6JrtIxmaSoA8lCPWFnE9z4lQeXW6H5z3l5aymEQw
 ];
 
@@ -3397,5 +3359,5 @@ function renderHTMLDocument(html) {
 const renderer = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({
   __proto__: null,
   default: handler
-}, Symbol.toStringTag, { value: 'Module' }));;globalThis.__timing__.logEnd('Nitro Start');
+}, Symbol.toStringTag, { value: 'Module' }));
 //# sourceMappingURL=index.mjs.map
