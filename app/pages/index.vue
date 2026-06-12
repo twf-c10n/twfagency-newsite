@@ -398,6 +398,7 @@ let pointerFrame = 0
 let scrollFrame = 0
 let scrollIdleTimer: number | undefined
 let trustSlideTimer: number | undefined
+let trustSlideResetTimer: number | undefined
 let showreelTracking = false
 let showreelStyleKey = ''
 
@@ -407,6 +408,8 @@ const advanceTrustPhoto = () => {
   }
 
   isTrustSliding.value = true
+  window.clearTimeout(trustSlideResetTimer)
+  trustSlideResetTimer = window.setTimeout(finishTrustPhotoSlide, 950)
 }
 
 const finishTrustPhotoSlide = () => {
@@ -414,6 +417,7 @@ const finishTrustPhotoSlide = () => {
     return
   }
 
+  window.clearTimeout(trustSlideResetTimer)
   trustBottomSlideIndex.value = (trustBottomSlideIndex.value + 1) % trustPhotos.value.length
   isTrustSliding.value = false
 }
@@ -650,6 +654,7 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
   window.clearTimeout(scrollIdleTimer)
+  window.clearTimeout(trustSlideResetTimer)
   window.clearInterval(trustSlideTimer)
   window.cancelAnimationFrame(pointerFrame)
   window.cancelAnimationFrame(scrollFrame)
@@ -900,8 +905,12 @@ onBeforeUnmount(() => {
           </video>
         </div>
         <div class="shell team-grid">
-          <div :class="['team-photos', { 'is-looping': hasTrustPhotoLoop, 'is-sliding': isTrustSliding }]" data-reveal>
-            <div class="team-photo-track" @animationend="finishTrustPhotoSlide">
+          <div :class="['team-photos', { 'is-looping': hasTrustPhotoLoop, 'is-sliding': isTrustSliding }]">
+            <div
+              class="team-photo-track"
+              @animationend="finishTrustPhotoSlide"
+              @animationcancel="finishTrustPhotoSlide"
+            >
               <figure class="team-photo-slide is-incoming" aria-hidden="true">
                 <img :src="trustIncomingPhoto.src" :alt="trustIncomingPhoto.alt">
               </figure>
@@ -911,6 +920,15 @@ onBeforeUnmount(() => {
               <figure class="team-photo-slide is-bottom">
                 <img :src="trustBottomPhoto.src" :alt="trustBottomPhoto.alt">
               </figure>
+            </div>
+            <div class="team-photo-buffer" aria-hidden="true">
+              <img
+                v-for="photo in trustPhotos"
+                :key="`buffer-${photo.id}`"
+                :src="photo.src"
+                :alt="photo.alt"
+                decoding="async"
+              >
             </div>
           </div>
           <div class="team-copy" data-reveal style="--delay: .14s">

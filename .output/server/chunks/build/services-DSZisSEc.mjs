@@ -1,4 +1,4 @@
-import { _ as __nuxt_component_0 } from './SiteHeader-D9ODwCeG.mjs';
+globalThis.__timing__.logStart('Load chunks/build/services-DSZisSEc');import { _ as __nuxt_component_0 } from './SiteHeader-D9ODwCeG.mjs';
 import { defineComponent, ref, computed, mergeProps, unref, useSSRContext } from 'vue';
 import { ssrRenderAttrs, ssrRenderComponent, ssrRenderStyle, ssrRenderList, ssrRenderClass, ssrInterpolate, ssrRenderAttr } from 'vue/server-renderer';
 import { u as useHead } from './composables-CXt4RJfp.mjs';
@@ -98,6 +98,15 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
         accent: "#39b54a",
         description: "LINE OA, CRM, commerce, and messaging solutions for Thai brands that need tighter customer relationships.",
         points: ["LINE OA strategy", "Rich menu and messaging", "Commerce integration"]
+      },
+      {
+        id: "ai-video-analytics",
+        title: "AI Video Analytics for Retail",
+        eyebrow: "Retail Intelligence",
+        image: `${assetPath}/analytics.jpg`,
+        accent: "#180dfd",
+        description: "AI-powered video analytics that translate in-store behavior into actionable retail insight, helping teams improve operations and customer experience.",
+        points: ["Customer Traffic Insight", "In-store Behavior Analysis", "Retail Performance Dashboard"]
       }
     ];
     const socials = [
@@ -140,5 +149,5 @@ _sfc_main.setup = (props, ctx) => {
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };
 
-export { _sfc_main as default };
-//# sourceMappingURL=services-JNBKPsf2.mjs.map
+export { _sfc_main as default };;globalThis.__timing__.logEnd('Load chunks/build/services-DSZisSEc');
+//# sourceMappingURL=services-DSZisSEc.mjs.map

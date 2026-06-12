@@ -1,4 +1,4 @@
-import { _ as __nuxt_component_0 } from './SiteHeader-D9ODwCeG.mjs';
+globalThis.__timing__.logStart('Load chunks/build/about-z31b3xzp');import { _ as __nuxt_component_0 } from './SiteHeader-D9ODwCeG.mjs';
 import { defineComponent, mergeProps, useSSRContext } from 'vue';
 import { ssrRenderAttrs, ssrRenderComponent, ssrRenderList, ssrRenderAttr, ssrRenderClass } from 'vue/server-renderer';
 import { p as publicAssetsURL } from '../routes/renderer.mjs';
@@ -118,5 +118,5 @@ _sfc_main.setup = (props, ctx) => {
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };
 
-export { _sfc_main as default };
+export { _sfc_main as default };;globalThis.__timing__.logEnd('Load chunks/build/about-z31b3xzp');
 //# sourceMappingURL=about-z31b3xzp.mjs.map

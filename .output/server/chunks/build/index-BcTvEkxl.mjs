@@ -1,4 +1,4 @@
-import { _ as __nuxt_component_0 } from './SiteHeader-D9ODwCeG.mjs';
+globalThis.__timing__.logStart('Load chunks/build/index-BcTvEkxl');import { _ as __nuxt_component_0 } from './SiteHeader-D9ODwCeG.mjs';
 import { _ as __nuxt_component_0$1 } from './nuxt-link-_96boU3P.mjs';
 import { defineComponent, ref, withAsyncContext, computed, watch, mergeProps, unref, withCtx, openBlock, createBlock, createVNode, toDisplayString, useSSRContext } from 'vue';
 import { ssrRenderAttrs, ssrRenderComponent, ssrInterpolate, ssrRenderList, ssrRenderClass, ssrRenderAttr } from 'vue/server-renderer';
@@ -471,5 +471,5 @@ _sfc_main.setup = (props, ctx) => {
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };
 
-export { _sfc_main as default };
+export { _sfc_main as default };;globalThis.__timing__.logEnd('Load chunks/build/index-BcTvEkxl');
 //# sourceMappingURL=index-BcTvEkxl.mjs.map
