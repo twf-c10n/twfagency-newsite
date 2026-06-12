@@ -537,6 +537,7 @@ onBeforeUnmount(() => {
               loading="lazy"
               decoding="async"
             >
+            <div class="poster-border" aria-hidden="true"></div>
           </div>
         </div>
 
