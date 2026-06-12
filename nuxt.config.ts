@@ -7,7 +7,9 @@ export default defineNuxtConfig({
     public: {
       apiBaseUrl:
         process.env.NUXT_PUBLIC_API_BASE_URL ||
+        process.env.NUXT_PUBLIC_API_URL ||
         process.env.VITE_API_BASE_URL ||
+        process.env.API_URL ||
         'https://admin-stg.twfagency.com/api'
     }
   },
