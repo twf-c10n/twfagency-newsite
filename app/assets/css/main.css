@@ -442,12 +442,15 @@ section[id], footer[id] {
 
 .needs {
   position: relative;
+  z-index: 1;
   isolation: isolate;
   display: grid;
-  min-height: 60vh;
+  min-height: clamp(560px, 68vh, 680px);
+  min-height: clamp(560px, 68svh, 680px);
   overflow: hidden;
   place-items: center;
-  padding: 70px 20px 0px;
+  padding: clamp(70px, 9vh, 96px) 20px clamp(120px, 15vh, 180px);
+  padding: clamp(70px, 9svh, 96px) 20px clamp(120px, 15svh, 180px);
   text-align: center;
   background: #000;
 }
@@ -493,9 +496,10 @@ section[id], footer[id] {
 }
 
 .needs p {
-  color: #d1d1d2;
+  color: rgb(232 233 236 / 88%);
   font-size: 14px;
   line-height: 1.65;
+  text-shadow: 0 2px 14px rgb(0 0 0 / 82%);
 }
 
 .expertise {
@@ -4923,7 +4927,12 @@ section[id], footer[id] {
   }
 
   .needs {
-    min-height: 60vh;
+    min-height: clamp(500px, 78vh, 620px);
+    min-height: clamp(500px, 78svh, 620px);
+    padding-top: clamp(88px, 14vh, 120px);
+    padding-top: clamp(88px, 14svh, 120px);
+    padding-bottom: clamp(112px, 18vh, 150px);
+    padding-bottom: clamp(112px, 18svh, 150px);
   }
 
   .narrow {

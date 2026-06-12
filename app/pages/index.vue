@@ -692,7 +692,7 @@ onBeforeUnmount(() => {
             performance optimization, and elite technical mastery. Future-forward
             solutions for high-growth innovators.
           </p>
-          <a class="cta-button" data-reveal style="--delay: .44s" href="/projects">Let's Launch Your Project <b>+</b></a>
+          <a class="cta-button" data-reveal style="--delay: .44s" href="/project">Let's Launch Your Project <b>+</b></a>
         </div>
       </section>
 
