@@ -641,6 +641,11 @@ onBeforeUnmount(() => {
       </section>
 
       <section id="about" class="team">
+        <div class="team-media" aria-hidden="true">
+          <video autoplay muted loop playsinline preload="metadata">
+            <source src="/assets/background.webm" type="video/webm">
+          </video>
+        </div>
         <div class="shell team-grid">
           <div class="team-photos" data-reveal>
             <img src="/assets/award.png" alt="TWF awards">

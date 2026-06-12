@@ -374,6 +374,7 @@ section[id], footer[id] {
   width: max-content;
   height: 100%;
   align-items: center;
+  gap: clamp(32px, 2vw, 64px);
   will-change: transform;
   animation: client-marquee 42s linear infinite;
 }
@@ -386,8 +387,7 @@ section[id], footer[id] {
   display: flex;
   min-width: max-content;
   align-items: center;
-  gap: clamp(64px, 2vw, 32px);
-  padding: 0 clamp(10px, 1vw, 16px);
+  gap: clamp(32px, 2vw, 64px);
 }
 
 .brand-logo {
@@ -1128,8 +1128,34 @@ section[id], footer[id] {
 }
 
 .team {
+  position: relative;
+  isolation: isolate;
   padding: 88px 0 158px;
   background: #000;
+}
+
+.team::after {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  content: "";
+  background:
+    linear-gradient(90deg, rgb(0 0 0 / 70%) 0%, rgb(0 0 0 / 20%) 50%, rgb(0 0 0 / 50%) 100%),
+    linear-gradient(180deg, transparent 50%, #000 100%);
+}
+
+.team-media {
+  position: absolute;
+  z-index: -2;
+  inset: 0;
+  overflow: hidden;
+  opacity: .7;
+}
+
+.team-media video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .team-grid {
@@ -4217,8 +4243,7 @@ section[id], footer[id] {
 
   .logo-set {
     min-width: max-content;
-    gap: clamp(64px, 2vw, 32px);
-    padding: 0 8px;
+    gap: clamp(32px, 2vw, 64px);
   }
 
   .brand-logo {
