@@ -798,6 +798,7 @@ section[id], footer[id] {
 }
 
 .pillar:hover div {
+  transform: translateY(-8px);
   box-shadow: 0 18px 42px rgb(0 0 0 / 28%);
 }
 

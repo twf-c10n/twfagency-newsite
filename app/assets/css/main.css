@@ -756,6 +756,11 @@ section[id], footer[id] {
   aspect-ratio: 1 / 1;
   padding: clamp(18px, 4vw, 56px);
   contain: layout paint;
+  transition: filter .32s ease;
+}
+
+.pillar.is-visible:hover {
+  filter: brightness(1.1);
 }
 
 .pillar.is-visible {
@@ -783,6 +788,12 @@ section[id], footer[id] {
   padding: 29px 27px;
   background: #000;
   align-items: center;
+  transition: transform .32s ease, box-shadow .32s ease;
+}
+
+.pillar:hover div {
+  transform: translateY(-8px);
+  box-shadow: 0 18px 42px rgb(0 0 0 / 28%);
 }
 
 .pillar span {
