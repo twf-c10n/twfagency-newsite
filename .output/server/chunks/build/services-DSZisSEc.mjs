@@ -1,4 +1,4 @@
-globalThis.__timing__.logStart('Load chunks/build/services-DSZisSEc');import { _ as __nuxt_component_0 } from './SiteHeader-D9ODwCeG.mjs';
+import { _ as __nuxt_component_0 } from './SiteHeader-D9ODwCeG.mjs';
 import { defineComponent, ref, computed, mergeProps, unref, useSSRContext } from 'vue';
 import { ssrRenderAttrs, ssrRenderComponent, ssrRenderStyle, ssrRenderList, ssrRenderClass, ssrInterpolate, ssrRenderAttr } from 'vue/server-renderer';
 import { u as useHead } from './composables-CXt4RJfp.mjs';
@@ -149,5 +149,5 @@ _sfc_main.setup = (props, ctx) => {
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };
 
-export { _sfc_main as default };;globalThis.__timing__.logEnd('Load chunks/build/services-DSZisSEc');
+export { _sfc_main as default };
 //# sourceMappingURL=services-DSZisSEc.mjs.map

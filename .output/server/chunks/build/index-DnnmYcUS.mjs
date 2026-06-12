@@ -1,4 +1,4 @@
-globalThis.__timing__.logStart('Load chunks/build/index-D1aXINkn');import { _ as __nuxt_component_0 } from './SiteHeader-D9ODwCeG.mjs';
+import { _ as __nuxt_component_0 } from './SiteHeader-D9ODwCeG.mjs';
 import { defineComponent, ref, withAsyncContext, computed, watch, mergeProps, unref, useSSRContext } from 'vue';
 import { ssrRenderAttrs, ssrRenderComponent, ssrRenderAttr, ssrRenderStyle, ssrRenderList, ssrInterpolate, ssrRenderClass } from 'vue/server-renderer';
 import { p as publicAssetsURL } from '../routes/renderer.mjs';
@@ -32,7 +32,7 @@ const _imports_6 = publicAssetsURL("/assets/orbit.png");
 const _imports_7 = publicAssetsURL("/assets/showreel-reference.png");
 const _imports_8 = publicAssetsURL("/assets/stellar-data.png");
 const _imports_9 = publicAssetsURL("/assets/kensento.png");
-const _imports_10 = publicAssetsURL("/assets/background.webm");
+const _imports_10 = publicAssetsURL("/assets/background-1781079667180.webm");
 const aboutAssetPath = "/assets/about-figma";
 const fallbackArticleImage = "/assets/article-cover.png";
 const fallbackTrustDescription = "We push boundaries and strive for excellence by fostering a highly collaborative and constructive environment. Our team is comprised of talented individuals who work hard to elevate your brand.";
@@ -332,5 +332,5 @@ _sfc_main.setup = (props, ctx) => {
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };
 
-export { _sfc_main as default };;globalThis.__timing__.logEnd('Load chunks/build/index-D1aXINkn');
-//# sourceMappingURL=index-D1aXINkn.mjs.map
+export { _sfc_main as default };
+//# sourceMappingURL=index-DnnmYcUS.mjs.map
