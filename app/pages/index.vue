@@ -230,7 +230,8 @@ const isTrustSliding = ref(false)
 
 const { data: homepage } = await useAsyncData<HomepagePage>(
   'homepage-trust-lies',
-  getHomepage
+  getHomepage,
+  { server: false }
 )
 
 const fallbackTrustPhotos = [

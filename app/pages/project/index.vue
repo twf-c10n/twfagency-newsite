@@ -303,7 +303,8 @@ const emptyCategory: ProjectCategoryView = {
 
 const { data: projectsPage, pending, error } = await useAsyncData<OurProjectsPage>(
   'page:our-projects',
-  () => getOurProjectsPage()
+  () => getOurProjectsPage(),
+  { server: false }
 )
 
 const asRecord = (source: unknown) => source as Record<string, unknown> | null | undefined

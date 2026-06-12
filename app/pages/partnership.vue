@@ -63,7 +63,8 @@ const socials = [
 
 const { data: contactPage } = await useAsyncData<ContactUsPage>(
   'partnership-contact-page',
-  getContactUsPage
+  getContactUsPage,
+  { server: false }
 )
 
 const form = reactive({
