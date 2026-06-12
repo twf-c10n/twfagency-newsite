@@ -692,7 +692,7 @@ onBeforeUnmount(() => {
             performance optimization, and elite technical mastery. Future-forward
             solutions for high-growth innovators.
           </p>
-          <a class="cta-button" data-reveal style="--delay: .44s" href="#contact">Let's Launch Your Project <b>+</b></a>
+          <a class="cta-button" data-reveal style="--delay: .44s" href="/projects">Let's Launch Your Project <b>+</b></a>
         </div>
       </section>
 
@@ -971,7 +971,7 @@ onBeforeUnmount(() => {
     <footer id="contact" class="footer">
       <div class="footer-action" data-reveal>
         <h2 class="gradient-title">Make your goals a reality</h2>
-        <a class="cta-button" href="mailto:hello@twf.agency">Initiate Project Launch <b>+</b></a>
+        <a class="cta-button" href="/partnerships">Initiate Project Launch <b>+</b></a>
       </div>
       <div class="shell footer-bottom">
         <img class="footer-logo" :src="`${aboutAssetPath}/twf-logo-footer.svg`" alt="TWF">
