@@ -136,6 +136,56 @@ export type ContactFormPayload = {
   utm_campaign?: string | null
 }
 
+export const leadUtmKeys = ['utm_source', 'utm_medium', 'utm_campaign'] as const
+
+export const normalizeLeadPhone = (value: string) => {
+  const digits = value.replace(/\D/g, '')
+
+  if (digits.startsWith('66') && digits.length === 11) {
+    return `0${digits.slice(2)}`
+  }
+
+  return digits
+}
+
+const parseBudgetNumbers = (value: string) => {
+  return (value.match(/\d[\d,]*(?:\.\d+)?/g) ?? [])
+    .map((amount) => Number(amount.replace(/,/g, '')))
+    .filter((amount) => Number.isFinite(amount))
+}
+
+export const parseLeadEstimatedBudget = (
+  value: string
+): ContactFormPayload['estimated_budget'] | null => {
+  const amounts = parseBudgetNumbers(value)
+
+  if (!amounts.length) {
+    return null
+  }
+
+  const firstAmount = amounts[0]
+  const normalizedValue = value.toLowerCase()
+
+  if (/[<≤]|under|below|less|น้อยกว่า/.test(normalizedValue)) {
+    return { min: 0, max: firstAmount }
+  }
+
+  if (/[>≥]|over|above|more|มากกว่า/.test(normalizedValue)) {
+    return { min: firstAmount, max: 0 }
+  }
+
+  if (amounts.length === 1) {
+    return { min: firstAmount, max: firstAmount }
+  }
+
+  const secondAmount = amounts[1]
+
+  return {
+    min: Math.min(firstAmount, secondAmount),
+    max: Math.max(firstAmount, secondAmount)
+  }
+}
+
 export type BlogList = {
   blogs: Array<{
     slug: string

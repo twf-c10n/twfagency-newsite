@@ -2,6 +2,9 @@
 import {
   PublicApiError,
   getContactUsPage,
+  leadUtmKeys,
+  normalizeLeadPhone,
+  parseLeadEstimatedBudget,
   submitContactForm,
   type ContactFormPayload,
   type ContactService,
@@ -78,7 +81,6 @@ const submitState = ref<'idle' | 'success' | 'error'>('idle')
 const submitMessage = ref('')
 const fieldErrors = ref<PartnershipFieldErrors>({})
 const route = useRoute()
-const utmKeys = ['utm_source', 'utm_medium', 'utm_campaign']
 
 const normalizeOptionId = (label: string, index: number) => {
   return `fallback-${index}-${label.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`
@@ -129,52 +131,6 @@ const selectedOtherServices = computed(() => {
     .filter((option) => option.isOther || !option.serviceId)
     .map((option) => option.label)
 })
-
-const normalizePhone = (value: string) => {
-  const digits = value.replace(/\D/g, '')
-
-  if (digits.startsWith('66') && digits.length === 11) {
-    return `0${digits.slice(2)}`
-  }
-
-  return digits
-}
-
-const parseBudgetNumbers = (value: string) => {
-  return (value.match(/\d[\d,]*(?:\.\d+)?/g) ?? [])
-    .map((amount) => Number(amount.replace(/,/g, '')))
-    .filter((amount) => Number.isFinite(amount))
-}
-
-const parseEstimatedBudget = (value: string): ContactFormPayload['estimated_budget'] | null => {
-  const amounts = parseBudgetNumbers(value)
-
-  if (!amounts.length) {
-    return null
-  }
-
-  const firstAmount = amounts[0]
-  const normalizedValue = value.toLowerCase()
-
-  if (/[<≤]|under|below|less|น้อยกว่า/.test(normalizedValue)) {
-    return { min: 0, max: firstAmount }
-  }
-
-  if (/[>≥]|over|above|more|มากกว่า/.test(normalizedValue)) {
-    return { min: firstAmount, max: 0 }
-  }
-
-  if (amounts.length === 1) {
-    return { min: firstAmount, max: firstAmount }
-  }
-
-  const secondAmount = amounts[1]
-
-  return {
-    min: Math.min(firstAmount, secondAmount),
-    max: Math.max(firstAmount, secondAmount)
-  }
-}
 
 const readQueryValue = (key: string) => {
   const value = route.query[key]
@@ -263,8 +219,8 @@ const resetForm = () => {
 
 const validateForm = () => {
   const nextErrors: PartnershipFieldErrors = {}
-  const phone = normalizePhone(form.phone)
-  const budget = parseEstimatedBudget(form.budget)
+  const phone = normalizeLeadPhone(form.phone)
+  const budget = parseLeadEstimatedBudget(form.budget)
 
   if (!form.fullname.trim()) {
     nextErrors.fullname = 'Please enter your name.'
@@ -309,7 +265,7 @@ const handleSubmit = async () => {
     return
   }
 
-  const estimatedBudget = parseEstimatedBudget(form.budget)
+  const estimatedBudget = parseLeadEstimatedBudget(form.budget)
 
   if (!estimatedBudget) {
     return
@@ -318,7 +274,7 @@ const handleSubmit = async () => {
   const payload: ContactFormPayload = {
     fullname: form.fullname.trim(),
     email: form.email.trim(),
-    phone: normalizePhone(form.phone),
+    phone: normalizeLeadPhone(form.phone),
     company_name: form.companyName.trim(),
     estimated_budget: estimatedBudget,
     form_type: 'partnership',
@@ -355,7 +311,7 @@ onMounted(() => {
     return
   }
 
-  utmKeys.forEach((key) => {
+  leadUtmKeys.forEach((key) => {
     const value = readQueryValue(key)
 
     if (value) {

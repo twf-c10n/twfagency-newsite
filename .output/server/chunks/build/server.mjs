@@ -638,7 +638,7 @@ const _routes = [
   {
     name: "project-slug",
     path: "/project/:slug()",
-    component: () => import('./_slug_-Defz7goM.mjs')
+    component: () => import('./_slug_-CB-bZ_Wi.mjs')
   },
   {
     name: "about",
@@ -653,12 +653,12 @@ const _routes = [
   {
     name: "contact",
     path: "/contact",
-    component: () => import('./contact-DxtwWk2Z.mjs')
+    component: () => import('./contact-BQWxHyyI.mjs')
   },
   {
     name: "partnership",
     path: "/partnership",
-    component: () => import('./partnership-fjgZssO3.mjs')
+    component: () => import('./partnership-DoBvywlj.mjs')
   },
   {
     name: "photography",
@@ -668,7 +668,7 @@ const _routes = [
   {
     name: "project",
     path: "/project",
-    component: () => import('./index-BL1psVQA.mjs')
+    component: () => import('./index-VgJY0FO-.mjs')
   },
   {
     name: "services",

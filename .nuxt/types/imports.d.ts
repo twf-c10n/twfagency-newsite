@@ -57,10 +57,12 @@ declare global {
   const isShallow: typeof import('vue').isShallow
   const isVue2: typeof import('../../node_modules/nuxt/dist/app/compat/vue-demi').isVue2
   const isVue3: typeof import('../../node_modules/nuxt/dist/app/compat/vue-demi').isVue3
+  const leadUtmKeys: typeof import('../../app/utils/api').leadUtmKeys
   const loadPayload: typeof import('../../node_modules/nuxt/dist/app/composables/payload').loadPayload
   const markRaw: typeof import('vue').markRaw
   const navigateTo: typeof import('../../node_modules/nuxt/dist/app/composables/router').navigateTo
   const nextTick: typeof import('vue').nextTick
+  const normalizeLeadPhone: typeof import('../../app/utils/api').normalizeLeadPhone
   const onActivated: typeof import('vue').onActivated
   const onBeforeMount: typeof import('vue').onBeforeMount
   const onBeforeRouteLeave: typeof import('vue-router').onBeforeRouteLeave
@@ -79,6 +81,7 @@ declare global {
   const onUnmounted: typeof import('vue').onUnmounted
   const onUpdated: typeof import('vue').onUpdated
   const onWatcherCleanup: typeof import('vue').onWatcherCleanup
+  const parseLeadEstimatedBudget: typeof import('../../app/utils/api').parseLeadEstimatedBudget
   const pickLocalizedText: typeof import('../../app/utils/api').pickLocalizedText
   const prefetchComponents: typeof import('../../node_modules/nuxt/dist/app/composables/preload').prefetchComponents
   const preloadComponents: typeof import('../../node_modules/nuxt/dist/app/composables/preload').preloadComponents
@@ -278,10 +281,12 @@ declare module 'vue' {
     readonly isShallow: UnwrapRef<typeof import('vue')['isShallow']>
     readonly isVue2: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/compat/vue-demi')['isVue2']>
     readonly isVue3: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/compat/vue-demi')['isVue3']>
+    readonly leadUtmKeys: UnwrapRef<typeof import('../../app/utils/api')['leadUtmKeys']>
     readonly loadPayload: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/payload')['loadPayload']>
     readonly markRaw: UnwrapRef<typeof import('vue')['markRaw']>
     readonly navigateTo: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/router')['navigateTo']>
     readonly nextTick: UnwrapRef<typeof import('vue')['nextTick']>
+    readonly normalizeLeadPhone: UnwrapRef<typeof import('../../app/utils/api')['normalizeLeadPhone']>
     readonly onActivated: UnwrapRef<typeof import('vue')['onActivated']>
     readonly onBeforeMount: UnwrapRef<typeof import('vue')['onBeforeMount']>
     readonly onBeforeRouteLeave: UnwrapRef<typeof import('vue-router')['onBeforeRouteLeave']>
@@ -300,6 +305,7 @@ declare module 'vue' {
     readonly onUnmounted: UnwrapRef<typeof import('vue')['onUnmounted']>
     readonly onUpdated: UnwrapRef<typeof import('vue')['onUpdated']>
     readonly onWatcherCleanup: UnwrapRef<typeof import('vue')['onWatcherCleanup']>
+    readonly parseLeadEstimatedBudget: UnwrapRef<typeof import('../../app/utils/api')['parseLeadEstimatedBudget']>
     readonly pickLocalizedText: UnwrapRef<typeof import('../../app/utils/api')['pickLocalizedText']>
     readonly prefetchComponents: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/preload')['prefetchComponents']>
     readonly preloadComponents: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/preload')['preloadComponents']>
