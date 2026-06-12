@@ -5,7 +5,10 @@ export default defineNuxtConfig({
   css: ['~/assets/css/main.css'],
   runtimeConfig: {
     public: {
-      apiBaseUrl: process.env.NUXT_PUBLIC_API_BASE_URL || process.env.VITE_API_BASE_URL || ''
+      apiBaseUrl:
+        process.env.NUXT_PUBLIC_API_BASE_URL ||
+        process.env.VITE_API_BASE_URL ||
+        'https://admin-stg.twfagency.com/api'
     }
   },
   app: {
