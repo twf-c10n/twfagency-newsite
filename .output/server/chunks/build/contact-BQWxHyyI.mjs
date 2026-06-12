@@ -1,4 +1,4 @@
-globalThis.__timing__.logStart('Load chunks/build/contact-BQWxHyyI');import { _ as __nuxt_component_0 } from './SiteHeader-D9ODwCeG.mjs';
+import { _ as __nuxt_component_0 } from './SiteHeader-D9ODwCeG.mjs';
 import { defineComponent, reactive, ref, mergeProps, unref, useSSRContext } from 'vue';
 import { ssrRenderAttrs, ssrRenderComponent, ssrRenderAttr, ssrRenderList, ssrInterpolate, ssrRenderClass, ssrIncludeBooleanAttr, ssrLooseContain } from 'vue/server-renderer';
 import { u as useHead } from './composables-CXt4RJfp.mjs';
@@ -139,5 +139,5 @@ _sfc_main.setup = (props, ctx) => {
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };
 
-export { _sfc_main as default };;globalThis.__timing__.logEnd('Load chunks/build/contact-BQWxHyyI');
+export { _sfc_main as default };
 //# sourceMappingURL=contact-BQWxHyyI.mjs.map

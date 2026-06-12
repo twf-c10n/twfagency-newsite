@@ -1,4 +1,4 @@
-import process from 'node:process';globalThis._importMeta_=globalThis._importMeta_||{url:"file:///_entry.js",env:process.env};globalThis.__timing__.logStart('Load chunks/build/server');import { hasInjectionContext, inject, getCurrentInstance, defineComponent, ref, h, Suspense, Fragment, createApp, provide, shallowReactive, onErrorCaptured, onServerPrefetch, unref, createVNode, resolveDynamicComponent, reactive, effectScope, defineAsyncComponent, mergeProps, getCurrentScope, toRef, shallowRef, isReadonly, useSSRContext, isRef, isShallow, isReactive, toRaw } from 'vue';
+import process from 'node:process';globalThis._importMeta_=globalThis._importMeta_||{url:"file:///_entry.js",env:process.env};import { hasInjectionContext, inject, getCurrentInstance, defineComponent, ref, h, Suspense, Fragment, createApp, provide, shallowReactive, onErrorCaptured, onServerPrefetch, unref, createVNode, resolveDynamicComponent, reactive, effectScope, defineAsyncComponent, mergeProps, getCurrentScope, toRef, shallowRef, isReadonly, useSSRContext, isRef, isShallow, isReactive, toRaw } from 'vue';
 import { c as createError$1, t as parseURL, f as encodePath, d as decodePath, m as hasProtocol, o as isScriptProtocol, q as joinURL, x as withQuery, u as sanitizeStatusCode, h as getContext, $ as $fetch, g as executeAsync, b as defu } from '../nitro/nitro.mjs';
 import { b as baseURL } from '../routes/renderer.mjs';
 import { RouterView, createMemoryHistory, createRouter, START_LOCATION } from 'vue-router';
@@ -187,38 +187,6 @@ var Hookable = class {
 };
 function createHooks() {
 	return new Hookable();
-}
-const isBrowser = "undefined" !== "undefined";
-function createDebugger(hooks, _options = {}) {
-	const options = {
-		inspect: isBrowser,
-		group: isBrowser,
-		filter: () => true,
-		..._options
-	};
-	const _filter = options.filter;
-	const filter = typeof _filter === "string" ? (name) => name.startsWith(_filter) : _filter;
-	const _tag = options.tag ? `[${options.tag}] ` : "";
-	const logPrefix = (event) => _tag + event.name + "".padEnd(event._id, "\0");
-	const _idCtr = {};
-	const unsubscribeBefore = hooks.beforeEach((event) => {
-		if (filter !== void 0 && !filter(event.name)) return;
-		_idCtr[event.name] = _idCtr[event.name] || 0;
-		event._id = _idCtr[event.name]++;
-		console.time(logPrefix(event));
-	});
-	const unsubscribeAfter = hooks.afterEach((event) => {
-		if (filter !== void 0 && !filter(event.name)) return;
-		if (options.group) console.groupCollapsed(event.name);
-		if (options.inspect) console.timeLog(logPrefix(event), event.args);
-		else console.timeEnd(logPrefix(event));
-		if (options.group) console.groupEnd();
-		_idCtr[event.name]--;
-	});
-	return { close: () => {
-		unsubscribeBefore();
-		unsubscribeAfter();
-	} };
 }
 
 if (!globalThis.$fetch) {
@@ -678,7 +646,7 @@ const _routes = [
   {
     name: "index",
     path: "/",
-    component: () => import('./index-BkBnMLHJ.mjs')
+    component: () => import('./index-D1S1dyo_.mjs')
   }
 ];
 const ROUTE_KEY_PARENTHESES_RE = /(:\w+)\([^)]+\)/g;
@@ -1022,13 +990,6 @@ const plugin = /* @__PURE__ */ defineNuxtPlugin({
     return { provide: { router } };
   }
 });
-const debug_hooks_hyXe6laRLyyi6S6XoqeItfe9HTFGNswlS09LT9GQbmQ = /* @__PURE__ */ defineNuxtPlugin({
-  name: "nuxt:debug:hooks",
-  enforce: "pre",
-  setup(nuxtApp) {
-    createDebugger(nuxtApp.hooks, { tag: "nuxt-app" });
-  }
-});
 function definePayloadReducer(name, reduce) {
   {
     useNuxtApp().ssrContext["~payloadReducers"][name] = reduce;
@@ -1057,7 +1018,6 @@ const components_plugin_4kY4pyzJIYX99vmMAAIorFf3CnAaptHitJgf7JxiED8 = /* @__PURE
 const plugins = [
   unhead_k2P3m_ZDyjlr2mMYnoDPwavjsDN8hBlk9cFai0bbopU,
   plugin,
-  debug_hooks_hyXe6laRLyyi6S6XoqeItfe9HTFGNswlS09LT9GQbmQ,
   revive_payload_server_MVtmlZaQpj6ApFmshWfUWl5PehCebzaBf2NuRMiIbms,
   components_plugin_4kY4pyzJIYX99vmMAAIorFf3CnAaptHitJgf7JxiED8
 ];
@@ -1270,5 +1230,5 @@ let entry;
 }
 const entry_default = ((ssrContext) => entry(ssrContext));
 
-export { _export_sfc as _, asyncDataDefaults as a, nuxtLinkDefaults as b, createError as c, useRoute as d, entry_default as default, encodeRoutePath as e, fetchDefaults as f, useRouter as g, useRuntimeConfig as h, navigateTo as n, resolveRouteObject as r, useNuxtApp as u };;globalThis.__timing__.logEnd('Load chunks/build/server');
+export { _export_sfc as _, asyncDataDefaults as a, nuxtLinkDefaults as b, createError as c, useRoute as d, entry_default as default, encodeRoutePath as e, fetchDefaults as f, useRouter as g, useRuntimeConfig as h, navigateTo as n, resolveRouteObject as r, useNuxtApp as u };
 //# sourceMappingURL=server.mjs.map

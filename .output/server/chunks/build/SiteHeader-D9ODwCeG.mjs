@@ -1,4 +1,4 @@
-globalThis.__timing__.logStart('Load chunks/build/SiteHeader-D9ODwCeG');import { defineComponent, ref, mergeProps, unref, useSSRContext } from 'vue';
+import { defineComponent, ref, mergeProps, unref, useSSRContext } from 'vue';
 import { ssrRenderAttrs, ssrRenderAttr, ssrRenderClass, ssrRenderList, ssrInterpolate } from 'vue/server-renderer';
 
 const aboutAssetPath = "/assets/about-figma";
@@ -44,5 +44,5 @@ _sfc_main.setup = (props, ctx) => {
 };
 const __nuxt_component_0 = Object.assign(_sfc_main, { __name: "SiteHeader" });
 
-export { __nuxt_component_0 as _ };;globalThis.__timing__.logEnd('Load chunks/build/SiteHeader-D9ODwCeG');
+export { __nuxt_component_0 as _ };
 //# sourceMappingURL=SiteHeader-D9ODwCeG.mjs.map

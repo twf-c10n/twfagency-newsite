@@ -225,8 +225,8 @@ const fallbackArticles: ArticleCard[] = [
 ]
 
 const articles = ref<ArticleCard[]>(fallbackArticles)
-const previousTrustSlideIndex = ref(0)
-const activeTrustSlideIndex = ref(1)
+const trustBottomSlideIndex = ref(0)
+const isTrustSliding = ref(false)
 
 const { data: homepage } = await useAsyncData<HomepagePage>(
   'homepage-trust-lies',
@@ -272,18 +272,14 @@ const getTrustPhotoAt = (index: number) => {
   return photos[index % photos.length] || fallbackTrustPhotos[0]
 }
 
-const previousTrustPhoto = computed(() => {
-  return trustPhotos.value.length > 1
-    ? getTrustPhotoAt(previousTrustSlideIndex.value)
-    : getTrustPhotoAt(activeTrustSlideIndex.value)
-})
-
-const activeTrustPhoto = computed(() => getTrustPhotoAt(activeTrustSlideIndex.value))
+const trustBottomPhoto = computed(() => getTrustPhotoAt(trustBottomSlideIndex.value))
+const trustTopPhoto = computed(() => getTrustPhotoAt(trustBottomSlideIndex.value + 1))
+const trustIncomingPhoto = computed(() => getTrustPhotoAt(trustBottomSlideIndex.value + 2))
 const hasTrustPhotoLoop = computed(() => trustPhotos.value.length > 1)
 
 watch(trustPhotos, (photos) => {
-  previousTrustSlideIndex.value = 0
-  activeTrustSlideIndex.value = photos.length > 1 ? 1 : 0
+  trustBottomSlideIndex.value = 0
+  isTrustSliding.value = false
 })
 
 const decodeHtml = (value: string) => {
@@ -406,12 +402,20 @@ let showreelTracking = false
 let showreelStyleKey = ''
 
 const advanceTrustPhoto = () => {
-  if (trustPhotos.value.length < 2) {
+  if (trustPhotos.value.length < 2 || isTrustSliding.value) {
     return
   }
 
-  previousTrustSlideIndex.value = activeTrustSlideIndex.value
-  activeTrustSlideIndex.value = (activeTrustSlideIndex.value + 1) % trustPhotos.value.length
+  isTrustSliding.value = true
+}
+
+const finishTrustPhotoSlide = () => {
+  if (!isTrustSliding.value) {
+    return
+  }
+
+  trustBottomSlideIndex.value = (trustBottomSlideIndex.value + 1) % trustPhotos.value.length
+  isTrustSliding.value = false
 }
 
 const startTrustPhotoLoop = () => {
@@ -896,13 +900,18 @@ onBeforeUnmount(() => {
           </video>
         </div>
         <div class="shell team-grid">
-          <div :class="['team-photos', { 'is-looping': hasTrustPhotoLoop }]" data-reveal>
-            <figure class="team-photo-slide is-previous" aria-hidden="true">
-              <img :src="previousTrustPhoto.src" :alt="previousTrustPhoto.alt">
-            </figure>
-            <figure :key="activeTrustPhoto.id" class="team-photo-slide is-active">
-              <img :src="activeTrustPhoto.src" :alt="activeTrustPhoto.alt">
-            </figure>
+          <div :class="['team-photos', { 'is-looping': hasTrustPhotoLoop, 'is-sliding': isTrustSliding }]" data-reveal>
+            <div class="team-photo-track" @animationend="finishTrustPhotoSlide">
+              <figure class="team-photo-slide is-incoming" aria-hidden="true">
+                <img :src="trustIncomingPhoto.src" :alt="trustIncomingPhoto.alt">
+              </figure>
+              <figure class="team-photo-slide is-top">
+                <img :src="trustTopPhoto.src" :alt="trustTopPhoto.alt">
+              </figure>
+              <figure class="team-photo-slide is-bottom">
+                <img :src="trustBottomPhoto.src" :alt="trustBottomPhoto.alt">
+              </figure>
+            </div>
           </div>
           <div class="team-copy" data-reveal style="--delay: .14s">
             <h2>A team you<br>can trust</h2>

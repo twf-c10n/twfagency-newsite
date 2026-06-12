@@ -1,4 +1,4 @@
-globalThis.__timing__.logStart('Load chunks/build/index-BkBnMLHJ');import { _ as __nuxt_component_0 } from './SiteHeader-D9ODwCeG.mjs';
+import { _ as __nuxt_component_0 } from './SiteHeader-D9ODwCeG.mjs';
 import { defineComponent, ref, withAsyncContext, computed, watch, mergeProps, unref, useSSRContext } from 'vue';
 import { ssrRenderAttrs, ssrRenderComponent, ssrRenderAttr, ssrRenderStyle, ssrRenderList, ssrInterpolate, ssrRenderClass } from 'vue/server-renderer';
 import { p as publicAssetsURL } from '../routes/renderer.mjs';
@@ -211,8 +211,8 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       }
     ];
     const articles = ref(fallbackArticles);
-    const previousTrustSlideIndex = ref(0);
-    const activeTrustSlideIndex = ref(1);
+    const trustBottomSlideIndex = ref(0);
+    const isTrustSliding = ref(false);
     const { data: homepage } = ([__temp, __restore] = withAsyncContext(() => useAsyncData(
       "homepage-trust-lies",
       getHomepage
@@ -248,14 +248,13 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       const photos = trustPhotos.value;
       return photos[index % photos.length] || fallbackTrustPhotos[0];
     };
-    const previousTrustPhoto = computed(() => {
-      return trustPhotos.value.length > 1 ? getTrustPhotoAt(previousTrustSlideIndex.value) : getTrustPhotoAt(activeTrustSlideIndex.value);
-    });
-    const activeTrustPhoto = computed(() => getTrustPhotoAt(activeTrustSlideIndex.value));
+    const trustBottomPhoto = computed(() => getTrustPhotoAt(trustBottomSlideIndex.value));
+    const trustTopPhoto = computed(() => getTrustPhotoAt(trustBottomSlideIndex.value + 1));
+    const trustIncomingPhoto = computed(() => getTrustPhotoAt(trustBottomSlideIndex.value + 2));
     const hasTrustPhotoLoop = computed(() => trustPhotos.value.length > 1);
     watch(trustPhotos, (photos) => {
-      previousTrustSlideIndex.value = 0;
-      activeTrustSlideIndex.value = photos.length > 1 ? 1 : 0;
+      trustBottomSlideIndex.value = 0;
+      isTrustSliding.value = false;
     });
     const motionReady = ref(false);
     const activeService = ref(mediaServices[0].id);
@@ -310,7 +309,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
         });
         _push(`<!--]--></ul></article>`);
       });
-      _push(`<!--]--></div></div><div class="orbit-art" data-reveal style="${ssrRenderStyle({ "--delay": ".18s" })}" aria-hidden="true"><img${ssrRenderAttr("src", _imports_6)} alt=""></div></div></section><section id="photography" class="${ssrRenderClass(["showreel", { "is-active": unref(showreelActive) }])}"><div class="showreel-stage"><figure class="showreel-frame" data-reveal><div class="media-skeleton showreel-skeleton" aria-hidden="true"></div><img class="showreel-poster"${ssrRenderAttr("src", _imports_7)} alt="" aria-hidden="true"><video muted loop playsinline preload="none"${ssrRenderAttr("poster", _imports_7)} aria-label="Capturing Vision. Executing Perfection. Watch 2026 showreel"><source data-src="/assets/showreel.mp4" type="video/mp4"></video></figure></div></section><section id="projects" class="products"><div class="shell products-inner"><p class="accent-copy" data-reveal>Venture Beyond Your Limits</p><h2 data-reveal style="${ssrRenderStyle({ "--delay": ".08s" })}">Our Innovative Product<br>and Services</h2><div class="product-grid"><article data-reveal style="${ssrRenderStyle({ "--delay": ".14s" })}"><img${ssrRenderAttr("src", _imports_8)} alt="Stellar Data"><p>Elevate your performance marketing campaigns</p></article><article data-reveal style="${ssrRenderStyle({ "--delay": ".22s" })}"><img${ssrRenderAttr("src", _imports_9)} alt="Kensento"><p>Taking you beyond cookies consent management</p></article></div></div></section><section id="about" class="team"><div class="team-media" aria-hidden="true"><video autoplay muted loop playsinline preload="metadata"><source${ssrRenderAttr("src", _imports_10)} type="video/webm"></video></div><div class="shell team-grid"><div class="${ssrRenderClass(["team-photos", { "is-looping": unref(hasTrustPhotoLoop) }])}" data-reveal><figure class="team-photo-slide is-previous" aria-hidden="true"><img${ssrRenderAttr("src", unref(previousTrustPhoto).src)}${ssrRenderAttr("alt", unref(previousTrustPhoto).alt)}></figure><figure class="team-photo-slide is-active"><img${ssrRenderAttr("src", unref(activeTrustPhoto).src)}${ssrRenderAttr("alt", unref(activeTrustPhoto).alt)}></figure></div><div class="team-copy" data-reveal style="${ssrRenderStyle({ "--delay": ".14s" })}"><h2>A team you<br>can trust</h2><p>${ssrInterpolate(unref(trustDescription))}</p></div></div></section><section id="blog" class="articles"><div class="shell"><p class="caption" data-reveal>Our Expertise</p><h2 data-reveal style="${ssrRenderStyle({ "--delay": ".08s" })}">Explore our recent articles</h2><p class="article-tags" data-reveal style="${ssrRenderStyle({ "--delay": ".12s" })}">Performance Marketing · Social Media · Case Study · Media Plan &amp; Buy · Digital Campaign</p><div class="article-grid"><!--[-->`);
+      _push(`<!--]--></div></div><div class="orbit-art" data-reveal style="${ssrRenderStyle({ "--delay": ".18s" })}" aria-hidden="true"><img${ssrRenderAttr("src", _imports_6)} alt=""></div></div></section><section id="photography" class="${ssrRenderClass(["showreel", { "is-active": unref(showreelActive) }])}"><div class="showreel-stage"><figure class="showreel-frame" data-reveal><div class="media-skeleton showreel-skeleton" aria-hidden="true"></div><img class="showreel-poster"${ssrRenderAttr("src", _imports_7)} alt="" aria-hidden="true"><video muted loop playsinline preload="none"${ssrRenderAttr("poster", _imports_7)} aria-label="Capturing Vision. Executing Perfection. Watch 2026 showreel"><source data-src="/assets/showreel.mp4" type="video/mp4"></video></figure></div></section><section id="projects" class="products"><div class="shell products-inner"><p class="accent-copy" data-reveal>Venture Beyond Your Limits</p><h2 data-reveal style="${ssrRenderStyle({ "--delay": ".08s" })}">Our Innovative Product<br>and Services</h2><div class="product-grid"><article data-reveal style="${ssrRenderStyle({ "--delay": ".14s" })}"><img${ssrRenderAttr("src", _imports_8)} alt="Stellar Data"><p>Elevate your performance marketing campaigns</p></article><article data-reveal style="${ssrRenderStyle({ "--delay": ".22s" })}"><img${ssrRenderAttr("src", _imports_9)} alt="Kensento"><p>Taking you beyond cookies consent management</p></article></div></div></section><section id="about" class="team"><div class="team-media" aria-hidden="true"><video autoplay muted loop playsinline preload="metadata"><source${ssrRenderAttr("src", _imports_10)} type="video/webm"></video></div><div class="shell team-grid"><div class="${ssrRenderClass(["team-photos", { "is-looping": unref(hasTrustPhotoLoop), "is-sliding": unref(isTrustSliding) }])}" data-reveal><div class="team-photo-track"><figure class="team-photo-slide is-incoming" aria-hidden="true"><img${ssrRenderAttr("src", unref(trustIncomingPhoto).src)}${ssrRenderAttr("alt", unref(trustIncomingPhoto).alt)}></figure><figure class="team-photo-slide is-top"><img${ssrRenderAttr("src", unref(trustTopPhoto).src)}${ssrRenderAttr("alt", unref(trustTopPhoto).alt)}></figure><figure class="team-photo-slide is-bottom"><img${ssrRenderAttr("src", unref(trustBottomPhoto).src)}${ssrRenderAttr("alt", unref(trustBottomPhoto).alt)}></figure></div></div><div class="team-copy" data-reveal style="${ssrRenderStyle({ "--delay": ".14s" })}"><h2>A team you<br>can trust</h2><p>${ssrInterpolate(unref(trustDescription))}</p></div></div></section><section id="blog" class="articles"><div class="shell"><p class="caption" data-reveal>Our Expertise</p><h2 data-reveal style="${ssrRenderStyle({ "--delay": ".08s" })}">Explore our recent articles</h2><p class="article-tags" data-reveal style="${ssrRenderStyle({ "--delay": ".12s" })}">Performance Marketing · Social Media · Case Study · Media Plan &amp; Buy · Digital Campaign</p><div class="article-grid"><!--[-->`);
       ssrRenderList(unref(articles), (article, index) => {
         _push(`<article data-reveal style="${ssrRenderStyle({ "--delay": `${160 + index * 75}ms` })}"><img${ssrRenderAttr("src", article.image)}${ssrRenderAttr("alt", article.title)} loading="lazy"><div><p>${ssrInterpolate(article.authorName)}</p><h3>${ssrInterpolate(article.title)}</h3><a${ssrRenderAttr("href", article.href)}${ssrRenderAttr("target", article.href.startsWith("http") ? "_blank" : void 0)}${ssrRenderAttr("rel", article.href.startsWith("http") ? "noreferrer" : void 0)}>Click Here <b>+</b></a></div></article>`);
       });
@@ -329,5 +328,5 @@ _sfc_main.setup = (props, ctx) => {
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };
 
-export { _sfc_main as default };;globalThis.__timing__.logEnd('Load chunks/build/index-BkBnMLHJ');
-//# sourceMappingURL=index-BkBnMLHJ.mjs.map
+export { _sfc_main as default };
+//# sourceMappingURL=index-D1S1dyo_.mjs.map
