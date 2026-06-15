@@ -48,8 +48,8 @@ const socials = [
         <div class="blog-card-grid">
           <article v-for="article in articles" :key="article.id" class="blog-card">
             <figure class="blog-card-media">
-              <img :src="`${blogAssetPath}/article-product.png`" alt="">
-              <img :src="`${blogAssetPath}/article-gradient.png`" alt="">
+              <img :src="`${blogAssetPath}/article-product.webp`" alt="">
+              <img :src="`${blogAssetPath}/article-gradient.webp`" alt="">
             </figure>
 
             <div class="blog-card-body">

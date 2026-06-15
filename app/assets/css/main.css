@@ -287,7 +287,7 @@ section[id], footer[id] {
   z-index: -1;
   inset: 0;
   overflow: hidden;
-  background: #101117 url("/assets/hero-gradient.png") center / cover no-repeat;
+  background: #101117 url("/assets/hero-gradient.webp") center / cover no-repeat;
   transform: scale(1.035);
   transition: transform 1.2s ease;
 }
@@ -468,7 +468,7 @@ section[id], footer[id] {
   z-index: 0;
   background:
     linear-gradient(180deg, #000 0%, rgb(0 0 0 / 100%) 0%, rgb(0 0 0 / 0%) 10%, #000 100%),
-    url("/assets/Abstract_grain.jpg") center / cover no-repeat;
+    url("/assets/Abstract_grain.webp") center / cover no-repeat;
   opacity: .92;
   transform: scale(1.04);
 }
