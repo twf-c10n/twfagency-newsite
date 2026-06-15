@@ -14,6 +14,20 @@ useHead({
       content:
         'TWF is a high-end digital agency merging technical mastery with creativity and performance.'
     }
+  ],
+  link: [
+    {
+      rel: 'preload',
+      href: '/assets/banner.webm',
+      as: 'video',
+      type: 'video/webm'
+    },
+    {
+      rel: 'preload',
+      href: '/assets/hero-gradient.png',
+      as: 'image',
+      type: 'image/png'
+    }
   ]
 })
 
@@ -385,6 +399,7 @@ const activeService = ref(mediaServices[0].id)
 const showreelActive = ref(false)
 const pageRoot = ref<HTMLElement | null>(null)
 const heroMedia = ref<HTMLElement | null>(null)
+const heroFilterVideo = ref<HTMLVideoElement | null>(null)
 const showreelSection = ref<HTMLElement | null>(null)
 const showreelStage = ref<HTMLElement | null>(null)
 const showreelVideo = ref<HTMLVideoElement | null>(null)
@@ -398,6 +413,7 @@ let showreelVideoObserver: IntersectionObserver | undefined
 let pointerFrame = 0
 let scrollFrame = 0
 let scrollIdleTimer: number | undefined
+let heroFilterLoadTimer: number | undefined
 let trustSlideTimer: number | undefined
 let trustSlideResetTimer: number | undefined
 let showreelTracking = false
@@ -446,6 +462,32 @@ const loadShowreelVideo = () => {
   video.play().catch(() => {
     // Autoplay can be blocked in edge cases; the poster keeps the section useful.
   })
+}
+
+const loadHeroFilterVideo = () => {
+  const video = heroFilterVideo.value
+  const source = video?.querySelector<HTMLSourceElement>('source[data-src]')
+
+  if (!video || !source || source.src) {
+    return
+  }
+
+  source.src = source.dataset.src ?? ''
+  video.load()
+  video.play().catch(() => {
+    // The main banner remains visible if autoplay is blocked.
+  })
+}
+
+const scheduleHeroFilterLoad = () => {
+  if (heroFilterLoadTimer || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    return
+  }
+
+  heroFilterLoadTimer = window.setTimeout(() => {
+    heroFilterLoadTimer = undefined
+    loadHeroFilterVideo()
+  }, 900)
 }
 
 const updateShowreelProgress = () => {
@@ -655,6 +697,7 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
   window.clearTimeout(scrollIdleTimer)
+  window.clearTimeout(heroFilterLoadTimer)
   window.clearTimeout(trustSlideResetTimer)
   window.clearInterval(trustSlideTimer)
   window.cancelAnimationFrame(pointerFrame)
@@ -678,11 +721,30 @@ onBeforeUnmount(() => {
       <section id="home" class="hero">
         <div ref="heroMedia" class="hero-media" aria-hidden="true">
           <div class="media-skeleton hero-media-skeleton" />
-          <video class="hero-banner" autoplay muted loop playsinline preload="metadata">
+          <video
+            class="hero-banner"
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="auto"
+            poster="/assets/hero-gradient.png"
+            fetchpriority="high"
+            @loadeddata="scheduleHeroFilterLoad"
+          >
             <source src="/assets/banner.webm" type="video/webm">
           </video>
-          <video class="hero-filter" autoplay muted loop playsinline preload="metadata">
-            <source src="/assets/bg_filter.webm" type="video/webm">
+          <video
+            ref="heroFilterVideo"
+            class="hero-filter"
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="none"
+            poster="/assets/hero-gradient.png"
+          >
+            <source data-src="/assets/bg_filter.webm" type="video/webm">
           </video>
         </div>
         <div class="shell hero-copy">
