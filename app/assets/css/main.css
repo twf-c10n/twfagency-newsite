@@ -287,6 +287,7 @@ section[id], footer[id] {
   z-index: -1;
   inset: 0;
   overflow: hidden;
+  background: #101117 url("/assets/hero-gradient.png") center / cover no-repeat;
   transform: scale(1.035);
   transition: transform 1.2s ease;
 }
