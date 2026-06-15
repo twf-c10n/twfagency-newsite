@@ -57,6 +57,7 @@ declare global {
   const isShallow: typeof import('vue').isShallow
   const isVue2: typeof import('../../node_modules/nuxt/dist/app/compat/vue-demi').isVue2
   const isVue3: typeof import('../../node_modules/nuxt/dist/app/compat/vue-demi').isVue3
+  const leadBudgetOptions: typeof import('../../app/utils/api').leadBudgetOptions
   const leadUtmKeys: typeof import('../../app/utils/api').leadUtmKeys
   const loadPayload: typeof import('../../node_modules/nuxt/dist/app/composables/payload').loadPayload
   const markRaw: typeof import('vue').markRaw
@@ -281,6 +282,7 @@ declare module 'vue' {
     readonly isShallow: UnwrapRef<typeof import('vue')['isShallow']>
     readonly isVue2: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/compat/vue-demi')['isVue2']>
     readonly isVue3: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/compat/vue-demi')['isVue3']>
+    readonly leadBudgetOptions: UnwrapRef<typeof import('../../app/utils/api')['leadBudgetOptions']>
     readonly leadUtmKeys: UnwrapRef<typeof import('../../app/utils/api')['leadUtmKeys']>
     readonly loadPayload: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/payload')['loadPayload']>
     readonly markRaw: UnwrapRef<typeof import('vue')['markRaw']>

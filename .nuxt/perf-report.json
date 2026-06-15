@@ -1,620 +1,689 @@
 {
-  "totalDuration": 857426.88,
+  "totalDuration": 60749.06,
   "totalMemoryDelta": {
-    "rss": 13873152,
-    "heapUsed": 22194568
+    "rss": 136278016,
+    "heapUsed": 72487496
   },
   "hasGCSnapshots": false,
   "phases": [
     {
       "name": "init",
-      "duration": 9.62,
-      "ownDuration": 9.62,
+      "duration": 20.43,
+      "ownDuration": 20.43,
       "memoryBefore": {
-        "rss": 298926080,
-        "heapUsed": 247042040,
-        "heapTotal": 259387392
+        "rss": 90599424,
+        "heapUsed": 46529608,
+        "heapTotal": 68894720
       },
       "memoryAfter": {
-        "rss": 299094016,
-        "heapUsed": 242896392,
-        "heapTotal": 259387392
+        "rss": 91435008,
+        "heapUsed": 47068224,
+        "heapTotal": 69681152
       },
       "memoryDelta": {
-        "rss": 167936,
-        "heapUsed": -4145648
+        "rss": 835584,
+        "heapUsed": 538616
       },
       "ownMemoryDelta": {
-        "rss": 167936,
-        "heapUsed": -4145648
+        "rss": 835584,
+        "heapUsed": 538616
       }
     },
     {
       "name": "modules",
-      "duration": 245.68,
-      "ownDuration": 19.19,
+      "duration": 958.09,
+      "ownDuration": 142.67,
       "memoryBefore": {
-        "rss": 299094016,
-        "heapUsed": 242897440,
-        "heapTotal": 259387392
+        "rss": 91443200,
+        "heapUsed": 47074008,
+        "heapTotal": 69681152
       },
       "memoryAfter": {
-        "rss": 300232704,
-        "heapUsed": 246440016,
-        "heapTotal": 260173824
+        "rss": 134008832,
+        "heapUsed": 54802128,
+        "heapTotal": 113651712
       },
       "memoryDelta": {
-        "rss": 1138688,
-        "heapUsed": 3542576
+        "rss": 42565632,
+        "heapUsed": 7728120
       },
       "ownMemoryDelta": {
-        "rss": 73728,
-        "heapUsed": 1034912
+        "rss": 1462272,
+        "heapUsed": -6107504
       }
     },
     {
       "name": "module:@nuxt/devtools",
-      "duration": 23.88,
-      "ownDuration": 23.88,
+      "duration": 615.97,
+      "ownDuration": 615.97,
       "memoryBefore": {
-        "rss": 299122688,
-        "heapUsed": 243344072,
-        "heapTotal": 259387392
+        "rss": 92614656,
+        "heapUsed": 40248672,
+        "heapTotal": 69488640
       },
       "memoryAfter": {
-        "rss": 299282432,
-        "heapUsed": 244242880,
-        "heapTotal": 259387392
+        "rss": 130596864,
+        "heapUsed": 49278144,
+        "heapTotal": 112340992
       },
       "memoryDelta": {
-        "rss": 159744,
-        "heapUsed": 898808
+        "rss": 37982208,
+        "heapUsed": 9029472
       },
       "ownMemoryDelta": {
-        "rss": 159744,
-        "heapUsed": 898808
+        "rss": 37982208,
+        "heapUsed": 9029472
       }
     },
     {
       "name": "module:nuxt:pages",
-      "duration": 62.26,
-      "ownDuration": 62.26,
+      "duration": 46.08,
+      "ownDuration": 46.08,
       "memoryBefore": {
-        "rss": 299298816,
-        "heapUsed": 244349160,
-        "heapTotal": 259387392
+        "rss": 130633728,
+        "heapUsed": 49384976,
+        "heapTotal": 112340992
       },
       "memoryAfter": {
-        "rss": 299364352,
-        "heapUsed": 247907784,
-        "heapTotal": 259387392
+        "rss": 131002368,
+        "heapUsed": 50383192,
+        "heapTotal": 112340992
       },
       "memoryDelta": {
-        "rss": 65536,
-        "heapUsed": 3558624
+        "rss": 368640,
+        "heapUsed": 998216
       },
       "ownMemoryDelta": {
-        "rss": 65536,
-        "heapUsed": 3558624
+        "rss": 368640,
+        "heapUsed": 998216
       }
     },
     {
       "name": "module:nuxt:meta",
-      "duration": 2.45,
-      "ownDuration": 2.45,
+      "duration": 13.09,
+      "ownDuration": 13.09,
       "memoryBefore": {
-        "rss": 299364352,
-        "heapUsed": 247933688,
-        "heapTotal": 259387392
+        "rss": 131014656,
+        "heapUsed": 50416680,
+        "heapTotal": 112340992
       },
       "memoryAfter": {
-        "rss": 299376640,
-        "heapUsed": 248123392,
-        "heapTotal": 259387392
+        "rss": 131055616,
+        "heapUsed": 50682696,
+        "heapTotal": 112865280
       },
       "memoryDelta": {
-        "rss": 12288,
-        "heapUsed": 189704
+        "rss": 40960,
+        "heapUsed": 266016
       },
       "ownMemoryDelta": {
-        "rss": 12288,
-        "heapUsed": 189704
+        "rss": 40960,
+        "heapUsed": 266016
       }
     },
     {
       "name": "module:nuxt:components",
-      "duration": 20.84,
-      "ownDuration": 20.84,
+      "duration": 18.92,
+      "ownDuration": 18.92,
       "memoryBefore": {
-        "rss": 299376640,
-        "heapUsed": 248150784,
-        "heapTotal": 259387392
+        "rss": 131059712,
+        "heapUsed": 50711520,
+        "heapTotal": 112865280
       },
       "memoryAfter": {
-        "rss": 299683840,
-        "heapUsed": 243782184,
-        "heapTotal": 259387392
+        "rss": 131149824,
+        "heapUsed": 51340512,
+        "heapTotal": 112865280
       },
       "memoryDelta": {
-        "rss": 307200,
-        "heapUsed": -4368600
+        "rss": 90112,
+        "heapUsed": 628992
       },
       "ownMemoryDelta": {
-        "rss": 307200,
-        "heapUsed": -4368600
+        "rss": 90112,
+        "heapUsed": 628992
       }
     },
     {
       "name": "module:nuxt:compiler",
-      "duration": 0.65,
-      "ownDuration": 0.65,
+      "duration": 0.36,
+      "ownDuration": 0.36,
       "memoryBefore": {
-        "rss": 299683840,
-        "heapUsed": 243806272,
-        "heapTotal": 259387392
+        "rss": 131174400,
+        "heapUsed": 51838480,
+        "heapTotal": 112865280
       },
       "memoryAfter": {
-        "rss": 299696128,
-        "heapUsed": 243810328,
-        "heapTotal": 259387392
+        "rss": 131178496,
+        "heapUsed": 51395928,
+        "heapTotal": 112865280
       },
       "memoryDelta": {
-        "rss": 12288,
-        "heapUsed": 4056
+        "rss": 4096,
+        "heapUsed": -442552
       },
       "ownMemoryDelta": {
-        "rss": 12288,
-        "heapUsed": 4056
+        "rss": 4096,
+        "heapUsed": -442552
       }
     },
     {
       "name": "module:nuxt:imports",
-      "duration": 4.27,
-      "ownDuration": 4.27,
+      "duration": 8.65,
+      "ownDuration": 8.65,
       "memoryBefore": {
-        "rss": 299700224,
-        "heapUsed": 243845536,
-        "heapTotal": 259387392
+        "rss": 131194880,
+        "heapUsed": 51443008,
+        "heapTotal": 112865280
       },
       "memoryAfter": {
-        "rss": 299716608,
-        "heapUsed": 244135032,
-        "heapTotal": 259387392
+        "rss": 131244032,
+        "heapUsed": 51742344,
+        "heapTotal": 112865280
       },
       "memoryDelta": {
-        "rss": 16384,
-        "heapUsed": 289496
+        "rss": 49152,
+        "heapUsed": 299336
       },
       "ownMemoryDelta": {
-        "rss": 16384,
-        "heapUsed": 289496
+        "rss": 49152,
+        "heapUsed": 299336
       }
     },
     {
       "name": "module:nuxt:nuxt-config-schema",
-      "duration": 1,
-      "ownDuration": 1,
+      "duration": 5.8,
+      "ownDuration": 5.8,
       "memoryBefore": {
-        "rss": 299716608,
-        "heapUsed": 244158440,
-        "heapTotal": 259387392
+        "rss": 131244032,
+        "heapUsed": 51767736,
+        "heapTotal": 112865280
       },
       "memoryAfter": {
-        "rss": 299724800,
-        "heapUsed": 244188088,
-        "heapTotal": 259387392
+        "rss": 131276800,
+        "heapUsed": 51835200,
+        "heapTotal": 112865280
       },
       "memoryDelta": {
-        "rss": 8192,
-        "heapUsed": 29648
+        "rss": 32768,
+        "heapUsed": 67464
       },
       "ownMemoryDelta": {
-        "rss": 8192,
-        "heapUsed": 29648
+        "rss": 32768,
+        "heapUsed": 67464
       }
     },
     {
       "name": "module:@nuxt/telemetry",
-      "duration": 0.06,
-      "ownDuration": 0.06,
+      "duration": 0.58,
+      "ownDuration": 0.58,
       "memoryBefore": {
-        "rss": 299724800,
-        "heapUsed": 244214992,
-        "heapTotal": 259387392
+        "rss": 131362816,
+        "heapUsed": 51888240,
+        "heapTotal": 112865280
       },
       "memoryAfter": {
-        "rss": 299724800,
-        "heapUsed": 244217720,
-        "heapTotal": 259387392
+        "rss": 131371008,
+        "heapUsed": 52305624,
+        "heapTotal": 112865280
       },
       "memoryDelta": {
-        "rss": 0,
-        "heapUsed": 2728
+        "rss": 8192,
+        "heapUsed": 417384
       },
       "ownMemoryDelta": {
-        "rss": 0,
-        "heapUsed": 2728
+        "rss": 8192,
+        "heapUsed": 417384
       }
     },
     {
       "name": "modules:done",
-      "duration": 111.08,
-      "ownDuration": 111.08,
+      "duration": 105.97,
+      "ownDuration": 99.87,
       "memoryBefore": {
-        "rss": 299749376,
-        "heapUsed": 244524784,
-        "heapTotal": 259387392
+        "rss": 131481600,
+        "heapUsed": 52227104,
+        "heapTotal": 112865280
       },
       "memoryAfter": {
-        "rss": 300232704,
-        "heapUsed": 246427984,
-        "heapTotal": 260173824
+        "rss": 134008832,
+        "heapUsed": 54798400,
+        "heapTotal": 113651712
       },
       "memoryDelta": {
-        "rss": 483328,
-        "heapUsed": 1903200
+        "rss": 2527232,
+        "heapUsed": 2571296
       },
       "ownMemoryDelta": {
-        "rss": 483328,
-        "heapUsed": 1903200
+        "rss": 2514944,
+        "heapUsed": 2473304
+      }
+    },
+    {
+      "name": "imports:sources",
+      "duration": 6.1,
+      "ownDuration": 6.1,
+      "memoryBefore": {
+        "rss": 131588096,
+        "heapUsed": 52360840,
+        "heapTotal": 112865280
+      },
+      "memoryAfter": {
+        "rss": 131600384,
+        "heapUsed": 52458832,
+        "heapTotal": 112865280
+      },
+      "memoryDelta": {
+        "rss": 12288,
+        "heapUsed": 97992
+      },
+      "ownMemoryDelta": {
+        "rss": 12288,
+        "heapUsed": 97992
+      }
+    },
+    {
+      "name": "nitro:config",
+      "duration": 97.83,
+      "ownDuration": 97.83,
+      "memoryBefore": {
+        "rss": 161206272,
+        "heapUsed": 79144792,
+        "heapTotal": 120512512
+      },
+      "memoryAfter": {
+        "rss": 166039552,
+        "heapUsed": 84023288,
+        "heapTotal": 120512512
+      },
+      "memoryDelta": {
+        "rss": 4833280,
+        "heapUsed": 4878496
+      },
+      "ownMemoryDelta": {
+        "rss": 4833280,
+        "heapUsed": 4878496
       }
     },
     {
       "name": "nitro:createNitro",
-      "duration": 151.26,
-      "ownDuration": 151.26,
+      "duration": 528.46,
+      "ownDuration": 528.46,
       "memoryBefore": {
-        "rss": 300290048,
-        "heapUsed": 247223544,
-        "heapTotal": 260173824
+        "rss": 165093376,
+        "heapUsed": 62683504,
+        "heapTotal": 124006400
       },
       "memoryAfter": {
-        "rss": 300879872,
-        "heapUsed": 246319816,
-        "heapTotal": 273543168
+        "rss": 179888128,
+        "heapUsed": 82275440,
+        "heapTotal": 127000576
       },
       "memoryDelta": {
-        "rss": 589824,
-        "heapUsed": -903728
+        "rss": 14794752,
+        "heapUsed": 19591936
       },
       "ownMemoryDelta": {
-        "rss": 589824,
-        "heapUsed": -903728
+        "rss": 14794752,
+        "heapUsed": 19591936
       }
     },
     {
       "name": "nitro:init",
-      "duration": 55.78,
-      "ownDuration": 55.78,
+      "duration": 43.93,
+      "ownDuration": 43.93,
       "memoryBefore": {
-        "rss": 300879872,
-        "heapUsed": 246564560,
-        "heapTotal": 273543168
+        "rss": 180076544,
+        "heapUsed": 82453624,
+        "heapTotal": 127000576
       },
       "memoryAfter": {
-        "rss": 300908544,
-        "heapUsed": 246706872,
-        "heapTotal": 273543168
+        "rss": 180350976,
+        "heapUsed": 82669944,
+        "heapTotal": 127000576
       },
       "memoryDelta": {
-        "rss": 28672,
-        "heapUsed": 142312
+        "rss": 274432,
+        "heapUsed": 216320
       },
       "ownMemoryDelta": {
-        "rss": 28672,
-        "heapUsed": 142312
+        "rss": 274432,
+        "heapUsed": 216320
       }
     },
     {
       "name": "ready",
-      "duration": 64.67,
-      "ownDuration": 64.67,
+      "duration": 8.76,
+      "ownDuration": 8.76,
       "memoryBefore": {
-        "rss": 300937216,
-        "heapUsed": 246841192,
-        "heapTotal": 273543168
+        "rss": 180502528,
+        "heapUsed": 82830968,
+        "heapTotal": 127262720
       },
       "memoryAfter": {
-        "rss": 301297664,
-        "heapUsed": 247300864,
-        "heapTotal": 273543168
+        "rss": 180817920,
+        "heapUsed": 83125480,
+        "heapTotal": 127262720
       },
       "memoryDelta": {
-        "rss": 360448,
-        "heapUsed": 459672
+        "rss": 315392,
+        "heapUsed": 294512
       },
       "ownMemoryDelta": {
-        "rss": 360448,
-        "heapUsed": 459672
+        "rss": 315392,
+        "heapUsed": 294512
       }
     },
     {
       "name": "app:generate",
-      "duration": 317.53,
-      "ownDuration": 246.42,
+      "duration": 371.17,
+      "ownDuration": 315.19,
       "memoryBefore": {
-        "rss": 301309952,
-        "heapUsed": 247472192,
-        "heapTotal": 273543168
+        "rss": 181194752,
+        "heapUsed": 83435632,
+        "heapTotal": 127262720
       },
       "memoryAfter": {
-        "rss": 303083520,
-        "heapUsed": 247300112,
-        "heapTotal": 274853888
+        "rss": 198459392,
+        "heapUsed": 81313744,
+        "heapTotal": 135680000
       },
       "memoryDelta": {
-        "rss": 1773568,
-        "heapUsed": -172080
+        "rss": 17264640,
+        "heapUsed": -2121888
       },
       "ownMemoryDelta": {
-        "rss": 1392640,
-        "heapUsed": 6218736
+        "rss": 15118336,
+        "heapUsed": -5065800
       }
     },
     {
       "name": "app:resolve",
-      "duration": 5.72,
-      "ownDuration": 5.72,
+      "duration": 5.36,
+      "ownDuration": 5.36,
       "memoryBefore": {
-        "rss": 301342720,
-        "heapUsed": 249610800,
-        "heapTotal": 273543168
+        "rss": 193507328,
+        "heapUsed": 72524032,
+        "heapTotal": 134455296
       },
       "memoryAfter": {
-        "rss": 301342720,
-        "heapUsed": 249690176,
-        "heapTotal": 273543168
+        "rss": 193527808,
+        "heapUsed": 72627120,
+        "heapTotal": 134455296
       },
       "memoryDelta": {
-        "rss": 0,
-        "heapUsed": 79376
+        "rss": 20480,
+        "heapUsed": 103088
       },
       "ownMemoryDelta": {
-        "rss": 0,
-        "heapUsed": 79376
+        "rss": 20480,
+        "heapUsed": 103088
       }
     },
     {
       "name": "app:templates",
-      "duration": 16.43,
-      "ownDuration": 16.43,
+      "duration": 35.81,
+      "ownDuration": 35.81,
       "memoryBefore": {
-        "rss": 301342720,
-        "heapUsed": 250123024,
-        "heapTotal": 273543168
+        "rss": 193626112,
+        "heapUsed": 73108344,
+        "heapTotal": 134455296
       },
       "memoryAfter": {
-        "rss": 301371392,
-        "heapUsed": 251052992,
-        "heapTotal": 273543168
+        "rss": 193937408,
+        "heapUsed": 74687368,
+        "heapTotal": 134717440
       },
       "memoryDelta": {
-        "rss": 28672,
-        "heapUsed": 929968
+        "rss": 311296,
+        "heapUsed": 1579024
       },
       "ownMemoryDelta": {
-        "rss": 28672,
-        "heapUsed": 929968
+        "rss": 311296,
+        "heapUsed": 1579024
       }
     },
     {
       "name": "app:templatesGenerated",
-      "duration": 48.96,
-      "ownDuration": 39.11,
+      "duration": 14.81,
+      "ownDuration": 14.81,
       "memoryBefore": {
-        "rss": 302731264,
-        "heapUsed": 254686728,
-        "heapTotal": 273543168
+        "rss": 196644864,
+        "heapUsed": 80047576,
+        "heapTotal": 135680000
       },
       "memoryAfter": {
-        "rss": 303083520,
-        "heapUsed": 247286568,
-        "heapTotal": 274853888
+        "rss": 198459392,
+        "heapUsed": 81309376,
+        "heapTotal": 135680000
       },
       "memoryDelta": {
-        "rss": 352256,
-        "heapUsed": -7400160
+        "rss": 1814528,
+        "heapUsed": 1261800
       },
       "ownMemoryDelta": {
-        "rss": 352256,
-        "heapUsed": -7401232
-      }
-    },
-    {
-      "name": "builder:generateApp",
-      "duration": 9.85,
-      "ownDuration": 9.85,
-      "memoryBefore": {
-        "rss": 303083520,
-        "heapUsed": 247273104,
-        "heapTotal": 274853888
-      },
-      "memoryAfter": {
-        "rss": 303083520,
-        "heapUsed": 247274176,
-        "heapTotal": 274853888
-      },
-      "memoryDelta": {
-        "rss": 0,
-        "heapUsed": 1072
-      },
-      "ownMemoryDelta": {
-        "rss": 0,
-        "heapUsed": 1072
+        "rss": 1814528,
+        "heapUsed": 1261800
       }
     },
     {
       "name": "build:before",
-      "duration": 71.6,
-      "ownDuration": 71.6,
+      "duration": 37.72,
+      "ownDuration": 37.72,
       "memoryBefore": {
-        "rss": 303087616,
-        "heapUsed": 247324080,
-        "heapTotal": 274853888
+        "rss": 198471680,
+        "heapUsed": 81345792,
+        "heapTotal": 135680000
       },
       "memoryAfter": {
-        "rss": 303210496,
-        "heapUsed": 247749480,
-        "heapTotal": 274853888
+        "rss": 200773632,
+        "heapUsed": 82278600,
+        "heapTotal": 135942144
       },
       "memoryDelta": {
-        "rss": 122880,
-        "heapUsed": 425400
+        "rss": 2301952,
+        "heapUsed": 932808
       },
       "ownMemoryDelta": {
-        "rss": 122880,
-        "heapUsed": 425400
+        "rss": 2301952,
+        "heapUsed": 932808
       }
     },
     {
       "name": "build:bundle",
-      "duration": 148.34,
-      "ownDuration": 34.66,
+      "duration": 1793.72,
+      "ownDuration": 1620.23,
       "memoryBefore": {
-        "rss": 303210496,
-        "heapUsed": 247761712,
-        "heapTotal": 274853888
+        "rss": 200773632,
+        "heapUsed": 82283184,
+        "heapTotal": 135942144
       },
       "memoryAfter": {
-        "rss": 304877568,
-        "heapUsed": 251764848,
-        "heapTotal": 275492864
+        "rss": 256417792,
+        "heapUsed": 119792944,
+        "heapTotal": 234811392
       },
       "memoryDelta": {
-        "rss": 1667072,
-        "heapUsed": 4003136
+        "rss": 55644160,
+        "heapUsed": 37509760
       },
       "ownMemoryDelta": {
-        "rss": 159744,
-        "heapUsed": 665616
+        "rss": 53571584,
+        "heapUsed": 30974312
+      }
+    },
+    {
+      "name": "vite:extend",
+      "duration": 5.98,
+      "ownDuration": 5.98,
+      "memoryBefore": {
+        "rss": 254345216,
+        "heapUsed": 113247120,
+        "heapTotal": 234434560
+      },
+      "memoryAfter": {
+        "rss": 254410752,
+        "heapUsed": 113523752,
+        "heapTotal": 234434560
+      },
+      "memoryDelta": {
+        "rss": 65536,
+        "heapUsed": 276632
+      },
+      "ownMemoryDelta": {
+        "rss": 65536,
+        "heapUsed": 276632
       }
     },
     {
       "name": "vite:client",
-      "duration": 83.85,
-      "ownDuration": 83.85,
+      "duration": 65.4,
+      "ownDuration": 65.4,
       "memoryBefore": {
-        "rss": 303370240,
-        "heapUsed": 248425408,
-        "heapTotal": 275116032
+        "rss": 254410752,
+        "heapUsed": 113531712,
+        "heapTotal": 234434560
       },
       "memoryAfter": {
-        "rss": 304492544,
-        "heapUsed": 250684256,
-        "heapTotal": 275492864
+        "rss": 255426560,
+        "heapUsed": 116774440,
+        "heapTotal": 234811392
       },
       "memoryDelta": {
-        "rss": 1122304,
-        "heapUsed": 2258848
+        "rss": 1015808,
+        "heapUsed": 3242728
       },
       "ownMemoryDelta": {
-        "rss": 1122304,
-        "heapUsed": 2258848
+        "rss": 1015808,
+        "heapUsed": 3242728
       }
     },
     {
       "name": "vite:server",
-      "duration": 29.83,
-      "ownDuration": 29.83,
+      "duration": 102.11,
+      "ownDuration": 95.11,
       "memoryBefore": {
-        "rss": 304492544,
-        "heapUsed": 250684992,
-        "heapTotal": 275492864
+        "rss": 255426560,
+        "heapUsed": 116775424,
+        "heapTotal": 234811392
       },
       "memoryAfter": {
-        "rss": 304877568,
-        "heapUsed": 251763664,
-        "heapTotal": 275492864
+        "rss": 256417792,
+        "heapUsed": 119791512,
+        "heapTotal": 234811392
       },
       "memoryDelta": {
-        "rss": 385024,
-        "heapUsed": 1078672
+        "rss": 991232,
+        "heapUsed": 3016088
       },
       "ownMemoryDelta": {
-        "rss": 385024,
-        "heapUsed": 1078672
+        "rss": 913408,
+        "heapUsed": 2688368
+      }
+    },
+    {
+      "name": "vite:extendConfig",
+      "duration": 7,
+      "ownDuration": 7,
+      "memoryBefore": {
+        "rss": 255430656,
+        "heapUsed": 116829264,
+        "heapTotal": 234811392
+      },
+      "memoryAfter": {
+        "rss": 255508480,
+        "heapUsed": 117156984,
+        "heapTotal": 234811392
+      },
+      "memoryDelta": {
+        "rss": 77824,
+        "heapUsed": 327720
+      },
+      "ownMemoryDelta": {
+        "rss": 77824,
+        "heapUsed": 327720
       }
     },
     {
       "name": "build:done",
-      "duration": 1376.35,
-      "ownDuration": 54.41,
+      "duration": 2459.99,
+      "ownDuration": 83.12,
       "memoryBefore": {
-        "rss": 304877568,
-        "heapUsed": 251766824,
-        "heapTotal": 275492864
+        "rss": 256417792,
+        "heapUsed": 119795168,
+        "heapTotal": 234811392
       },
       "memoryAfter": {
-        "rss": 385810432,
-        "heapUsed": 237085560,
-        "heapTotal": 365801472
+        "rss": 402239488,
+        "heapUsed": 170429104,
+        "heapTotal": 298778624
       },
       "memoryDelta": {
-        "rss": 80932864,
-        "heapUsed": -14681264
+        "rss": 145821696,
+        "heapUsed": 50633936
       },
       "ownMemoryDelta": {
-        "rss": 7114752,
-        "heapUsed": 1876136
+        "rss": 14336000,
+        "heapUsed": 1152112
       }
     },
     {
       "name": "nitro:build",
-      "duration": 1321.94,
-      "ownDuration": 1321.94,
+      "duration": 2376.87,
+      "ownDuration": 2376.87,
       "memoryBefore": {
-        "rss": 309399552,
-        "heapUsed": 253473352,
-        "heapTotal": 275492864
+        "rss": 256536576,
+        "heapUsed": 120800536,
+        "heapTotal": 235335680
       },
       "memoryAfter": {
-        "rss": 383217664,
-        "heapUsed": 236915952,
-        "heapTotal": 365801472
+        "rss": 388022272,
+        "heapUsed": 170282360,
+        "heapTotal": 298778624
       },
       "memoryDelta": {
-        "rss": 73818112,
-        "heapUsed": -16557400
+        "rss": 131485696,
+        "heapUsed": 49481824
       },
       "ownMemoryDelta": {
-        "rss": 73818112,
-        "heapUsed": -16557400
+        "rss": 131485696,
+        "heapUsed": 49481824
       }
     }
   ],
   "slowHooks": [],
   "modules": [
     {
-      "name": "nuxt:pages",
-      "setupTime": 62.23
+      "name": "@nuxt/devtools",
+      "setupTime": 616.01
     },
     {
-      "name": "@nuxt/devtools",
-      "setupTime": 23.97
+      "name": "nuxt:pages",
+      "setupTime": 46.08
     },
     {
       "name": "nuxt:components",
-      "setupTime": 20.92
-    },
-    {
-      "name": "nuxt:imports",
-      "setupTime": 4.2
+      "setupTime": 18.94
     },
     {
       "name": "nuxt:meta",
-      "setupTime": 2.47
+      "setupTime": 13.14
+    },
+    {
+      "name": "nuxt:imports",
+      "setupTime": 8.67
     },
     {
       "name": "nuxt:nuxt-config-schema",
-      "setupTime": 1.01
-    },
-    {
-      "name": "nuxt:compiler",
-      "setupTime": 0.66
+      "setupTime": 5.83
     },
     {
       "name": "@nuxt/telemetry",
-      "setupTime": 0.05
+      "setupTime": 0.61
+    },
+    {
+      "name": "nuxt:compiler",
+      "setupTime": 0.37
     }
   ],
   "bundlerPlugins": [
@@ -622,61 +691,10 @@
       "name": "nitro:node-externals",
       "hooks": {
         "resolveId": {
-          "totalTime": 20907.11,
+          "totalTime": 37453.41,
           "count": 385,
-          "maxTime": 591.69,
-          "avgTime": 54.3
-        }
-      }
-    },
-    {
-      "name": "vite:vue",
-      "hooks": {
-        "transform": {
-          "totalTime": 4096.68,
-          "count": 28,
-          "maxTime": 509.42,
-          "avgTime": 146.31
-        },
-        "resolveId": {
-          "totalTime": 0.02,
-          "count": 15,
-          "maxTime": 0,
-          "avgTime": 0
-        },
-        "load": {
-          "totalTime": 0.17,
-          "count": 2,
-          "maxTime": 0.17,
-          "avgTime": 0.09
-        }
-      }
-    },
-    {
-      "name": "vite:optimized-deps",
-      "hooks": {
-        "resolveId": {
-          "totalTime": 0.5,
-          "count": 534,
-          "maxTime": 0.03,
-          "avgTime": 0
-        },
-        "load": {
-          "totalTime": 1814.84,
-          "count": 181,
-          "maxTime": 615.59,
-          "avgTime": 10.03
-        }
-      }
-    },
-    {
-      "name": "vite:client-inject",
-      "hooks": {
-        "transform": {
-          "totalTime": 1262.74,
-          "count": 280,
-          "maxTime": 482.15,
-          "avgTime": 4.51
+          "maxTime": 1146.17,
+          "avgTime": 97.28
         }
       }
     },
@@ -684,165 +702,10 @@
       "name": "nitro:alias",
       "hooks": {
         "resolveId": {
-          "totalTime": 1149.21,
+          "totalTime": 1679.23,
           "count": 584,
-          "maxTime": 215.97,
-          "avgTime": 1.97
-        }
-      }
-    },
-    {
-      "name": "nuxt:imports-transform",
-      "hooks": {
-        "transform": {
-          "totalTime": 652.86,
-          "count": 560,
-          "maxTime": 33.41,
-          "avgTime": 1.17
-        }
-      }
-    },
-    {
-      "name": "vite:css",
-      "hooks": {
-        "load": {
-          "totalTime": 0.02,
-          "count": 4,
-          "maxTime": 0.01,
-          "avgTime": 0
-        },
-        "transform": {
-          "totalTime": 650.97,
-          "count": 4,
-          "maxTime": 314.99,
-          "avgTime": 162.74
-        }
-      }
-    },
-    {
-      "name": "vite:import-analysis",
-      "hooks": {
-        "transform": {
-          "totalTime": 520.66,
-          "count": 280,
-          "maxTime": 32.28,
-          "avgTime": 1.86
-        }
-      }
-    },
-    {
-      "name": "vite:resolve",
-      "hooks": {
-        "resolveId": {
-          "totalTime": 519.16,
-          "count": 930,
-          "maxTime": 29.21,
-          "avgTime": 0.56
-        }
-      }
-    },
-    {
-      "name": "vite-plugin-vue-tracer",
-      "hooks": {
-        "transform": {
-          "totalTime": 291.19,
-          "count": 560,
-          "maxTime": 47.98,
-          "avgTime": 0.52
-        }
-      }
-    },
-    {
-      "name": "nuxt:import-protection:impound:trace",
-      "hooks": {
-        "transform": {
-          "totalTime": 271.97,
-          "count": 280,
-          "maxTime": 27.64,
-          "avgTime": 0.97
-        }
-      }
-    },
-    {
-      "name": "unctx:transform",
-      "hooks": {
-        "transform": {
-          "totalTime": 241.21,
-          "count": 560,
-          "maxTime": 16.91,
-          "avgTime": 0.43
-        }
-      }
-    },
-    {
-      "name": "impound:trace",
-      "hooks": {
-        "transform": {
-          "totalTime": 219.66,
-          "count": 181,
-          "maxTime": 24.11,
-          "avgTime": 1.21
-        }
-      }
-    },
-    {
-      "name": "alias",
-      "hooks": {
-        "resolveId": {
-          "totalTime": 151.12,
-          "count": 946,
-          "maxTime": 9.87,
-          "avgTime": 0.16
-        }
-      }
-    },
-    {
-      "name": "nuxt:pages-macros-transform",
-      "hooks": {
-        "transform": {
-          "totalTime": 150.78,
-          "count": 36,
-          "maxTime": 29.57,
-          "avgTime": 4.19
-        }
-      }
-    },
-    {
-      "name": "vite:define",
-      "hooks": {
-        "transform": {
-          "totalTime": 150.25,
-          "count": 280,
-          "maxTime": 7.22,
-          "avgTime": 0.54
-        }
-      }
-    },
-    {
-      "name": "vite:esbuild",
-      "hooks": {
-        "transform": {
-          "totalTime": 105.16,
-          "count": 280,
-          "maxTime": 86.58,
-          "avgTime": 0.38
-        }
-      }
-    },
-    {
-      "name": "nuxt:import-protection:impound",
-      "hooks": {
-        "resolveId": {
-          "totalTime": 93.02,
-          "count": 946,
-          "maxTime": 1.2,
-          "avgTime": 0.1
-        },
-        "load": {
-          "totalTime": 0.31,
-          "count": 276,
-          "maxTime": 0.03,
-          "avgTime": 0
+          "maxTime": 360.19,
+          "avgTime": 2.88
         }
       }
     },
@@ -850,27 +713,16 @@
       "name": "nitro:virtual",
       "hooks": {
         "resolveId": {
-          "totalTime": 33.53,
+          "totalTime": 53.95,
           "count": 6237,
-          "maxTime": 0.36,
+          "maxTime": 1.85,
           "avgTime": 0.01
         },
         "load": {
-          "totalTime": 57.16,
+          "totalTime": 138.86,
           "count": 714,
-          "maxTime": 40.48,
-          "avgTime": 0.08
-        }
-      }
-    },
-    {
-      "name": "nuxt:compiler:keyed-functions",
-      "hooks": {
-        "transform": {
-          "totalTime": 67.29,
-          "count": 258,
-          "maxTime": 15.34,
-          "avgTime": 0.26
+          "maxTime": 71.2,
+          "avgTime": 0.19
         }
       }
     },
@@ -878,26 +730,243 @@
       "name": "nitro:inject",
       "hooks": {
         "transform": {
-          "totalTime": 61.62,
+          "totalTime": 127.23,
           "count": 79,
-          "maxTime": 4.2,
-          "avgTime": 0.78
+          "maxTime": 15.94,
+          "avgTime": 1.61
         }
       }
     },
     {
-      "name": "nuxt:virtual",
+      "name": "vite:define",
+      "hooks": {
+        "transform": {
+          "totalTime": 88.47,
+          "count": 3,
+          "maxTime": 88.31,
+          "avgTime": 29.49
+        }
+      }
+    },
+    {
+      "name": "vite:import-analysis",
+      "hooks": {
+        "transform": {
+          "totalTime": 26.41,
+          "count": 3,
+          "maxTime": 25.4,
+          "avgTime": 8.8
+        }
+      }
+    },
+    {
+      "name": "alias",
       "hooks": {
         "resolveId": {
-          "totalTime": 57.19,
-          "count": 466,
-          "maxTime": 1.24,
-          "avgTime": 0.12
+          "totalTime": 16.99,
+          "count": 10,
+          "maxTime": 8.38,
+          "avgTime": 1.7
+        }
+      }
+    },
+    {
+      "name": "nitro:replace",
+      "hooks": {
+        "transform": {
+          "totalTime": 14.72,
+          "count": 79,
+          "maxTime": 2.56,
+          "avgTime": 0.19
+        }
+      }
+    },
+    {
+      "name": "nitro:raw",
+      "hooks": {
+        "resolveId": {
+          "totalTime": 12.49,
+          "count": 633,
+          "maxTime": 0.44,
+          "avgTime": 0.02
         },
         "load": {
-          "totalTime": 0.53,
-          "count": 40,
-          "maxTime": 0.07,
+          "totalTime": 0.34,
+          "count": 79,
+          "maxTime": 0.17,
+          "avgTime": 0
+        },
+        "transform": {
+          "totalTime": 0.73,
+          "count": 79,
+          "maxTime": 0.27,
+          "avgTime": 0.01
+        }
+      }
+    },
+    {
+      "name": "nuxt:imports-transform",
+      "hooks": {
+        "transform": {
+          "totalTime": 12.41,
+          "count": 6,
+          "maxTime": 4.85,
+          "avgTime": 2.07
+        }
+      }
+    },
+    {
+      "name": "nitro:dynamic-require",
+      "hooks": {
+        "resolveId": {
+          "totalTime": 0.82,
+          "count": 633,
+          "maxTime": 0.45,
+          "avgTime": 0
+        },
+        "load": {
+          "totalTime": 5.77,
+          "count": 79,
+          "maxTime": 5.08,
+          "avgTime": 0.07
+        },
+        "transform": {
+          "totalTime": 1.13,
+          "count": 79,
+          "maxTime": 0.21,
+          "avgTime": 0.01
+        }
+      }
+    },
+    {
+      "name": "nuxt:import-protection:impound",
+      "hooks": {
+        "resolveId": {
+          "totalTime": 4.76,
+          "count": 10,
+          "maxTime": 1.91,
+          "avgTime": 0.48
+        },
+        "load": {
+          "totalTime": 0.09,
+          "count": 3,
+          "maxTime": 0.08,
+          "avgTime": 0.03
+        }
+      }
+    },
+    {
+      "name": "vite:resolve",
+      "hooks": {
+        "resolveId": {
+          "totalTime": 4.53,
+          "count": 9,
+          "maxTime": 2.55,
+          "avgTime": 0.5
+        }
+      }
+    },
+    {
+      "name": "vite:pre-alias",
+      "hooks": {
+        "resolveId": {
+          "totalTime": 3.47,
+          "count": 7,
+          "maxTime": 3,
+          "avgTime": 0.5
+        }
+      }
+    },
+    {
+      "name": "impound:trace",
+      "hooks": {
+        "transform": {
+          "totalTime": 2.99,
+          "count": 2,
+          "maxTime": 2.35,
+          "avgTime": 1.49
+        }
+      }
+    },
+    {
+      "name": "nuxt:module-preload-polyfill",
+      "hooks": {
+        "transform": {
+          "totalTime": 2.52,
+          "count": 2,
+          "maxTime": 2.48,
+          "avgTime": 1.26
+        }
+      }
+    },
+    {
+      "name": "nitro:commonjs",
+      "hooks": {
+        "load": {
+          "totalTime": 0.4,
+          "count": 52,
+          "maxTime": 0.17,
+          "avgTime": 0.01
+        },
+        "transform": {
+          "totalTime": 2.08,
+          "count": 79,
+          "maxTime": 1.06,
+          "avgTime": 0.03
+        }
+      }
+    },
+    {
+      "name": "unctx:transform",
+      "hooks": {
+        "transform": {
+          "totalTime": 1.4,
+          "count": 6,
+          "maxTime": 0.52,
+          "avgTime": 0.23
+        }
+      }
+    },
+    {
+      "name": "nuxt:import-protection:impound:trace",
+      "hooks": {
+        "transform": {
+          "totalTime": 0.99,
+          "count": 3,
+          "maxTime": 0.45,
+          "avgTime": 0.33
+        }
+      }
+    },
+    {
+      "name": "nitro:unimport",
+      "hooks": {
+        "transform": {
+          "totalTime": 0.95,
+          "count": 79,
+          "maxTime": 0.08,
+          "avgTime": 0.01
+        }
+      }
+    },
+    {
+      "name": "nuxt:compiler:keyed-functions",
+      "hooks": {
+        "transform": {
+          "totalTime": 0.92,
+          "count": 2,
+          "maxTime": 0.47,
+          "avgTime": 0.46
+        }
+      }
+    },
+    {
+      "name": "nitro:esbuild",
+      "hooks": {
+        "transform": {
+          "totalTime": 0.87,
+          "count": 79,
+          "maxTime": 0.16,
           "avgTime": 0.01
         }
       }
@@ -906,54 +975,10 @@
       "name": "nuxt:remove-plugin-metadata",
       "hooks": {
         "transform": {
-          "totalTime": 45.59,
-          "count": 560,
-          "maxTime": 7.88,
-          "avgTime": 0.08
-        }
-      }
-    },
-    {
-      "name": "vite-plugin-inspect",
-      "hooks": {
-        "load": {
-          "totalTime": 20.97,
-          "count": 559,
-          "maxTime": 3.38,
-          "avgTime": 0.04
-        }
-      }
-    },
-    {
-      "name": "nuxt:components-loader",
-      "hooks": {
-        "transform": {
-          "totalTime": 9.4,
-          "count": 280,
-          "maxTime": 4.31,
-          "avgTime": 0.03
-        }
-      }
-    },
-    {
-      "name": "nitro:replace",
-      "hooks": {
-        "transform": {
-          "totalTime": 8.47,
-          "count": 79,
-          "maxTime": 1.35,
-          "avgTime": 0.11
-        }
-      }
-    },
-    {
-      "name": "vite:pre-alias",
-      "hooks": {
-        "resolveId": {
-          "totalTime": 7.9,
-          "count": 534,
-          "maxTime": 0.12,
-          "avgTime": 0.01
+          "totalTime": 0.73,
+          "count": 6,
+          "maxTime": 0.37,
+          "avgTime": 0.12
         }
       }
     },
@@ -961,212 +986,10 @@
       "name": "vite:asset",
       "hooks": {
         "load": {
-          "totalTime": 6.92,
-          "count": 273,
-          "maxTime": 0.2,
-          "avgTime": 0.03
-        },
-        "resolveId": {
-          "totalTime": 0.08,
-          "count": 15,
-          "maxTime": 0.01,
-          "avgTime": 0.01
-        }
-      }
-    },
-    {
-      "name": "nitro:raw",
-      "hooks": {
-        "resolveId": {
-          "totalTime": 6.2,
-          "count": 633,
-          "maxTime": 0.1,
-          "avgTime": 0.01
-        },
-        "load": {
-          "totalTime": 0.07,
-          "count": 79,
-          "maxTime": 0,
-          "avgTime": 0
-        },
-        "transform": {
-          "totalTime": 0.12,
-          "count": 79,
-          "maxTime": 0,
-          "avgTime": 0
-        }
-      }
-    },
-    {
-      "name": "nuxt:prehydrate-transform",
-      "hooks": {
-        "transform": {
-          "totalTime": 5.09,
-          "count": 4,
-          "maxTime": 1.47,
-          "avgTime": 1.27
-        }
-      }
-    },
-    {
-      "name": "nuxt:component-name-plugin",
-      "hooks": {
-        "transform": {
-          "totalTime": 4.04,
-          "count": 120,
-          "maxTime": 2.23,
-          "avgTime": 0.03
-        }
-      }
-    },
-    {
-      "name": "vite:css-post",
-      "hooks": {
-        "transform": {
-          "totalTime": 3.31,
-          "count": 4,
-          "maxTime": 3.25,
-          "avgTime": 0.83
-        }
-      }
-    },
-    {
-      "name": "nuxt:layer-aliasing",
-      "hooks": {
-        "transform": {
-          "totalTime": 1.15,
-          "count": 32,
-          "maxTime": 0.29,
-          "avgTime": 0.04
-        },
-        "resolveId": {
-          "totalTime": 0.9,
-          "count": 8,
-          "maxTime": 0.52,
-          "avgTime": 0.11
-        }
-      }
-    },
-    {
-      "name": "nitro:dynamic-require",
-      "hooks": {
-        "resolveId": {
-          "totalTime": 0.22,
-          "count": 633,
-          "maxTime": 0,
-          "avgTime": 0
-        },
-        "load": {
-          "totalTime": 0.43,
-          "count": 79,
-          "maxTime": 0.09,
-          "avgTime": 0.01
-        },
-        "transform": {
-          "totalTime": 0.99,
-          "count": 79,
-          "maxTime": 0.2,
-          "avgTime": 0.01
-        }
-      }
-    },
-    {
-      "name": "nitro:commonjs",
-      "hooks": {
-        "load": {
-          "totalTime": 0.18,
-          "count": 52,
-          "maxTime": 0.03,
-          "avgTime": 0
-        },
-        "transform": {
-          "totalTime": 1.32,
-          "count": 79,
-          "maxTime": 0.63,
-          "avgTime": 0.02
-        }
-      }
-    },
-    {
-      "name": "nuxt:module-preload-polyfill",
-      "hooks": {
-        "transform": {
-          "totalTime": 1.28,
-          "count": 181,
-          "maxTime": 0.75,
-          "avgTime": 0.01
-        }
-      }
-    },
-    {
-      "name": "nuxt:runtime-paths-dep",
-      "hooks": {
-        "transform": {
-          "totalTime": 1.27,
-          "count": 181,
-          "maxTime": 0.05,
-          "avgTime": 0.01
-        }
-      }
-    },
-    {
-      "name": "impound",
-      "hooks": {
-        "resolveId": {
-          "totalTime": 0.82,
-          "count": 493,
-          "maxTime": 0.08,
-          "avgTime": 0
-        },
-        "load": {
-          "totalTime": 0.11,
-          "count": 177,
-          "maxTime": 0.02,
-          "avgTime": 0
-        }
-      }
-    },
-    {
-      "name": "nuxt:tree-shake-template",
-      "hooks": {
-        "transform": {
-          "totalTime": 0.91,
-          "count": 14,
-          "maxTime": 0.29,
-          "avgTime": 0.07
-        }
-      }
-    },
-    {
-      "name": "nuxt:dev-style-ssr",
-      "hooks": {
-        "transform": {
-          "totalTime": 0.85,
-          "count": 181,
-          "maxTime": 0.21,
-          "avgTime": 0
-        }
-      }
-    },
-    {
-      "name": "nitro:esbuild",
-      "hooks": {
-        "transform": {
-          "totalTime": 0.73,
-          "count": 79,
-          "maxTime": 0.15,
-          "avgTime": 0.01
-        }
-      }
-    },
-    {
-      "name": "nuxt:optimize-deps-hint",
-      "hooks": {
-        "resolveId": {
-          "totalTime": 0.7,
-          "count": 588,
-          "maxTime": 0.04,
-          "avgTime": 0
+          "totalTime": 0.63,
+          "count": 2,
+          "maxTime": 0.5,
+          "avgTime": 0.31
         }
       }
     },
@@ -1174,49 +997,32 @@
       "name": "vite:dynamic-import-vars",
       "hooks": {
         "transform": {
-          "totalTime": 0.63,
-          "count": 16,
-          "maxTime": 0.26,
-          "avgTime": 0.04
+          "totalTime": 0.41,
+          "count": 2,
+          "maxTime": 0.39,
+          "avgTime": 0.21
         }
       }
     },
     {
-      "name": "nitro:unimport",
+      "name": "vite-plugin-vue-tracer",
       "hooks": {
         "transform": {
-          "totalTime": 0.54,
-          "count": 79,
-          "maxTime": 0.02,
-          "avgTime": 0.01
+          "totalTime": 0.37,
+          "count": 6,
+          "maxTime": 0.21,
+          "avgTime": 0.06
         }
       }
     },
     {
-      "name": "nuxt:head:unhead-imports",
+      "name": "vite-plugin-inspect",
       "hooks": {
-        "transform": {
-          "totalTime": 0.24,
-          "count": 12,
-          "maxTime": 0.03,
-          "avgTime": 0.02
-        }
-      }
-    },
-    {
-      "name": "vite:modulepreload-polyfill",
-      "hooks": {
-        "resolveId": {
-          "totalTime": 0.05,
-          "count": 1,
-          "maxTime": 0.05,
-          "avgTime": 0.05
-        },
         "load": {
-          "totalTime": 0.11,
-          "count": 1,
-          "maxTime": 0.11,
-          "avgTime": 0.11
+          "totalTime": 0.3,
+          "count": 5,
+          "maxTime": 0.17,
+          "avgTime": 0.06
         }
       }
     },
@@ -1224,20 +1030,126 @@
       "name": "nitro:json",
       "hooks": {
         "transform": {
-          "totalTime": 0.11,
+          "totalTime": 0.28,
           "count": 79,
+          "maxTime": 0.09,
+          "avgTime": 0
+        }
+      }
+    },
+    {
+      "name": "nuxt:runtime-paths-dep",
+      "hooks": {
+        "transform": {
+          "totalTime": 0.24,
+          "count": 2,
+          "maxTime": 0.2,
+          "avgTime": 0.12
+        }
+      }
+    },
+    {
+      "name": "vite:esbuild",
+      "hooks": {
+        "transform": {
+          "totalTime": 0.23,
+          "count": 3,
+          "maxTime": 0.21,
+          "avgTime": 0.08
+        }
+      }
+    },
+    {
+      "name": "vite:optimized-deps",
+      "hooks": {
+        "resolveId": {
+          "totalTime": 0.06,
+          "count": 7,
+          "maxTime": 0.03,
+          "avgTime": 0.01
+        },
+        "load": {
+          "totalTime": 0.16,
+          "count": 2,
+          "maxTime": 0.15,
+          "avgTime": 0.08
+        }
+      }
+    },
+    {
+      "name": "vite:modulepreload-polyfill",
+      "hooks": {
+        "resolveId": {
+          "totalTime": 0.12,
+          "count": 1,
+          "maxTime": 0.12,
+          "avgTime": 0.12
+        },
+        "load": {
+          "totalTime": 0.1,
+          "count": 1,
+          "maxTime": 0.1,
+          "avgTime": 0.1
+        }
+      }
+    },
+    {
+      "name": "nuxt:dev-style-ssr",
+      "hooks": {
+        "transform": {
+          "totalTime": 0.19,
+          "count": 2,
+          "maxTime": 0.19,
+          "avgTime": 0.09
+        }
+      }
+    },
+    {
+      "name": "vite:client-inject",
+      "hooks": {
+        "transform": {
+          "totalTime": 0.19,
+          "count": 3,
+          "maxTime": 0.17,
+          "avgTime": 0.06
+        }
+      }
+    },
+    {
+      "name": "impound",
+      "hooks": {
+        "resolveId": {
+          "totalTime": 0.17,
+          "count": 6,
+          "maxTime": 0.07,
+          "avgTime": 0.03
+        },
+        "load": {
+          "totalTime": 0.01,
+          "count": 2,
           "maxTime": 0,
           "avgTime": 0
         }
       }
     },
     {
-      "name": "vite:css-analysis",
+      "name": "nuxt:components-loader",
       "hooks": {
         "transform": {
-          "totalTime": 0.04,
-          "count": 4,
-          "maxTime": 0.01,
+          "totalTime": 0.13,
+          "count": 3,
+          "maxTime": 0.09,
+          "avgTime": 0.04
+        }
+      }
+    },
+    {
+      "name": "nuxt:optimize-deps-hint",
+      "hooks": {
+        "resolveId": {
+          "totalTime": 0.08,
+          "count": 7,
+          "maxTime": 0.04,
           "avgTime": 0.01
         }
       }
@@ -1246,13 +1158,24 @@
       "name": "nitro:node-resolve",
       "hooks": {
         "load": {
-          "totalTime": 0.02,
+          "totalTime": 0.08,
           "count": 52,
-          "maxTime": 0,
+          "maxTime": 0.03,
           "avgTime": 0
+        }
+      }
+    },
+    {
+      "name": "nuxt:component-name-plugin",
+      "hooks": {
+        "transform": {
+          "totalTime": 0.05,
+          "count": 2,
+          "maxTime": 0.05,
+          "avgTime": 0.03
         }
       }
     }
   ],
-  "timestamp": "2026-06-12T15:15:42.088Z"
+  "timestamp": "2026-06-15T03:39:14.473Z"
 }

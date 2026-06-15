@@ -3486,6 +3486,7 @@ section[id], footer[id] {
 }
 
 .contact-form input:not([type="checkbox"]),
+.contact-form select,
 .contact-form textarea {
   width: 100%;
   border: 0;
@@ -3497,9 +3498,20 @@ section[id], footer[id] {
   outline: 0;
 }
 
-.contact-form input:not([type="checkbox"]) {
+.contact-form input:not([type="checkbox"]),
+.contact-form select {
   height: 45px;
   padding: 0 12px;
+}
+
+.contact-form select {
+  appearance: none;
+  background:
+    linear-gradient(45deg, transparent 50%, #121212 50%) calc(100% - 18px) 50% / 6px 6px no-repeat,
+    linear-gradient(135deg, #121212 50%, transparent 50%) calc(100% - 14px) 50% / 6px 6px no-repeat,
+    #fff;
+  cursor: pointer;
+  padding-right: 34px;
 }
 
 .contact-form textarea {
@@ -3514,11 +3526,13 @@ section[id], footer[id] {
 }
 
 .contact-form input:not([type="checkbox"]):focus,
+.contact-form select:focus,
 .contact-form textarea:focus {
   box-shadow: 0 0 0 2px #39b54a inset;
 }
 
 .contact-field.has-error input,
+.contact-field.has-error select,
 .contact-field.has-error textarea {
   box-shadow: 0 0 0 2px #ff8f82 inset;
 }
@@ -3693,6 +3707,7 @@ section[id], footer[id] {
 }
 
 .partnership-field input,
+.partnership-field select,
 .partnership-field textarea {
   width: 100%;
   border: 0;
@@ -3705,8 +3720,24 @@ section[id], footer[id] {
   font-size: 16px;
 }
 
-.partnership-field input {
+.partnership-field input,
+.partnership-field select {
   height: 31px;
+}
+
+.partnership-field select {
+  appearance: none;
+  background:
+    linear-gradient(45deg, transparent 50%, #fff 50%) calc(100% - 18px) 50% / 6px 6px no-repeat,
+    linear-gradient(135deg, #fff 50%, transparent 50%) calc(100% - 14px) 50% / 6px 6px no-repeat,
+    transparent;
+  cursor: pointer;
+  padding-right: 34px;
+}
+
+.partnership-field select option {
+  background: #fff;
+  color: #121212;
 }
 
 .partnership-field textarea {
@@ -3715,11 +3746,13 @@ section[id], footer[id] {
 }
 
 .partnership-field input:focus,
+.partnership-field select:focus,
 .partnership-field textarea:focus {
   border-bottom-color: #fde33b;
 }
 
 .partnership-field.has-error input,
+.partnership-field.has-error select,
 .partnership-field.has-error textarea {
   border-bottom-color: #ff9b8f;
 }
