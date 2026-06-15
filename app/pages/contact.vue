@@ -278,7 +278,7 @@ onMounted(() => {
           </article>
 
           <article class="contact-panel contact-map-panel" aria-label="TWF office map">
-            <img :src="`${contactAssetPath}/hq-location-map.png`" alt="Map view around TWF office">
+            <img :src="`${contactAssetPath}/hq-location-map.webp`" alt="Map view around TWF office">
             <div class="contact-map-overlay">
               <span class="contact-map-pin">
                 <img :src="`${contactAssetPath}/map-pin.svg`" alt="">

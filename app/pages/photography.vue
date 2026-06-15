@@ -53,28 +53,28 @@ const portfolioItems = [
     className: 'large',
     title: 'Apex Motors: "Nightfall"',
     meta: 'Motion • Automotive',
-    src: `${assetPath}/automotive-campaign.png`,
+    src: `${assetPath}/automotive-campaign.webp`,
     alt: 'Black sports car in a neon-lit studio'
   },
   {
     className: 'tall',
     title: 'Vogue Vanguard',
     meta: 'Stills • Editorial',
-    src: `${assetPath}/fashion-editorial.png`,
+    src: `${assetPath}/fashion-editorial.webp`,
     alt: 'Editorial portrait lit with pink and green accents'
   },
   {
     className: 'wide',
     title: 'Air Defy Launch',
     meta: 'Commercial • Apparel',
-    src: `${assetPath}/product-drop.png`,
+    src: `${assetPath}/product-drop.webp`,
     alt: 'Black running shoe exploding through colorful powder'
   },
   {
     className: 'wide mono',
     title: 'Sonic Architecture',
     meta: 'Motion • Tech',
-    src: `${assetPath}/tech-commercial.png`,
+    src: `${assetPath}/tech-commercial.webp`,
     alt: 'Monochrome reel-to-reel recording equipment'
   }
 ]

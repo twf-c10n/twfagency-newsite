@@ -18,7 +18,7 @@ const route = useRoute()
 const rawSlug = route.params.slug
 const slug = Array.isArray(rawSlug) ? rawSlug[0] : String(rawSlug ?? '')
 const aboutAssetPath = '/assets/about-figma'
-const fallbackProjectMedia = '/assets/Abstract_grain.jpg'
+const fallbackProjectMedia = '/assets/Abstract_grain.webp'
 const runtimeConfig = useRuntimeConfig()
 const apiBaseUrl = String(runtimeConfig.public.apiBaseUrl || '')
 

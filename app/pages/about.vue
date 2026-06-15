@@ -13,9 +13,9 @@ useHead({
 const assetPath = '/assets/about-figma'
 
 const storyImages = [
-  { src: `${assetPath}/story-left.png`, alt: 'TWF agency event installation' },
-  { src: `${assetPath}/story-center.png`, alt: 'TWF team portrait' },
-  { src: `${assetPath}/story-right.png`, alt: 'TWF team celebration' }
+  { src: `${assetPath}/story-left.webp`, alt: 'TWF agency event installation' },
+  { src: `${assetPath}/story-center.webp`, alt: 'TWF team portrait' },
+  { src: `${assetPath}/story-right.webp`, alt: 'TWF team celebration' }
 ]
 
 const storySets = [storyImages, storyImages]
@@ -33,7 +33,7 @@ const partners = [
     name: 'Google',
     className: 'partner-google',
     images: [
-      { src: `${assetPath}/google-g.png`, alt: 'Google' },
+      { src: `${assetPath}/google-g.webp`, alt: 'Google' },
       { src: `${assetPath}/google-partner.svg`, alt: 'Google Partner' }
     ]
   },
@@ -41,7 +41,7 @@ const partners = [
     name: 'Meta',
     className: 'partner-meta',
     images: [
-      { src: `${assetPath}/meta-mark.png`, alt: 'Meta' },
+      { src: `${assetPath}/meta-mark.webp`, alt: 'Meta' },
       { src: `${assetPath}/meta-partner.svg`, alt: 'Agency Partner' }
     ]
   },
@@ -111,7 +111,7 @@ const socials = [
               Performance Creative Services.
             </p>
           </div>
-          <img src="/assets/about-figma/team-event.png" alt="TWF team at an event">
+          <img src="/assets/about-figma/team-event.webp" alt="TWF team at an event">
         </div>
       </section>
 
@@ -141,7 +141,7 @@ const socials = [
             to take action and fuel your<br>
             business growth with measurable results."
           </blockquote>
-          <img src="/assets/about-figma/founder.png" alt="Narongyod Mahittivanicha">
+          <img src="/assets/about-figma/founder.webp" alt="Narongyod Mahittivanicha">
           <p>
             <strong>Narongyod Mahittivanicha</strong>
             <span>Cofounder</span>

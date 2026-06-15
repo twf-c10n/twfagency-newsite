@@ -20,7 +20,7 @@ const services = [
     id: 'media-strategy',
     title: 'Media Strategy',
     eyebrow: 'Planning System',
-    image: `${assetPath}/media-strategy.jpg`,
+    image: `${assetPath}/media-strategy.webp`,
     accent: '#39b54a',
     description:
       'We map the full funnel from audience insight to channel mix, building campaign architecture that makes every baht work harder.',
@@ -30,7 +30,7 @@ const services = [
     id: 'performance-marketing',
     title: 'Performance Marketing',
     eyebrow: 'Growth Engine',
-    image: `${assetPath}/performance-marketing.jpg`,
+    image: `${assetPath}/performance-marketing.webp`,
     accent: '#00a8de',
     description:
       'Always-on optimization across paid platforms with creative testing, conversion tracking, and measurable growth loops.',
@@ -40,7 +40,7 @@ const services = [
     id: 'creative-solutions',
     title: 'Creative Solutions',
     eyebrow: 'Creative Studio',
-    image: `${assetPath}/creative-solutions.jpg`,
+    image: `${assetPath}/creative-solutions.webp`,
     accent: '#eb2d2e',
     description:
       'Campaign ideas, key visuals, motion, and content systems designed to stop the scroll and drive action.',
@@ -50,7 +50,7 @@ const services = [
     id: 'crm-solutions',
     title: 'CRM Solutions',
     eyebrow: 'Lifecycle Design',
-    image: `${assetPath}/crm-solutions.jpg`,
+    image: `${assetPath}/crm-solutions.webp`,
     accent: '#93278f',
     description:
       'Lifecycle journeys that turn first-party data into smarter segmentation, retention, and repeat purchase.',
@@ -60,7 +60,7 @@ const services = [
     id: 'influencer-kol',
     title: 'Influencer & KOL Affiliate Marketing',
     eyebrow: 'Creator Network',
-    image: `${assetPath}/influencer-kol.jpg`,
+    image: `${assetPath}/influencer-kol.webp`,
     accent: '#fde92b',
     description:
       'Creator programs built around audience fit, credible storytelling, and trackable business outcomes.',
@@ -70,7 +70,7 @@ const services = [
     id: 'analytics',
     title: 'Digital Marketing Analytics',
     eyebrow: 'Insight Layer',
-    image: `${assetPath}/analytics.jpg`,
+    image: `${assetPath}/analytics.webp`,
     accent: '#00a8de',
     description:
       'Dashboards, tagging, and insight frameworks that clarify what is working and where to scale next.',
@@ -80,7 +80,7 @@ const services = [
     id: 'line-business',
     title: 'LINE Service for Business',
     eyebrow: 'Messaging Commerce',
-    image: `${assetPath}/line-business.jpg`,
+    image: `${assetPath}/line-business.webp`,
     accent: '#39b54a',
     description:
       'LINE OA, CRM, commerce, and messaging solutions for Thai brands that need tighter customer relationships.',
@@ -90,7 +90,7 @@ const services = [
     id: 'ai-video-analytics',
     title: 'AI Video Analytics for Retail',
     eyebrow: 'Retail Intelligence',
-    image: `${assetPath}/analytics.jpg`,
+    image: `${assetPath}/analytics.webp`,
     accent: '#180dfd',
     description:
       'AI-powered video analytics that translate in-store behavior into actionable retail insight, helping teams improve operations and customer experience.',

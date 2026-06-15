@@ -29,7 +29,7 @@ type ProjectCategoryView = {
 }
 
 const aboutAssetPath = '/assets/about-figma'
-const fallbackProjectMedia = '/assets/Abstract_grain.jpg'
+const fallbackProjectMedia = '/assets/Abstract_grain.webp'
 const activeCategoryId = ref('')
 const runtimeConfig = useRuntimeConfig()
 const apiBaseUrl = String(runtimeConfig.public.apiBaseUrl || '')

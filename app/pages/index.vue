@@ -24,34 +24,34 @@ useHead({
     },
     {
       rel: 'preload',
-      href: '/assets/hero-gradient.png',
+      href: '/assets/hero-gradient.webp',
       as: 'image',
-      type: 'image/png'
+      type: 'image/webp'
     }
   ]
 })
 
 const clientLogos = [
-  { label: 'TrueCoffee', src: '/assets/client-logos/client-logo-12.png' },
-  { label: 'UNICEF', src: '/assets/client-logos/client-logo-10.png' },
-  { label: 'SCG', src: '/assets/client-logos/client-logo-07.png' },
-  { label: 'SC Asset', src: '/assets/client-logos/client-logo-16.png' },
-  { label: 'Pruksa', src: '/assets/client-logos/client-logo-15.png' },
-  { label: 'Kubota', src: '/assets/client-logos/client-logo-18.png' },
-  { label: 'HomePro', src: '/assets/client-logos/client-logo-01.png' },
-  { label: 'GS Battery', src: '/assets/client-logos/client-logo-03.png' },
-  { label: 'Certainty', src: '/assets/client-logos/client-logo-02.png' },
-  { label: 'Bangkok Insurance', src: '/assets/client-logos/client-logo-17.png' },
-  { label: 'Double Goose', src: '/assets/client-logos/client-logo-14.png' },
-  { label: 'BabyLove', src: '/assets/client-logos/client-logo-19.png' },
-  { label: 'ACUVUE', src: '/assets/client-logos/client-logo-20.png' },
-  { label: 'Acer', src: '/assets/client-logos/client-logo-11.png' },
-  { label: 'ViMUT Hospital', src: '/assets/client-logos/client-logo-09.png' },
-  { label: "Dentiste' Plus White", src: '/assets/client-logos/client-logo-08.png' },
-  { label: 'ROJUKISS', src: '/assets/client-logos/client-logo-05.png' },
-  { label: 'Beger', src: '/assets/client-logos/client-logo-06.png' },
-  { label: 'Syngenta', src: '/assets/client-logos/client-logo-04.png' },
-  { label: 'Taro', src: '/assets/client-logos/client-logo-13.png' }
+  { label: 'TrueCoffee', src: '/assets/client-logos/client-logo-12.webp' },
+  { label: 'UNICEF', src: '/assets/client-logos/client-logo-10.webp' },
+  { label: 'SCG', src: '/assets/client-logos/client-logo-07.webp' },
+  { label: 'SC Asset', src: '/assets/client-logos/client-logo-16.webp' },
+  { label: 'Pruksa', src: '/assets/client-logos/client-logo-15.webp' },
+  { label: 'Kubota', src: '/assets/client-logos/client-logo-18.webp' },
+  { label: 'HomePro', src: '/assets/client-logos/client-logo-01.webp' },
+  { label: 'GS Battery', src: '/assets/client-logos/client-logo-03.webp' },
+  { label: 'Certainty', src: '/assets/client-logos/client-logo-02.webp' },
+  { label: 'Bangkok Insurance', src: '/assets/client-logos/client-logo-17.webp' },
+  { label: 'Double Goose', src: '/assets/client-logos/client-logo-14.webp' },
+  { label: 'BabyLove', src: '/assets/client-logos/client-logo-19.webp' },
+  { label: 'ACUVUE', src: '/assets/client-logos/client-logo-20.webp' },
+  { label: 'Acer', src: '/assets/client-logos/client-logo-11.webp' },
+  { label: 'ViMUT Hospital', src: '/assets/client-logos/client-logo-09.webp' },
+  { label: "Dentiste' Plus White", src: '/assets/client-logos/client-logo-08.webp' },
+  { label: 'ROJUKISS', src: '/assets/client-logos/client-logo-05.webp' },
+  { label: 'Beger', src: '/assets/client-logos/client-logo-06.webp' },
+  { label: 'Syngenta', src: '/assets/client-logos/client-logo-04.webp' },
+  { label: 'Taro', src: '/assets/client-logos/client-logo-13.webp' }
 ]
 
 const aboutAssetPath = '/assets/about-figma'
@@ -205,7 +205,7 @@ type WordPressPost = {
 }
 
 const wordpressOrigin = 'https://twfdigital.com'
-const fallbackArticleImage = '/assets/article-cover.png'
+const fallbackArticleImage = '/assets/article-cover.webp'
 const fallbackTrustDescription =
   'We push boundaries and strive for excellence by fostering a highly collaborative and constructive environment. Our team is comprised of talented individuals who work hard to elevate your brand.'
 const runtimeConfig = useRuntimeConfig()
@@ -251,12 +251,12 @@ const { data: homepage } = await useAsyncData<HomepagePage>(
 const fallbackTrustPhotos = [
   {
     id: 'fallback-award',
-    src: '/assets/award.png',
+    src: '/assets/award.webp',
     alt: 'TWF awards'
   },
   {
     id: 'fallback-team',
-    src: '/assets/team.png',
+    src: '/assets/team.webp',
     alt: 'TWF team'
   }
 ]
@@ -728,7 +728,7 @@ onBeforeUnmount(() => {
             loop
             playsinline
             preload="auto"
-            poster="/assets/hero-gradient.png"
+            poster="/assets/hero-gradient.webp"
             fetchpriority="high"
             @loadeddata="scheduleHeroFilterLoad"
           >
@@ -742,7 +742,7 @@ onBeforeUnmount(() => {
             loop
             playsinline
             preload="none"
-            poster="/assets/hero-gradient.png"
+            poster="/assets/hero-gradient.webp"
           >
             <source data-src="/assets/bg_filter.webm" type="video/webm">
           </video>
@@ -802,7 +802,7 @@ onBeforeUnmount(() => {
           <div class="performance-scene" data-reveal>
             <picture class="performance-bg" aria-hidden="true">
               <source srcset="/assets/performance-bg.webp" type="image/webp">
-              <img src="/assets/performance-bg.png" alt="" loading="lazy" decoding="async">
+              <img src="/assets/performance-bg.webp" alt="" loading="lazy" decoding="async">
             </picture>
             <img
               class="performance-shards"
@@ -852,7 +852,7 @@ onBeforeUnmount(() => {
             </div>
             <img
               class="performance-poster"
-              src="/assets/triangle-of-performance-figma.png"
+              src="/assets/triangle-of-performance-figma.webp"
               alt="Triangle of Performance: TWF Agency Performance Creative"
               loading="lazy"
               decoding="async"
@@ -919,7 +919,7 @@ onBeforeUnmount(() => {
             </div>
           </div>
           <div class="orbit-art" data-reveal style="--delay: .18s" aria-hidden="true">
-            <img src="/assets/orbit.png" alt="">
+            <img src="/assets/orbit.webp" alt="">
           </div>
         </div>
       </section>
@@ -928,14 +928,14 @@ onBeforeUnmount(() => {
         <div ref="showreelStage" class="showreel-stage">
           <figure class="showreel-frame" data-reveal>
             <div class="media-skeleton showreel-skeleton" aria-hidden="true" />
-            <img class="showreel-poster" src="/assets/showreel-reference.png" alt="" aria-hidden="true">
+            <img class="showreel-poster" src="/assets/showreel-reference.webp" alt="" aria-hidden="true">
             <video
               ref="showreelVideo"
               muted
               loop
               playsinline
               preload="none"
-              poster="/assets/showreel-reference.png"
+              poster="/assets/showreel-reference.webp"
               aria-label="Capturing Vision. Executing Perfection. Watch 2026 showreel"
             >
               <source data-src="/assets/showreel.mp4" type="video/mp4">
@@ -950,11 +950,11 @@ onBeforeUnmount(() => {
           <h2 data-reveal style="--delay: .08s">Our Innovative Product<br>and Services</h2>
           <div class="product-grid">
             <article data-reveal style="--delay: .14s">
-              <img src="/assets/stellar-data.png" alt="Stellar Data">
+              <img src="/assets/stellar-data.webp" alt="Stellar Data">
               <p>Elevate your performance marketing campaigns</p>
             </article>
             <article data-reveal style="--delay: .22s">
-              <img src="/assets/kensento.png" alt="Kensento">
+              <img src="/assets/kensento.webp" alt="Kensento">
               <p>Taking you beyond cookies consent management</p>
             </article>
           </div>
