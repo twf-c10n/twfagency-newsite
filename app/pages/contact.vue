@@ -1,10 +1,8 @@
 <script setup lang="ts">
 import {
   PublicApiError,
-  leadBudgetOptions,
   leadUtmKeys,
   normalizeLeadPhone,
-  parseLeadEstimatedBudget,
   submitContactForm,
   type ContactFormPayload
 } from '~/utils/api'
@@ -25,7 +23,6 @@ type ContactLeadField =
   | 'email'
   | 'phone'
   | 'companyName'
-  | 'budget'
   | 'objectives'
   | 'hasAccepted'
 
@@ -59,7 +56,6 @@ const contactForm = reactive({
   email: '',
   phone: '',
   companyName: '',
-  budget: '',
   objectives: '',
   hasAccepted: false
 })
@@ -116,8 +112,6 @@ const mapApiFieldErrors = (errors?: Record<string, string[]>) => {
       mappedErrors.phone = message
     } else if (field === 'company_name') {
       mappedErrors.companyName = message
-    } else if (field.startsWith('estimated_budget')) {
-      mappedErrors.budget = message
     } else if (field === 'objectives') {
       mappedErrors.objectives = message
     } else if (field === 'has_accepted') {
@@ -145,7 +139,6 @@ const resetContactForm = () => {
   contactForm.email = ''
   contactForm.phone = ''
   contactForm.companyName = ''
-  contactForm.budget = ''
   contactForm.objectives = ''
   contactForm.hasAccepted = false
 }
@@ -153,7 +146,6 @@ const resetContactForm = () => {
 const validateContactForm = () => {
   const nextErrors: ContactLeadFieldErrors = {}
   const phone = normalizeLeadPhone(contactForm.phone)
-  const budget = parseLeadEstimatedBudget(contactForm.budget)
 
   if (!contactForm.fullname.trim()) {
     nextErrors.fullname = 'Please enter your name.'
@@ -169,10 +161,6 @@ const validateContactForm = () => {
 
   if (!contactForm.companyName.trim()) {
     nextErrors.companyName = 'Please enter your company or brand name.'
-  }
-
-  if (!budget) {
-    nextErrors.budget = 'Please enter an estimated budget.'
   }
 
   if (!contactForm.objectives.trim()) {
@@ -198,18 +186,11 @@ const handleContactSubmit = async () => {
     return
   }
 
-  const estimatedBudget = parseLeadEstimatedBudget(contactForm.budget)
-
-  if (!estimatedBudget) {
-    return
-  }
-
   const payload: ContactFormPayload = {
     fullname: contactForm.fullname.trim(),
     email: contactForm.email.trim(),
     phone: normalizeLeadPhone(contactForm.phone),
     company_name: contactForm.companyName.trim(),
-    estimated_budget: estimatedBudget,
     form_type: 'contact',
     objectives: contactForm.objectives.trim(),
     has_accepted: contactForm.hasAccepted,
@@ -377,22 +358,6 @@ onMounted(() => {
                 <small v-if="fieldErrors.companyName" id="contact-company-error">{{ fieldErrors.companyName }}</small>
               </label>
 
-              <label :class="['contact-field contact-field-wide', { 'has-error': hasFieldError('budget') }]">
-                <select
-                  v-model="contactForm.budget"
-                  name="budget"
-                  required
-                  :aria-invalid="hasFieldError('budget')"
-                  :aria-describedby="fieldErrors.budget ? 'contact-budget-error' : undefined"
-                  @change="clearFieldError('budget')"
-                >
-                  <option value="" disabled>Budget</option>
-                  <option v-for="option in leadBudgetOptions" :key="option" :value="option">
-                    {{ option }}
-                  </option>
-                </select>
-                <small v-if="fieldErrors.budget" id="contact-budget-error">{{ fieldErrors.budget }}</small>
-              </label>
             </div>
 
             <label :class="['contact-field contact-message-field', { 'has-error': hasFieldError('objectives') }]">
