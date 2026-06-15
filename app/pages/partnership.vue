@@ -2,6 +2,7 @@
 import {
   PublicApiError,
   getContactUsPage,
+  leadBudgetOptions,
   leadUtmKeys,
   normalizeLeadPhone,
   parseLeadEstimatedBudget,
@@ -427,15 +428,19 @@ onMounted(() => {
 
             <label :class="['partnership-field', { 'has-error': hasFieldError('budget') }]">
               <span>Budget</span>
-              <input
+              <select
                 v-model="form.budget"
-                type="text"
                 name="budget"
-                inputmode="decimal"
+                required
                 :aria-invalid="hasFieldError('budget')"
                 :aria-describedby="fieldErrors.budget ? 'partnership-budget-error' : undefined"
-                @input="clearFieldError('budget')"
+                @change="clearFieldError('budget')"
               >
+                <option value="" disabled>Select budget</option>
+                <option v-for="option in leadBudgetOptions" :key="option" :value="option">
+                  {{ option }}
+                </option>
+              </select>
               <small
                 v-if="fieldErrors.budget"
                 id="partnership-budget-error"

@@ -1,4 +1,4 @@
-globalThis.__timing__.logStart('Load chunks/build/error-500-BqqSvFwj');import { mergeProps, useSSRContext } from 'vue';
+import { mergeProps, useSSRContext } from 'vue';
 import { ssrRenderAttrs, ssrInterpolate } from 'vue/server-renderer';
 import { _ as _export_sfc } from './server.mjs';
 import { u as useHead } from './composables-CXt4RJfp.mjs';
@@ -71,5 +71,5 @@ _sfc_main.setup = (props, ctx) => {
 };
 const error500 = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-cbb70498"]]);
 
-export { error500 as default };;globalThis.__timing__.logEnd('Load chunks/build/error-500-BqqSvFwj');
+export { error500 as default };
 //# sourceMappingURL=error-500-BqqSvFwj.mjs.map

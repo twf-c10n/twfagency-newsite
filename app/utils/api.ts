@@ -147,6 +147,12 @@ export type ContactFormPayload = {
 
 export const leadUtmKeys = ['utm_source', 'utm_medium', 'utm_campaign'] as const
 
+export const leadBudgetOptions = [
+  '1,000,000 - 3,000,000',
+  '3,000,000 - 5,000,000',
+  '> 5,000,000'
+] as const
+
 export const normalizeLeadPhone = (value: string) => {
   const digits = value.replace(/\D/g, '')
 
@@ -372,6 +378,10 @@ const getReadableMessage = (
   }
 
   if (typeof message === 'string') {
+    if (message === 'EMAIL_NOT_SEND') {
+      return 'Unable to send email right now. Please try again or email us at mailus@twfagency.com.'
+    }
+
     return message
   }
 

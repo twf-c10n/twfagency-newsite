@@ -1,4 +1,4 @@
-globalThis.__timing__.logStart('Load chunks/build/_slug_-DS5tAWI1');import { _ as __nuxt_component_0 } from './SiteHeader-D9ODwCeG.mjs';
+import { _ as __nuxt_component_0 } from './SiteHeader-D9ODwCeG.mjs';
 import { _ as __nuxt_component_0$1 } from './nuxt-link-_96boU3P.mjs';
 import { defineComponent, withAsyncContext, computed, mergeProps, withCtx, createTextVNode, unref, createVNode, toDisplayString, useSSRContext } from 'vue';
 import { ssrRenderAttrs, ssrRenderComponent, ssrInterpolate, ssrRenderAttr, ssrRenderList } from 'vue/server-renderer';
@@ -337,5 +337,5 @@ _sfc_main.setup = (props, ctx) => {
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };
 
-export { _sfc_main as default };;globalThis.__timing__.logEnd('Load chunks/build/_slug_-DS5tAWI1');
+export { _sfc_main as default };
 //# sourceMappingURL=_slug_-DS5tAWI1.mjs.map

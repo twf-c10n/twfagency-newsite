@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import {
   PublicApiError,
+  leadBudgetOptions,
   leadUtmKeys,
   normalizeLeadPhone,
   parseLeadEstimatedBudget,
@@ -377,16 +378,19 @@ onMounted(() => {
               </label>
 
               <label :class="['contact-field contact-field-wide', { 'has-error': hasFieldError('budget') }]">
-                <input
+                <select
                   v-model="contactForm.budget"
-                  type="text"
                   name="budget"
-                  placeholder="Budget"
-                  inputmode="decimal"
+                  required
                   :aria-invalid="hasFieldError('budget')"
                   :aria-describedby="fieldErrors.budget ? 'contact-budget-error' : undefined"
-                  @input="clearFieldError('budget')"
+                  @change="clearFieldError('budget')"
                 >
+                  <option value="" disabled>Budget</option>
+                  <option v-for="option in leadBudgetOptions" :key="option" :value="option">
+                    {{ option }}
+                  </option>
+                </select>
                 <small v-if="fieldErrors.budget" id="contact-budget-error">{{ fieldErrors.budget }}</small>
               </label>
             </div>
