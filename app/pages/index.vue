@@ -953,16 +953,20 @@ onBeforeUnmount(() => {
               data-reveal
               :style="{ '--delay': `${160 + index * 75}ms` }"
             >
-              <img :src="article.image" :alt="article.title" loading="lazy">
-              <div>
-                <p>{{ article.authorName }}</p>
-                <h3>{{ article.title }}</h3>
-                <a
-                  :href="article.href"
-                  :target="article.href.startsWith('http') ? '_blank' : undefined"
-                  :rel="article.href.startsWith('http') ? 'noreferrer' : undefined"
-                >Click Here <b>+</b></a>
-              </div>
+              <a
+                class="article-card-link"
+                :href="article.href"
+                :target="article.href.startsWith('http') ? '_blank' : undefined"
+                :rel="article.href.startsWith('http') ? 'noreferrer' : undefined"
+                :aria-label="`ดูบทความ ${article.title}`"
+              >
+                <img :src="article.image" :alt="article.title" loading="lazy">
+                <div>
+                  <p>{{ article.authorName }}</p>
+                  <h3>{{ article.title }}</h3>
+                  <span class="article-link">ดูบทความ <b>+</b></span>
+                </div>
+              </a>
             </article>
           </div>
         </div>
@@ -972,7 +976,7 @@ onBeforeUnmount(() => {
     <footer id="contact" class="footer">
       <div class="footer-action" data-reveal>
         <h2 class="gradient-title">Make your goals a reality</h2>
-        <a class="cta-button" href="/partnerships">Initiate Project Launch <b>+</b></a>
+        <a class="cta-button" href="/partnership" target="_blank">Initiate Project Launch <b>+</b></a>
       </div>
       <div class="shell footer-bottom">
         <img class="footer-logo" :src="`${aboutAssetPath}/twf-logo-footer.svg`" alt="TWF">

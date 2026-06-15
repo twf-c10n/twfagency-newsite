@@ -131,7 +131,7 @@ export type ContactFormPayload = {
   email: string
   phone: string
   company_name: string
-  estimated_budget: {
+  estimated_budget?: {
     min: number
     max: number
   }
