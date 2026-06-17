@@ -1,4 +1,4 @@
-import { hasInjectionContext, inject } from 'vue';
+globalThis.__timing__.logStart('Load chunks/build/composables-CXt4RJfp');import { hasInjectionContext, inject } from 'vue';
 import { u as useNuxtApp } from './server.mjs';
 import { u as useHead$1, h as headSymbol } from '../routes/renderer.mjs';
 
@@ -19,5 +19,5 @@ function useHead(input, options = {}) {
   return useHead$1(input, { head, ...options });
 }
 
-export { useHead as u };
+export { useHead as u };;globalThis.__timing__.logEnd('Load chunks/build/composables-CXt4RJfp');
 //# sourceMappingURL=composables-CXt4RJfp.mjs.map
