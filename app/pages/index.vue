@@ -6,15 +6,15 @@ import {
   type HomepagePage
 } from '~/utils/api'
 
-useHead({
+usePageSeo({
   title: 'TWF Agency | Imagine Beyond The Limit',
-  meta: [
-    {
-      name: 'description',
-      content:
-        'TWF is a high-end digital agency merging technical mastery with creativity and performance.'
-    }
-  ],
+  description:
+    'TWF is a high-end digital agency merging technical mastery with creativity and performance.',
+  path: '/',
+  image: '/assets/hero-gradient.webp'
+})
+
+useHead({
   link: [
     {
       rel: 'preload',

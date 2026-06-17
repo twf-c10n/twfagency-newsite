@@ -21,6 +21,7 @@ const aboutAssetPath = '/assets/about-figma'
 const fallbackProjectMedia = '/assets/Abstract_grain.webp'
 const runtimeConfig = useRuntimeConfig()
 const apiBaseUrl = String(runtimeConfig.public.apiBaseUrl || '')
+const siteUrl = String(runtimeConfig.public.siteUrl || '')
 
 const { data: project, pending, error } = await useAsyncData<ProjectDetail>(
   `project-detail:${slug}`,
@@ -148,18 +149,20 @@ useHead(() => {
   const description = pickLocalizedText(asRecord(project.value), 'meta_description', headline.value || seoTitle)
   const keywords = pickLocalizedText(asRecord(project.value), 'meta_keyword')
   const thumbnail = getMediaUrl(project.value?.meta_thumbnail ?? project.value?.thumbnail, '', apiBaseUrl)
+  const image = thumbnail || getAbsoluteUrl(fallbackProjectMedia, siteUrl)
   const meta: Array<Record<string, string>> = [
     { name: 'description', content: description },
+    { property: 'og:type', content: 'article' },
     { property: 'og:title', content: seoTitle },
-    { property: 'og:description', content: description }
+    { property: 'og:description', content: description },
+    { property: 'og:image', content: image },
+    { name: 'twitter:title', content: seoTitle },
+    { name: 'twitter:description', content: description },
+    { name: 'twitter:image', content: image }
   ]
 
   if (keywords) {
     meta.push({ name: 'keywords', content: keywords })
-  }
-
-  if (thumbnail) {
-    meta.push({ property: 'og:image', content: thumbnail })
   }
 
   return {

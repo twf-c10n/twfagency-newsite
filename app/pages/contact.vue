@@ -7,15 +7,12 @@ import {
   type ContactFormPayload
 } from '~/utils/api'
 
-useHead({
+usePageSeo({
   title: 'Contact TWF Agency | Start a Partnership',
-  meta: [
-    {
-      name: 'description',
-      content:
-        'Start a partnership with The Web Flight Co., Ltd. Contact TWF Agency for digital marketing, creative, media, and growth services.'
-    }
-  ]
+  description:
+    'Start a partnership with The Web Flight Co., Ltd. Contact TWF Agency for digital marketing, creative, media, and growth services.',
+  path: '/contact',
+  image: '/assets/contact-figma/hq-location-map.webp'
 })
 
 type ContactLeadField =

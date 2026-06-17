@@ -1,23 +1,21 @@
 <script setup lang="ts">
-useHead({
+usePageSeo({
   title: 'Blog | TWF Agency',
-  meta: [
-    {
-      name: 'description',
-      content:
-        'Read digital marketing, LINE Commerce, media, creative, and performance marketing articles from TWF Agency.'
-    }
-  ]
+  description:
+    'Read digital marketing, LINE Commerce, media, creative, and performance marketing articles from TWF Agency.',
+  path: '/blog',
+  image: '/assets/blog-figma/article-product.webp'
 })
 
 const aboutAssetPath = '/assets/about-figma'
 const blogAssetPath = '/assets/blog-figma'
+const blogListingUrl = 'https://twfdigital.com/blogs/'
 
 const articles = Array.from({ length: 6 }, (_, index) => ({
   id: `line-commerce-${index + 1}`,
   category: 'LINE Commerce',
   title: 'เครื่องมือทำเงินแห่งยุคดิจิทัล!',
-  href: '#'
+  href: blogListingUrl
 }))
 
 const socials = [
@@ -63,7 +61,7 @@ const socials = [
           </article>
         </div>
 
-        <a class="blog-more-button" href="#">
+        <a class="blog-more-button" :href="blogListingUrl">
           <span>บทความเพิ่มเติม</span>
           <b aria-hidden="true">→</b>
         </a>

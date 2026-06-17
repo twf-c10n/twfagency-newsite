@@ -33,6 +33,7 @@ const fallbackProjectMedia = '/assets/Abstract_grain.webp'
 const activeCategoryId = ref('')
 const runtimeConfig = useRuntimeConfig()
 const apiBaseUrl = String(runtimeConfig.public.apiBaseUrl || '')
+const siteUrl = String(runtimeConfig.public.siteUrl || '')
 
 const fallbackSeoTitle = 'Projects | TWF Agency'
 const fallbackSeoDescription =
@@ -400,18 +401,20 @@ useHead(() => {
   const description = pickLocalizedText(asRecord(projectsPage.value), 'meta_description', fallbackSeoDescription)
   const keywords = pickLocalizedText(asRecord(projectsPage.value), 'meta_keyword')
   const thumbnail = getMediaUrl(projectsPage.value?.meta_thumbnail, '', apiBaseUrl)
+  const image = thumbnail || getAbsoluteUrl(fallbackProjectMedia, siteUrl)
   const meta: Array<Record<string, string>> = [
     { name: 'description', content: description },
+    { property: 'og:type', content: 'website' },
     { property: 'og:title', content: title },
-    { property: 'og:description', content: description }
+    { property: 'og:description', content: description },
+    { property: 'og:image', content: image },
+    { name: 'twitter:title', content: title },
+    { name: 'twitter:description', content: description },
+    { name: 'twitter:image', content: image }
   ]
 
   if (keywords) {
     meta.push({ name: 'keywords', content: keywords })
-  }
-
-  if (thumbnail) {
-    meta.push({ property: 'og:image', content: thumbnail })
   }
 
   return {
