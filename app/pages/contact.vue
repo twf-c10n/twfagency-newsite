@@ -210,6 +210,10 @@ const handleContactSubmit = async () => {
 
     if (error instanceof PublicApiError) {
       fieldErrors.value = mapApiFieldErrors(error.errors)
+      const mappedCount = Object.keys(fieldErrors.value).length
+      if (mappedCount > 0) {
+        submitMessage.value = error.message || submitMessage.value
+      }
     }
   } finally {
     isSubmitting.value = false
