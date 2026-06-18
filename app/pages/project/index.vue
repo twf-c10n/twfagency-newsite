@@ -294,6 +294,11 @@ const fallbackCategories: ProjectCategoryView[] = fallbackCategoryMeta.map((cate
   }))
 }))
 
+const { data: projectsPage, pending, error } = await useAsyncData<OurProjectsPage>(
+  'page:our-projects',
+  () => getOurProjectsPage()
+)
+
 const emptyCategory: ProjectCategoryView = {
   id: 'projects',
   label: 'Projects',
@@ -301,12 +306,6 @@ const emptyCategory: ProjectCategoryView = {
   description: '',
   cards: []
 }
-
-const { data: projectsPage, pending, error } = await useAsyncData<OurProjectsPage>(
-  'page:our-projects',
-  () => getOurProjectsPage(),
-  { server: false }
-)
 
 const asRecord = (source: unknown) => source as Record<string, unknown> | null | undefined
 
@@ -363,7 +362,8 @@ const apiCategories = computed(() => {
 const hasApiCategories = computed(() => apiCategories.value.length > 0)
 
 const projectCategories = computed(() => {
-  return hasApiCategories.value ? apiCategories.value : fallbackCategories
+  const categories = hasApiCategories.value ? apiCategories.value : fallbackCategories
+  return [...categories].sort((a, b) => a.label.localeCompare(b.label))
 })
 
 watch(
@@ -441,26 +441,27 @@ const socials = [
         <p>{{ heroDescription }}</p>
       </section>
 
-      <section class="project-categories" aria-label="Project categories">
-        <button
-          v-for="category in projectCategories"
-          :key="category.id"
-          type="button"
-          :class="{ active: activeCategoryId === category.id }"
-          @click="activeCategoryId = category.id"
-        >
-          {{ category.label }}
-        </button>
-      </section>
-
       <p v-if="pending" class="project-status" role="status">
         Loading projects...
       </p>
-      <p v-else-if="error && !hasApiCategories" class="project-status" role="status">
+      <p v-else-if="error" class="project-status" role="status">
         Project data is unavailable.
       </p>
 
-      <section class="project-services" :aria-labelledby="`${activeCategory.id}-title`">
+      <template v-else>
+        <section class="project-categories" aria-label="Project categories">
+          <button
+            v-for="category in projectCategories"
+            :key="category.id"
+            type="button"
+            :class="{ active: activeCategoryId === category.id }"
+            @click="activeCategoryId = category.id"
+          >
+            {{ category.label }}
+          </button>
+        </section>
+
+        <section class="project-services" :aria-labelledby="`${activeCategory.id}-title`">
         <div class="project-service-copy">
           <h2 :id="`${activeCategory.id}-title`">{{ activeCategory.title }}</h2>
           <p>{{ activeCategory.description }}</p>
@@ -500,6 +501,7 @@ const socials = [
           Projects for this category are coming soon.
         </div>
       </section>
+      </template>
     </main>
 
     <footer class="about-figma-footer project-footer">

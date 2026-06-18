@@ -2214,24 +2214,27 @@ section[id], footer[id] {
 }
 
 .project-categories {
-  display: flex;
+  display: grid;
   width: min(100%, 800px);
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 14px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
   margin: 0 auto;
   padding: 0 24px;
 }
 
 .project-categories button {
   min-height: 36px;
-  padding: 10px 22px;
+  padding: 10px 14px;
   border: 1px solid rgb(255 255 255 / 12%);
   border-radius: 999px;
   color: #fff;
   background: rgb(255 255 255 / 6%);
-  font: 500 14px/1 var(--font-primary);
-  letter-spacing: .05em;
+  font: 500 13px/1.2 var(--font-primary);
+  letter-spacing: .03em;
+  text-align: center;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
   cursor: pointer;
   transition: background .25s ease, border-color .25s ease, color .25s ease, transform .2s ease, box-shadow .25s ease;
 }
@@ -2284,7 +2287,7 @@ section[id], footer[id] {
 
 .project-card-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 22px;
 }
 
@@ -4462,6 +4465,7 @@ section[id], footer[id] {
   }
 
   .project-categories {
+    display: flex;
     gap: 10px;
     justify-content: flex-start;
     overflow-x: auto;
