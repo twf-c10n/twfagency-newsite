@@ -1,13 +1,10 @@
 <script setup lang="ts">
-useHead({
+usePageSeo({
   title: 'Our Services | TWF Agency',
-  meta: [
-    {
-      name: 'description',
-      content:
-        'Explore TWF Agency services across media strategy, performance marketing, creative solutions, CRM, influencer marketing, analytics, and LINE business solutions.'
-    }
-  ]
+  description:
+    'Explore TWF Agency services across media strategy, performance marketing, creative solutions, CRM, influencer marketing, analytics, and LINE business solutions.',
+  path: '/services',
+  image: '/assets/services-figma/media-strategy.webp'
 })
 
 const activeServiceId = ref('media-strategy')

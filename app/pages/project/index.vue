@@ -33,6 +33,7 @@ const fallbackProjectMedia = '/assets/Abstract_grain.webp'
 const activeCategoryId = ref('')
 const runtimeConfig = useRuntimeConfig()
 const apiBaseUrl = String(runtimeConfig.public.apiBaseUrl || '')
+const siteUrl = String(runtimeConfig.public.siteUrl || '')
 
 const fallbackSeoTitle = 'Projects | TWF Agency'
 const fallbackSeoDescription =
@@ -293,6 +294,11 @@ const fallbackCategories: ProjectCategoryView[] = fallbackCategoryMeta.map((cate
   }))
 }))
 
+const { data: projectsPage, pending, error } = await useAsyncData<OurProjectsPage>(
+  'page:our-projects',
+  () => getOurProjectsPage()
+)
+
 const emptyCategory: ProjectCategoryView = {
   id: 'projects',
   label: 'Projects',
@@ -300,12 +306,6 @@ const emptyCategory: ProjectCategoryView = {
   description: '',
   cards: []
 }
-
-const { data: projectsPage, pending, error } = await useAsyncData<OurProjectsPage>(
-  'page:our-projects',
-  () => getOurProjectsPage(),
-  { server: false }
-)
 
 const asRecord = (source: unknown) => source as Record<string, unknown> | null | undefined
 
@@ -362,7 +362,8 @@ const apiCategories = computed(() => {
 const hasApiCategories = computed(() => apiCategories.value.length > 0)
 
 const projectCategories = computed(() => {
-  return hasApiCategories.value ? apiCategories.value : fallbackCategories
+  const categories = hasApiCategories.value ? apiCategories.value : fallbackCategories
+  return [...categories].sort((a, b) => a.label.localeCompare(b.label))
 })
 
 watch(
@@ -400,18 +401,20 @@ useHead(() => {
   const description = pickLocalizedText(asRecord(projectsPage.value), 'meta_description', fallbackSeoDescription)
   const keywords = pickLocalizedText(asRecord(projectsPage.value), 'meta_keyword')
   const thumbnail = getMediaUrl(projectsPage.value?.meta_thumbnail, '', apiBaseUrl)
+  const image = thumbnail || getAbsoluteUrl(fallbackProjectMedia, siteUrl)
   const meta: Array<Record<string, string>> = [
     { name: 'description', content: description },
+    { property: 'og:type', content: 'website' },
     { property: 'og:title', content: title },
-    { property: 'og:description', content: description }
+    { property: 'og:description', content: description },
+    { property: 'og:image', content: image },
+    { name: 'twitter:title', content: title },
+    { name: 'twitter:description', content: description },
+    { name: 'twitter:image', content: image }
   ]
 
   if (keywords) {
     meta.push({ name: 'keywords', content: keywords })
-  }
-
-  if (thumbnail) {
-    meta.push({ property: 'og:image', content: thumbnail })
   }
 
   return {
@@ -438,26 +441,27 @@ const socials = [
         <p>{{ heroDescription }}</p>
       </section>
 
-      <section class="project-categories" aria-label="Project categories">
-        <button
-          v-for="category in projectCategories"
-          :key="category.id"
-          type="button"
-          :class="{ active: activeCategoryId === category.id }"
-          @click="activeCategoryId = category.id"
-        >
-          {{ category.label }}
-        </button>
-      </section>
-
       <p v-if="pending" class="project-status" role="status">
         Loading projects...
       </p>
-      <p v-else-if="error && !hasApiCategories" class="project-status" role="status">
+      <p v-else-if="error" class="project-status" role="status">
         Project data is unavailable.
       </p>
 
-      <section class="project-services" :aria-labelledby="`${activeCategory.id}-title`">
+      <template v-else>
+        <section class="project-categories" aria-label="Project categories">
+          <button
+            v-for="category in projectCategories"
+            :key="category.id"
+            type="button"
+            :class="{ active: activeCategoryId === category.id }"
+            @click="activeCategoryId = category.id"
+          >
+            {{ category.label }}
+          </button>
+        </section>
+
+        <section class="project-services" :aria-labelledby="`${activeCategory.id}-title`">
         <div class="project-service-copy">
           <h2 :id="`${activeCategory.id}-title`">{{ activeCategory.title }}</h2>
           <p>{{ activeCategory.description }}</p>
@@ -497,6 +501,7 @@ const socials = [
           Projects for this category are coming soon.
         </div>
       </section>
+      </template>
     </main>
 
     <footer class="about-figma-footer project-footer">

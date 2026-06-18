@@ -12,15 +12,12 @@ import {
   type ContactUsPage
 } from '~/utils/api'
 
-useHead({
+usePageSeo({
   title: 'Start a Partnership | TWF Agency',
-  meta: [
-    {
-      name: 'description',
-      content:
-        'Start a partnership with TWF Agency across media strategy, performance marketing, creative, CRM, commerce, analytics, and technology services.'
-    }
-  ]
+  description:
+    'Start a partnership with TWF Agency across media strategy, performance marketing, creative, CRM, commerce, analytics, and technology services.',
+  path: '/partnership',
+  image: '/assets/showreel-reference.webp'
 })
 
 const aboutAssetPath = '/assets/about-figma'

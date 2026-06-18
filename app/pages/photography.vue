@@ -1,13 +1,10 @@
 <script setup lang="ts">
-useHead({
+usePageSeo({
   title: 'Photography & Production | TWF Agency',
-  meta: [
-    {
-      name: 'description',
-      content:
-        'Commercial photography, cinema-grade video production, short-form content, drone operations, VFX, and color finishing by TWF Agency.'
-    }
-  ]
+  description:
+    'Commercial photography, cinema-grade video production, short-form content, drone operations, VFX, and color finishing by TWF Agency.',
+  path: '/photography',
+  image: '/assets/photography-figma/automotive-campaign.webp'
 })
 
 const aboutAssetPath = '/assets/about-figma'

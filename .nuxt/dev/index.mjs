@@ -692,6 +692,7 @@ const _inlineRuntimeConfig = {
     }
   },
   "public": {
+    "siteUrl": "https://twfagency.com",
     "apiBaseUrl": "https://admin-stg.twfagency.com/api"
   }
 };
@@ -2097,7 +2098,7 @@ const _9Zo5TYKyr5YBE4nMrrsj4yCbCdXElKpMthT_Rv_7MAY = (function(nitro) {
 
 const rootDir = "/Users/tf-066/twf-agency";
 
-const appHead = {"meta":[{"name":"viewport","content":"width=device-width, initial-scale=1"},{"charset":"utf-8"}],"link":[],"style":[],"script":[],"noscript":[],"htmlAttrs":{"lang":"en"},"viewport":"width=device-width, initial-scale=1"};
+const appHead = {"meta":[{"name":"viewport","content":"width=device-width, initial-scale=1"},{"charset":"utf-8"},{"name":"description","content":"TWF is a high-end digital agency merging technical mastery with creativity and performance."},{"property":"og:site_name","content":"TWF Agency"},{"property":"og:type","content":"website"},{"property":"og:image","content":"https://twfagency.com/assets/hero-gradient.webp"},{"name":"twitter:card","content":"summary_large_image"},{"name":"twitter:image","content":"https://twfagency.com/assets/hero-gradient.webp"}],"link":[],"style":[],"script":[],"noscript":[],"htmlAttrs":{"lang":"en"},"viewport":"width=device-width, initial-scale=1"};
 
 const appRootTag = "div";
 

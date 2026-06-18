@@ -1,13 +1,10 @@
 <script setup lang="ts">
-useHead({
+usePageSeo({
   title: 'About TWF Agency | Our Story Begins with the Digital Age',
-  meta: [
-    {
-      name: 'description',
-      content:
-        'TWF Agency is a performance creative services team driving measurable growth for brands in the digital age.'
-    }
-  ]
+  description:
+    'TWF Agency is a performance creative services team driving measurable growth for brands in the digital age.',
+  path: '/about',
+  image: '/assets/about-figma/team-event.webp'
 })
 
 const assetPath = '/assets/about-figma'
