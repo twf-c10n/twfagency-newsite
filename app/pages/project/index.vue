@@ -294,10 +294,13 @@ const fallbackCategories: ProjectCategoryView[] = fallbackCategoryMeta.map((cate
   }))
 }))
 
-const { data: projectsPage, pending, error } = await useAsyncData<OurProjectsPage>(
+const { data: projectsPage, pending, error } = useAsyncData<OurProjectsPage>(
   'page:our-projects',
-  () => getOurProjectsPage()
+  () => getOurProjectsPage(),
+  { server: false }
 )
+
+onUnmounted(() => clearNuxtData('page:our-projects'))
 
 const emptyCategory: ProjectCategoryView = {
   id: 'projects',
@@ -361,9 +364,11 @@ const apiCategories = computed(() => {
 
 const hasApiCategories = computed(() => apiCategories.value.length > 0)
 
+const isPending = computed(() => pending.value || !hasApiCategories.value)
+
 const projectCategories = computed(() => {
-  const categories = hasApiCategories.value ? apiCategories.value : fallbackCategories
-  return [...categories].sort((a, b) => a.label.localeCompare(b.label))
+  if (!hasApiCategories.value) return []
+  return [...apiCategories.value].sort((a, b) => a.label.localeCompare(b.label))
 })
 
 watch(
@@ -436,19 +441,43 @@ const socials = [
     <SiteHeader active-path="/project" />
 
     <main>
-      <section class="project-hero">
-        <h1>{{ heroTitle }}</h1>
-        <p>{{ heroDescription }}</p>
-      </section>
-
-      <p v-if="pending" class="project-status" role="status">
-        Loading projects...
-      </p>
+      <template v-if="isPending">
+        <section class="project-hero" aria-busy="true">
+          <span class="skeleton-bar skeleton-hero-title" />
+          <span class="skeleton-bar skeleton-hero-desc" />
+          <span class="skeleton-bar skeleton-hero-desc" style="width:65%" />
+        </section>
+        <section class="project-categories" aria-label="Loading categories" aria-busy="true">
+          <span v-for="i in 8" :key="i" class="project-cat-skeleton" />
+        </section>
+        <section class="project-services">
+          <div class="project-service-copy">
+            <span class="skeleton-bar skeleton-bar--title" />
+            <span class="skeleton-bar skeleton-bar--body" />
+            <span class="skeleton-bar skeleton-bar--body" style="width:60%" />
+          </div>
+          <div class="project-card-grid">
+            <article v-for="i in 6" :key="i" class="project-card has-media skeleton-card" aria-hidden="true">
+              <div class="project-card-media">
+                <span class="media-skeleton skeleton-media-placeholder" />
+              </div>
+              <div class="project-card-body">
+                <span class="skeleton-bar" />
+                <span class="skeleton-bar skeleton-bar--short" />
+              </div>
+            </article>
+          </div>
+        </section>
+      </template>
       <p v-else-if="error" class="project-status" role="status">
         Project data is unavailable.
       </p>
 
       <template v-else>
+        <section class="project-hero">
+          <h1>{{ heroTitle }}</h1>
+          <p>{{ heroDescription }}</p>
+        </section>
         <section class="project-categories" aria-label="Project categories">
           <button
             v-for="category in projectCategories"
