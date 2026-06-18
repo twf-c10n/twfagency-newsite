@@ -188,7 +188,7 @@ const handleContactSubmit = async () => {
     email: contactForm.email.trim(),
     phone: normalizeLeadPhone(contactForm.phone),
     company_name: contactForm.companyName.trim(),
-    estimated_budget: { min: 0, max: 0 },
+    estimated_budget: null,
     form_type: 'contact',
     objectives: contactForm.objectives.trim(),
     has_accepted: contactForm.hasAccepted,
