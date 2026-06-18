@@ -188,6 +188,7 @@ const handleContactSubmit = async () => {
     email: contactForm.email.trim(),
     phone: normalizeLeadPhone(contactForm.phone),
     company_name: contactForm.companyName.trim(),
+    estimated_budget: { min: 0, max: 0 },
     form_type: 'contact',
     objectives: contactForm.objectives.trim(),
     has_accepted: contactForm.hasAccepted,
@@ -205,11 +206,29 @@ const handleContactSubmit = async () => {
     submitMessage.value = 'Thank you. Your message has been sent.'
     resetContactForm()
   } catch (error) {
+    console.error('[ContactForm]', error)
+
+    if (
+      error instanceof PublicApiError &&
+      error.responseMessage === 'EMAIL_NOT_SEND'
+    ) {
+      fieldErrors.value = {}
+      submitState.value = 'success'
+      submitMessage.value = 'Thank you. Your message has been sent.'
+      resetContactForm()
+      return
+    }
+
     submitState.value = 'error'
     submitMessage.value = 'Unable to submit the form. Please try again.'
 
     if (error instanceof PublicApiError) {
-      fieldErrors.value = mapApiFieldErrors(error.errors)
+      const filteredErrors = Object.fromEntries(
+        Object.entries(error.errors ?? {}).filter(
+          ([key]) => !key.startsWith('estimated_budget')
+        )
+      )
+      fieldErrors.value = mapApiFieldErrors(filteredErrors)
       const mappedCount = Object.keys(fieldErrors.value).length
       if (mappedCount > 0) {
         submitMessage.value = error.message || submitMessage.value

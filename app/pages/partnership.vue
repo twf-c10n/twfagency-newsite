@@ -293,6 +293,17 @@ const handleSubmit = async () => {
     submitMessage.value = 'Thank you. Your partnership request has been sent.'
     resetForm()
   } catch (error) {
+    if (
+      error instanceof PublicApiError &&
+      error.responseMessage === 'EMAIL_NOT_SEND'
+    ) {
+      fieldErrors.value = {}
+      submitState.value = 'success'
+      submitMessage.value = 'Thank you. Your partnership request has been sent.'
+      resetForm()
+      return
+    }
+
     submitState.value = 'error'
     submitMessage.value = 'Unable to submit the form. Please try again.'
 

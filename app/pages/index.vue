@@ -18,15 +18,10 @@ useHead({
   link: [
     {
       rel: 'preload',
-      href: '/assets/banner.webm',
-      as: 'video',
-      type: 'video/webm'
-    },
-    {
-      rel: 'preload',
       href: '/assets/hero-gradient.webp',
       as: 'image',
-      type: 'image/webp'
+      type: 'image/webp',
+      fetchpriority: 'high'
     }
   ]
 })
@@ -239,14 +234,11 @@ const fallbackArticles: ArticleCard[] = [
 ]
 
 const articles = ref<ArticleCard[]>(fallbackArticles)
+const homepage = ref<HomepagePage | null>(null)
+const hasFetchedHomepage = ref(false)
+const hasFetchedArticles = ref(false)
 const trustBottomSlideIndex = ref(0)
 const isTrustSliding = ref(false)
-
-const { data: homepage } = await useAsyncData<HomepagePage>(
-  'homepage-trust-lies',
-  getHomepage,
-  { server: false }
-)
 
 const fallbackTrustPhotos = [
   {
@@ -354,6 +346,12 @@ const revealArticleCards = async () => {
 }
 
 const fetchLatestArticles = async () => {
+  if (hasFetchedArticles.value) {
+    return
+  }
+
+  hasFetchedArticles.value = true
+
   const fields = [
     'id',
     'slug',
@@ -394,20 +392,40 @@ const fetchLatestArticles = async () => {
   }
 }
 
+const fetchHomepageContent = async () => {
+  if (hasFetchedHomepage.value) {
+    return
+  }
+
+  hasFetchedHomepage.value = true
+
+  try {
+    homepage.value = await getHomepage()
+  } catch (error) {
+    console.error('Error fetching homepage content:', error)
+  }
+}
+
 const motionReady = ref(false)
 const activeService = ref(mediaServices[0].id)
 const showreelActive = ref(false)
 const pageRoot = ref<HTMLElement | null>(null)
 const heroMedia = ref<HTMLElement | null>(null)
+const heroBannerVideo = ref<HTMLVideoElement | null>(null)
 const heroFilterVideo = ref<HTMLVideoElement | null>(null)
 const showreelSection = ref<HTMLElement | null>(null)
 const showreelStage = ref<HTMLElement | null>(null)
 const showreelVideo = ref<HTMLVideoElement | null>(null)
+const teamSection = ref<HTMLElement | null>(null)
+const teamBackgroundVideo = ref<HTMLVideoElement | null>(null)
+const articleSection = ref<HTMLElement | null>(null)
 const serviceNavigation = ref<HTMLUListElement | null>(null)
 
 let revealObserver: IntersectionObserver | undefined
 let strategyObserver: IntersectionObserver | undefined
 let heroVideoObserver: IntersectionObserver | undefined
+let teamSectionObserver: IntersectionObserver | undefined
+let articleSectionObserver: IntersectionObserver | undefined
 let showreelStageObserver: IntersectionObserver | undefined
 let showreelVideoObserver: IntersectionObserver | undefined
 let pointerFrame = 0
@@ -416,8 +434,48 @@ let scrollIdleTimer: number | undefined
 let heroFilterLoadTimer: number | undefined
 let trustSlideTimer: number | undefined
 let trustSlideResetTimer: number | undefined
+let articleFetchTimer: number | undefined
+let heroAmbientMediaLoaded = false
 let showreelTracking = false
 let showreelStyleKey = ''
+
+const canLoadAmbientMedia = () => {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    return false
+  }
+
+  const connection = (navigator as Navigator & {
+    connection?: {
+      saveData?: boolean
+      effectiveType?: string
+    }
+  }).connection
+
+  if (connection?.saveData || ['slow-2g', '2g'].includes(connection?.effectiveType || '')) {
+    return false
+  }
+
+  return window.matchMedia('(min-width: 900px)').matches
+}
+
+const loadVideoSource = (video?: HTMLVideoElement | null) => {
+  const source = video?.querySelector<HTMLSourceElement>('source[data-src]')
+
+  if (!video || !source || source.src) {
+    return false
+  }
+
+  source.src = source.dataset.src ?? ''
+  video.load()
+
+  return true
+}
+
+const playVideo = (video?: HTMLVideoElement | null) => {
+  video?.play().catch(() => {
+    // Posters keep each section useful when autoplay is blocked.
+  })
+}
 
 const advanceTrustPhoto = () => {
   if (trustPhotos.value.length < 2 || isTrustSliding.value) {
@@ -451,43 +509,66 @@ const startTrustPhotoLoop = () => {
 
 const loadShowreelVideo = () => {
   const video = showreelVideo.value
-  const source = video?.querySelector<HTMLSourceElement>('source[data-src]')
 
-  if (!video || !source || source.src) {
+  if (!video || !canLoadAmbientMedia()) {
     return
   }
 
-  source.src = source.dataset.src ?? ''
-  video.load()
-  video.play().catch(() => {
-    // Autoplay can be blocked in edge cases; the poster keeps the section useful.
-  })
+  loadVideoSource(video)
+  playVideo(video)
+}
+
+const loadHeroBannerVideo = () => {
+  const video = heroBannerVideo.value
+
+  if (!video || !canLoadAmbientMedia()) {
+    return
+  }
+
+  loadVideoSource(video)
+  playVideo(video)
+}
+
+const loadHeroAmbientMedia = () => {
+  if (heroAmbientMediaLoaded) {
+    return
+  }
+
+  heroAmbientMediaLoaded = true
+  loadHeroBannerVideo()
 }
 
 const loadHeroFilterVideo = () => {
   const video = heroFilterVideo.value
-  const source = video?.querySelector<HTMLSourceElement>('source[data-src]')
 
-  if (!video || !source || source.src) {
+  if (!video || !canLoadAmbientMedia()) {
     return
   }
 
-  source.src = source.dataset.src ?? ''
-  video.load()
-  video.play().catch(() => {
-    // The main banner remains visible if autoplay is blocked.
-  })
+  loadVideoSource(video)
+  playVideo(video)
+}
+
+const loadTeamBackgroundVideo = () => {
+  const video = teamBackgroundVideo.value
+
+  if (!video || !canLoadAmbientMedia()) {
+    return
+  }
+
+  loadVideoSource(video)
+  playVideo(video)
 }
 
 const scheduleHeroFilterLoad = () => {
-  if (heroFilterLoadTimer || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  if (heroFilterLoadTimer || !canLoadAmbientMedia()) {
     return
   }
 
   heroFilterLoadTimer = window.setTimeout(() => {
     heroFilterLoadTimer = undefined
     loadHeroFilterVideo()
-  }, 900)
+  }, 4500)
 }
 
 const updateShowreelProgress = () => {
@@ -595,8 +676,6 @@ const selectService = (id: string, keepVisible = false) => {
 }
 
 onMounted(() => {
-  fetchLatestArticles()
-
   const page = pageRoot.value
   if (!page) {
     return
@@ -605,6 +684,23 @@ onMounted(() => {
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
   if (!reduceMotion) {
     startTrustPhotoLoop()
+  }
+
+  if (articleSection.value) {
+    articleSectionObserver = new IntersectionObserver(
+      (entries) => {
+        if (!entries.some((entry) => entry.isIntersecting)) {
+          return
+        }
+
+        fetchLatestArticles()
+        articleSectionObserver?.disconnect()
+      },
+      { rootMargin: '600px 0px', threshold: 0 }
+    )
+    articleSectionObserver.observe(articleSection.value)
+  } else {
+    articleFetchTimer = window.setTimeout(fetchLatestArticles, 6500)
   }
 
   updateScrollEffects()
@@ -624,7 +720,7 @@ onMounted(() => {
   )
   strategyPanels.forEach((panel) => strategyObserver?.observe(panel))
 
-  if (!reduceMotion && showreelVideo.value) {
+  if (!reduceMotion && canLoadAmbientMedia() && showreelVideo.value) {
     showreelVideoObserver = new IntersectionObserver(
       (entries) => {
         if (entries.some((entry) => entry.isIntersecting)) {
@@ -632,7 +728,7 @@ onMounted(() => {
           showreelVideoObserver?.disconnect()
         }
       },
-      { rootMargin: '600px 0px', threshold: 0 }
+      { rootMargin: '200px 0px', threshold: 0 }
     )
     showreelVideoObserver.observe(showreelVideo.value)
   }
@@ -648,7 +744,7 @@ onMounted(() => {
     showreelStageObserver.observe(showreelStage.value)
   }
 
-  if (!reduceMotion && heroMedia.value) {
+  if (!reduceMotion && canLoadAmbientMedia() && heroMedia.value) {
     const heroVideos = Array.from(heroMedia.value.querySelectorAll<HTMLVideoElement>('video'))
 
     heroVideoObserver = new IntersectionObserver(
@@ -657,9 +753,7 @@ onMounted(() => {
 
         heroVideos.forEach((video) => {
           if (isVisible) {
-            video.play().catch(() => {
-              // Autoplay can be blocked; the static frame remains visible.
-            })
+            playVideo(video)
           } else {
             video.pause()
           }
@@ -668,6 +762,26 @@ onMounted(() => {
       { rootMargin: '120px 0px 120px 0px', threshold: 0.04 }
     )
     heroVideoObserver.observe(heroMedia.value)
+
+    window.addEventListener('pointerdown', loadHeroAmbientMedia, { once: true, passive: true })
+    window.addEventListener('keydown', loadHeroAmbientMedia, { once: true })
+    window.addEventListener('scroll', loadHeroAmbientMedia, { once: true, passive: true })
+  }
+
+  if (teamSection.value) {
+    teamSectionObserver = new IntersectionObserver(
+      (entries) => {
+        if (!entries.some((entry) => entry.isIntersecting)) {
+          return
+        }
+
+        fetchHomepageContent()
+        loadTeamBackgroundVideo()
+        teamSectionObserver?.disconnect()
+      },
+      { rootMargin: '500px 0px', threshold: 0 }
+    )
+    teamSectionObserver.observe(teamSection.value)
   }
 
   if (reduceMotion) {
@@ -699,15 +813,21 @@ onBeforeUnmount(() => {
   window.clearTimeout(scrollIdleTimer)
   window.clearTimeout(heroFilterLoadTimer)
   window.clearTimeout(trustSlideResetTimer)
+  window.clearTimeout(articleFetchTimer)
   window.clearInterval(trustSlideTimer)
   window.cancelAnimationFrame(pointerFrame)
   window.cancelAnimationFrame(scrollFrame)
   window.removeEventListener('scroll', requestScrollEffects)
+  window.removeEventListener('scroll', loadHeroAmbientMedia)
+  window.removeEventListener('pointerdown', loadHeroAmbientMedia)
+  window.removeEventListener('keydown', loadHeroAmbientMedia)
   window.removeEventListener('resize', requestScrollEffects)
   pageRoot.value?.removeEventListener('pointermove', updatePointerGlow)
   revealObserver?.disconnect()
   strategyObserver?.disconnect()
   heroVideoObserver?.disconnect()
+  teamSectionObserver?.disconnect()
+  articleSectionObserver?.disconnect()
   showreelStageObserver?.disconnect()
   showreelVideoObserver?.disconnect()
 })
@@ -722,17 +842,17 @@ onBeforeUnmount(() => {
         <div ref="heroMedia" class="hero-media" aria-hidden="true">
           <div class="media-skeleton hero-media-skeleton" />
           <video
+            ref="heroBannerVideo"
             class="hero-banner"
             autoplay
             muted
             loop
             playsinline
-            preload="auto"
+            preload="none"
             poster="/assets/hero-gradient.webp"
-            fetchpriority="high"
             @loadeddata="scheduleHeroFilterLoad"
           >
-            <source src="/assets/banner.webm" type="video/webm">
+            <source data-src="/assets/banner.webm" type="video/webm">
           </video>
           <video
             ref="heroFilterVideo"
@@ -768,7 +888,7 @@ onBeforeUnmount(() => {
               class="brand-logo"
               :src="logo.src"
               :alt="logo.label"
-              loading="eager"
+              loading="lazy"
               decoding="async"
             >
           </div>
@@ -919,7 +1039,7 @@ onBeforeUnmount(() => {
             </div>
           </div>
           <div class="orbit-art" data-reveal style="--delay: .18s" aria-hidden="true">
-            <img src="/assets/orbit.webp" alt="">
+            <img src="/assets/orbit.webp" alt="" loading="lazy" decoding="async">
           </div>
         </div>
       </section>
@@ -928,7 +1048,7 @@ onBeforeUnmount(() => {
         <div ref="showreelStage" class="showreel-stage">
           <figure class="showreel-frame" data-reveal>
             <div class="media-skeleton showreel-skeleton" aria-hidden="true" />
-            <img class="showreel-poster" src="/assets/showreel-reference.webp" alt="" aria-hidden="true">
+            <img class="showreel-poster" src="/assets/showreel-reference.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
             <video
               ref="showreelVideo"
               muted
@@ -950,21 +1070,21 @@ onBeforeUnmount(() => {
           <h2 data-reveal style="--delay: .08s">Our Innovative Product<br>and Services</h2>
           <div class="product-grid">
             <article data-reveal style="--delay: .14s">
-              <img src="/assets/stellar-data.webp" alt="Stellar Data">
+              <img src="/assets/stellar-data.webp" alt="Stellar Data" loading="lazy" decoding="async">
               <p>Elevate your performance marketing campaigns</p>
             </article>
             <article data-reveal style="--delay: .22s">
-              <img src="/assets/kensento.webp" alt="Kensento">
+              <img src="/assets/kensento.webp" alt="Kensento" loading="lazy" decoding="async">
               <p>Taking you beyond cookies consent management</p>
             </article>
           </div>
         </div>
       </section>
 
-      <section id="about" class="team">
+      <section id="about" ref="teamSection" class="team">
         <div class="team-media" aria-hidden="true">
-          <video autoplay muted loop playsinline preload="metadata">
-            <source src="/assets/background-1781079667180.webm" type="video/webm">
+          <video ref="teamBackgroundVideo" autoplay muted loop playsinline preload="none">
+            <source data-src="/assets/background-1781079667180.webm" type="video/webm">
           </video>
         </div>
         <div class="shell team-grid">
@@ -975,13 +1095,13 @@ onBeforeUnmount(() => {
               @animationcancel="finishTrustPhotoSlide"
             >
               <figure class="team-photo-slide is-incoming" aria-hidden="true">
-                <img :src="trustIncomingPhoto.src" :alt="trustIncomingPhoto.alt">
+                <img :src="trustIncomingPhoto.src" :alt="trustIncomingPhoto.alt" loading="lazy" decoding="async">
               </figure>
               <figure class="team-photo-slide is-top">
-                <img :src="trustTopPhoto.src" :alt="trustTopPhoto.alt">
+                <img :src="trustTopPhoto.src" :alt="trustTopPhoto.alt" loading="lazy" decoding="async">
               </figure>
               <figure class="team-photo-slide is-bottom">
-                <img :src="trustBottomPhoto.src" :alt="trustBottomPhoto.alt">
+                <img :src="trustBottomPhoto.src" :alt="trustBottomPhoto.alt" loading="lazy" decoding="async">
               </figure>
             </div>
             <div class="team-photo-buffer" aria-hidden="true">
@@ -990,6 +1110,7 @@ onBeforeUnmount(() => {
                 :key="`buffer-${photo.id}`"
                 :src="photo.src"
                 :alt="photo.alt"
+                loading="lazy"
                 decoding="async"
               >
             </div>
@@ -1003,7 +1124,7 @@ onBeforeUnmount(() => {
         </div>
       </section>
 
-      <section id="blog" class="articles">
+      <section id="blog" ref="articleSection" class="articles">
         <div class="shell">
           <p class="caption" data-reveal>Our Expertise</p>
           <h2 data-reveal style="--delay: .08s">Explore our recent articles</h2>
@@ -1022,7 +1143,7 @@ onBeforeUnmount(() => {
                 :rel="article.href.startsWith('http') ? 'noreferrer' : undefined"
                 :aria-label="`ดูบทความ ${article.title}`"
               >
-                <img :src="article.image" :alt="article.title" loading="lazy">
+                <img :src="article.image" :alt="article.title" loading="lazy" decoding="async">
                 <div>
                   <p>{{ article.authorName }}</p>
                   <h3>{{ article.title }}</h3>

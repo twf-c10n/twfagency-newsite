@@ -1,6 +1,6 @@
 <script setup lang="ts">
 usePageSeo({
-  title: 'Blog | TWF Agency',
+  title: 'Digital Marketing Blog | TWF Agency',
   description:
     'Read digital marketing, LINE Commerce, media, creative, and performance marketing articles from TWF Agency.',
   path: '/blog',
@@ -32,6 +32,8 @@ const socials = [
     <SiteHeader active-path="/blog" />
 
     <main>
+      <h1 class="visually-hidden">Digital Marketing Blog by TWF Agency</h1>
+
       <section class="blog-search-section" aria-label="Blog search">
         <form class="blog-search-pill" action="/blog" role="search">
           <input type="search" name="q" aria-label="Search articles" placeholder="Search">
@@ -46,8 +48,8 @@ const socials = [
         <div class="blog-card-grid">
           <article v-for="article in articles" :key="article.id" class="blog-card">
             <figure class="blog-card-media">
-              <img :src="`${blogAssetPath}/article-product.webp`" alt="">
-              <img :src="`${blogAssetPath}/article-gradient.webp`" alt="">
+              <img :src="`${blogAssetPath}/article-product.webp`" alt="" loading="lazy" decoding="async">
+              <img :src="`${blogAssetPath}/article-gradient.webp`" alt="" loading="lazy" decoding="async">
             </figure>
 
             <div class="blog-card-body">
