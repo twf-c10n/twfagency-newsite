@@ -18,12 +18,6 @@ useHead({
   link: [
     {
       rel: 'preload',
-      href: '/assets/banner.webm',
-      as: 'video',
-      type: 'video/webm'
-    },
-    {
-      rel: 'preload',
       href: '/assets/hero-gradient.webp',
       as: 'image',
       type: 'image/webp'
