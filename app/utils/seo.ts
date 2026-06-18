@@ -59,6 +59,26 @@ export const usePageSeo = ({
     const siteUrl = config.public.siteUrl
     const canonicalUrl = getAbsoluteUrl(path ?? route.path, siteUrl)
     const imageUrl = getAbsoluteUrl(image, siteUrl)
+    const siteRoot = getAbsoluteUrl('/', siteUrl)
+    const pageJsonLd = {
+      '@context': 'https://schema.org',
+      '@type': 'WebPage',
+      name: title,
+      description,
+      url: canonicalUrl,
+      image: imageUrl,
+      isPartOf: {
+        '@type': 'WebSite',
+        name: 'TWF Agency',
+        url: siteRoot
+      },
+      publisher: {
+        '@type': 'Organization',
+        name: 'TWF Agency',
+        url: siteRoot,
+        logo: getAbsoluteUrl('/assets/about-figma/twf-logo.svg', siteUrl)
+      }
+    }
 
     return {
       title,
@@ -101,6 +121,11 @@ export const usePageSeo = ({
           content: imageUrl
         },
         {
+          key: 'og:image:alt',
+          property: 'og:image:alt',
+          content: title
+        },
+        {
           key: 'twitter:title',
           name: 'twitter:title',
           content: title
@@ -114,6 +139,13 @@ export const usePageSeo = ({
           key: 'twitter:image',
           name: 'twitter:image',
           content: imageUrl
+        }
+      ],
+      script: [
+        {
+          key: 'webpage-jsonld',
+          type: 'application/ld+json',
+          children: JSON.stringify(pageJsonLd)
         }
       ]
     }

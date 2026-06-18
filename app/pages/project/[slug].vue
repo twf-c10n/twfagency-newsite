@@ -23,10 +23,10 @@ const runtimeConfig = useRuntimeConfig()
 const apiBaseUrl = String(runtimeConfig.public.apiBaseUrl || '')
 const siteUrl = String(runtimeConfig.public.siteUrl || '')
 
-const { data: project, pending, error } = await useAsyncData<ProjectDetail>(
+const { data: project, pending, error } = await useAsyncData<ProjectDetail | null>(
   `project-detail:${slug}`,
   () => getProjectDetail(slug),
-  { server: false }
+  { default: () => null }
 )
 
 const asRecord = (source: unknown) => source as Record<string, unknown> | null | undefined
@@ -150,12 +150,29 @@ useHead(() => {
   const keywords = pickLocalizedText(asRecord(project.value), 'meta_keyword')
   const thumbnail = getMediaUrl(project.value?.meta_thumbnail ?? project.value?.thumbnail, '', apiBaseUrl)
   const image = thumbnail || getAbsoluteUrl(fallbackProjectMedia, siteUrl)
+  const canonicalUrl = getAbsoluteUrl(`/project/${slug}`, siteUrl)
+  const projectJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'CreativeWork',
+    name: seoTitle,
+    headline: title.value,
+    description,
+    url: canonicalUrl,
+    image,
+    publisher: {
+      '@type': 'Organization',
+      name: 'TWF Agency',
+      url: getAbsoluteUrl('/', siteUrl)
+    }
+  }
   const meta: Array<Record<string, string>> = [
     { name: 'description', content: description },
     { property: 'og:type', content: 'article' },
     { property: 'og:title', content: seoTitle },
     { property: 'og:description', content: description },
+    { property: 'og:url', content: canonicalUrl },
     { property: 'og:image', content: image },
+    { property: 'og:image:alt', content: title.value },
     { name: 'twitter:title', content: seoTitle },
     { name: 'twitter:description', content: description },
     { name: 'twitter:image', content: image }
@@ -167,7 +184,14 @@ useHead(() => {
 
   return {
     title: seoTitle,
-    meta
+    meta,
+    script: [
+      {
+        key: 'project-jsonld',
+        type: 'application/ld+json',
+        children: JSON.stringify(projectJsonLd)
+      }
+    ]
   }
 })
 

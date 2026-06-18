@@ -1,8 +1,8 @@
-import process from 'node:process';globalThis._importMeta_=globalThis._importMeta_||{url:"file:///_entry.js",env:process.env};globalThis.__timing__.logStart('Load chunks/build/server');import { hasInjectionContext, inject, getCurrentInstance, defineComponent, ref, h, Suspense, Fragment, createApp, provide, shallowReactive, onErrorCaptured, onServerPrefetch, unref, createVNode, resolveDynamicComponent, reactive, effectScope, defineAsyncComponent, mergeProps, getCurrentScope, toRef, shallowRef, isReadonly, useSSRContext, isRef, isShallow, isReactive, toRaw } from 'vue';
+import process from 'node:process';globalThis._importMeta_=globalThis._importMeta_||{url:"file:///_entry.js",env:process.env};globalThis.__timing__.logStart('Load chunks/build/server');import { hasInjectionContext, inject, getCurrentInstance, defineComponent, ref, h, Suspense, Fragment, useSSRContext, createApp, provide, shallowReactive, onErrorCaptured, onServerPrefetch, unref, createVNode, resolveDynamicComponent, reactive, effectScope, defineAsyncComponent, mergeProps, getCurrentScope, toRef, shallowRef, isReadonly, isRef, isShallow, isReactive, toRaw } from 'vue';
 import { c as createError$1, t as parseURL, f as encodePath, d as decodePath, m as hasProtocol, o as isScriptProtocol, q as joinURL, x as withQuery, u as sanitizeStatusCode, h as getContext, $ as $fetch, g as executeAsync, b as defu } from '../nitro/nitro.mjs';
-import { b as baseURL } from '../routes/renderer.mjs';
+import { u as useHead$1, h as headSymbol, b as baseURL } from '../routes/renderer.mjs';
 import { RouterView, createMemoryHistory, createRouter, START_LOCATION } from 'vue-router';
-import { ssrRenderSuspense, ssrRenderComponent, ssrRenderVNode } from 'vue/server-renderer';
+import { ssrRenderComponent, ssrRenderSuspense, ssrRenderVNode } from 'vue/server-renderer';
 import 'node:http';
 import 'node:https';
 import 'node:events';
@@ -620,10 +620,23 @@ const unhead_k2P3m_ZDyjlr2mMYnoDPwavjsDN8hBlk9cFai0bbopU = /* @__PURE__ */ defin
 function toArray(value) {
   return Array.isArray(value) ? value : [value];
 }
-const matcher = (m, p) => {
-  return [];
-};
-const _routeRulesMatcher = (path) => defu({}, ...matcher().map((r) => r.data).reverse());
+const matcher = /* @__PURE__ */ (() => {
+  const $0 = {};
+  return (m, p) => {
+    let r = [];
+    if (p.charCodeAt(p.length - 1) === 47) p = p.slice(0, -1) || "/";
+    let s = p.split("/"), l = s.length;
+    if (l > 1) {
+      if (s[1] === "assets") {
+        r.unshift({ data: $0, params: { "_": s.slice(2).join("/") } });
+      } else if (s[1] === "fonts") {
+        r.unshift({ data: $0, params: { "_": s.slice(2).join("/") } });
+      }
+    }
+    return r;
+  };
+})();
+const _routeRulesMatcher = (path) => defu({}, ...matcher("", path).map((r) => r.data).reverse());
 const routeRulesMatcher = _routeRulesMatcher;
 function getRouteRules(arg) {
   const path = typeof arg === "string" ? arg : arg.path;
@@ -638,47 +651,47 @@ const _routes = [
   {
     name: "project-slug",
     path: "/project/:slug()",
-    component: () => import('./_slug_-B56-MgL0.mjs')
+    component: () => import('./_slug_-2dZT7mNA.mjs')
   },
   {
     name: "about",
     path: "/about",
-    component: () => import('./about-B6DoE3K8.mjs')
+    component: () => import('./about-BDLyZhWx.mjs')
   },
   {
     name: "blog",
     path: "/blog",
-    component: () => import('./blog-CeVU02yg.mjs')
+    component: () => import('./blog-BogU7Kbu.mjs')
   },
   {
     name: "contact",
     path: "/contact",
-    component: () => import('./contact-C51G7IUD.mjs')
+    component: () => import('./contact-BR9XmnsI.mjs')
   },
   {
     name: "partnership",
     path: "/partnership",
-    component: () => import('./partnership-Coh7qjtT.mjs')
+    component: () => import('./partnership-4M2D-o7l.mjs')
   },
   {
     name: "photography",
     path: "/photography",
-    component: () => import('./photography-Dw-Uh6oq.mjs')
+    component: () => import('./photography-BzHRDnq8.mjs')
   },
   {
     name: "project",
     path: "/project",
-    component: () => import('./index-BJTm7iU9.mjs')
+    component: () => import('./index-BfXSdiOw.mjs')
   },
   {
     name: "services",
     path: "/services",
-    component: () => import('./services-DUMcq6on.mjs')
+    component: () => import('./services-B7LR10h-.mjs')
   },
   {
     name: "index",
     path: "/",
-    component: () => import('./index-DJiKmOjj.mjs')
+    component: () => import('./index-BzfMYF5r.mjs')
   }
 ];
 const ROUTE_KEY_PARENTHESES_RE = /(:\w+)\([^)]+\)/g;
@@ -1029,6 +1042,22 @@ const debug_hooks_hyXe6laRLyyi6S6XoqeItfe9HTFGNswlS09LT9GQbmQ = /* @__PURE__ */ 
     createDebugger(nuxtApp.hooks, { tag: "nuxt-app" });
   }
 });
+function injectHead(nuxtApp) {
+  const nuxt = nuxtApp || useNuxtApp();
+  return nuxt.ssrContext?.head || nuxt.runWithContext(() => {
+    if (hasInjectionContext()) {
+      const head = inject(headSymbol);
+      if (!head) {
+        throw new Error("[nuxt] [unhead] Missing Unhead instance.");
+      }
+      return head;
+    }
+  });
+}
+function useHead(input, options = {}) {
+  const head = options.head || injectHead(options.nuxt);
+  return useHead$1(input, { head, ...options });
+}
 function definePayloadReducer(name, reduce) {
   {
     useNuxtApp().ssrContext["~payloadReducers"][name] = reduce;
@@ -1144,25 +1173,161 @@ function normalizeSlot(slot, data) {
   const slotContent = slot(data);
   return slotContent.length === 1 ? h(slotContent[0]) : h(Fragment, void 0, slotContent);
 }
-const _export_sfc = (sfc, props) => {
-  const target = sfc.__vccOpts || sfc;
-  for (const [key, val] of props) {
-    target[key] = val;
-  }
-  return target;
+const fallbackSiteUrl = "https://twfagency.com";
+const defaultSeoImage = "/assets/hero-gradient.webp";
+const normalizeSiteUrl = (siteUrl) => {
+  return (siteUrl || fallbackSiteUrl).replace(/\/+$/, "");
 };
-const _sfc_main$2 = {};
-function _sfc_ssrRender(_ctx, _push, _parent, _attrs) {
-  const _component_NuxtPage = __nuxt_component_0;
-  _push(ssrRenderComponent(_component_NuxtPage, _attrs, null, _parent));
-}
+const getAbsoluteUrl = (path = "/", siteUrl) => {
+  if (/^https?:\/\//i.test(path)) {
+    return path;
+  }
+  const normalizedPath = path.startsWith("/") ? path : `/${path}`;
+  return `${normalizeSiteUrl(siteUrl)}${normalizedPath}`;
+};
+const useCanonicalSeo = () => {
+  const route = useRoute();
+  const config = /* @__PURE__ */ useRuntimeConfig();
+  useHead(() => {
+    const canonicalUrl = getAbsoluteUrl(route.path, config.public.siteUrl);
+    return {
+      link: [
+        {
+          key: "canonical",
+          rel: "canonical",
+          href: canonicalUrl
+        }
+      ],
+      meta: [
+        {
+          key: "og:url",
+          property: "og:url",
+          content: canonicalUrl
+        }
+      ]
+    };
+  });
+};
+const usePageSeo = ({
+  title,
+  description,
+  path,
+  image = defaultSeoImage
+}) => {
+  const route = useRoute();
+  const config = /* @__PURE__ */ useRuntimeConfig();
+  useHead(() => {
+    const siteUrl = config.public.siteUrl;
+    const canonicalUrl = getAbsoluteUrl(path ?? route.path, siteUrl);
+    const imageUrl = getAbsoluteUrl(image, siteUrl);
+    const siteRoot = getAbsoluteUrl("/", siteUrl);
+    const pageJsonLd = {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      name: title,
+      description,
+      url: canonicalUrl,
+      image: imageUrl,
+      isPartOf: {
+        "@type": "WebSite",
+        name: "TWF Agency",
+        url: siteRoot
+      },
+      publisher: {
+        "@type": "Organization",
+        name: "TWF Agency",
+        url: siteRoot,
+        logo: getAbsoluteUrl("/assets/about-figma/twf-logo.svg", siteUrl)
+      }
+    };
+    return {
+      title,
+      link: [
+        {
+          key: "canonical",
+          rel: "canonical",
+          href: canonicalUrl
+        }
+      ],
+      meta: [
+        {
+          key: "description",
+          name: "description",
+          content: description
+        },
+        {
+          key: "og:type",
+          property: "og:type",
+          content: "website"
+        },
+        {
+          key: "og:title",
+          property: "og:title",
+          content: title
+        },
+        {
+          key: "og:description",
+          property: "og:description",
+          content: description
+        },
+        {
+          key: "og:url",
+          property: "og:url",
+          content: canonicalUrl
+        },
+        {
+          key: "og:image",
+          property: "og:image",
+          content: imageUrl
+        },
+        {
+          key: "og:image:alt",
+          property: "og:image:alt",
+          content: title
+        },
+        {
+          key: "twitter:title",
+          name: "twitter:title",
+          content: title
+        },
+        {
+          key: "twitter:description",
+          name: "twitter:description",
+          content: description
+        },
+        {
+          key: "twitter:image",
+          name: "twitter:image",
+          content: imageUrl
+        }
+      ],
+      script: [
+        {
+          key: "webpage-jsonld",
+          type: "application/ld+json",
+          children: JSON.stringify(pageJsonLd)
+        }
+      ]
+    };
+  });
+};
+const _sfc_main$2 = /* @__PURE__ */ defineComponent({
+  __name: "app",
+  __ssrInlineRender: true,
+  setup(__props) {
+    useCanonicalSeo();
+    return (_ctx, _push, _parent, _attrs) => {
+      const _component_NuxtPage = __nuxt_component_0;
+      _push(ssrRenderComponent(_component_NuxtPage, _attrs, null, _parent));
+    };
+  }
+});
 const _sfc_setup$2 = _sfc_main$2.setup;
 _sfc_main$2.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("app.vue");
   return _sfc_setup$2 ? _sfc_setup$2(props, ctx) : void 0;
 };
-const AppComponent = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["ssrRender", _sfc_ssrRender]]);
 const _sfc_main$1 = {
   __name: "nuxt-error-page",
   __ssrInlineRender: true,
@@ -1177,8 +1342,8 @@ const _sfc_main$1 = {
     const statusText = _error.statusMessage ?? (is404 ? "Page Not Found" : "Internal Server Error");
     const description = _error.message || _error.toString();
     const stack = void 0;
-    const _Error404 = defineAsyncComponent(() => import('./error-404-C0YcVGNb.mjs'));
-    const _Error = defineAsyncComponent(() => import('./error-500-BqqSvFwj.mjs'));
+    const _Error404 = defineAsyncComponent(() => import('./error-404-C6wxjLfk.mjs'));
+    const _Error = defineAsyncComponent(() => import('./error-500-BpFaJlcx.mjs'));
     const ErrorTemplate = is404 ? _Error404 : _Error;
     return (_ctx, _push, _parent, _attrs) => {
       _push(ssrRenderComponent(unref(ErrorTemplate), mergeProps({ status: unref(status), statusText: unref(statusText), statusCode: unref(status), statusMessage: unref(statusText), description: unref(description), stack: unref(stack) }, _attrs), null, _parent));
@@ -1236,7 +1401,7 @@ const _sfc_main = {
           } else if (unref(SingleRenderer)) {
             ssrRenderVNode(_push, createVNode(resolveDynamicComponent(unref(SingleRenderer)), null, null), _parent);
           } else {
-            _push(ssrRenderComponent(unref(AppComponent), null, null, _parent));
+            _push(ssrRenderComponent(unref(_sfc_main$2), null, null, _parent));
           }
         },
         _: 1
@@ -1270,5 +1435,5 @@ let entry;
 }
 const entry_default = ((ssrContext) => entry(ssrContext));
 
-export { _export_sfc as _, asyncDataDefaults as a, nuxtLinkDefaults as b, createError as c, useRoute as d, entry_default as default, encodeRoutePath as e, fetchDefaults as f, useRouter as g, useRuntimeConfig as h, navigateTo as n, resolveRouteObject as r, useNuxtApp as u };;globalThis.__timing__.logEnd('Load chunks/build/server');
+export { asyncDataDefaults as a, nuxtLinkDefaults as b, createError as c, useNuxtApp as d, entry_default as default, encodeRoutePath as e, fetchDefaults as f, getAbsoluteUrl as g, usePageSeo as h, useRoute as i, useRouter as j, useRuntimeConfig as k, navigateTo as n, resolveRouteObject as r, useHead as u };;globalThis.__timing__.logEnd('Load chunks/build/server');
 //# sourceMappingURL=server.mjs.map

@@ -38,7 +38,7 @@ const siteUrl = String(runtimeConfig.public.siteUrl || '')
 const fallbackSeoTitle = 'Projects | TWF Agency'
 const fallbackSeoDescription =
   'Explore TWF Agency project capabilities across media strategy, performance marketing, creative solutions, CRM, influencer marketing, and analytics.'
-const fallbackHeroTitle = 'Reach New Heights'
+const fallbackHeroTitle = 'Digital Marketing Projects'
 const fallbackHeroDescription =
   'Elite technical mastery meets uncompromising aesthetic standards. We architect digital dominance for high-growth innovators.'
 const fallbackCardCopy =
@@ -77,8 +77,8 @@ const fallbackCategoryMeta = [
   },
   {
     id: 'influencer-kol',
-    label: 'Influencer & KOL Affilate Marketing',
-    title: 'Influencer & KOL Affilate Marketing',
+    label: 'Influencer & KOL Affiliate Marketing',
+    title: 'Influencer & KOL Affiliate Marketing',
     description:
       'Match brands with credible creators and affiliate partners through accountable campaign operations and trackable outcomes.'
   },
@@ -294,10 +294,10 @@ const fallbackCategories: ProjectCategoryView[] = fallbackCategoryMeta.map((cate
   }))
 }))
 
-const { data: projectsPage, pending, error } = useAsyncData<OurProjectsPage>(
+const { data: projectsPage, pending, error } = await useAsyncData<OurProjectsPage | null>(
   'page:our-projects',
   () => getOurProjectsPage(),
-  { server: false }
+  { default: () => null }
 )
 
 onUnmounted(() => clearNuxtData('page:our-projects'))
@@ -364,10 +364,12 @@ const apiCategories = computed(() => {
 
 const hasApiCategories = computed(() => apiCategories.value.length > 0)
 
-const isPending = computed(() => pending.value || !hasApiCategories.value)
+const isPending = computed(() => pending.value && !hasApiCategories.value && !fallbackCategories.length)
+const showErrorState = computed(() => Boolean(error.value) && !projectCategories.value.length)
 
 const projectCategories = computed(() => {
-  if (!hasApiCategories.value) return []
+  if (!hasApiCategories.value) return fallbackCategories
+
   return [...apiCategories.value].sort((a, b) => a.label.localeCompare(b.label))
 })
 
@@ -407,12 +409,33 @@ useHead(() => {
   const keywords = pickLocalizedText(asRecord(projectsPage.value), 'meta_keyword')
   const thumbnail = getMediaUrl(projectsPage.value?.meta_thumbnail, '', apiBaseUrl)
   const image = thumbnail || getAbsoluteUrl(fallbackProjectMedia, siteUrl)
+  const canonicalUrl = getAbsoluteUrl('/project', siteUrl)
+  const pageJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: title,
+    description,
+    url: canonicalUrl,
+    image,
+    isPartOf: {
+      '@type': 'WebSite',
+      name: 'TWF Agency',
+      url: getAbsoluteUrl('/', siteUrl)
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'TWF Agency',
+      url: getAbsoluteUrl('/', siteUrl)
+    }
+  }
   const meta: Array<Record<string, string>> = [
     { name: 'description', content: description },
     { property: 'og:type', content: 'website' },
     { property: 'og:title', content: title },
     { property: 'og:description', content: description },
+    { property: 'og:url', content: canonicalUrl },
     { property: 'og:image', content: image },
+    { property: 'og:image:alt', content: title },
     { name: 'twitter:title', content: title },
     { name: 'twitter:description', content: description },
     { name: 'twitter:image', content: image }
@@ -424,7 +447,14 @@ useHead(() => {
 
   return {
     title,
-    meta
+    meta,
+    script: [
+      {
+        key: 'projects-jsonld',
+        type: 'application/ld+json',
+        children: JSON.stringify(pageJsonLd)
+      }
+    ]
   }
 })
 
@@ -469,7 +499,7 @@ const socials = [
           </div>
         </section>
       </template>
-      <p v-else-if="error" class="project-status" role="status">
+      <p v-else-if="showErrorState" class="project-status" role="status">
         Project data is unavailable.
       </p>
 
