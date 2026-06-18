@@ -188,7 +188,7 @@ const handleContactSubmit = async () => {
     email: contactForm.email.trim(),
     phone: normalizeLeadPhone(contactForm.phone),
     company_name: contactForm.companyName.trim(),
-    estimated_budget: null,
+    estimated_budget: { min: 0, max: 0 },
     form_type: 'contact',
     objectives: contactForm.objectives.trim(),
     has_accepted: contactForm.hasAccepted,
@@ -206,6 +206,7 @@ const handleContactSubmit = async () => {
     submitMessage.value = 'Thank you. Your message has been sent.'
     resetContactForm()
   } catch (error) {
+    console.error('[ContactForm]', error)
     submitState.value = 'error'
     submitMessage.value = 'Unable to submit the form. Please try again.'
 
