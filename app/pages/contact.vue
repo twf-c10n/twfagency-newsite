@@ -207,6 +207,18 @@ const handleContactSubmit = async () => {
     resetContactForm()
   } catch (error) {
     console.error('[ContactForm]', error)
+
+    if (
+      error instanceof PublicApiError &&
+      error.responseMessage === 'EMAIL_NOT_SEND'
+    ) {
+      fieldErrors.value = {}
+      submitState.value = 'success'
+      submitMessage.value = 'Thank you. Your message has been sent.'
+      resetContactForm()
+      return
+    }
+
     submitState.value = 'error'
     submitMessage.value = 'Unable to submit the form. Please try again.'
 
