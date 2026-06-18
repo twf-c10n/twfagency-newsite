@@ -223,6 +223,7 @@ img {
   position: fixed;
   inset: 0 0 auto;
   z-index: 10;
+  background: transparent;
   transition: background .35s ease, border-color .35s ease;
 }
 
@@ -1561,7 +1562,7 @@ section[id], footer[id] {
 }
 
 .about-figma-header {
-  background: #1a1a1a;
+  background: transparent;
 }
 
 .about-figma-header.scrolled {
