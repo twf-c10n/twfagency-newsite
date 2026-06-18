@@ -124,6 +124,56 @@ img {
   animation: skeleton-sweep 1.45s ease-in-out infinite;
 }
 
+/* ---- shared skeleton shimmer ---- */
+.skeleton-bar,
+.project-cat-skeleton {
+  display: block;
+  background: rgb(255 255 255 / 6%);
+  border-radius: 6px;
+  overflow: hidden;
+  position: relative;
+}
+.skeleton-bar::after,
+.project-cat-skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 30%, rgb(255 255 255 / 8%) 48%, transparent 66%);
+  transform: translateX(-100%);
+  animation: skeleton-sweep 1.45s ease-in-out infinite;
+}
+
+.skeleton-bar                { height: 14px; margin-bottom: 10px; border-radius: 6px; }
+.skeleton-bar--title         { height: 36px; width: 55%; margin-bottom: 18px; border-radius: 8px; }
+.skeleton-bar--body          { height: 14px; width: 90%; }
+.skeleton-bar--short         { width: 55%; }
+.skeleton-hero-title         { height: clamp(58px, 7.5vw, 96px); width: 70%; margin-bottom: 20px; border-radius: 10px; }
+.skeleton-hero-desc          { height: 20px; width: 80%; margin-bottom: 12px; border-radius: 8px; }
+
+.project-hero[aria-busy] {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.project-cat-skeleton {
+  width: 100%;
+  min-height: 36px;
+  border-radius: 999px;
+}
+
+.skeleton-media-placeholder {
+  position: relative !important;
+  aspect-ratio: 16 / 9;
+}
+
+.skeleton-card {
+  pointer-events: none;
+  user-select: none;
+}
+
 @keyframes skeleton-sweep {
   to {
     transform: translateX(100%);
@@ -131,7 +181,9 @@ img {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .media-skeleton::after {
+  .media-skeleton::after,
+  .skeleton-bar::after,
+  .project-cat-skeleton::after {
     animation: none;
     transform: none;
   }
@@ -2192,7 +2244,7 @@ section[id], footer[id] {
   text-align: center;
   background:
     radial-gradient(ellipse 70% 35% at 50% 45%,
-      rgb(79 74 74 / 50%) 15%,
+      rgb(0 0 0 / 50%) 15%,
       transparent 60%
     );
 }
