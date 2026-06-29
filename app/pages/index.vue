@@ -410,6 +410,7 @@ const motionReady = ref(false)
 const activeService = ref(mediaServices[0].id)
 const showreelActive = ref(false)
 const pageRoot = ref<HTMLElement | null>(null)
+const introStory = ref<HTMLElement | null>(null)
 const heroMedia = ref<HTMLElement | null>(null)
 const heroBannerVideo = ref<HTMLVideoElement | null>(null)
 const heroFilterVideo = ref<HTMLVideoElement | null>(null)
@@ -439,7 +440,7 @@ let heroAmbientMediaLoaded = false
 let showreelTracking = false
 let showreelStyleKey = ''
 
-const canLoadAmbientMedia = () => {
+const canUseMotionMedia = () => {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     return false
   }
@@ -455,8 +456,18 @@ const canLoadAmbientMedia = () => {
     return false
   }
 
+  return true
+}
+
+const canLoadAmbientMedia = () => {
+  if (!canUseMotionMedia()) {
+    return false
+  }
+
   return window.matchMedia('(min-width: 900px)').matches
 }
+
+const canLoadHeroMedia = () => canUseMotionMedia()
 
 const loadVideoSource = (video?: HTMLVideoElement | null) => {
   const source = video?.querySelector<HTMLSourceElement>('source[data-src]')
@@ -521,7 +532,7 @@ const loadShowreelVideo = () => {
 const loadHeroBannerVideo = () => {
   const video = heroBannerVideo.value
 
-  if (!video || !canLoadAmbientMedia()) {
+  if (!video || !canLoadHeroMedia()) {
     return
   }
 
@@ -541,7 +552,7 @@ const loadHeroAmbientMedia = () => {
 const loadHeroFilterVideo = () => {
   const video = heroFilterVideo.value
 
-  if (!video || !canLoadAmbientMedia()) {
+  if (!video || !canLoadHeroMedia()) {
     return
   }
 
@@ -561,7 +572,7 @@ const loadTeamBackgroundVideo = () => {
 }
 
 const scheduleHeroFilterLoad = () => {
-  if (heroFilterLoadTimer || !canLoadAmbientMedia()) {
+  if (heroFilterLoadTimer || !canLoadHeroMedia()) {
     return
   }
 
@@ -603,6 +614,39 @@ const updateShowreelProgress = () => {
   section.style.setProperty('--showreel-height', `${showreelHeight}px`)
 }
 
+const getIntroStoryProgress = () => {
+  const story = introStory.value
+
+  if (!story) {
+    return 0
+  }
+
+  const rect = story.getBoundingClientRect()
+  const bound = story.querySelector<HTMLElement>('.home-intro-bound')
+  const boundRect = bound?.getBoundingClientRect()
+  const viewportHeight = window.innerHeight
+  const timelineHeight = boundRect?.height || rect.height
+  const travelDistance = Math.max(1, timelineHeight - viewportHeight)
+
+  return Math.min(1, Math.max(0, -rect.top / travelDistance))
+}
+
+const applyIntroStoryProgress = (progress: number) => {
+  const story = introStory.value
+
+  if (!story) {
+    return
+  }
+
+  story.style.setProperty('--intro-progress', String(progress))
+  story.style.setProperty('--hero-progress', String(progress))
+}
+
+const updateIntroStoryProgress = () => {
+  // Lenis smooths the scroll position itself, so this value can stay perfectly reversible.
+  applyIntroStoryProgress(getIntroStoryProgress())
+}
+
 const updateScrollEffects = () => {
   if (!pageRoot.value) {
     return
@@ -615,6 +659,8 @@ const updateScrollEffects = () => {
     ? Math.min(1, Math.max(0, scrollY / maximumScroll))
     : 0
   pageRoot.value.style.setProperty('--scroll-progress', String(progress))
+
+  updateIntroStoryProgress()
 
   if (showreelTracking) {
     updateShowreelProgress()
@@ -744,7 +790,7 @@ onMounted(() => {
     showreelStageObserver.observe(showreelStage.value)
   }
 
-  if (!reduceMotion && canLoadAmbientMedia() && heroMedia.value) {
+  if (!reduceMotion && canLoadHeroMedia() && heroMedia.value) {
     const heroVideos = Array.from(heroMedia.value.querySelectorAll<HTMLVideoElement>('video'))
 
     heroVideoObserver = new IntersectionObserver(
@@ -753,6 +799,7 @@ onMounted(() => {
 
         heroVideos.forEach((video) => {
           if (isVisible) {
+            loadHeroAmbientMedia()
             playVideo(video)
           } else {
             video.pause()
@@ -838,44 +885,62 @@ onBeforeUnmount(() => {
     <SiteHeader active-path="/" />
 
     <main>
-      <section id="home" class="hero">
-        <div ref="heroMedia" class="hero-media" aria-hidden="true">
-          <div class="media-skeleton hero-media-skeleton" />
-          <video
-            ref="heroBannerVideo"
-            class="hero-banner"
-            autoplay
-            muted
-            loop
-            playsinline
-            preload="none"
-            poster="/assets/hero-gradient.webp"
-            @loadeddata="scheduleHeroFilterLoad"
-          >
-            <source data-src="/assets/banner.webm" type="video/webm">
-          </video>
-          <video
-            ref="heroFilterVideo"
-            class="hero-filter"
-            autoplay
-            muted
-            loop
-            playsinline
-            preload="none"
-            poster="/assets/hero-gradient.webp"
-          >
-            <source data-src="/assets/bg_filter.webm" type="video/webm">
-          </video>
+      <section ref="introStory" class="home-intro-story" aria-label="TWF introduction">
+        <div class="home-intro-bound">
+          <div class="home-intro-stage">
+            <section id="home" class="hero">
+              <div ref="heroMedia" class="hero-media" aria-hidden="true">
+                <div class="media-skeleton hero-media-skeleton" />
+                <video
+                  ref="heroBannerVideo"
+                  class="hero-banner"
+                  autoplay
+                  muted
+                  loop
+                  playsinline
+                  preload="none"
+                  poster="/assets/hero-gradient.webp"
+                  @loadeddata="scheduleHeroFilterLoad"
+                >
+                  <source data-src="/assets/banner.webm" type="video/webm">
+                </video>
+                <video
+                  ref="heroFilterVideo"
+                  class="hero-filter"
+                  autoplay
+                  muted
+                  loop
+                  playsinline
+                  preload="none"
+                  poster="/assets/hero-gradient.webp"
+                >
+                  <source data-src="/assets/bg_filter.webm" type="video/webm">
+                </video>
+              </div>
+              <div class="shell hero-copy">
+                <p class="pill" data-reveal style="--delay: .12s"><span /> Performance Creative Agency</p>
+                <h1 data-reveal style="--delay: .22s">Imagine Beyond<br>The Limit</h1>
+                <p class="hero-description" data-reveal style="--delay: .34s">
+                  We empower digital dominance through high-content design, relentless
+                  performance optimization, and elite technical mastery. Future-forward
+                  solutions for high-growth innovators.
+                </p>
+                <a class="cta-button" data-reveal style="--delay: .44s" href="/project">Let's Launch Your Project <b>+</b></a>
+              </div>
+            </section>
+          </div>
         </div>
-        <div class="shell hero-copy">
-          <p class="pill" data-reveal style="--delay: .12s"><span /> Performance Creative Agency</p>
-          <h1 data-reveal style="--delay: .22s">Imagine Beyond<br>The Limit</h1>
-          <p class="hero-description" data-reveal style="--delay: .34s">
-            We empower digital dominance through high-content design, relentless
-            performance optimization, and elite technical mastery. Future-forward
-            solutions for high-growth innovators.
+      </section>
+
+      <section class="needs">
+        <div class="narrow" data-reveal>
+          <p class="caption needs-caption">Built for brands that need more than visibility</p>
+          <h2 class="gradient-title">All your needs</h2>
+          <p>
+            We are a high-end digital agency merging uncompromising technical mastery
+            with unbounded creativity. For 15 years, we have engineered digital
+            experiences for high-growth talent firms and luxury innovators.
           </p>
-          <a class="cta-button" data-reveal style="--delay: .44s" href="/project">Let's Launch Your Project <b>+</b></a>
         </div>
       </section>
 
@@ -892,17 +957,6 @@ onBeforeUnmount(() => {
               decoding="async"
             >
           </div>
-        </div>
-      </section>
-
-      <section class="needs">
-        <div class="narrow" data-reveal>
-          <h2 class="gradient-title">All your needs</h2>
-          <p>
-            We are a high-end digital agency merging uncompromising technical mastery
-            with unbounded creativity. For 15 years, we have engineered digital
-            experiences for high-growth talent firms and luxury innovators.
-          </p>
         </div>
       </section>
 

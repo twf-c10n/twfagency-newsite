@@ -1,9 +1,0 @@
-{
-  "pid": 46299,
-  "startedAt": 1781774059729,
-  "command": "dev",
-  "cwd": "/Users/tf-066/twf-agency",
-  "port": 3003,
-  "hostname": "::1",
-  "url": "http://[::1]:3003"
-}

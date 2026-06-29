@@ -55,6 +55,24 @@ html {
   scroll-padding-top: 64px;
 }
 
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis,
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: clip;
+}
+
 body {
   margin: 0;
   min-width: 320px;
@@ -339,6 +357,37 @@ section[id], footer[id] {
   background: #101117;
 }
 
+.home-intro-story {
+  --intro-progress: 0;
+  --hero-progress: 0;
+  position: relative;
+  height: 150vh;
+  overflow: clip;
+  background:
+    radial-gradient(circle at 50% 0%, rgb(255 200 56 / 8%), transparent 30%),
+    linear-gradient(180deg, #06070a 0%, #000 52%, #000 100%);
+}
+
+.home-intro-bound {
+  position: absolute;
+  inset: 0;
+  bottom: -100vh;
+  pointer-events: none;
+}
+
+.home-intro-stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: clip;
+  pointer-events: auto;
+}
+
+.home-intro-stage > .hero {
+  height: 100%;
+  min-height: 100%;
+}
+
 .hero::after {
   position: absolute;
   z-index: -1;
@@ -354,17 +403,21 @@ section[id], footer[id] {
   inset: 0;
   overflow: hidden;
   background: #101117 url("/assets/hero-gradient.webp") center / cover no-repeat;
-  transform: scale(1.035);
-  transition: transform 1.2s ease;
+  transform:
+    translate3d(0, calc(var(--hero-progress) * -5vh), 0)
+    scale(calc(1 + (var(--hero-progress) * 1.5)));
+  transform-origin: center center;
+  filter: saturate(calc(1.08 + (var(--hero-progress) * 0.06))) blur(calc(var(--hero-progress) * 1.5px));
+  will-change: transform, filter;
 }
 
 .hero:hover .hero-media {
-  transform: scale(1);
+  filter: saturate(calc(1.12 + (var(--hero-progress) * 0.06))) blur(calc(var(--hero-progress) * 1.5px));
 }
 
 .hero-media video {
   position: absolute;
-  z-index: 1;
+  z-index: 2;
   inset: 0;
   width: 100%;
   height: 100vh;
@@ -372,12 +425,23 @@ section[id], footer[id] {
   object-position: center;
 }
 
+.hero-media-skeleton {
+  z-index: 0;
+}
+
 .hero-filter {
   opacity: .5;
 }
 
-.hero-copy {
-  padding-top: 45px;
+.hero-copy.shell {
+  position: relative;
+  z-index: 3;
+  width: min(100%, 1280px);
+  padding: 45px 80px 0;
+  box-sizing: border-box;
+  opacity: calc(1 - (var(--hero-progress) * .88));
+  transform: translate3d(0, calc(var(--hero-progress) * -7vh), 0);
+  will-change: transform, opacity;
 }
 
 .pill {
@@ -454,6 +518,7 @@ section[id], footer[id] {
 .client-strip {
   --client-logo-height: 40px;
   position: relative;
+  z-index: 3;
   height: 91px;
   overflow: hidden;
   background: linear-gradient(105deg, #ffde20 0%, #f1c32e 43%, #f04b21 100%);
@@ -559,6 +624,12 @@ section[id], footer[id] {
   background-clip: text;
 }
 
+.needs-caption {
+  margin-bottom: 24px;
+  color: rgb(247 248 250 / 66%);
+  letter-spacing: .3em;
+}
+
 .needs h2 {
   margin-bottom: 38px;
   font-size: clamp(40px, 4.2vw, 53px);
@@ -569,6 +640,41 @@ section[id], footer[id] {
   font-size: 14px;
   line-height: 1.65;
   text-shadow: 0 2px 14px rgb(0 0 0 / 82%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-intro-story {
+    height: auto;
+  }
+
+  .home-intro-stage {
+    position: relative;
+    height: auto;
+  }
+
+  .home-intro-bound {
+    position: relative;
+    inset: auto;
+    bottom: auto;
+  }
+
+  .hero,
+  .client-strip,
+  .needs,
+  .hero-media,
+  .hero-copy,
+  .narrow {
+    transform: none;
+    opacity: 1;
+    filter: none;
+    clip-path: none;
+    will-change: auto;
+  }
+
+  .needs {
+    min-height: clamp(560px, 68vh, 680px);
+    min-height: clamp(560px, 68svh, 680px);
+  }
 }
 
 .expertise {
@@ -4084,6 +4190,11 @@ section[id], footer[id] {
     padding-left: 40px;
   }
 
+  .hero-copy.shell {
+    padding-right: 40px;
+    padding-left: 40px;
+  }
+
   .about-figma-links {
     gap: 18px;
   }
@@ -5032,8 +5143,12 @@ section[id], footer[id] {
     min-height: 590px;
   }
 
-  .hero-copy {
-    padding-top: 52px;
+  .home-intro-story {
+    height: 140vh;
+  }
+
+  .hero-copy.shell {
+    padding: 52px 17px 0;
   }
 
   .pill {
@@ -5098,6 +5213,11 @@ section[id], footer[id] {
     font-size: 12px;
     overflow-wrap: anywhere;
     white-space: normal;
+  }
+
+  .needs-caption {
+    margin-bottom: 18px;
+    letter-spacing: .18em;
   }
 
   .expertise-heading,
