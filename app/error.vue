@@ -77,11 +77,11 @@ const goHome = () => clearError({ redirect: '/' })
           <p id="error-description">{{ description }}</p>
 
           <div class="error-actions">
+            <a class="error-secondary-link" href="/contact">Contact TWF</a>
             <a class="error-home-link" href="/" @click.prevent="goHome">
               <span>Back to home</span>
               <b aria-hidden="true">→</b>
             </a>
-            <a class="error-secondary-link" href="/contact">Contact TWF</a>
           </div>
 
           <nav class="error-quick-links" aria-label="Helpful links">
