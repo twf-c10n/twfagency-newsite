@@ -7,12 +7,18 @@ const props = defineProps<{
 
 const statusCode = computed(() => props.error.statusCode || 500)
 const isNotFound = computed(() => statusCode.value === 404)
+const statusDigits = computed(() => String(statusCode.value).padStart(3, '0').split(''))
 const pageTitle = computed(() => (isNotFound.value ? 'Page Not Found | TWF Agency' : 'Something Went Wrong | TWF Agency'))
 const heading = computed(() => (isNotFound.value ? 'Page not found' : 'Something went off course'))
 const description = computed(() =>
   isNotFound.value
     ? 'The route may have moved, changed, or never existed. Return to the main site and keep the mission moving.'
     : 'We could not load this page right now. Please return to the homepage or contact the TWF team.'
+)
+const errorNote = computed(() =>
+  isNotFound.value
+    ? 'If you followed an old campaign URL, this page now safely returns a 404 so search engines can update.'
+    : 'The team-friendly fallback is online, so visitors can still navigate while the issue is investigated.'
 )
 const aboutAssetPath = '/assets/about-figma'
 
@@ -62,9 +68,7 @@ const goHome = () => clearError({ redirect: '/' })
           <span class="error-orbit error-orbit-two" />
           <span class="error-route-line" />
           <span class="error-number">
-            <span>4</span>
-            <span>0</span>
-            <span>4</span>
+            <span v-for="(digit, index) in statusDigits" :key="`${digit}-${index}`">{{ digit }}</span>
           </span>
           <span class="error-line" />
           <span class="error-word">TWF</span>
@@ -75,7 +79,6 @@ const goHome = () => clearError({ redirect: '/' })
           <p class="error-kicker">{{ statusCode }} / Flight path interrupted</p>
           <h1 id="error-title">{{ heading }}</h1>
           <p id="error-description">{{ description }}</p>
-
           <div class="error-actions">
             <a class="error-secondary-link" href="/contact">Contact TWF</a>
             <a class="error-home-link" href="/" @click.prevent="goHome">
@@ -92,7 +95,7 @@ const goHome = () => clearError({ redirect: '/' })
 
           <div class="error-note" role="note">
             <span aria-hidden="true" />
-            <p>If you followed an old campaign URL, this page now safely returns a 404 so search engines can update.</p>
+            <p>{{ errorNote }}</p>
           </div>
         </div>
       </section>
@@ -321,7 +324,7 @@ const goHome = () => clearError({ redirect: '/' })
 
 .error-number span:nth-child(2) {
   color: var(--yellow);
-  transform: translateY(-12%);
+  transform: translateY(0%);
   box-shadow:
     inset 0 0 28px rgb(255 213 27 / 10%),
     0 0 34px rgb(255 213 27 / 16%);
@@ -338,8 +341,8 @@ const goHome = () => clearError({ redirect: '/' })
 
 .error-word {
   position: absolute;
-  right: 11%;
-  bottom: 12%;
+  right: 5%;
+  bottom: 5%;
   color: var(--yellow);
   font-size: clamp(1.25rem, 2.4vw, 1.95rem);
   font-weight: 700;
