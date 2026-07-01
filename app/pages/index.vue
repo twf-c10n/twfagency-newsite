@@ -953,6 +953,8 @@ onBeforeUnmount(() => {
               class="brand-logo"
               :src="logo.src"
               :alt="logo.label"
+              width="700"
+              height="314"
               loading="lazy"
               decoding="async"
             >
@@ -976,13 +978,15 @@ onBeforeUnmount(() => {
           <div class="performance-scene" data-reveal>
             <picture class="performance-bg" aria-hidden="true">
               <source srcset="/assets/performance-bg.webp" type="image/webp">
-              <img src="/assets/performance-bg.webp" alt="" loading="lazy" decoding="async">
+              <img src="/assets/performance-bg.webp" alt="" width="1600" height="900" loading="lazy" decoding="async">
             </picture>
             <img
               class="performance-shards"
               src="/assets/triangle-performance-glow.webp"
               alt=""
               aria-hidden="true"
+              width="1600"
+              height="1591"
               loading="lazy"
               decoding="async"
             >
@@ -1028,6 +1032,8 @@ onBeforeUnmount(() => {
               class="performance-poster"
               src="/assets/triangle-of-performance-figma.webp"
               alt="Triangle of Performance: TWF Agency Performance Creative"
+              width="558"
+              height="469"
               loading="lazy"
               decoding="async"
             >
@@ -1093,7 +1099,7 @@ onBeforeUnmount(() => {
             </div>
           </div>
           <div class="orbit-art" data-reveal style="--delay: .18s" aria-hidden="true">
-            <img src="/assets/orbit.webp" alt="" loading="lazy" decoding="async">
+            <img src="/assets/orbit.webp" alt="" width="670" height="372" loading="lazy" decoding="async">
           </div>
         </div>
       </section>
@@ -1102,7 +1108,16 @@ onBeforeUnmount(() => {
         <div ref="showreelStage" class="showreel-stage">
           <figure class="showreel-frame" data-reveal>
             <div class="media-skeleton showreel-skeleton" aria-hidden="true" />
-            <img class="showreel-poster" src="/assets/showreel-reference.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
+            <img
+              class="showreel-poster"
+              src="/assets/showreel-reference.webp"
+              alt=""
+              aria-hidden="true"
+              width="2880"
+              height="1326"
+              loading="lazy"
+              decoding="async"
+            >
             <video
               ref="showreelVideo"
               muted
@@ -1124,11 +1139,11 @@ onBeforeUnmount(() => {
           <h2 data-reveal style="--delay: .08s">Our Innovative Product<br>and Services</h2>
           <div class="product-grid">
             <article data-reveal style="--delay: .14s">
-              <img src="/assets/stellar-data.webp" alt="Stellar Data" loading="lazy" decoding="async">
+              <img src="/assets/stellar-data.webp" alt="Stellar Data" width="358" height="111" loading="lazy" decoding="async">
               <p>Elevate your performance marketing campaigns</p>
             </article>
             <article data-reveal style="--delay: .22s">
-              <img src="/assets/kensento.webp" alt="Kensento" loading="lazy" decoding="async">
+              <img src="/assets/kensento.webp" alt="Kensento" width="338" height="98" loading="lazy" decoding="async">
               <p>Taking you beyond cookies consent management</p>
             </article>
           </div>
@@ -1149,13 +1164,13 @@ onBeforeUnmount(() => {
               @animationcancel="finishTrustPhotoSlide"
             >
               <figure class="team-photo-slide is-incoming" aria-hidden="true">
-                <img :src="trustIncomingPhoto.src" :alt="trustIncomingPhoto.alt" loading="lazy" decoding="async">
+                <img :src="trustIncomingPhoto.src" :alt="trustIncomingPhoto.alt" width="880" height="490" loading="lazy" decoding="async">
               </figure>
               <figure class="team-photo-slide is-top">
-                <img :src="trustTopPhoto.src" :alt="trustTopPhoto.alt" loading="lazy" decoding="async">
+                <img :src="trustTopPhoto.src" :alt="trustTopPhoto.alt" width="880" height="490" loading="lazy" decoding="async">
               </figure>
               <figure class="team-photo-slide is-bottom">
-                <img :src="trustBottomPhoto.src" :alt="trustBottomPhoto.alt" loading="lazy" decoding="async">
+                <img :src="trustBottomPhoto.src" :alt="trustBottomPhoto.alt" width="880" height="490" loading="lazy" decoding="async">
               </figure>
             </div>
             <div class="team-photo-buffer" aria-hidden="true">
@@ -1164,6 +1179,8 @@ onBeforeUnmount(() => {
                 :key="`buffer-${photo.id}`"
                 :src="photo.src"
                 :alt="photo.alt"
+                width="880"
+                height="490"
                 loading="lazy"
                 decoding="async"
               >
@@ -1194,10 +1211,10 @@ onBeforeUnmount(() => {
                 class="article-card-link"
                 :href="article.href"
                 :target="article.href.startsWith('http') ? '_blank' : undefined"
-                :rel="article.href.startsWith('http') ? 'noreferrer' : undefined"
+                :rel="article.href.startsWith('http') ? 'noopener noreferrer' : undefined"
                 :aria-label="`ดูบทความ ${article.title}`"
               >
-                <img :src="article.image" :alt="article.title" loading="lazy" decoding="async">
+                <img :src="article.image" :alt="article.title" width="384" height="250" loading="lazy" decoding="async">
                 <div>
                   <p>{{ article.authorName }}</p>
                   <h3>{{ article.title }}</h3>
@@ -1213,14 +1230,14 @@ onBeforeUnmount(() => {
     <footer id="contact" class="footer">
       <div class="footer-action" data-reveal>
         <h2 class="gradient-title">Make your goals a reality</h2>
-        <a class="cta-button" href="/partnership" target="_blank">Initiate Project Launch <b>+</b></a>
+        <a class="cta-button" href="/partnership" target="_blank" rel="noopener noreferrer">Initiate Project Launch <b>+</b></a>
       </div>
       <div class="shell footer-bottom">
-        <img class="footer-logo" :src="`${aboutAssetPath}/twf-logo-footer.svg`" alt="TWF">
+        <img class="footer-logo" :src="`${aboutAssetPath}/twf-logo-footer.svg`" alt="TWF" width="123" height="47" loading="lazy" decoding="async">
         <p>The Web Flight Co., Ltd. Crystal Park Place Building, R.1<br>Praditmanutham Road, Wangthonglang, Bangkok 10310</p>
         <div class="socials">
           <a v-for="social in footerSocials" :key="social.label" :href="social.href" :aria-label="social.label">
-            <img :src="social.src" alt="">
+            <img :src="social.src" alt="" width="29" height="29" loading="lazy" decoding="async">
           </a>
         </div>
       </div>

@@ -189,7 +189,9 @@ useHead(() => {
       {
         key: 'project-jsonld',
         type: 'application/ld+json',
-        children: JSON.stringify(projectJsonLd)
+        defer: true,
+        tagPosition: 'bodyClose',
+        innerHTML: JSON.stringify(projectJsonLd)
       }
     ]
   }
@@ -215,7 +217,7 @@ const socials = [
           <p v-if="headline">{{ headline }}</p>
         </div>
         <div class="project-detail-hero-media">
-          <img :src="heroImage" :alt="title">
+          <img :src="heroImage" :alt="title" width="1200" height="675" fetchpriority="high" decoding="async">
         </div>
       </section>
 
@@ -251,7 +253,10 @@ const socials = [
               :key="media.src"
               :src="media.src"
               :alt="media.alt"
+              width="800"
+              height="600"
               loading="lazy"
+              decoding="async"
             >
           </div>
         </section>
@@ -262,7 +267,7 @@ const socials = [
         >
           <h2>Showcase</h2>
           <div v-if="showcaseMainMedia" class="project-detail-wide-media">
-            <img :src="showcaseMainMedia.src" :alt="showcaseMainMedia.alt" loading="lazy">
+            <img :src="showcaseMainMedia.src" :alt="showcaseMainMedia.alt" width="1200" height="675" loading="lazy" decoding="async">
           </div>
           <div v-if="showcaseImages.length" class="project-detail-media-grid">
             <img
@@ -270,10 +275,13 @@ const socials = [
               :key="media.src"
               :src="media.src"
               :alt="media.alt"
+              width="800"
+              height="600"
               loading="lazy"
+              decoding="async"
             >
           </div>
-          <a v-if="project.showcase_url" class="project-detail-link" :href="project.showcase_url" target="_blank" rel="noreferrer">
+          <a v-if="project.showcase_url" class="project-detail-link" :href="project.showcase_url" target="_blank" rel="noopener noreferrer">
             Open showcase
           </a>
         </section>
@@ -287,12 +295,12 @@ const socials = [
             <ul v-if="measurables.length">
               <li v-for="item in measurables" :key="item">{{ item }}</li>
             </ul>
-            <a v-if="project.result_url" class="project-detail-link" :href="project.result_url" target="_blank" rel="noreferrer">
+            <a v-if="project.result_url" class="project-detail-link" :href="project.result_url" target="_blank" rel="noopener noreferrer">
               Open result
             </a>
           </div>
           <div v-if="resultImage" class="project-detail-wide-media">
-            <img :src="resultImage.src" :alt="resultImage.alt" loading="lazy">
+            <img :src="resultImage.src" :alt="resultImage.alt" width="1200" height="675" loading="lazy" decoding="async">
           </div>
         </section>
 
@@ -316,7 +324,7 @@ const socials = [
     <footer class="about-figma-footer project-footer">
       <div class="about-footer-inner">
         <div class="about-footer-address">
-          <img :src="`${aboutAssetPath}/twf-logo-footer.svg`" alt="TWF">
+          <img :src="`${aboutAssetPath}/twf-logo-footer.svg`" alt="TWF" width="123" height="47" loading="lazy" decoding="async">
           <p>
             The Web Flight Co., Ltd., Capital Work Place Building, Fl. 8, 1<br>
             Soi Chamchan, Klongton-neur, Wattana, Bangkok 10110
@@ -324,7 +332,7 @@ const socials = [
         </div>
         <div class="about-footer-socials">
           <a v-for="social in socials" :key="social.label" :href="social.href" :aria-label="social.label">
-            <img :src="social.src" alt="">
+            <img :src="social.src" alt="" width="29" height="29" loading="lazy" decoding="async">
           </a>
         </div>
       </div>

@@ -148,7 +148,14 @@ const activeService = computed(() => {
           <article class="automotive-content">
             <Transition name="service-image" mode="out-in">
               <figure :key="activeService.id" class="automotive-media">
-                <img :src="activeService.image" :alt="`${activeService.title} campaign visual`">
+                <img
+                  :src="activeService.image"
+                  :alt="`${activeService.title} campaign visual`"
+                  width="1586"
+                  height="992"
+                  loading="lazy"
+                  decoding="async"
+                >
               </figure>
             </Transition>
             <div class="automotive-copy">
@@ -181,7 +188,7 @@ const activeService = computed(() => {
     <footer class="about-figma-footer">
       <div class="about-footer-inner">
         <div class="about-footer-address">
-          <img :src="`${aboutAssetPath}/twf-logo-footer.svg`" alt="TWF">
+          <img :src="`${aboutAssetPath}/twf-logo-footer.svg`" alt="TWF" width="123" height="47" loading="lazy" decoding="async">
           <p>
             The Web Flight Co., Ltd., Capital Work Place Building, Fl. 8, 1<br>
             Soi Chamchan, Klongton-neur, Wattana, Bangkok 10110
@@ -189,7 +196,7 @@ const activeService = computed(() => {
         </div>
         <div class="about-footer-socials">
           <a v-for="social in socials" :key="social.label" :href="social.href" :aria-label="social.label">
-            <img :src="social.src" alt="">
+            <img :src="social.src" alt="" width="29" height="29" loading="lazy" decoding="async">
           </a>
         </div>
       </div>

@@ -28,6 +28,18 @@ export const useCanonicalSeo = () => {
           key: 'canonical',
           rel: 'canonical',
           href: canonicalUrl
+        },
+        {
+          key: 'alternate-en',
+          rel: 'alternate',
+          hreflang: 'en',
+          href: canonicalUrl
+        },
+        {
+          key: 'alternate-default',
+          rel: 'alternate',
+          hreflang: 'x-default',
+          href: canonicalUrl
         }
       ],
       meta: [
@@ -87,6 +99,18 @@ export const usePageSeo = ({
           key: 'canonical',
           rel: 'canonical',
           href: canonicalUrl
+        },
+        {
+          key: 'alternate-en',
+          rel: 'alternate',
+          hreflang: 'en',
+          href: canonicalUrl
+        },
+        {
+          key: 'alternate-default',
+          rel: 'alternate',
+          hreflang: 'x-default',
+          href: canonicalUrl
         }
       ],
       meta: [
@@ -145,7 +169,9 @@ export const usePageSeo = ({
         {
           key: 'webpage-jsonld',
           type: 'application/ld+json',
-          children: JSON.stringify(pageJsonLd)
+          defer: true,
+          tagPosition: 'bodyClose',
+          innerHTML: JSON.stringify(pageJsonLd)
         }
       ]
     }

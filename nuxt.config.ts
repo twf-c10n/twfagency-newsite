@@ -4,6 +4,13 @@ const defaultDescription =
   'TWF is a high-end digital agency merging technical mastery with creativity and performance.'
 const defaultImage = `${siteUrl}/assets/hero-gradient.webp`
 const defaultLogo = `${siteUrl}/assets/about-figma/twf-logo.svg`
+const securityHeaders = {
+  'x-content-type-options': 'nosniff',
+  'x-frame-options': 'SAMEORIGIN',
+  'referrer-policy': 'strict-origin-when-cross-origin',
+  'permissions-policy': 'camera=(), microphone=(), geolocation=()',
+  'content-security-policy': "frame-ancestors 'self'; upgrade-insecure-requests"
+}
 const organizationJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
@@ -48,18 +55,24 @@ export default defineNuxtConfig({
     }
   },
   routeRules: {
+    '/**': {
+      headers: securityHeaders
+    },
     '/assets/**': {
       headers: {
+        ...securityHeaders,
         'cache-control': 'public, max-age=31536000, immutable'
       }
     },
     '/fonts/**': {
       headers: {
+        ...securityHeaders,
         'cache-control': 'public, max-age=31536000, immutable'
       }
     },
     '/_nuxt/**': {
       headers: {
+        ...securityHeaders,
         'cache-control': 'public, max-age=31536000, immutable'
       }
     }
@@ -82,6 +95,11 @@ export default defineNuxtConfig({
       titleTemplate: (titleChunk) => titleChunk || 'TWF Agency',
       link: [
         {
+          rel: 'icon',
+          href: '/favicon.ico',
+          sizes: 'any'
+        },
+        {
           rel: 'preload',
           href: '/fonts/chakra-petch-regular.ttf',
           as: 'font',
@@ -103,12 +121,16 @@ export default defineNuxtConfig({
         {
           key: 'organization-jsonld',
           type: 'application/ld+json',
-          children: JSON.stringify(organizationJsonLd)
+          defer: true,
+          tagPosition: 'bodyClose',
+          innerHTML: JSON.stringify(organizationJsonLd)
         },
         {
           key: 'website-jsonld',
           type: 'application/ld+json',
-          children: JSON.stringify(websiteJsonLd)
+          defer: true,
+          tagPosition: 'bodyClose',
+          innerHTML: JSON.stringify(websiteJsonLd)
         }
       ]
     }

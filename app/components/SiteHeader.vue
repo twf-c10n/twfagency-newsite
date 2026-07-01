@@ -55,7 +55,7 @@ onBeforeUnmount(() => {
   <header :class="['site-header about-figma-header', { scrolled: headerScrolled }]">
     <nav class="about-figma-nav" aria-label="Primary navigation">
       <a class="about-logo" href="/" aria-label="TWF home" @click="closeMenu">
-        <img :src="`${aboutAssetPath}/twf-logo.svg`" alt="TWF">
+        <img :src="`${aboutAssetPath}/twf-logo.svg`" alt="TWF" width="104" height="40" decoding="async">
       </a>
 
       <div :class="['nav-links about-figma-links', { open: menuOpen }]">

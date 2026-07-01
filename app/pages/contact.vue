@@ -264,7 +264,7 @@ onMounted(() => {
         <h1>Start a partnership</h1>
         <a class="contact-pill-button" href="#partnership-form">
           <span>Start a partnership</span>
-          <img :src="`${contactAssetPath}/arrow.svg`" alt="">
+          <img :src="`${contactAssetPath}/arrow.svg`" alt="" width="16" height="16" decoding="async">
         </a>
       </section>
 
@@ -289,7 +289,7 @@ onMounted(() => {
                 <p>Let's be friends</p>
                 <div>
                   <a v-for="social in socialLinks" :key="social.label" :href="social.href" :aria-label="social.label">
-                    <img :src="social.src" alt="">
+                    <img :src="social.src" alt="" width="24" height="24" loading="lazy" decoding="async">
                   </a>
                 </div>
               </div>
@@ -297,10 +297,17 @@ onMounted(() => {
           </article>
 
           <article class="contact-panel contact-map-panel" aria-label="TWF office map">
-            <img :src="`${contactAssetPath}/hq-location-map.webp`" alt="Map view around TWF office">
+            <img
+              :src="`${contactAssetPath}/hq-location-map.webp`"
+              alt="Map view around TWF office"
+              width="512"
+              height="512"
+              loading="lazy"
+              decoding="async"
+            >
             <div class="contact-map-overlay">
               <span class="contact-map-pin">
-                <img :src="`${contactAssetPath}/map-pin.svg`" alt="">
+                <img :src="`${contactAssetPath}/map-pin.svg`" alt="" width="16" height="20" decoding="async">
               </span>
               <span>LAT 51.5045 LON -0.0195</span>
             </div>
@@ -416,7 +423,7 @@ onMounted(() => {
 
             <button class="contact-pill-button contact-submit" type="submit" :disabled="isSubmitting">
               <span>{{ isSubmitting ? 'Sending...' : 'Submit' }}</span>
-              <img :src="`${contactAssetPath}/arrow.svg`" alt="">
+              <img :src="`${contactAssetPath}/arrow.svg`" alt="" width="16" height="16" decoding="async">
             </button>
           </form>
         </div>
@@ -426,7 +433,7 @@ onMounted(() => {
     <footer class="about-figma-footer">
       <div class="about-footer-inner">
         <div class="about-footer-address">
-          <img :src="`${aboutAssetPath}/twf-logo-footer.svg`" alt="TWF">
+          <img :src="`${aboutAssetPath}/twf-logo-footer.svg`" alt="TWF" width="123" height="47" loading="lazy" decoding="async">
           <p>
             The Web Flight Co., Ltd., Capital Work Place Building, Fl. 8, 1<br>
             Soi Chamchan, Klongton-neur, Wattana, Bangkok 10110
@@ -434,7 +441,7 @@ onMounted(() => {
         </div>
         <div class="about-footer-socials">
           <a v-for="social in footerSocials" :key="social.label" :href="social.href" :aria-label="social.label">
-            <img :src="social.src" alt="">
+            <img :src="social.src" alt="" width="29" height="29" loading="lazy" decoding="async">
           </a>
         </div>
       </div>

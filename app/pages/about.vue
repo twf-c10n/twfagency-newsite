@@ -10,9 +10,9 @@ usePageSeo({
 const assetPath = '/assets/about-figma'
 
 const storyImages = [
-  { src: `${assetPath}/story-left.webp`, alt: 'TWF agency event installation' },
-  { src: `${assetPath}/story-center.webp`, alt: 'TWF team portrait' },
-  { src: `${assetPath}/story-right.webp`, alt: 'TWF team celebration' }
+  { src: `${assetPath}/story-left.webp`, alt: 'TWF agency event installation', width: 880, height: 490 },
+  { src: `${assetPath}/story-center.webp`, alt: 'TWF team portrait', width: 879, height: 490 },
+  { src: `${assetPath}/story-right.webp`, alt: 'TWF team celebration', width: 879, height: 492 }
 ]
 
 const storySets = [storyImages, storyImages]
@@ -22,35 +22,35 @@ const partners = [
     name: 'TikTok',
     className: 'partner-tiktok',
     images: [
-      { src: `${assetPath}/tiktok-word.svg`, alt: 'TikTok Agency Partner' },
-      { src: `${assetPath}/tiktok-note.svg`, alt: '' }
+      { src: `${assetPath}/tiktok-word.svg`, alt: 'TikTok Agency Partner', width: 144, height: 41 },
+      { src: `${assetPath}/tiktok-note.svg`, alt: '', width: 83, height: 11 }
     ]
   },
   {
     name: 'Google',
     className: 'partner-google',
     images: [
-      { src: `${assetPath}/google-g.webp`, alt: 'Google' },
-      { src: `${assetPath}/google-partner.svg`, alt: 'Google Partner' }
+      { src: `${assetPath}/google-g.webp`, alt: 'Google', width: 123, height: 123 },
+      { src: `${assetPath}/google-partner.svg`, alt: 'Google Partner', width: 79, height: 11 }
     ]
   },
   {
     name: 'Meta',
     className: 'partner-meta',
     images: [
-      { src: `${assetPath}/meta-mark.webp`, alt: 'Meta' },
-      { src: `${assetPath}/meta-partner.svg`, alt: 'Agency Partner' }
+      { src: `${assetPath}/meta-mark.webp`, alt: 'Meta', width: 123, height: 123 },
+      { src: `${assetPath}/meta-partner.svg`, alt: 'Agency Partner', width: 66, height: 38 }
     ]
   },
   {
     name: 'Adman Awards',
     className: 'partner-adman',
-    images: [{ src: `${assetPath}/admanawards.svg`, alt: 'Adman Awards' }]
+    images: [{ src: `${assetPath}/admanawards.svg`, alt: 'Adman Awards', width: 200, height: 102 }]
   },
   {
     name: 'LINE',
     className: 'partner-line',
-    images: [{ src: `${assetPath}/line.svg`, alt: 'LINE Agency Partner' }]
+    images: [{ src: `${assetPath}/line.svg`, alt: 'LINE Agency Partner', width: 200, height: 102 }]
   }
 ]
 
@@ -76,7 +76,14 @@ const socials = [
         <div class="about-story-track">
           <div v-for="(set, setIndex) in storySets" :key="setIndex" class="about-story-set">
             <figure v-for="image in set" :key="`${setIndex}-${image.src}`">
-              <img :src="image.src" :alt="setIndex === 0 ? image.alt : ''">
+              <img
+                :src="image.src"
+                :alt="setIndex === 0 ? image.alt : ''"
+                :width="image.width"
+                :height="image.height"
+                loading="lazy"
+                decoding="async"
+              >
             </figure>
           </div>
         </div>
@@ -108,7 +115,14 @@ const socials = [
               Performance Creative Services.
             </p>
           </div>
-          <img src="/assets/about-figma/team-event.webp" alt="TWF team at an event">
+          <img
+            src="/assets/about-figma/team-event.webp"
+            alt="TWF team at an event"
+            width="880"
+            height="489"
+            loading="lazy"
+            decoding="async"
+          >
         </div>
       </section>
 
@@ -125,6 +139,10 @@ const socials = [
               :key="image.src"
               :src="image.src"
               :alt="image.alt"
+              :width="image.width"
+              :height="image.height"
+              loading="lazy"
+              decoding="async"
             >
           </div>
         </div>
@@ -138,7 +156,14 @@ const socials = [
             to take action and fuel your<br>
             business growth with measurable results."
           </blockquote>
-          <img src="/assets/about-figma/founder.webp" alt="Narongyod Mahittivanicha">
+          <img
+            src="/assets/about-figma/founder.webp"
+            alt="Narongyod Mahittivanicha"
+            width="532"
+            height="532"
+            loading="lazy"
+            decoding="async"
+          >
           <p>
             <strong>Narongyod Mahittivanicha</strong>
             <span>Cofounder</span>
@@ -151,7 +176,7 @@ const socials = [
     <footer id="contact" class="about-figma-footer">
       <div class="about-footer-inner">
         <div class="about-footer-address">
-          <img :src="`${assetPath}/twf-logo-footer.svg`" alt="TWF">
+          <img :src="`${assetPath}/twf-logo-footer.svg`" alt="TWF" width="123" height="47" loading="lazy" decoding="async">
           <p>
             The Web Flight Co., Ltd., Capital Work Place Building, Fl. 8<br>
             1 Soi Chamchan, Klongton-neur, Wattana, Bangkok 10110
@@ -159,7 +184,7 @@ const socials = [
         </div>
         <div class="about-footer-socials">
           <a v-for="social in socials" :key="social.label" :href="social.href" :aria-label="social.label">
-            <img :src="social.src" alt="">
+            <img :src="social.src" alt="" width="29" height="29" loading="lazy" decoding="async">
           </a>
         </div>
       </div>

@@ -51,28 +51,36 @@ const portfolioItems = [
     title: 'Apex Motors: "Nightfall"',
     meta: 'Motion • Automotive',
     src: `${assetPath}/automotive-campaign.webp`,
-    alt: 'Black sports car in a neon-lit studio'
+    alt: 'Black sports car in a neon-lit studio',
+    width: 512,
+    height: 512
   },
   {
     className: 'tall',
     title: 'Vogue Vanguard',
     meta: 'Stills • Editorial',
     src: `${assetPath}/fashion-editorial.webp`,
-    alt: 'Editorial portrait lit with pink and green accents'
+    alt: 'Editorial portrait lit with pink and green accents',
+    width: 512,
+    height: 512
   },
   {
     className: 'wide',
     title: 'Air Defy Launch',
     meta: 'Commercial • Apparel',
     src: `${assetPath}/product-drop.webp`,
-    alt: 'Black running shoe exploding through colorful powder'
+    alt: 'Black running shoe exploding through colorful powder',
+    width: 512,
+    height: 512
   },
   {
     className: 'wide mono',
     title: 'Sonic Architecture',
     meta: 'Motion • Tech',
     src: `${assetPath}/tech-commercial.webp`,
-    alt: 'Monochrome reel-to-reel recording equipment'
+    alt: 'Monochrome reel-to-reel recording equipment',
+    width: 512,
+    height: 512
   }
 ]
 
@@ -149,7 +157,14 @@ const socials = [
             :key="item.title"
             :class="['photo-work', item.className]"
           >
-            <img :src="item.src" :alt="item.alt">
+            <img
+              :src="item.src"
+              :alt="item.alt"
+              :width="item.width"
+              :height="item.height"
+              loading="lazy"
+              decoding="async"
+            >
             <div class="photo-work-copy">
               <span>{{ item.meta }}</span>
               <h3>{{ item.title }}</h3>
@@ -170,7 +185,7 @@ const socials = [
     <footer class="about-figma-footer">
       <div class="about-footer-inner">
         <div class="about-footer-address">
-          <img :src="`${aboutAssetPath}/twf-logo-footer.svg`" alt="TWF">
+          <img :src="`${aboutAssetPath}/twf-logo-footer.svg`" alt="TWF" width="123" height="47" loading="lazy" decoding="async">
           <p>
             The Web Flight Co., Ltd., Capital Work Place Building, Fl. 8<br>
             1 Soi Chamchan, Klongton-neur, Wattana, Bangkok 10110
@@ -178,7 +193,7 @@ const socials = [
         </div>
         <div class="about-footer-socials">
           <a v-for="social in socials" :key="social.label" :href="social.href" :aria-label="social.label">
-            <img :src="social.src" alt="">
+            <img :src="social.src" alt="" width="29" height="29" loading="lazy" decoding="async">
           </a>
         </div>
       </div>
