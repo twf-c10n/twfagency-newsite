@@ -679,18 +679,42 @@ const _inlineRuntimeConfig = {
       "/__nuxt_error": {
         "cache": false
       },
+      "/**": {
+        "headers": {
+          "x-content-type-options": "nosniff",
+          "x-frame-options": "SAMEORIGIN",
+          "referrer-policy": "strict-origin-when-cross-origin",
+          "permissions-policy": "camera=(), microphone=(), geolocation=()",
+          "content-security-policy": "frame-ancestors 'self'; upgrade-insecure-requests"
+        }
+      },
       "/assets/**": {
         "headers": {
+          "x-content-type-options": "nosniff",
+          "x-frame-options": "SAMEORIGIN",
+          "referrer-policy": "strict-origin-when-cross-origin",
+          "permissions-policy": "camera=(), microphone=(), geolocation=()",
+          "content-security-policy": "frame-ancestors 'self'; upgrade-insecure-requests",
           "cache-control": "public, max-age=31536000, immutable"
         }
       },
       "/fonts/**": {
         "headers": {
+          "x-content-type-options": "nosniff",
+          "x-frame-options": "SAMEORIGIN",
+          "referrer-policy": "strict-origin-when-cross-origin",
+          "permissions-policy": "camera=(), microphone=(), geolocation=()",
+          "content-security-policy": "frame-ancestors 'self'; upgrade-insecure-requests",
           "cache-control": "public, max-age=31536000, immutable"
         }
       },
       "/_nuxt/**": {
         "headers": {
+          "x-content-type-options": "nosniff",
+          "x-frame-options": "SAMEORIGIN",
+          "referrer-policy": "strict-origin-when-cross-origin",
+          "permissions-policy": "camera=(), microphone=(), geolocation=()",
+          "content-security-policy": "frame-ancestors 'self'; upgrade-insecure-requests",
           "cache-control": "public, max-age=31536000, immutable"
         }
       },
@@ -2113,7 +2137,7 @@ const _9Zo5TYKyr5YBE4nMrrsj4yCbCdXElKpMthT_Rv_7MAY = (function(nitro) {
 
 const rootDir = "/Users/tf-066/twf-agency";
 
-const appHead = {"meta":[{"name":"viewport","content":"width=device-width, initial-scale=1"},{"charset":"utf-8"},{"name":"description","content":"TWF is a high-end digital agency merging technical mastery with creativity and performance."},{"name":"robots","content":"index, follow"},{"property":"og:site_name","content":"TWF Agency"},{"property":"og:type","content":"website"},{"property":"og:image","content":"https://twfagency.com/assets/hero-gradient.webp"},{"property":"og:image:alt","content":"TWF Agency"},{"name":"twitter:card","content":"summary_large_image"},{"name":"twitter:image","content":"https://twfagency.com/assets/hero-gradient.webp"}],"link":[{"rel":"preload","href":"/fonts/chakra-petch-regular.ttf","as":"font","type":"font/ttf","crossorigin":"anonymous"}],"style":[],"script":[{"key":"organization-jsonld","type":"application/ld+json","children":"{\"@context\":\"https://schema.org\",\"@type\":\"Organization\",\"name\":\"TWF Agency\",\"alternateName\":\"The Web Flight\",\"url\":\"https://twfagency.com\",\"logo\":\"https://twfagency.com/assets/about-figma/twf-logo.svg\",\"image\":\"https://twfagency.com/assets/hero-gradient.webp\",\"address\":{\"@type\":\"PostalAddress\",\"streetAddress\":\"Capital Work Place Building, Fl. 8, 1 Soi Chamchan, Klongton-neur, Wattana\",\"addressLocality\":\"Bangkok\",\"postalCode\":\"10110\",\"addressCountry\":\"TH\"}}"},{"key":"website-jsonld","type":"application/ld+json","children":"{\"@context\":\"https://schema.org\",\"@type\":\"WebSite\",\"name\":\"TWF Agency\",\"url\":\"https://twfagency.com\",\"publisher\":{\"@type\":\"Organization\",\"name\":\"TWF Agency\",\"logo\":\"https://twfagency.com/assets/about-figma/twf-logo.svg\"},\"potentialAction\":{\"@type\":\"SearchAction\",\"target\":\"https://twfagency.com/blog?q={search_term_string}\",\"query-input\":\"required name=search_term_string\"}}"}],"noscript":[],"htmlAttrs":{"lang":"en"},"viewport":"width=device-width, initial-scale=1"};
+const appHead = {"meta":[{"name":"viewport","content":"width=device-width, initial-scale=1"},{"charset":"utf-8"},{"name":"description","content":"TWF is a high-end digital agency merging technical mastery with creativity and performance."},{"name":"robots","content":"index, follow"},{"property":"og:site_name","content":"TWF Agency"},{"property":"og:type","content":"website"},{"property":"og:image","content":"https://twfagency.com/assets/hero-gradient.webp"},{"property":"og:image:alt","content":"TWF Agency"},{"name":"twitter:card","content":"summary_large_image"},{"name":"twitter:image","content":"https://twfagency.com/assets/hero-gradient.webp"}],"link":[{"rel":"icon","href":"/favicon.ico","sizes":"any"},{"rel":"preload","href":"/fonts/chakra-petch-regular.ttf","as":"font","type":"font/ttf","crossorigin":"anonymous"}],"style":[],"script":[{"key":"organization-jsonld","type":"application/ld+json","defer":true,"tagPosition":"bodyClose","innerHTML":"{\"@context\":\"https://schema.org\",\"@type\":\"Organization\",\"name\":\"TWF Agency\",\"alternateName\":\"The Web Flight\",\"url\":\"https://twfagency.com\",\"logo\":\"https://twfagency.com/assets/about-figma/twf-logo.svg\",\"image\":\"https://twfagency.com/assets/hero-gradient.webp\",\"address\":{\"@type\":\"PostalAddress\",\"streetAddress\":\"Capital Work Place Building, Fl. 8, 1 Soi Chamchan, Klongton-neur, Wattana\",\"addressLocality\":\"Bangkok\",\"postalCode\":\"10110\",\"addressCountry\":\"TH\"}}"},{"key":"website-jsonld","type":"application/ld+json","defer":true,"tagPosition":"bodyClose","innerHTML":"{\"@context\":\"https://schema.org\",\"@type\":\"WebSite\",\"name\":\"TWF Agency\",\"url\":\"https://twfagency.com\",\"publisher\":{\"@type\":\"Organization\",\"name\":\"TWF Agency\",\"logo\":\"https://twfagency.com/assets/about-figma/twf-logo.svg\"},\"potentialAction\":{\"@type\":\"SearchAction\",\"target\":\"https://twfagency.com/blog?q={search_term_string}\",\"query-input\":\"required name=search_term_string\"}}"}],"noscript":[],"htmlAttrs":{"lang":"en"},"viewport":"width=device-width, initial-scale=1"};
 
 const appRootTag = "div";
 
@@ -2222,7 +2246,22 @@ _R795cDPadXzxuf2du_AkShkP4_A1Aflj9_2k3LvLWc,
 _wH6JrtIxmaSoA8lCPWFnE9z4lQeXW6H5z3l5aymEQw
 ];
 
-const assets = {};
+const assets = {
+  "/index.mjs": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"1b0f8-8kHzK5e84pqrXRmAyOZFphKMgYE\"",
+    "mtime": "2026-07-01T11:08:39.818Z",
+    "size": 110840,
+    "path": "index.mjs"
+  },
+  "/index.mjs.map": {
+    "type": "application/json",
+    "etag": "\"6bd37-VdmiusZbTn17TJ4Cdut1oTw6Vj4\"",
+    "mtime": "2026-07-01T11:08:39.820Z",
+    "size": 441655,
+    "path": "index.mjs.map"
+  }
+};
 
 function readAsset (id) {
   const serverDir = dirname$1(fileURLToPath(globalThis._importMeta_.url));
