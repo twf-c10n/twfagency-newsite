@@ -75,6 +75,10 @@ const goHome = () => clearError({ redirect: '/' })
           <p class="error-kicker">{{ statusCode }} / Flight path interrupted</p>
           <h1 id="error-title">{{ heading }}</h1>
           <p id="error-description">{{ description }}</p>
+<<<<<<< HEAD
+=======
+
+>>>>>>> main
           <div class="error-actions">
             <a class="error-home-link" href="/" @click.prevent="goHome">
               <span>Back to home</span>
@@ -347,7 +351,10 @@ const goHome = () => clearError({ redirect: '/' })
 
 .error-signal {
   position: absolute;
+<<<<<<< HEAD
   top: auto;
+=======
+>>>>>>> main
   bottom: 24px;
   left: 24px;
   z-index: 2;
