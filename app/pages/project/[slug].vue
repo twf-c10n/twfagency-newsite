@@ -189,7 +189,9 @@ useHead(() => {
       {
         key: 'project-jsonld',
         type: 'application/ld+json',
-        children: JSON.stringify(projectJsonLd)
+        defer: true,
+        tagPosition: 'bodyClose',
+        innerHTML: JSON.stringify(projectJsonLd)
       }
     ]
   }

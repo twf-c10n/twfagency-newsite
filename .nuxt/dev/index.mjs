@@ -1,4 +1,4 @@
-import process from 'node:process';globalThis._importMeta_={url:import.meta.url,env:process.env};import './timing.js';globalThis.__timing__.logStart('Nitro Start');import { tmpdir } from 'node:os';
+import process from 'node:process';globalThis._importMeta_={url:import.meta.url,env:process.env};import { tmpdir } from 'node:os';
 import { defineEventHandler, handleCacheHeaders, splitCookiesString, createEvent, fetchWithEvent, isEvent, eventHandler, setHeaders, createError, sendRedirect, proxyRequest, getRequestHeader, setResponseHeaders, setResponseStatus, send, getRequestHeaders, setResponseHeader, appendResponseHeader, getRequestURL, getResponseHeader, removeResponseHeader, getQuery as getQuery$1, readBody, createApp, createRouter as createRouter$1, toNodeListener, lazyEventHandler, getResponseStatus, getRouterParam, getResponseStatusText } from 'file:///Users/tf-066/twf-agency/node_modules/h3/dist/index.mjs';
 import { Server } from 'node:http';
 import { resolve, dirname, join } from 'node:path';
@@ -10,7 +10,7 @@ import { viteNodeFetch } from 'file:///Users/tf-066/twf-agency/node_modules/@nux
 import { createRenderer, getRequestDependencies, getPreloadLinks, getPrefetchLinks } from 'file:///Users/tf-066/twf-agency/node_modules/vue-bundle-renderer/dist/runtime.mjs';
 import { parseURL, withoutBase, joinURL, getQuery, withQuery, withTrailingSlash, decodePath, withLeadingSlash, withoutTrailingSlash, encodePath, joinRelativeURL } from 'file:///Users/tf-066/twf-agency/node_modules/ufo/dist/index.mjs';
 import destr, { destr as destr$1 } from 'file:///Users/tf-066/twf-agency/node_modules/destr/dist/index.mjs';
-import { createDebugger, createHooks } from 'file:///Users/tf-066/twf-agency/node_modules/nitropack/node_modules/hookable/dist/index.mjs';
+import { createHooks } from 'file:///Users/tf-066/twf-agency/node_modules/nitropack/node_modules/hookable/dist/index.mjs';
 import { createFetch, Headers as Headers$1 } from 'file:///Users/tf-066/twf-agency/node_modules/ofetch/dist/node.mjs';
 import { fetchNodeRequestHandler, callNodeRequestHandler } from 'file:///Users/tf-066/twf-agency/node_modules/node-mock-http/dist/index.mjs';
 import { createStorage, defineDriver, prefixStorage } from 'file:///Users/tf-066/twf-agency/node_modules/unstorage/dist/index.mjs';
@@ -679,18 +679,42 @@ const _inlineRuntimeConfig = {
       "/__nuxt_error": {
         "cache": false
       },
+      "/**": {
+        "headers": {
+          "x-content-type-options": "nosniff",
+          "x-frame-options": "SAMEORIGIN",
+          "referrer-policy": "strict-origin-when-cross-origin",
+          "permissions-policy": "camera=(), microphone=(), geolocation=()",
+          "content-security-policy": "frame-ancestors 'self'; upgrade-insecure-requests"
+        }
+      },
       "/assets/**": {
         "headers": {
+          "x-content-type-options": "nosniff",
+          "x-frame-options": "SAMEORIGIN",
+          "referrer-policy": "strict-origin-when-cross-origin",
+          "permissions-policy": "camera=(), microphone=(), geolocation=()",
+          "content-security-policy": "frame-ancestors 'self'; upgrade-insecure-requests",
           "cache-control": "public, max-age=31536000, immutable"
         }
       },
       "/fonts/**": {
         "headers": {
+          "x-content-type-options": "nosniff",
+          "x-frame-options": "SAMEORIGIN",
+          "referrer-policy": "strict-origin-when-cross-origin",
+          "permissions-policy": "camera=(), microphone=(), geolocation=()",
+          "content-security-policy": "frame-ancestors 'self'; upgrade-insecure-requests",
           "cache-control": "public, max-age=31536000, immutable"
         }
       },
       "/_nuxt/**": {
         "headers": {
+          "x-content-type-options": "nosniff",
+          "x-frame-options": "SAMEORIGIN",
+          "referrer-policy": "strict-origin-when-cross-origin",
+          "permissions-policy": "camera=(), microphone=(), geolocation=()",
+          "content-security-policy": "frame-ancestors 'self'; upgrade-insecure-requests",
           "cache-control": "public, max-age=31536000, immutable"
         }
       },
@@ -2113,7 +2137,7 @@ const _9Zo5TYKyr5YBE4nMrrsj4yCbCdXElKpMthT_Rv_7MAY = (function(nitro) {
 
 const rootDir = "/Users/tf-066/twf-agency";
 
-const appHead = {"meta":[{"name":"viewport","content":"width=device-width, initial-scale=1"},{"charset":"utf-8"},{"name":"description","content":"TWF is a high-end digital agency merging technical mastery with creativity and performance."},{"name":"robots","content":"index, follow"},{"property":"og:site_name","content":"TWF Agency"},{"property":"og:type","content":"website"},{"property":"og:image","content":"https://twfagency.com/assets/hero-gradient.webp"},{"property":"og:image:alt","content":"TWF Agency"},{"name":"twitter:card","content":"summary_large_image"},{"name":"twitter:image","content":"https://twfagency.com/assets/hero-gradient.webp"}],"link":[{"rel":"preload","href":"/fonts/chakra-petch-regular.ttf","as":"font","type":"font/ttf","crossorigin":"anonymous"}],"style":[],"script":[{"key":"organization-jsonld","type":"application/ld+json","children":"{\"@context\":\"https://schema.org\",\"@type\":\"Organization\",\"name\":\"TWF Agency\",\"alternateName\":\"The Web Flight\",\"url\":\"https://twfagency.com\",\"logo\":\"https://twfagency.com/assets/about-figma/twf-logo.svg\",\"image\":\"https://twfagency.com/assets/hero-gradient.webp\",\"address\":{\"@type\":\"PostalAddress\",\"streetAddress\":\"Capital Work Place Building, Fl. 8, 1 Soi Chamchan, Klongton-neur, Wattana\",\"addressLocality\":\"Bangkok\",\"postalCode\":\"10110\",\"addressCountry\":\"TH\"}}"},{"key":"website-jsonld","type":"application/ld+json","children":"{\"@context\":\"https://schema.org\",\"@type\":\"WebSite\",\"name\":\"TWF Agency\",\"url\":\"https://twfagency.com\",\"publisher\":{\"@type\":\"Organization\",\"name\":\"TWF Agency\",\"logo\":\"https://twfagency.com/assets/about-figma/twf-logo.svg\"},\"potentialAction\":{\"@type\":\"SearchAction\",\"target\":\"https://twfagency.com/blog?q={search_term_string}\",\"query-input\":\"required name=search_term_string\"}}"}],"noscript":[],"htmlAttrs":{"lang":"en"},"viewport":"width=device-width, initial-scale=1"};
+const appHead = {"meta":[{"name":"viewport","content":"width=device-width, initial-scale=1"},{"charset":"utf-8"},{"name":"description","content":"TWF is a high-end digital agency merging technical mastery with creativity and performance."},{"name":"robots","content":"index, follow"},{"property":"og:site_name","content":"TWF Agency"},{"property":"og:type","content":"website"},{"property":"og:image","content":"https://twfagency.com/assets/hero-gradient.webp"},{"property":"og:image:alt","content":"TWF Agency"},{"name":"twitter:card","content":"summary_large_image"},{"name":"twitter:image","content":"https://twfagency.com/assets/hero-gradient.webp"}],"link":[{"rel":"icon","href":"/favicon.ico","sizes":"any"},{"rel":"preload","href":"/fonts/chakra-petch-regular.ttf","as":"font","type":"font/ttf","crossorigin":"anonymous"}],"style":[],"script":[{"key":"organization-jsonld","type":"application/ld+json","defer":true,"tagPosition":"bodyClose","innerHTML":"{\"@context\":\"https://schema.org\",\"@type\":\"Organization\",\"name\":\"TWF Agency\",\"alternateName\":\"The Web Flight\",\"url\":\"https://twfagency.com\",\"logo\":\"https://twfagency.com/assets/about-figma/twf-logo.svg\",\"image\":\"https://twfagency.com/assets/hero-gradient.webp\",\"address\":{\"@type\":\"PostalAddress\",\"streetAddress\":\"Capital Work Place Building, Fl. 8, 1 Soi Chamchan, Klongton-neur, Wattana\",\"addressLocality\":\"Bangkok\",\"postalCode\":\"10110\",\"addressCountry\":\"TH\"}}"},{"key":"website-jsonld","type":"application/ld+json","defer":true,"tagPosition":"bodyClose","innerHTML":"{\"@context\":\"https://schema.org\",\"@type\":\"WebSite\",\"name\":\"TWF Agency\",\"url\":\"https://twfagency.com\",\"publisher\":{\"@type\":\"Organization\",\"name\":\"TWF Agency\",\"logo\":\"https://twfagency.com/assets/about-figma/twf-logo.svg\"},\"potentialAction\":{\"@type\":\"SearchAction\",\"target\":\"https://twfagency.com/blog?q={search_term_string}\",\"query-input\":\"required name=search_term_string\"}}"}],"noscript":[],"htmlAttrs":{"lang":"en"},"viewport":"width=device-width, initial-scale=1"};
 
 const appRootTag = "div";
 
@@ -2216,47 +2240,9 @@ function onConsoleLog(callback) {
 	consola$1.wrapConsole();
 }
 
-function defineNitroPlugin(def) {
-  return def;
-}
-
-const _T1_b7tuxMCnFAzt9ZetZyfUDINLEmVuShC5vern34bc = defineNitroPlugin((nitro) => {
-  createDebugger(nitro.hooks, { tag: "nitro-runtime" });
-});
-
-const globalTiming = globalThis.__timing__ || {
-  start: () => 0,
-  end: () => 0,
-  metrics: []
-};
-const timingMiddleware = eventHandler((event) => {
-  const start = globalTiming.start();
-  const _end = event.node.res.end;
-  event.node.res.end = function(chunk, encoding, cb) {
-    const metrics = [
-      ["Generate", globalTiming.end(start)],
-      ...globalTiming.metrics
-    ];
-    const serverTiming = metrics.map((m) => `-;dur=${m[1]};desc="${encodeURIComponent(m[0])}"`).join(", ");
-    if (!event.node.res.headersSent) {
-      event.node.res.setHeader("Server-Timing", serverTiming);
-    }
-    _end.call(event.node.res, chunk, encoding, cb);
-    return this;
-  }.bind(event.node.res);
-});
-const _o2KiOWSWGBdL_fy4YRrsFpmZCDPdeBdN0LDROIuYHHY = defineNitroPlugin((nitro) => {
-  nitro.h3App.stack.unshift({
-    route: "/",
-    handler: timingMiddleware
-  });
-});
-
 const plugins = [
   _9Zo5TYKyr5YBE4nMrrsj4yCbCdXElKpMthT_Rv_7MAY,
 _R795cDPadXzxuf2du_AkShkP4_A1Aflj9_2k3LvLWc,
-_T1_b7tuxMCnFAzt9ZetZyfUDINLEmVuShC5vern34bc,
-_o2KiOWSWGBdL_fy4YRrsFpmZCDPdeBdN0LDROIuYHHY,
 _wH6JrtIxmaSoA8lCPWFnE9z4lQeXW6H5z3l5aymEQw
 ];
 
@@ -3413,5 +3399,5 @@ function renderHTMLDocument(html) {
 const renderer = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({
   __proto__: null,
   default: handler
-}, Symbol.toStringTag, { value: 'Module' }));;globalThis.__timing__.logEnd('Nitro Start');
+}, Symbol.toStringTag, { value: 'Module' }));
 //# sourceMappingURL=index.mjs.map
