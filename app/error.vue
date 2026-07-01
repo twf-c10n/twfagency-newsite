@@ -303,7 +303,7 @@ const goHome = () => clearError({ redirect: '/' })
   font-size: clamp(5.6rem, 13vw, 9.6rem);
   font-weight: 700;
   line-height: 1;
-  letter-spacing: -0.08em;
+  letter-spacing: -0.0em;
   text-shadow:
     0 0 26px rgb(255 213 27 / 16%),
     0 16px 46px rgb(0 0 0 / 58%);
