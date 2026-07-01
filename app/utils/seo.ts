@@ -28,6 +28,18 @@ export const useCanonicalSeo = () => {
           key: 'canonical',
           rel: 'canonical',
           href: canonicalUrl
+        },
+        {
+          key: 'alternate-en',
+          rel: 'alternate',
+          hreflang: 'en',
+          href: canonicalUrl
+        },
+        {
+          key: 'alternate-default',
+          rel: 'alternate',
+          hreflang: 'x-default',
+          href: canonicalUrl
         }
       ],
       meta: [
@@ -86,6 +98,18 @@ export const usePageSeo = ({
         {
           key: 'canonical',
           rel: 'canonical',
+          href: canonicalUrl
+        },
+        {
+          key: 'alternate-en',
+          rel: 'alternate',
+          hreflang: 'en',
+          href: canonicalUrl
+        },
+        {
+          key: 'alternate-default',
+          rel: 'alternate',
+          hreflang: 'x-default',
           href: canonicalUrl
         }
       ],

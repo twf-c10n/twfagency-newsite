@@ -536,7 +536,7 @@ const socials = [
               :class="['project-card', { 'has-media': card.image }]"
             >
               <div v-if="card.image" class="project-card-media">
-                <img :src="card.image" :alt="card.imageAlt" loading="lazy">
+                <img :src="card.image" :alt="card.imageAlt" width="800" height="600" loading="lazy" decoding="async">
               </div>
               <span v-else :class="['project-card-icon', card.icon]" aria-hidden="true" />
               <div class="project-card-body">
@@ -547,7 +547,7 @@ const socials = [
 
             <article v-else :class="['project-card', { 'has-media': card.image }]">
               <div v-if="card.image" class="project-card-media">
-                <img :src="card.image" :alt="card.imageAlt" loading="lazy">
+                <img :src="card.image" :alt="card.imageAlt" width="800" height="600" loading="lazy" decoding="async">
               </div>
               <span v-else :class="['project-card-icon', card.icon]" aria-hidden="true" />
               <div class="project-card-body">
@@ -568,7 +568,7 @@ const socials = [
     <footer class="about-figma-footer project-footer">
       <div class="about-footer-inner">
         <div class="about-footer-address">
-          <img :src="`${aboutAssetPath}/twf-logo-footer.svg`" alt="TWF">
+          <img :src="`${aboutAssetPath}/twf-logo-footer.svg`" alt="TWF" width="123" height="47" loading="lazy" decoding="async">
           <p>
             The Web Flight Co., Ltd., Capital Work Place Building, Fl. 8, 1<br>
             Soi Chamchan, Klongton-neur, Wattana, Bangkok 10110
@@ -576,7 +576,7 @@ const socials = [
         </div>
         <div class="about-footer-socials">
           <a v-for="social in socials" :key="social.label" :href="social.href" :aria-label="social.label">
-            <img :src="social.src" alt="">
+            <img :src="social.src" alt="" width="29" height="29" loading="lazy" decoding="async">
           </a>
         </div>
       </div>
